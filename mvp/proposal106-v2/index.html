@@ -1,0 +1,2053 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposal 106</title>
+<meta name="description" content="Put a new building anywhere in London, then watch Planning and the Developer argue it through approval and Section 106. Stated assumptions, no approval odds.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%232E7D5B'/%3E%3Crect x='14' y='9' width='12' height='22' rx='1.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F4EF;--surface:#FFFFFF;--ink:#151B18;--ink2:#3A433E;--muted:#727A75;--faint:#A4AAA6;--line:#E4E2DA;--line2:#D5D2C8;--well:#ECEAE3;
+  --plan:#2B4C7E;--dev:#B8741A;--arch:#2E7D5B;--res:#7A5BA6;
+  --plan-t:rgba(43,76,126,.1);--dev-t:rgba(184,116,26,.085);--arch-t:rgba(46,125,91,.09);--res-t:rgba(122,91,166,.09);
+  --stop:#B3261E;--serious:#C8671A;--check:#978B33;--support:#2E7D5B;--neg:#B3261E;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --sans:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font:14px/1.45 var(--sans);-webkit-font-smoothing:antialiased;
+  display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;height:100vh;overflow:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--plan)}
+:focus-visible{outline:2px solid var(--arch);outline-offset:2px}
+.lbl{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+.nr{color:var(--faint);font-style:italic;font-weight:400}
+.av{--c:var(--arch);width:28px;height:28px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;flex:none;letter-spacing:0}
+.av.sm{width:22px;height:22px;font-size:10px}
+.ghost{border:1px solid var(--line2);background:transparent;border-radius:999px;height:34px;padding:0 14px;font-weight:500;color:var(--ink2);white-space:nowrap;transition:background .2s,border-color .2s}
+.ghost:hover{background:var(--surface)}
+.ghost[aria-pressed="true"],.ghost.on{border-color:var(--arch);color:var(--arch);background:var(--arch-t)}
+.ghost.sm{height:30px;padding:0 12px;font-size:13px}
+.hidden{display:none!important}
+
+/* top bar */
+.top{display:flex;align-items:center;gap:24px;padding:18px 32px 8px}
+.brand{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.mark{font-family:var(--serif);font-size:30px;line-height:1;color:var(--arch);letter-spacing:-.5px}
+.brand .name{font-weight:600;font-size:15px}
+.search{flex:0 1 400px;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:0 8px 0 14px;height:38px;margin:0 0 0 12px}
+.search svg{flex:none;color:var(--faint)}
+.search input{border:0;outline:0;background:transparent;flex:1;min-width:0}
+.sstate{font-size:12px;color:var(--muted);white-space:nowrap;padding-right:6px}
+.sitectl{display:flex;align-items:center;gap:10px}
+.sitectl input[type=range]{width:96px;accent-color:var(--ink2)}
+.sitectl output{font-variant-numeric:tabular-nums;font-size:13px;min-width:4.4em;color:var(--ink2)}
+.council{margin-left:auto;display:flex;align-items:center;gap:9px;font-weight:600;font-size:15px;white-space:nowrap;transition:opacity .3s}
+.council .dot{width:8px;height:8px;border-radius:50%;background:var(--arch);box-shadow:0 0 0 4px var(--arch-t)}
+.council.out .dot{background:var(--faint);box-shadow:0 0 0 4px rgba(0,0,0,.05)}
+.council.fade{opacity:0}
+
+/* architect bar */
+.arch{display:flex;align-items:center;gap:22px;padding:8px 32px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.arch .who{display:flex;align-items:center;gap:9px}
+.seg{display:inline-flex;background:var(--well);border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;border-radius:999px;padding:6px 15px;font-weight:500;color:var(--ink2);transition:background .2s,color .2s,box-shadow .2s}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--arch);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.seg.sm button{padding:4px 11px;font-size:12.5px}
+.rng{display:flex;align-items:center;gap:10px}
+.rng input[type=range]{width:118px;accent-color:var(--arch)}
+.rng output{font-family:var(--serif);font-size:24px;line-height:1;min-width:2.1em;font-variant-numeric:tabular-nums}
+.rng output small{font-family:var(--sans);font-size:11px;color:var(--muted);margin-left:1px}
+.more-wrap{position:relative}
+.pop{position:absolute;top:42px;left:0;z-index:30;width:300px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 14px 40px rgba(20,30,25,.14);display:grid;gap:12px;animation:pop .22s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.pop[hidden]{display:none}
+.pop .mix{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pop .mix label{font-size:12px;color:var(--muted);display:grid;gap:3px}
+.pop input[type=number]{width:100%;border:1px solid var(--line);border-radius:8px;padding:5px 7px;background:var(--paper);font-variant-numeric:tabular-nums}
+.prow{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center}
+.prow input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--arch)}
+.prow output{font-variant-numeric:tabular-nums;font-size:13px;color:var(--ink2)}
+.upchip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--arch);background:var(--arch-t);border-radius:999px;padding:4px 6px 4px 12px;white-space:nowrap}
+.upchip button{border:0;background:transparent;color:inherit;padding:0 5px;font-size:13px}
+.primary{margin-left:auto;background:var(--ink);color:#fff;border:0;border-radius:999px;height:42px;padding:0 22px;font-weight:600;white-space:nowrap;transition:transform .2s var(--ease),background .2s,opacity .2s}
+.primary:hover{transform:translateY(-1px)}
+.primary:disabled{opacity:.45;cursor:default;transform:none}
+
+/* main */
+.main{display:grid;grid-template-columns:minmax(260px,21vw) minmax(0,1fr) minmax(260px,21vw);grid-template-rows:auto auto minmax(0,1fr);gap:14px 28px;padding:22px 32px 18px;min-height:0}
+.tabs{display:none}
+.col{grid-row:1/-1;display:grid;grid-template-rows:subgrid;min-height:0}
+.col-plan{grid-column:1}.col-dev{grid-column:3}
+.center{grid-column:2;grid-row:1/-1}
+.col-h{display:flex;align-items:center;gap:10px}
+.col-h b{font-size:15px;font-weight:600}
+.col-h small{display:block;color:var(--muted);font-size:12px;transition:opacity .3s}
+.col-dev .col-h{justify-content:flex-end;text-align:right}
+.pack{transition:opacity .28s ease;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.pack.fade{opacity:0}
+.pack h2{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1;margin:0 0 4px;letter-spacing:-.3px}
+.pack .lp{font-size:12.5px;color:var(--muted)}
+.pack .lp a{text-decoration:none}
+.rows{margin:12px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:12.5px}
+.rows dt{color:var(--muted)}
+.rows dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;min-width:0}
+.tag{font-style:normal;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--well);border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:1px}
+.kpi{display:grid;gap:2px;text-align:right}
+.kpi .big{font-family:var(--serif);font-size:40px;line-height:1;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.kpi.neg .big{color:var(--neg)}
+.kpi small{color:var(--muted);font-size:12px}
+
+/* chat */
+/* one thread, two lanes: every turn is a row in both lanes (bubble on the speaker's side, spacer on the other) and the lanes scroll together */
+.chat{min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:10px 2px 6px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18px);mask-image:linear-gradient(to bottom,transparent 0,#000 18px);scrollbar-width:none}
+.chat::-webkit-scrollbar{display:none}
+.row{flex:none;min-width:0}
+.row>.divider,.row>.note{text-align:center}
+.note{font-size:12px;color:var(--muted);animation:msgIn .4s both;padding:0 6px}
+.you{display:flex;justify-content:center;animation:msgIn .45s var(--ease) both}
+.you .ub{background:var(--arch-t);border-radius:14px;padding:6px 12px;font-size:12.5px;line-height:1.4;max-width:94%}
+.you .ub b{color:var(--arch);font-weight:600;margin-right:6px}
+.msg{display:flex;gap:8px;align-items:flex-end;animation:msgIn .45s var(--ease) both}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.m-developer{flex-direction:row-reverse}
+.bubble{position:relative;max-width:88%;padding:8px 12px 5px;border-radius:16px;background:var(--surface);font-size:13.5px;line-height:1.42}
+.m-planning .bubble{background:var(--plan-t);border-bottom-left-radius:5px}
+.m-developer .bubble{background:var(--dev-t);border-bottom-right-radius:5px}
+.m-residents .bubble{background:var(--res-t);border-bottom-left-radius:5px}
+.bubble p{margin:0}
+.bubble time{display:block;text-align:right;font-size:10.5px;color:var(--faint);margin-top:2px;font-variant-numeric:tabular-nums}
+.bubble .who{display:block;font-size:11px;font-weight:600;color:var(--c)}
+.typing .bubble{display:flex;gap:4px;padding:12px 13px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);opacity:.5;animation:dot 1.1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-4px);opacity:.9}}
+.verdict{font-family:var(--serif);font-size:25px;line-height:1.1;margin:1px 0 4px}
+.v-red{color:var(--stop)}.v-concerns{color:var(--serious)}.v-ok{color:var(--support)}
+.reasons{margin:2px 0 0;padding:0;list-style:none;display:grid;gap:2px}
+.reasons li{position:relative;padding-left:13px;font-size:13px}
+.reasons li::before{content:"";position:absolute;left:1px;top:.58em;width:5px;height:5px;border-radius:50%;background:var(--muted)}
+.divider{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:4px 0;animation:msgIn .4s both}
+
+/* centre */
+.center{display:flex;flex-direction:column;min-height:0;gap:12px}
+.map-wrap{position:relative;flex:1;min-height:0;border-radius:22px;overflow:hidden;background:#E9E7E0}
+#map{position:absolute;inset:0}
+.mapmsg{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);text-align:center;padding:24px}
+.flags{position:absolute;left:14px;top:14px;display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px;pointer-events:none;max-width:min(72%,560px)}
+.flag{--tc:var(--muted);display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:999px;padding:4px 11px 4px 9px;font-size:12px;animation:msgIn .4s both;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.flag .d{width:7px;height:7px;border-radius:50%;background:var(--tc);flex:none}
+.flag small{color:var(--tc);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.flag.pulse .d{animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.flags.flash .flag{animation:flash .9s}
+@keyframes flash{30%{transform:scale(1.06)}}
+.sitetag{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:999px;padding:5px 12px;font-size:12px;color:var(--ink2);pointer-events:none;max-width:55%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sitetag i{display:inline-block;width:14px;border-top:2px dashed #D0342C;vertical-align:middle;margin-right:7px}
+.mapbtns{position:absolute;right:46px;bottom:12px;display:flex;gap:8px}
+.mapbtns .ghost{background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-color:transparent;box-shadow:0 1px 2px rgba(0,0,0,.06);height:32px;font-size:12.5px}
+.hint{position:absolute;left:50%;top:14px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:999px;padding:6px 14px;font-size:12.5px;white-space:nowrap}
+.maplibregl-ctrl-attrib{font-size:10px}
+.stamp{position:absolute;left:50%;top:19%;transform:translate(-50%,-50%) rotate(-5deg);font-family:var(--serif);font-size:46px;line-height:1;padding:10px 24px 12px;border:3px solid currentColor;border-radius:14px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);pointer-events:none;white-space:nowrap;box-shadow:0 14px 40px rgba(20,30,25,.14);animation:stampIn .4s var(--ease) both}
+.stamp[hidden]{display:none}
+.stamp.out{animation:stampOut .4s ease forwards}
+@keyframes stampIn{from{opacity:0;transform:translate(-50%,-50%) rotate(-5deg) scale(1.35)}to{opacity:1;transform:translate(-50%,-50%) rotate(-5deg) scale(1)}}
+@keyframes stampOut{from{opacity:1}to{opacity:0}}
+.prop{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 10px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 12px;font-size:13px;animation:msgIn .45s var(--ease) both;box-shadow:0 2px 10px rgba(20,30,25,.05)}
+.prop .pt{display:grid;min-width:0}
+.prop .pt b{font-weight:600}
+.prop .pt small{color:var(--muted);font-size:11.5px}
+.prop .acts{grid-column:1/-1;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.prop button{border-radius:999px;height:30px;padding:0 13px;font-weight:600;border:1px solid var(--line2);background:transparent;font-size:12.5px;flex:none}
+.prop .yes{background:var(--arch);border-color:var(--arch);color:#fff}
+.prop .state{display:none;font-size:12px;color:var(--muted);padding:0 6px;flex:none}
+.prop.done button{display:none}.prop.done .state{display:inline}
+.prop.done.ok .state{color:var(--arch);font-weight:600}
+.askrow{display:flex;gap:10px;align-items:center}
+.ask{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;height:46px;padding:0 6px 0 18px;transition:border-color .2s,box-shadow .2s}
+.ask:focus-within{border-color:var(--arch);box-shadow:0 0 0 4px var(--arch-t)}
+.ask input{flex:1;border:0;outline:0;background:transparent;min-width:0}
+.ask button{width:34px;height:34px;border-radius:50%;border:0;background:var(--arch);color:#fff;font-size:15px;display:grid;place-items:center;flex:none}
+.pill{border:1px dashed var(--res);color:var(--res);background:transparent;border-radius:999px;height:40px;padding:0 15px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:7px}
+.pill[aria-pressed="true"]{background:var(--res-t);border-style:solid}
+.pill .av{width:20px;height:20px;font-size:9.5px}
+
+/* results */
+.results{padding:12px 32px 18px;border-top:1px solid var(--line)}
+.trk{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.tracker{display:flex;align-items:center;gap:10px}
+.node{display:flex;align-items:center;gap:8px;border:0;background:none;color:var(--faint);font-size:12.5px;padding:2px 0;font-weight:500;transition:color .4s}
+.node .d{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--line2);background:var(--paper);transition:all .5s var(--ease)}
+.node.on{color:var(--ink)}
+.node.on .d{border-color:var(--arch);background:var(--arch)}
+.node.cur .d{box-shadow:0 0 0 5px var(--arch-t)}
+.link{width:84px;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.link i{display:block;height:100%;width:0;background:var(--arch);transition:width 1s var(--ease)}
+.link.on i{width:100%}
+.trk .push{margin-left:auto}
+.flagchip{border:0;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;background:var(--well);color:var(--muted)}
+.flagchip.red{background:rgba(179,38,30,.1);color:var(--stop)}
+.flagchip.amber{background:rgba(200,103,26,.12);color:var(--serious)}
+.flagchip.ok{background:var(--arch-t);color:var(--arch)}
+.linkbtn{border:0;background:none;color:var(--muted);font-size:12px;text-decoration:underline;text-underline-offset:3px;padding:0}
+.rbody{display:grid}
+.rbody>*{grid-area:1/1;transition:opacity .45s var(--ease),visibility .45s}
+.rbody>.off{opacity:0;visibility:hidden;pointer-events:none}
+.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.hot{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:18px;align-content:start}
+.hot .m{padding-left:12px}
+.hot .hv{font-family:var(--serif);font-size:23px;line-height:1.15;margin:5px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.hot .m .s{white-space:normal;font-size:11.5px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.hothead{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600}
+.hothead .st{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;border-radius:999px;padding:3px 9px;background:var(--well);color:var(--muted)}
+.hothead .st.ok{background:var(--arch-t);color:var(--arch)}
+.m{border-left:1px solid var(--line);padding-left:16px;min-width:0}
+.m .k{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.m .v{font-family:var(--serif);font-size:42px;line-height:1.02;letter-spacing:-.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.m .v small{font-family:var(--sans);font-size:13px;color:var(--muted);letter-spacing:0}
+.m .v.neg{color:var(--neg)}
+.m .s{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{display:inline-block;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:600;background:var(--arch-t);color:var(--arch)}
+.chip.vt{background:rgba(200,103,26,.12);color:var(--serious)}
+
+dialog{border:0;border-radius:20px;padding:24px 26px;max-width:560px;width:calc(100% - 32px);box-shadow:0 24px 60px rgba(20,30,25,.25);color:var(--ink)}
+dialog::backdrop{background:rgba(21,27,24,.35)}
+dialog h3{font-family:var(--serif);font-weight:400;font-size:28px;margin:0 0 10px}
+dialog dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:13px;margin:0}
+dialog dt{color:var(--muted)}dialog dd{margin:0}
+dialog dd small{display:block;color:var(--muted);font-size:11.5px}
+dialog .close{float:right;border:0;background:var(--well);border-radius:999px;height:30px;padding:0 12px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media (max-width:1280px){
+  .top,.arch{padding-left:24px;padding-right:24px}
+  .main{padding:18px 24px 14px;gap:22px}
+  .results{padding:10px 24px 14px}
+  .m .v{font-size:36px}
+  .rng input[type=range]{width:92px}
+  .arch{gap:16px}
+  .arch .who .lbl{display:none}
+  .seg button{padding:6px 12px}
+  .primary{padding:0 18px}
+}
+@media (max-width:1023px){
+  body{display:flex;flex-direction:column;height:auto;min-height:100%;overflow:auto}
+  .top{order:0;flex-wrap:wrap;padding:14px 16px 6px;gap:12px}
+  .search{order:5;flex:1 1 100%;margin:0}
+  .arch{order:1;padding:8px 16px 14px;gap:14px}
+  .primary{margin-left:0;width:100%}
+  .main{display:contents}
+  .center{order:2;padding:14px 16px 0}
+  .map-wrap{flex:none;height:56vh;min-height:300px}
+  .results{order:3;padding:12px 16px}
+  .tabs{order:4;display:flex;gap:6px;padding:4px 16px 0}
+  .tabs button{flex:1;border:0;border-bottom:2px solid transparent;background:none;padding:10px 0;font-weight:600;color:var(--muted);position:relative}
+  .tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--ink)}
+  .tabs button.unread::after{content:"";position:absolute;top:10px;margin-left:6px;width:7px;height:7px;border-radius:50%;background:var(--dev)}
+  .col{order:5;padding:12px 16px 24px;height:78vh;display:flex;flex-direction:column;gap:14px}
+  .chat{flex:1}
+  .row.pad{display:none}
+  body[data-tab="plan"] .col-dev,body[data-tab="dev"] .col-plan{display:none}
+  .metrics,.hot{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .m .v{font-size:32px}
+  .trk{flex-wrap:wrap}
+  .link{width:36px}
+}
+@media (max-width:600px){
+  .askrow{flex-wrap:wrap}
+  .ask{flex:1 1 100%}
+  .pill{margin-left:auto}
+}
+@media (max-width:480px){
+  .rng input[type=range]{width:84px}
+  .sitectl input[type=range]{width:80px}
+  .node{font-size:11.5px}
+  .flags{max-width:calc(100% - 28px)}
+}
+
+.ai-wrap{position:relative}
+.ai-pop{left:auto;right:0;width:320px}
+.ai-pop select,.ai-pop input{width:100%;height:34px;border:1px solid var(--line2);border-radius:10px;padding:0 10px;background:var(--surface);color:var(--ink);font:inherit;font-size:13px}
+.ai-pop .prow{display:grid;gap:5px}
+.ai-row{display:flex;gap:8px;flex-wrap:wrap}
+.ai-note{color:var(--muted);font-size:12px;line-height:1.4}
+.ai-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--faint);margin-right:7px;vertical-align:middle;transition:background .3s}
+.ai-dot.on{background:var(--arch);box-shadow:0 0 0 3px var(--arch-t)}
+.ai-dot.warn{background:var(--serious)}
+</style>
+</head>
+<body data-tab="plan">
+<header class="top">
+  <div class="brand"><span class="mark">106</span><span class="name">Proposal 106</span></div>
+  <form class="search" id="searchForm" role="search" autocomplete="off">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Search postcode or address…" aria-label="Search postcode or address" enterkeyhint="search">
+    <span class="sstate" id="sstate" aria-live="polite"></span>
+  </form>
+  <div class="sitectl">
+    <span class="lbl">Site</span>
+    <input type="range" id="siteHa" min="0.1" max="2" step="0.01" aria-label="Site area in hectares">
+    <output id="siteHaOut"></output>
+    <button class="ghost sm" id="drawBtn" type="button" aria-pressed="false">Draw site</button>
+  </div>
+  <div class="council" id="councilChip"><span class="dot"></span><span id="councilName">Southwark</span></div>
+  <div class="ai-wrap">
+    <button class="ghost sm" type="button" id="aiBtn" aria-expanded="false" aria-controls="aiPop"><span class="ai-dot" id="aiDot"></span><span id="aiLbl">Connect AI</span></button>
+    <div class="pop ai-pop" id="aiPop" hidden>
+      <div class="lbl">Connect an AI provider</div>
+      <label class="prow"><span class="lbl">Provider</span>
+        <select id="aiProv"><option value="groq">Groq</option><option value="openrouter">OpenRouter (free models)</option><option value="siliconflow">SiliconFlow</option></select></label>
+      <label class="prow"><span class="lbl">API key</span><input id="aiKey" type="password" autocomplete="off" placeholder="Paste your key"></label>
+      <label class="prow"><span class="lbl">Model</span><select id="aiModel"><option value="">Load models first</option></select></label>
+      <div class="ai-row"><button class="ghost sm" type="button" id="aiLoad">Load models</button><button class="ghost sm" type="button" id="aiSave">Save</button><button class="ghost sm" type="button" id="aiOff">Disconnect</button></div>
+      <small class="ai-note" id="aiNote">Your key is saved in this browser. Requests send chat and scheme context to your chosen provider. Charges may apply. No key → prepared answers.</small>
+    </div>
+  </div>
+</header>
+
+<section class="arch" aria-label="Architect's model">
+  <div class="who"><span class="av" style="--c:var(--arch)">A</span><span class="lbl">Architect</span></div>
+  <div class="seg" id="scaleSeg" role="group" aria-label="Scale">
+    <button type="button" data-preset="minor">Minor</button><button type="button" data-preset="mid">Mid</button><button type="button" data-preset="higher">Higher</button>
+  </div>
+  <label class="rng"><span class="lbl">Storeys</span><input type="range" id="storeys" min="1" max="40" step="1" aria-label="Storeys"><output id="storeysOut"></output></label>
+  <label class="rng"><span class="lbl">Footprint</span><input type="range" id="foot" min="5" max="90" step="1" aria-label="Footprint, percent of site"><output id="footOut"></output></label>
+  <div class="more-wrap">
+    <button class="ghost" type="button" id="moreBtn" aria-expanded="false" aria-controls="morePop">More</button>
+    <div class="pop" id="morePop" hidden>
+      <div><div class="lbl" style="margin-bottom:6px">Unit mix</div>
+        <div class="mix"><label>1 bed %<input type="number" id="mix1" min="0" max="100" step="5"></label><label>2 bed %<input type="number" id="mix2" min="0" max="100" step="5"></label><label>3 bed %<input type="number" id="mix3" min="0" max="100" step="5"></label></div></div>
+      <label class="prow"><span class="lbl">Floor to floor</span><output id="f2fOut"></output><input type="range" id="f2f" min="2.8" max="4" step="0.1"></label>
+      <label class="prow"><span class="lbl">Starting affordable</span><output id="affOut"></output><input type="range" id="aff" min="0" max="50" step="1"></label>
+      <label class="prow"><span class="lbl">Social Rent share</span><output id="srsOut"></output><input type="range" id="srs" min="0" max="100" step="5"></label>
+      <div><div class="lbl" style="margin-bottom:6px">Land</div><div class="seg sm" id="landSeg"><button type="button" data-land="private">Private</button><button type="button" data-land="public">Public</button><button type="button" data-land="industrial">Industrial</button></div></div>
+    </div>
+  </div>
+  <button class="ghost" type="button" id="upBtn" title="GeoJSON polygon with height or storeys, or an OBJ model">⤒ Upload</button>
+  <input type="file" id="upFile" accept=".geojson,.json,.obj" hidden>
+  <span class="upchip hidden" id="upChip"></span>
+  <button class="primary" type="button" id="primary">Submit to planning →</button>
+</section>
+
+<main class="main">
+  <nav class="tabs" role="tablist" aria-label="Agents">
+    <button type="button" role="tab" id="tabPlan" aria-selected="true">Planning</button>
+    <button type="button" role="tab" id="tabDev" aria-selected="false">Developer</button>
+  </nav>
+  <aside class="col col-plan" aria-label="Planning agent">
+    <header class="col-h"><span class="av" style="--c:var(--plan)">P</span><div><b>Planning</b><small id="planSub">case officer</small></div></header>
+    <div class="pack" id="pack"></div>
+    <div class="chat" id="chatPlan" aria-live="polite"></div>
+  </aside>
+  <section class="center" aria-label="Site and model">
+    <div class="map-wrap">
+      <div id="map" role="region" aria-label="3D map of the site"></div>
+      <div class="mapmsg hidden" id="mapMsg">The map could not load. Every number still works.</div>
+      <div class="flags" id="flags" aria-label="Site constraints"></div>
+      <div class="sitetag" id="siteTag"></div>
+      <div class="mapbtns"><button class="ghost" type="button" id="streetBtn" title="Read neighbour heights within 150 m">Match street</button></div>
+      <div class="hint hidden" id="drawHint">Click corners · double-click to close · Esc to cancel</div>
+      <div class="stamp" id="stamp" hidden aria-hidden="true"></div>
+    </div>
+    <form class="askrow" id="askForm" autocomplete="off">
+      <div class="ask"><input id="askIn" placeholder="Ask the table…  @planning  @developer" aria-label="Ask the table"><button type="submit" aria-label="Send">⏎</button></div>
+      <button type="button" class="pill" id="resBtn" aria-pressed="false"><span class="av" style="--c:var(--res)">R</span><span id="resTxt">Invite residents</span></button>
+    </form>
+  </section>
+  <aside class="col col-dev" aria-label="Developer agent">
+    <header class="col-h"><div><b>Developer</b><small>appraisal</small></div><span class="av" style="--c:var(--dev)">D</span></header>
+    <div class="pack" id="devCard"></div>
+    <div class="chat" id="chatDev" aria-live="polite"></div>
+  </aside>
+</main>
+
+<footer class="results">
+  <div class="trk">
+    <div class="tracker" id="tracker">
+      <button type="button" class="node" data-i="0"><span class="d"></span>0 Architect</button><span class="link" data-l="0"><i></i></span>
+      <button type="button" class="node" data-i="1"><span class="d"></span>1 Planning</button><span class="link" data-l="1"><i></i></span>
+      <button type="button" class="node" data-i="2"><span class="d"></span>2 Section 106</button>
+    </div>
+    <span class="hothead hidden" id="hotHead">Heads of terms <span class="st" id="hotSt">Draft</span></span>
+    <button type="button" class="flagchip push" id="flagChip">checking…</button>
+    <button type="button" class="linkbtn hidden" id="hotToggle">Heads of terms</button>
+    <button type="button" class="linkbtn" id="assBtn">Assumptions</button>
+  </div>
+  <div class="rbody">
+  <div class="metrics" id="metrics">
+    <div class="m"><div class="k">Homes</div><div class="v" id="mHomes">0</div><div class="s" id="mHomesS"></div></div>
+    <div class="m"><div class="k">Affordable</div><div class="v" id="mAff">0%</div><div class="s" id="mAffS"></div></div>
+    <div class="m"><div class="k">Developer</div><div class="v" id="mDev">£0.0m</div><div class="s" id="mDevS"></div></div>
+    <div class="m"><div class="k">Decision time</div><div class="v"><span id="mDays">0</span><small> days</small></div><div class="s" id="mDaysS"></div></div>
+    <div class="m"><div class="k">Vision kept</div><div class="v" id="mVis">100%</div><div class="s" id="mVisS"></div></div>
+  </div>
+  <div class="hot off" id="hot" aria-label="Heads of terms" aria-hidden="true"></div>
+  </div>
+</footer>
+
+<dialog id="assDlg" aria-label="Assumptions"><button class="close" type="button" id="assClose">Close</button><h3>Assumptions</h3><dl id="assList"></dl></dialog>
+
+<script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+
+<script id="engine-src">
+/* ENGINE-START */
+/* Pure functions only: no DOM, no globals read. engine(params, assumptions) -> outputs. */
+const clamp = (v, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
+
+const BASE_ASSUMPTIONS = {
+  nia_ratio: 0.80,                                  // assumption
+  unit_nia_m2: { b1: 50, b2: 70, b3: 86 },          // London Plan Table 3.1: 1b2p, 2b4p, 3b5p
+  hab_rooms: { b1: 2, b2: 3, b3: 4 },
+  sale_psm: { low: 7200, base: 8000, high: 9000 },  // Lewisham placeholder, NOT Southwark evidence
+  scenario: 'base',
+  sr_transfer_psm: 2987,                            // Lewisham LAR transfer value; Social Rent not verified
+  so_value_psm: 4500,                               // shared ownership, assumption
+  build_psm_low: 2014,                              // Lewisham, up to 5 storeys
+  build_psm_high: 2364,                             // Lewisham, above 5 storeys
+  build_high_above_storeys: 5,
+  contingency: 0.10,
+  fees_pct_build: 0.10,
+  sales_pct_market_gdv: 0.0275,
+  mcil_psm: 72.73,                                  // Mayoral CIL band 2 (confirm Southwark's band)
+  bcil_psm: null,                                   // borough CIL: not entered
+  s106_per_home: null,                              // S106 contributions: not entered
+  finance_rate: 0.065, finance_years: 2,            // assumption
+  land_value: 12000000,                             // EUV + premium: assumption
+  target_return_pct_gdv: 0.175,
+  child_yield: { b1: 0, b2: 0.2, b3: 0.6 },         // assumption
+  play_m2_per_child: 10,                            // London Plan S4
+  neighbour_median_m: 9,
+  breakeven_iterations: 5,
+  vision_weights: { storeys: 0.3, coverage: 0.3, homes: 0.2, open_space: 0.2 },
+  vision: null                                      // Concept 0 params (the saved vision)
+};
+
+const RULES = {
+  temporary: { name: 'Temporary route', source: 'March 2026 guidance; applications validated by 31 Mar 2028', threshold: { private: 20, public: 35, industrial: 35 }, min_social_rent_share: 0.60, metric: 'habitable rooms', status: 'guidance' },
+  fast_track: { name: 'H5 Fast Track', source: 'London Plan 2021 H5', threshold: { private: 35, public: 50, industrial: 50 }, min_low_cost_rent_share: 0.30, min_intermediate_share: 0.30, metric: 'habitable rooms', status: 'adopted' },
+  viability: { name: 'H5 Viability Tested', source: 'London Plan 2021 H5', status: 'adopted' },
+  mayor: { notify_homes: 50, refer_homes: 150, refer_height_m: 30 },
+  tall: { storeys: 6, height_m: 18 },
+  draft_bands: { A: 35, B: 25, C: 20 }
+};
+
+function withDefaults(assumptions) {
+  const src = assumptions || {};
+  const a = Object.assign({}, BASE_ASSUMPTIONS, src);
+  for (const k of ['unit_nia_m2', 'hab_rooms', 'sale_psm', 'child_yield', 'vision_weights']) a[k] = Object.assign({}, BASE_ASSUMPTIONS[k], src[k] || {});
+  return a;
+}
+
+/* --- geometry helpers (pure) --- */
+function projector(lat0, lon0) {
+  const kx = 111320 * Math.cos(lat0 * Math.PI / 180), ky = 110574;
+  return (lon, lat) => [(lon - lon0) * kx, (lat - lat0) * ky]; // [east, north] metres
+}
+function ringArea(pts) { let s = 0; for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) s += pts[j][0] * pts[i][1] - pts[i][0] * pts[j][1]; return Math.abs(s) / 2; }
+function ringCentroid(pts) {
+  let a = 0, cx = 0, cy = 0;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) { const f = pts[j][0] * pts[i][1] - pts[i][0] * pts[j][1]; a += f; cx += (pts[j][0] + pts[i][0]) * f; cy += (pts[j][1] + pts[i][1]) * f; }
+  if (Math.abs(a) < 1e-9) return [pts.reduce((s, p) => s + p[0], 0) / pts.length, pts.reduce((s, p) => s + p[1], 0) / pts.length];
+  return [cx / (3 * a), cy / (3 * a)];
+}
+function inRing(x, y, ring) { let hit = false; for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const a = ring[i], b = ring[j]; if ((a[1] > y) !== (b[1] > y) && x < (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1]) + a[0]) hit = !hit; } return hit; }
+function heightOf(tags) {
+  const h = parseFloat(tags.height), l = parseFloat(tags['building:levels']);
+  if (Number.isFinite(h)) return { h: clamp(h, 2, 200), src: 'height' };
+  if (Number.isFinite(l)) return { h: clamp(l * 3, 2, 200), src: 'levels' };      // levels x 3 m (assumption)
+  if (tags.building === 'roof') return { h: 3, src: 'assumed' };
+  return { h: 9, src: 'assumed' };                                                   // no tag: 9 m (assumption)
+}
+/* Neighbour median height: all mapped buildings in context.json whose centroid lies outside the site; canopies (building=roof) excluded. */
+function neighbourStats(elements, siteRingLonLat, lat0, lon0) {
+  const P = projector(lat0, lon0), site = siteRingLonLat.map(p => P(p[0], p[1]));
+  const hs = [], tagged = []; let assumed = 0, onSite = 0;
+  for (const e of elements || []) {
+    const t = e.tags || {}, g = e.geometry || [];
+    if (!t.building || g.length < 4) continue;
+    const pts = g.map(q => P(q.lon, q.lat)), c = ringCentroid(pts);
+    if (inRing(c[0], c[1], site)) { onSite++; continue; }
+    if (t.building === 'roof') continue;
+    const r = heightOf(t); hs.push(r.h); if (r.src === 'assumed') assumed++; else tagged.push(r.h);
+  }
+  const med = arr => { const s = arr.slice().sort((x, y) => x - y), n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : null; };
+  return { median_m: med(hs), n: hs.length, assumed, on_site: onSite, tagged_median_m: med(tagged), tagged_n: tagged.length };
+}
+
+/* --- stage 0: massing --- */
+function massing(p, a) {
+  const site = +p.site_area_m2 || 0;
+  const ps = Math.max(0, Math.round(+p.podium_storeys || 0));
+  const pc = ps > 0 ? clamp(+p.podium_coverage || 0) : 0;
+  let tc = clamp(+p.tower_coverage || 0);
+  if (ps > 0) tc = Math.min(tc, pc);
+  const ts = tc > 0 ? Math.max(0, Math.round(+p.tower_storeys || 0)) : 0;
+  if (ts === 0) tc = 0;
+  const storeys = ps + ts;
+  const f2f = +p.floor_to_floor_m || 3.2;
+  const gia = site * (pc * ps + tc * ts);
+  const nia = a.nia_ratio * gia;
+  let m1 = Math.max(0, +p.mix_b1 || 0), m2 = Math.max(0, +p.mix_b2 || 0), m3 = Math.max(0, +p.mix_b3 || 0);
+  const ms = m1 + m2 + m3; if (ms > 0) { m1 /= ms; m2 /= ms; m3 /= ms; } else { m1 = m2 = m3 = 1 / 3; }
+  const u = a.unit_nia_m2, avg = m1 * u.b1 + m2 * u.b2 + m3 * u.b3;
+  const homes = avg > 0 ? Math.floor(nia / avg + 1e-9) : 0;
+  // largest-remainder rounding of homes by type (remainder goes to the largest fractions)
+  const raw = [homes * m1, homes * m2, homes * m3], cnt = raw.map(x => Math.floor(x + 1e-9));
+  const fr = raw.map((x, i) => Math.round((x - cnt[i]) * 1e9));
+  const order = [0, 1, 2].sort((i, j) => fr[j] - fr[i] || i - j);
+  for (let k = 0, left = homes - cnt[0] - cnt[1] - cnt[2]; left > 0; k++, left--) cnt[order[k % 3]]++;
+  const [n1, n2, n3] = cnt;
+  const hr = a.hab_rooms, hab = n1 * hr.b1 + n2 * hr.b2 + n3 * hr.b3;
+  const footprint = Math.max(pc, tc);
+  return {
+    site_area_m2: site, podium_coverage: pc, podium_storeys: ps, tower_coverage: tc, tower_storeys: ts,
+    storeys, floor_to_floor_m: f2f, max_height_m: storeys * f2f, gia_m2: gia, nia_m2: nia,
+    mix_b1: m1, mix_b2: m2, mix_b3: m3, avg_unit_m2: avg, homes, homes_b1: n1, homes_b2: n2, homes_b3: n3,
+    habitable_rooms: hab, open_space_share: 1 - footprint, open_space_m2: site * (1 - footprint)
+  };
+}
+
+/* Affordable homes are assumed to follow the same unit mix, so % by habitable room = % by NIA. */
+function tenure(m, p) {
+  const aff = clamp((+p.affordable_hr_pct || 0) / 100), sr = clamp(+p.social_rent_share || 0);
+  const affNia = m.nia_m2 * aff;
+  return {
+    affordable_hr_pct: aff * 100, social_rent_share: sr,
+    affordable_nia_m2: affNia, social_rent_nia_m2: affNia * sr, intermediate_nia_m2: affNia * (1 - sr), market_nia_m2: m.nia_m2 - affNia,
+    affordable_hab_rooms: m.habitable_rooms * aff, social_rent_hab_rooms: m.habitable_rooms * aff * sr,
+    affordable_homes: Math.round(m.homes * aff), social_rent_homes: Math.round(m.homes * aff * sr)
+  };
+}
+
+/* --- stage 2: developer appraisal at a given market sale value --- */
+function appraisal(m, t, a, salePsm) {
+  const market_gdv = t.market_nia_m2 * salePsm;
+  const sr_receipts = t.social_rent_nia_m2 * a.sr_transfer_psm;
+  const so_receipts = t.intermediate_nia_m2 * a.so_value_psm;
+  const affordable_receipts = sr_receipts + so_receipts;
+  const gdv = market_gdv + affordable_receipts;
+  const build_rate = m.storeys > a.build_high_above_storeys ? a.build_psm_high : a.build_psm_low;
+  const build_base = m.gia_m2 * build_rate;
+  const contingency = build_base * a.contingency;
+  const build = build_base + contingency;                       // build incl. 10% contingency
+  const fees = a.fees_pct_build * build;
+  const sales = a.sales_pct_market_gdv * market_gdv;
+  const mcil = a.mcil_psm * m.gia_m2;
+  const bcil = (a.bcil_psm == null ? 0 : a.bcil_psm) * m.gia_m2;
+  const s106 = (a.s106_per_home == null ? 0 : a.s106_per_home) * m.homes;
+  const land = a.land_value;
+  const finance = a.finance_rate * (land + 0.5 * build) * a.finance_years;
+  const total_cost = build + fees + sales + mcil + bcil + s106 + finance + land;
+  const target_return = a.target_return_pct_gdv * gdv;
+  const profit = gdv - total_cost;
+  const surplus = profit - target_return;                         // surplus = GDV - costs - target return
+  return { sale_psm: salePsm, market_gdv, sr_receipts, so_receipts, affordable_receipts, gdv, build_rate, build_base, contingency, build, fees, sales, mcil, bcil, s106, finance, land, total_cost, target_return, profit, surplus,
+    profit_on_gdv: gdv > 0 ? profit / gdv : 0, profit_on_cost: total_cost > 0 ? profit / total_cost : 0 };
+}
+
+/* break-even market £/m² = (total cost incl. land + target return - affordable receipts) / market NIA.
+   Sales cost and target return depend on GDV, so iterate 5 times starting from the base sale value. */
+function breakEven(m, t, a) {
+  if (t.market_nia_m2 <= 0) return { psm: null, trace: [] };
+  let p = a.sale_psm.base; const trace = [];
+  for (let i = 0; i < a.breakeven_iterations; i++) {
+    const v = appraisal(m, t, a, p);
+    p = (v.total_cost + v.target_return - v.affordable_receipts) / t.market_nia_m2;
+    trace.push(p);
+  }
+  return { psm: p, trace };
+}
+
+/* --- stage 1: route matrix (adopted rules + March 2026 guidance; draft only as what-if) --- */
+function routeMatrix(m, t, landType) {
+  const lt = ['private', 'public', 'industrial'].includes(landType) ? landType : 'private';
+  const aff = t.affordable_hr_pct, sr = t.social_rent_share, inter = 1 - sr;
+  const R = RULES, pct = v => Math.round(v * 10) / 10;
+  const tempT = R.temporary.threshold[lt], ftT = R.fast_track.threshold[lt];
+  const tf = [];
+  if (aff < tempT) tf.push(`affordable ${pct(aff)}% is below ${tempT}% by habitable room`);
+  if (sr < R.temporary.min_social_rent_share) tf.push(`Social Rent ${Math.round(sr * 100)}% is below 60% of the affordable`);
+  const temporary = { threshold: tempT, status: tf.length ? 'fails stated condition' : 'likely eligible',
+    reasons: tf.length ? tf : [`${pct(aff)}% ≥ ${tempT}% with ${Math.round(sr * 100)}% Social Rent; assumes validation by 31 Mar 2028`] };
+  const ff = [];
+  if (aff < ftT) ff.push(`affordable ${pct(aff)}% is below ${ftT}% by habitable room`);
+  if (sr < R.fast_track.min_low_cost_rent_share) ff.push(`low-cost rent ${Math.round(sr * 100)}% is below 30%`);
+  if (inter < R.fast_track.min_intermediate_share - 1e-9) ff.push(`intermediate ${Math.round(inter * 100)}% is below 30%`);
+  const fast_track = { threshold: ftT, status: ff.length ? 'fails stated condition' : 'likely eligible',
+    reasons: ff.length ? ff : [`${pct(aff)}% ≥ ${ftT}% with ≥30% low-cost rent and ≥30% intermediate`] };
+  const viability_tested = { status: 'requires review', reasons: ['Needs a viability assessment, with early and late-stage reviews'] };
+  const tempTenureOk = sr >= R.temporary.min_social_rent_share;
+  const route_min_pct = tempTenureOk ? tempT : ftT;
+  const badge = fast_track.status === 'likely eligible' ? 'Fast Track' : temporary.status === 'likely eligible' ? 'Temporary route' : 'Viability Tested';
+  const refer = [], notify = [];
+  if (m.homes >= R.mayor.refer_homes) refer.push(`${m.homes} homes ≥ 150`);
+  if (m.max_height_m > R.mayor.refer_height_m) refer.push(`${pct(m.max_height_m)} m > 30 m`);
+  if (m.homes >= R.mayor.notify_homes) notify.push(`${m.homes} homes ≥ 50 (Category 3J)`);
+  const mayor = { status: refer.length ? 'referable' : notify.length ? 'notified' : 'below thresholds', reasons: refer.length ? refer : notify.length ? notify : ['under 50 homes and 30 m'] };
+  const isTall = m.storeys > R.tall.storeys || m.max_height_m > R.tall.height_m;
+  const tall = { status: isTall ? 'not checked' : 'below trigger', reasons: [isTall ? `${m.storeys} storeys / ${pct(m.max_height_m)} m: check Southwark's tall-building zones` : 'up to 6 storeys and 18 m'] };
+  const draft = Object.fromEntries(Object.entries(R.draft_bands).map(([k, v]) => [k, { threshold: v, meets: aff >= v }]));
+  return { land_type: lt, temporary, fast_track, viability_tested, route_min_pct, badge, no_viability_assessment: badge !== 'Viability Tested', mayor, tall, draft };
+}
+
+/* --- stage 3: residents --- */
+function residents(m, t, a) {
+  const med = a.neighbour_median_m > 0 ? a.neighbour_median_m : 9;
+  const y = a.child_yield, children = m.homes_b1 * y.b1 + m.homes_b2 * y.b2 + m.homes_b3 * y.b3;
+  return { neighbour_median_m: med, height_ratio: m.max_height_m / med, children, play_need_m2: children * a.play_m2_per_child,
+    open_space_m2: m.open_space_m2, open_space_share: m.open_space_share, social_rent_homes: t.social_rent_homes };
+}
+
+/* V = 1 - (0.3|dStoreys|/seed + 0.3|dCoverage|/seed + 0.2|dHomes|/seed + 0.2|dOpen|/seed), clamped 0..1 */
+function visionRetained(m, a) {
+  if (!a.vision) return 1;
+  const s = massing(a.vision, a), w = a.vision_weights;
+  const rel = (x, x0) => x0 > 0 ? Math.abs(x - x0) / x0 : (x === x0 ? 0 : 1);
+  return clamp(1 - (w.storeys * rel(m.storeys, s.storeys) + w.coverage * rel(m.podium_coverage, s.podium_coverage) + w.homes * rel(m.homes, s.homes) + w.open_space * rel(m.open_space_m2, s.open_space_m2)));
+}
+
+function engine(params, assumptions) {
+  const a = withDefaults(assumptions);
+  const m = massing(params, a), t = tenure(m, params);
+  const sale = a.sale_psm[a.scenario] != null ? a.sale_psm[a.scenario] : a.sale_psm.base;
+  const f = appraisal(m, t, a, sale);
+  const be = breakEven(m, t, a);
+  const routes = routeMatrix(m, t, params.land_type);
+  const res = residents(m, t, a);
+  const V = visionRetained(m, a);
+  const U = {
+    dev: Math.min(1, f.profit_on_gdv / 0.25),
+    plan: Math.min(1, t.affordable_hr_pct / 50),
+    res: 0.5 * (1 - clamp((res.height_ratio - 1) / 4)) + 0.5 * Math.min(1, m.open_space_share / 0.5),
+    arch: V
+  };
+  const warnings = [];
+  if (a.bcil_psm == null) warnings.push('Borough CIL not entered: counted as £0.');
+  if (a.s106_per_home == null) warnings.push('S106 contributions not entered: counted as £0.');
+  return Object.assign({}, m, t, { land_type: routes.land_type, scenario: a.scenario, appraisal: f, surplus: f.surplus,
+    breakeven_psm: be.psm, breakeven_trace: be.trace, routes, residents: res, vision_retained: V, U, warnings });
+}
+
+/* Developer's best offer: highest affordable % (0..50, step 1) keeping surplus >= 0.
+   Uses the selected sale scenario (assumptions.scenario, 'base' by default, as in the spec). */
+function bestOffer(params, assumptions) {
+  const a = withDefaults(assumptions);
+  let best = null;
+  for (let pct = 0; pct <= 50; pct++) {
+    const o = engine(Object.assign({}, params, { affordable_hr_pct: pct }), a);
+    if (o.appraisal.surplus >= 0) best = { pct, surplus: o.appraisal.surplus };
+  }
+  return { pct: best ? best.pct : null, surplus: best ? best.surplus : null, capped: !!best && best.pct === 50 };
+}
+
+/* Breakeven curve vs affordable % for the chart. */
+function breakEvenCurve(params, assumptions, step) {
+  const out = [];
+  for (let pct = 0; pct <= 50; pct += (step || 5)) { const o = engine(Object.assign({}, params, { affordable_hr_pct: pct }), assumptions); out.push({ pct, be: o.breakeven_psm, surplus: o.appraisal.surplus }); }
+  return out;
+}
+
+/* --- stage 5: sweep + Nash "Balanced" --- */
+function sweep(params, assumptions, walk) {
+  const a = withDefaults(assumptions);
+  const seed = massing(a.vision || params, a);
+  const S0 = seed.storeys, towerShare = S0 > 0 ? seed.tower_storeys / S0 : 0;
+  const covRatio = seed.podium_coverage > 0 ? seed.tower_coverage / seed.podium_coverage : 0;
+  const keys = ['dev', 'plan', 'res', 'arch'];
+  const variants = [];
+  for (let S = 2; S <= S0 + 6; S++) {
+    let ts = Math.round(S * towerShare), ps = S - ts; if (ps < 1) { ps = 1; ts = S - 1; }
+    for (let ci = 6; ci <= 14; ci++) {
+      const pc = ci / 20, tc = ts > 0 ? pc * covRatio : 0;
+      for (let aff = 0; aff <= 50; aff += 5) {
+        const vp = Object.assign({}, params, { podium_coverage: pc, podium_storeys: ps, tower_coverage: tc, tower_storeys: ts, affordable_hr_pct: aff });
+        const o = engine(vp, a);
+        variants.push({ params: vp, U: o.U, homes: o.homes, storeys: o.storeys, height_m: o.max_height_m, affordable_hr_pct: aff,
+          affordable_hab_rooms: o.affordable_hab_rooms, social_rent_homes: o.social_rent_homes, profit_on_gdv: o.appraisal.profit_on_gdv,
+          surplus: o.appraisal.surplus, breakeven_psm: o.breakeven_psm, route: o.routes.badge, open_space_m2: o.open_space_m2, V: o.vision_retained });
+      }
+    }
+  }
+  // Default walk-away points; planning defaults to the route minimum / 50 (so a direct call with plan: null matches the UI).
+  const d = Object.assign({ dev: 0.6, res: 0.3, arch: 0.6 }, walk || {});
+  if (d.plan == null) d.plan = engine(params, a).routes.route_min_pct / 50;
+  const passes = (v, skip) => keys.every(k => k === skip || v.U[k] > d[k]);
+  const feasible = variants.filter(v => passes(v));
+  let balanced = null;
+  for (const v of feasible) {
+    v.nash = keys.reduce((acc, k) => acc * (v.U[k] - d[k]), 1);
+    v.usum = keys.reduce((s, k) => s + v.U[k], 0);
+    if (!balanced || v.nash > balanced.nash + 1e-12 || (Math.abs(v.nash - balanced.nash) <= 1e-12 && v.usum > balanced.usum)) balanced = v;
+  }
+  const pick = (list, f) => list.reduce((b, v) => (!b || f(v) > f(b) + 1e-9 || (Math.abs(f(v) - f(b)) <= 1e-9 && v.V > b.V)) ? v : b, null);
+  const higher_return = pick(variants.filter(v => v.U.plan >= d.plan - 1e-9), v => v.profit_on_gdv);
+  const more_affordable = pick(variants.filter(v => v.U.dev >= d.dev - 1e-9), v => v.affordable_hab_rooms);
+  const best = Object.fromEntries(keys.map(k => [k, Math.max(...variants.map(v => v.U[k]))]));
+  const blockers = feasible.length ? [] : keys.filter(k => variants.some(v => passes(v, k)));
+  return { count: variants.length, feasible: feasible.length, balanced, higher_return, more_affordable, best, blockers, walk: d, variants };
+}
+/* ENGINE-END */
+</script>
+
+<script>
+'use strict';
+/* ================= helpers ================= */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const RM = (() => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } })();
+const nf = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 });
+const f0 = v => v == null || !Number.isFinite(v) ? '–' : nf.format(Math.round(v));
+const fm = v => (v < 0 ? '−' : '') + '£' + Math.abs(v / 1e6).toFixed(1) + 'm';
+const fsm = v => (v >= 0 ? '+' : '−') + '£' + Math.abs(v / 1e6).toFixed(1) + 'm';
+const fpsm = v => v == null || !Number.isFinite(v) ? 'n/a' : '£' + f0(v) + '/m²';
+const fp = v => Math.round(v * 100) + '%';
+const pctA = v => (v * 100).toFixed(1).replace(/\.0$/, '') + '%';
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const isNum = v => typeof v === 'number' && Number.isFinite(v);
+const clone = o => JSON.parse(JSON.stringify(o));
+const trunc = (s, n) => { s = String(s || ''); return s.length > n ? s.slice(0, n - 1).trim() + '…' : s; };
+const sleep = ms => new Promise(r => setTimeout(r, RM ? Math.min(ms, 60) : ms));
+const sleepReal = ms => new Promise(r => setTimeout(r, ms));
+const hhmm = () => new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+const NR = '<span class="nr">not researched</span>';
+const safeUrl = u => typeof u === 'string' && /^https?:\/\//i.test(u) ? u : null;
+const pctN = v => Math.round((v > 0 && v < 1 ? v * 100 : v) * 10) / 10;
+const cap1 = s => s.charAt(0).toUpperCase() + s.slice(1);
+const poss = s => /s$/i.test(s) ? s + "'" : s + "'s";
+
+/* ================= constants ================= */
+const AG = {
+  planning: { name: 'Planning', initial: 'P', color: '#2B4C7E' },
+  developer: { name: 'Developer', initial: 'D', color: '#B8741A' },
+  you: { name: 'You', initial: 'A', color: '#2E7D5B' },
+  residents: { name: 'Residents', initial: 'R', color: '#7A5BA6' }
+};
+/* observed, hackathon planning data (analysis/sim_parameters.py), full applications of 10+ homes, London sample */
+const OBS = {
+  all: { days: 289 },
+  size: [{ label: '10–49 homes', lo: 0, hi: 49, days: 252 }, { label: '50–149 homes', lo: 50, hi: 149, days: 374 }, { label: '150+ homes', lo: 150, hi: Infinity, days: 322 }],
+  s106_medium: { with: 359, without: 91 }
+};
+const SITE_FALLBACK = {
+  name: 'Morrisons, Walworth Road', register_reference: 'NSP83', entity: 1710099, borough: 'Southwark',
+  source_url: 'https://www.planning.data.gov.uk/entity/1710099', hectares: 0.51, dwellings_min: 135, dwellings_max: 165,
+  lat: 51.487291, lng: -0.09615,
+  polygon: [[-0.09565,51.487749],[-0.095962,51.487696],[-0.095964,51.487701],[-0.095978,51.487698],[-0.096008,51.487772],[-0.096053,51.487764],[-0.096133,51.48774],[-0.096291,51.487687],[-0.096788,51.48753],[-0.096562,51.487216],[-0.096615,51.487201],[-0.096575,51.487128],[-0.096462,51.48716],[-0.096391,51.487068],[-0.096525,51.487033],[-0.096414,51.486811],[-0.09637,51.486824],[-0.09587,51.486958],[-0.096011,51.487181],[-0.096,51.48729],[-0.095652,51.487364],[-0.095552,51.487379],[-0.095498,51.487383],[-0.09565,51.487749]],
+  constraints_point_query: { conservation_area: 'Walworth Road (ref 48)', flood_risk_zone: 'Flood zone 3 and 2', article_4: 'Article 4 areas 61 and 180', archaeological_priority_area: 'Walworth', heritage_at_risk: 'Walworth Road, Walworth' }
+};
+const LAND_DEFAULT = 25e6;
+const PRESETS = {
+  minor: { label: 'Minor', lo: 10, hi: 49, target: 30, smin: 1, smax: 6, sdef: 4, cmin: 0.08, cmax: 0.7 },
+  mid: { label: 'Mid', lo: 50, hi: 149, target: 100, smin: 6, smax: 12, sdef: 8, cmin: 0.12, cmax: 0.7 },
+  higher: { label: 'Higher', lo: 150, hi: Infinity, target: 225, smin: 12, smax: 30, sdef: 16, cmin: 0.08, cmax: 0.4 }
+};
+const TIER = { STOP: { c: '#B3261E', n: 'Stop' }, SERIOUS: { c: '#C8671A', n: 'Serious' }, CHECK: { c: '#978B33', n: 'Check' }, SUPPORT: { c: '#2E7D5B', n: 'Support' } };
+const TIER_ORDER = ['STOP', 'SERIOUS', 'CHECK', 'SUPPORT'];
+/* dataset -> [tier, label, show name?, note] */
+const DS_TIER = {
+  'green-belt': ['STOP', 'Green Belt'],
+  'scheduled-monument': ['STOP', 'Scheduled monument', 1],
+  'site-of-special-scientific-interest': ['STOP', 'SSSI', 1],
+  'ancient-woodland': ['STOP', 'Ancient woodland'],
+  'listed-building': ['SERIOUS', 'Listed building on site', 1],
+  'listed-building-outline': ['SERIOUS', 'Listed building on site', 1],
+  'world-heritage-site': ['SERIOUS', 'World Heritage Site', 1],
+  'world-heritage-site-buffer-zone': ['CHECK', 'World Heritage buffer zone'],
+  'park-and-garden': ['CHECK', 'Registered park or garden', 1],
+  'archaeological-priority-area': ['CHECK', 'Archaeological priority area'],
+  'tree-preservation-zone': ['CHECK', 'Tree preservation zone'],
+  'article-4-direction-area': ['CHECK', 'Article 4 direction', 0, 'barely affects a full application'],
+  'heritage-at-risk': ['CHECK', 'Heritage at risk', 1],
+  'brownfield-land': ['SUPPORT', 'Brownfield land', 1],
+  'brownfield-site': ['SUPPORT', 'Brownfield land', 1]
+};
+
+/* ================= state ================= */
+const S = {
+  stage: 0, s1done: false, s2done: false, busy: false, hot: false, agreed: false,
+  site: clone(SITE_FALLBACK), center: { lat: SITE_FALLBACK.lat, lng: SITE_FALLBACK.lng }, ring: [], siteHa: 0.51,
+  council: 'Southwark', outside: false, councils: {}, boroughs: null, layers: [],
+  constraints: { status: 'idle', ents: [], london: [] }, cToken: 0, cPromise: null,
+  params: { site_area_m2: 5090, podium_coverage: 0.2, podium_storeys: 8, tower_coverage: 0, tower_storeys: 0, floor_to_floor_m: 3.2,
+    mix_b1: 0.40, mix_b2: 0.40, mix_b3: 0.20, affordable_hr_pct: 35, social_rent_share: 0.60, land_type: 'private' },
+  preset: 'mid', vision: null, upload: null, street: null, residents: false,
+  api: 'maybe', history: [], drawing: false, drawPts: [], offerKey: '', offerVal: null, sw: null, gen: 0
+};
+let OUT = null;
+
+/* ================= assumptions from the council pack ================= */
+const normName = s => String(s || '').toLowerCase().replace(/&/g, 'and').replace(/^(the )?(london borough of|royal borough of)\s+/, '').replace(/[^a-z]/g, '');
+function councilPack() {
+  if (!S.council || !S.councils) return null;
+  if (S.councils[S.council]) return S.councils[S.council];
+  const n = normName(S.council);
+  for (const [k, v] of Object.entries(S.councils)) {
+    const kn = normName(k), vn = normName(v && v.name);
+    if (kn === n || vn === n || (kn && (kn.startsWith(n) || n.startsWith(kn)))) return v;
+  }
+  return null;
+}
+/* research values may arrive as numbers or strings ("£10–£70", "£45m"): read a number, midpoint for a range */
+function numOf(v) {
+  if (isNum(v)) return v;
+  if (typeof v !== 'string') return null;
+  const t = v.replace(/,/g, ''), ns = (t.match(/\d+(?:\.\d+)?/g) || []).map(Number).filter(Number.isFinite);
+  if (!ns.length) return null;
+  const x = ns.length >= 2 && /[–—-]|to/.test(t) ? (ns[0] + ns[1]) / 2 : ns[0];
+  return /\d\s*(m|million)\b/i.test(t) ? x * 1e6 : /\d\s*k\b/i.test(t) ? x * 1e3 : x;
+}
+const cnum = (c, k) => c ? numOf(c[k]) : null;
+function bcilOf(c) {
+  if (!c) return null;
+  if (isNum(c.borough_cil_resi_per_m2)) return { v: c.borough_cil_resi_per_m2, range: false };
+  if (isNum(c.borough_cil_resi_min) && isNum(c.borough_cil_resi_max)) return { v: (c.borough_cil_resi_min + c.borough_cil_resi_max) / 2, range: true };
+  const v = numOf(c.borough_cil_resi_per_m2);
+  return v == null ? null : { v, range: /[–—-]|to/.test(String(c.borough_cil_resi_per_m2)) };
+}
+function obsOf(c, b) {
+  const o = c && c.observed; if (!o || typeof o !== 'object') return null;
+  if (o[b]) return o[b];
+  const n = s => String(s).replace(/[^0-9+]/g, '');
+  const k = Object.keys(o).find(k => n(k) === n(b));
+  return k ? o[k] : null;
+}
+function saleRatio() {
+  const c = councilPack(), a = cnum(c, 'avg_house_price'), l = cnum(c, 'london_avg_house_price');
+  return a && l && a > 0 && l > 0 ? a / l : null;
+}
+function landInfo() {
+  const c = councilPack(), ha = S.params.site_area_m2 / 1e4, lv = cnum(c, 'land_value_per_ha_2023');
+  if (lv && lv > 0) return { v: lv * ha, src: 'council' };
+  return { v: LAND_DEFAULT, src: 'placeholder' };
+}
+function A() {
+  const c = councilPack(), r = saleRatio(), B = BASE_ASSUMPTIONS;
+  const a = { vision: S.vision, land_value: landInfo().v, neighbour_median_m: S.street ? S.street.median : 9 };
+  if (r) a.sale_psm = { low: B.sale_psm.low * r, base: B.sale_psm.base * r, high: B.sale_psm.high * r };
+  const bc = bcilOf(c); if (bc) a.bcil_psm = bc.v;
+  const mc = cnum(c, 'mcil_rate_2026'); if (mc != null) a.mcil_psm = mc;
+  return a;
+}
+function compute() { OUT = engine(S.params, A()); return OUT; }
+function offer() {
+  const k = JSON.stringify([S.params, A()]);
+  if (k !== S.offerKey) { S.offerVal = bestOffer(S.params, A()); S.offerKey = k; }
+  return S.offerVal;
+}
+function offerAt(ch) { return bestOffer(Object.assign({}, S.params, ch), A()); }
+const offTxt = o => o.pct == null ? 'nothing viable' : o.capped ? '50%+' : o.pct + '%';
+function scaleOf(h) { return h >= 150 ? 'Higher' : h >= 50 ? 'Mid' : h >= 10 ? 'Minor' : 'under 10 homes'; }
+function bucket(h) { return h >= 150 ? '150+' : h >= 50 ? '50-149' : '10-49'; }
+const OBS_MIN_N = 10, OBS_MIN_DAYS = 91;
+function observed(h) {
+  const b = bucket(h), ob = obsOf(councilPack(), b), n = ob && numOf(ob.n), d = ob && numOf(ob.median_days);
+  const label = h >= 150 ? '150+ homes' : h >= 50 ? '50–149 homes' : '10–49 homes';
+  // a borough median needs 10+ decided full applications and at least the 13-week statutory period; otherwise use the London sample
+  if (d != null && n != null && n >= OBS_MIN_N && d >= OBS_MIN_DAYS) return { days: d, n, where: S.council, label, src: 'council' };
+  const s = OBS.size.find(z => h >= z.lo && h <= z.hi) || OBS.size[0];
+  return { days: s.days, n: null, where: 'London sample', label, src: 'london' };
+}
+
+/* ================= site geometry ================= */
+function ringOpen(poly) {
+  const r = (poly || []).map(p => [+p[0], +p[1]]);
+  if (r.length > 1) { const a = r[0], b = r[r.length - 1]; if (a[0] === b[0] && a[1] === b[1]) r.pop(); }
+  return r;
+}
+function LP() {
+  const lat0 = S.center.lat, lng0 = S.center.lng, kx = 111320 * Math.cos(lat0 * Math.PI / 180), ky = 110574;
+  return { fwd: (lng, lat) => [(lng - lng0) * kx, (lat - lat0) * ky], inv: (x, y) => [lng0 + x / kx, lat0 + y / ky] };
+}
+function setupSite() {
+  const ring = ringOpen(S.site.polygon);
+  const lat0 = ring.reduce((s, p) => s + p[1], 0) / ring.length, lng0 = ring.reduce((s, p) => s + p[0], 0) / ring.length;
+  const P = projector(lat0, lng0), m = ring.map(p => P(p[0], p[1])), c = ringCentroid(m);
+  const kx = 111320 * Math.cos(lat0 * Math.PI / 180), ky = 110574;
+  S.center = { lng: lng0 + c[0] / kx, lat: lat0 + c[1] / ky };
+  S.ring = ring;
+  S.params.site_area_m2 = Math.max(1, Math.round(ringArea(m)));
+  S.siteHa = S.params.site_area_m2 / 1e4;
+  if (S.site.lat == null || S.site.lng == null) { S.site.lat = S.center.lat; S.site.lng = S.center.lng; }
+}
+function squareAt(lng, lat, ha) {
+  const h = Math.sqrt(ha * 1e4) / 2, kx = 111320 * Math.cos(lat * Math.PI / 180), ky = 110574;
+  return [[-h, -h], [h, -h], [h, h], [-h, h]].map(([x, y]) => [lng + x / kx, lat + y / ky]);
+}
+function scaleSite(ha) {
+  const L = LP(), k = Math.sqrt(ha * 1e4 / S.params.site_area_m2);
+  S.site.polygon = S.ring.map(p => { const q = L.fwd(p[0], p[1]); return L.inv(q[0] * k, q[1] * k); });
+  setupSite();
+}
+const closeRing = r => r.concat([r[0]]);
+const polyF = (ring, props) => ({ type: 'Feature', properties: props || {}, geometry: { type: 'Polygon', coordinates: [closeRing(ring)] } });
+const FC = f => ({ type: 'FeatureCollection', features: f });
+function massRing() {
+  const o = OUT, cov = o.podium_coverage || 0;
+  if (cov <= 0 || o.storeys <= 0) return null;
+  const L = LP();
+  let base, c0;
+  if (S.upload) { base = S.upload.ring; c0 = S.upload.area / Math.max(1, o.site_area_m2); }
+  else { base = S.ring.map(p => L.fwd(p[0], p[1])); c0 = 1; }
+  const k = Math.sqrt(cov / c0);
+  return base.map(p => L.inv(p[0] * k, p[1] * k));
+}
+function boroughAt(lng, lat) {
+  if (!S.boroughs) return undefined;
+  for (const f of S.boroughs.features || []) {
+    const g = f.geometry; if (!g) continue;
+    const polys = g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : [];
+    for (const p of polys) if (p[0] && inRing(lng, lat, p[0])) return (f.properties && (f.properties.name || f.properties.NAME)) || null;
+  }
+  return null;
+}
+function detectCouncil() {
+  const b = boroughAt(S.site.lng, S.site.lat);
+  if (b === undefined) { S.council = S.site.borough || null; S.outside = false; }
+  else { S.council = b; S.outside = !b; }
+}
+
+/* ================= presets ================= */
+function avgUnit() { const p = S.params, u = BASE_ASSUMPTIONS.unit_nia_m2, s = (p.mix_b1 + p.mix_b2 + p.mix_b3) || 1; return (p.mix_b1 * u.b1 + p.mix_b2 * u.b2 + p.mix_b3 * u.b3) / s; }
+function presetFor(key, siteArea) {
+  const P = PRESETS[key], a = withDefaults(A()), gia = P.target * avgUnit() / a.nia_ratio;
+  let best = null;
+  for (let s = P.smin; s <= P.smax; s++) {
+    const c = Math.round(Math.min(P.cmax, Math.max(P.cmin, gia / (siteArea * s))) * 100) / 100;
+    const m = massing(Object.assign({}, S.params, { site_area_m2: siteArea, podium_coverage: c, podium_storeys: s, tower_coverage: 0, tower_storeys: 0 }), a);
+    const inRange = m.homes >= P.lo && m.homes <= P.hi;
+    const score = Math.abs(m.homes - P.target) + (inRange ? 0 : 1000) + Math.abs(s - P.sdef) * 0.01;
+    if (!best || score < best.score) best = { s, c, score };
+  }
+  return best;
+}
+function applyPreset(key) {
+  const b = presetFor(key, S.params.site_area_m2);
+  S.preset = key; S.upload = null;
+  Object.assign(S.params, { podium_storeys: b.s, podium_coverage: b.c, tower_coverage: 0, tower_storeys: 0 });
+}
+
+/* ================= constraints ================= */
+async function timedJSON(url, ms, opt) {
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
+  try { const r = await fetch(url, Object.assign({ signal: ctl.signal }, opt || {})); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.json(); }
+  finally { clearTimeout(t); }
+}
+async function londonHit(L, lat, lng) {
+  try {
+    const u = String(L.url_template).replace(/\{lng\}/g, lng.toFixed(6)).replace(/\{lat\}/g, lat.toFixed(6));
+    const d = await timedJSON(u, 10000);
+    if (d.error || !(Array.isArray(d.features) || isNum(d.count) || Array.isArray(d))) throw new Error('Invalid layer response');
+    const n = Array.isArray(d.features) ? d.features.length : isNum(d.count) ? d.count : Array.isArray(d) ? d.length : 0;
+    return n > 0 ? { key: L.key, name: L.name || L.key, tier: TIER[L.tier] ? L.tier : 'CHECK' } : null;
+  } catch (e) { return { failed: true, key: L.key }; }
+}
+function cachedEnts() {
+  const c = S.site.constraints_point_query; if (!c || S.site.custom) return null;
+  const e = [];
+  if (c.conservation_area) e.push({ dataset: 'conservation-area', name: String(c.conservation_area).replace(/\s*\(.*$/, '') });
+  if (/3/.test(c.flood_risk_zone || '')) e.push({ dataset: 'flood-risk-zone', 'flood-risk-level': '3' });
+  if (/2/.test(c.flood_risk_zone || '')) e.push({ dataset: 'flood-risk-zone', 'flood-risk-level': '2' });
+  if (c.article_4) e.push({ dataset: 'article-4-direction-area' });
+  if (c.archaeological_priority_area) e.push({ dataset: 'archaeological-priority-area' });
+  if (c.heritage_at_risk) e.push({ dataset: 'heritage-at-risk', name: c.heritage_at_risk });
+  e.push({ dataset: 'brownfield-site', name: S.site.name });
+  return e;
+}
+function fetchConstraints() {
+  const tok = ++S.cToken, lat = S.site.lat, lng = S.site.lng;
+  S.constraints = { status: 'loading', ents: [], london: [] };
+  const url = `https://www.planning.data.gov.uk/entity.json?latitude=${lat.toFixed(6)}&longitude=${lng.toFixed(6)}&limit=100&exclude_field=geometry,point`;
+  const main = timedJSON(url, 12000).then(d => { if (!Array.isArray(d.entities)) throw new Error('Invalid constraint response'); return d.entities.filter(e => !e['end-date']); });
+  const ldn = Promise.all((S.layers || []).map(L => londonHit(L, lat, lng))).then(a => a.filter(Boolean));
+  S.cPromise = Promise.allSettled([main, ldn]).then(([a, b]) => {
+    if (tok !== S.cToken) return;
+    const results = b.status === 'fulfilled' ? b.value : [];
+    const incomplete = b.status !== 'fulfilled' || !(S.layers || []).length || results.some(r => r.failed);
+    const london = results.filter(r => !r.failed);
+    if (a.status === 'fulfilled') S.constraints = { status: 'ok', ents: a.value, london, incomplete };
+    else { const c = cachedEnts(); S.constraints = c ? { status: 'cached', ents: c, london } : { status: 'error', ents: [], london }; }
+    refresh();
+  });
+  return S.cPromise;
+}
+function classify() {
+  const C = S.constraints, o = OUT, out = [];
+  if (!C || !(C.status === 'ok' || C.status === 'cached')) return out;
+  const add = (tier, key, label, detail, note) => {
+    const ex = out.find(x => x.key === key);
+    if (ex) { if (detail && !ex.details.includes(detail)) ex.details.push(detail); return; }
+    out.push({ tier, key, label, details: detail ? [detail] : [], note: note || '' });
+  };
+  for (const e of C.ents) {
+    const ds = e.dataset, nm = trunc((e.name || '').trim(), 34);
+    if (ds === 'flood-risk-zone') {
+      const lv = String(e['flood-risk-level'] || '');
+      if (/3b/i.test(lv)) add('STOP', 'fz3b', 'Functional floodplain');
+      else if (lv.startsWith('3')) add('SERIOUS', 'fz3', 'Flood zone 3', null, 'sequential and exception tests');
+      else if (lv.startsWith('2')) add('CHECK', 'fz2', 'Flood zone 2');
+      continue;
+    }
+    if (ds === 'conservation-area') {
+      const tall = o.storeys > RULES.tall.storeys || o.max_height_m > RULES.tall.height_m;
+      add(tall ? 'SERIOUS' : 'CHECK', 'ca', 'Conservation area', nm || null, tall ? `${o.storeys} storeys, ${o.max_height_m.toFixed(0)} m` : 'at or under 6 storeys and 18 m');
+      continue;
+    }
+    const m = DS_TIER[ds];
+    if (m) add(m[0], m[1], m[1], m[2] && nm ? nm : null, m[3]);
+  }
+  for (const L of C.london || []) add(L.tier, 'gla-' + L.key, trunc(String(L.name).replace(/\s*\(.*$/, ''), 40));
+  const i2 = out.findIndex(x => x.key === 'fz2');
+  if (i2 >= 0 && out.some(x => x.key === 'fz3' || x.key === 'fz3b')) out.splice(i2, 1);
+  return out.sort((a, b) => TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier));
+}
+const flagLabel = f => f.label + (f.details[0] ? ` (${f.details[0]})` : '') + (f.note ? `: ${f.note}` : '');
+
+/* ================= context for the agents ================= */
+function ctx() {
+  const o = OUT || compute(), f = o.appraisal, r = o.routes, c = councilPack(), flags = classify();
+  const routeT = r.route_min_pct, ct = cnum(c, 'affordable_target_pct'), sm = cnum(c, 'affordable_site_min_pct');
+  // Planning asks the council's site minimum where the pack states one, else its plan target, never less than the route minimum
+  const ask = sm != null && sm > routeT ? sm : ct != null && ct > routeT ? ct : routeT;
+  return {
+    o, f, r, c, flags, routeT, ct, sm, ask, askLbl: ask === routeT ? null : ask === sm ? 'site minimum' : 'plan target', off: offer(), a: withDefaults(A()),
+    consv: flags.find(x => x.key === 'ca'), stop: flags.filter(x => x.tier === 'STOP'), ser: flags.filter(x => x.tier === 'SERIOUS'),
+    chk: flags.filter(x => x.tier === 'CHECK'), sup: flags.filter(x => x.tier === 'SUPPORT'),
+    obs: observed(o.homes), cname: S.council || (S.outside ? 'this area' : 'the borough'),
+    tall: o.storeys > RULES.tall.storeys || o.max_height_m > RULES.tall.height_m, cstatus: S.constraints.status, screeningIncomplete: S.constraints.status !== 'ok' || !!S.constraints.incomplete,
+    tallDef: c && typeof c.tall_building_definition === 'string' && c.tall_building_definition.trim() ? c.tall_building_definition.trim() : null
+  };
+}
+function routeName(x) { return x.o.social_rent_share >= RULES.temporary.min_social_rent_share && x.routeT === RULES.temporary.threshold[x.r.land_type] ? 'temporary route' : 'Fast Track'; }
+function verdictOf(x) {
+  const incomplete = x.screeningIncomplete || x.cstatus !== 'ok';
+  const level = x.stop.length ? 'red' : x.ser.length || incomplete ? 'concerns' : 'ok';
+  const title = level === 'red' ? 'Red flags' : incomplete && !x.ser.length ? 'Screening incomplete' : level === 'concerns' ? 'Concerns' : 'Supportable in principle';
+  const R = [];
+  if (incomplete) R.push('Some constraint layers are unavailable or still loading; screening incomplete');
+  if (x.stop.length) R.push('Red flag: policy presumption against housing here');
+  x.stop.forEach(f => R.push(flagLabel(f)));
+  x.ser.forEach(f => R.push(flagLabel(f)));
+  if (x.tall && !(x.consv && x.consv.tier === 'SERIOUS')) R.push(`Tall building: ${x.o.storeys} storeys, ${x.o.max_height_m.toFixed(0)} m${x.tallDef ? ` (${trunc(x.tallDef, 40)})` : ''}`);
+  if (level === 'ok') { x.sup.forEach(f => R.push(flagLabel(f))); R.push(`${x.r.badge} at ${f0(x.o.affordable_hr_pct)}% affordable`); }
+  x.chk.forEach(f => R.push(flagLabel(f)));
+  return { level, title, reasons: R.slice(0, 3) };
+}
+function flagsLine(x) {
+  if (x.cstatus === 'loading') return 'Still checking the constraint layers at this point.';
+  if (x.screeningIncomplete || x.cstatus !== 'ok') return 'Constraint screening is incomplete. Check the missing layers before drawing conclusions.';
+  const big = x.stop.concat(x.ser);
+  if (!big.length) return `No red flags at this point${x.chk.length ? `; check ${x.chk.slice(0, 2).map(f => f.label.toLowerCase()).join(' and ')}` : ''}. Screening, not a site check.`;
+  return `${x.stop.length ? 'Red flag: policy presumption against housing here. ' : ''}${big.slice(0, 3).map(f => f.label).join(', ')}.`;
+}
+function policyLine(x) {
+  if (S.outside) return 'Outside London: only London-wide rules in this model, no council pack.';
+  if (!x.c) return `${x.cname}: local plan not researched yet. London Plan routes apply.`;
+  const lp = x.c.local_plan || {};
+  const yr = lp.year || lp.year_adopted;
+  return `${lp.name ? lp.name + (yr ? ' (' + yr + ')' : '') : 'Local plan not researched'}. Affordable target ${x.ct != null ? x.ct + '%' : 'not researched'}${x.sm != null ? `, site minimum ${x.sm}%` : ''}.`;
+}
+/* Borough CIL in words: a zoned schedule is read at the midpoint, unindexed, zone not checked */
+function bcilTxt(x) {
+  if (x.a.bcil_psm == null) return 'not researched';
+  const bc = bcilOf(x.c);
+  if (!bc || !bc.range) return fm(x.f.bcil);
+  const c = x.c, rng = isNum(c.borough_cil_resi_min) && isNum(c.borough_cil_resi_max) ? `£${f0(c.borough_cil_resi_min)}–£${f0(c.borough_cil_resi_max)}` : String(c.borough_cil_resi_per_m2);
+  return `about ${fm(x.f.bcil)} (midpoint of ${rng}/m² zones, unindexed; zone not checked)`;
+}
+function take35(x) {
+  if (x.off.pct != null && x.off.pct >= 35) return `35% works. I can carry ${offTxt(x.off)}.`;
+  for (let n = 1; n <= 6; n++) { const b = offerAt({ podium_storeys: S.params.podium_storeys + n }); if (b.pct != null && b.pct >= 35) return `For 35% I need ${n} more storey${n > 1 ? 's' : ''}, or cheaper land.`; }
+  return "35% doesn't work at these values, even six storeys higher.";
+}
+/* Scripted answers. Every number comes from the engine, the council pack or the constraint lookup. */
+const PL = {
+  route: x => { const rn = routeName(x); return `${x.r.badge}. ${f0(x.o.affordable_hr_pct)}% by habitable room, ${fp(x.o.social_rent_share)} Social Rent. Minimum for the ${rn} here: ${x.routeT}%${rn === 'temporary route' ? ` (Fast Track ${x.r.fast_track.threshold}%)` : ''}.`; },
+  need: x => `${x.ask}% affordable by habitable room${x.askLbl ? `, ${poss(x.cname)} ${x.askLbl}` : ''}, 60% of it Social Rent. And no red flags.`,
+  flags: flagsLine,
+  cil: x => `Mayoral CIL ${fm(x.f.mcil)}, fixed. Borough CIL ${bcilTxt(x)}. Neither is negotiable.`,
+  time: x => `Observed, ${x.obs.where}, ${x.obs.label}: median ${f0(x.obs.days)} days.${x.stop.length ? ' Red-flag sites fall outside this sample.' : ''} S106 wording: ${OBS.s106_medium.with} vs ${OBS.s106_medium.without} days.`,
+  higher: x => x.tall ? `${x.o.storeys} storeys, ${x.o.max_height_m.toFixed(0)} m is already tall${x.consv ? ', in a conservation area' : ''}. Higher needs a townscape case.` : `Up to 6 storeys and 18 m is below the tall-building trigger.${x.consv ? ' The conservation area still caps it.' : ' Beyond that, we talk townscape.'}`,
+  breakeven: x => `Viability is the developer's case to prove. If ${f0(x.o.affordable_hr_pct)}% doesn't work, it goes Viability Tested with reviews.`,
+  max: x => `I don't set a maximum. Minimum for the ${routeName(x)}, with no viability assessment: ${x.routeT}%.${x.askLbl ? ` ${poss(x.cname)} ${x.askLbl} is ${x.ask}%${x.askLbl === 'site minimum' && x.ct != null && x.ct > x.ask ? `, plan target ${x.ct}%` : ''}.` : ''}`,
+  take35: () => '35% with 30% low-cost rent and 30% intermediate is Fast Track: no viability assessment.',
+  land: () => "Land price isn't a planning matter. Policy should already be priced into it.",
+  tenure: x => `Temporary route: 60% Social Rent. Fast Track: 30% low-cost rent, 30% intermediate. You're at ${fp(x.o.social_rent_share)} Social Rent.`,
+  residents: () => S.residents ? 'Residents are at the table. They count in the Balanced point.' : "Residents aren't at the table. Invite them and they count in the Balanced point.",
+  mayor: x => `Mayor: ${x.r.mayor.status}, ${x.r.mayor.reasons[0]}.`,
+  policy: policyLine,
+  homes: x => `${x.o.homes} homes, ${scaleOf(x.o.homes)} scale${!S.site.custom && S.site.dwellings_min ? `. The register says ${S.site.dwellings_min}–${S.site.dwellings_max}` : ''}.`,
+  hello: x => `Planning, ${x.cname}. Ask me about the route, constraints or timing.`,
+  other: () => 'I can speak to the route, constraints, CIL, timing, height and tenure.'
+};
+const DV = {
+  route: x => x.r.badge === 'Viability Tested' ? 'Viability Tested: full assessment and reviews. Slow, but honest at these numbers.' : `${x.r.badge} suits me if ${f0(x.o.affordable_hr_pct)}% pays. Surplus now ${fsm(x.f.surplus)}.`,
+  need: x => `A ${pctA(x.a.target_return_pct_gdv)} return on GDV. At ${f0(x.o.affordable_hr_pct)}% affordable I'm ${fsm(x.f.surplus)} against it.`,
+  flags: x => x.stop.length ? "Red flags mean I'm buying a refusal. I'd walk." : x.ser.length ? `${x.ser.slice(0, 2).map(f => f.label).join(' and ')}: consultants and time. Priced, not fatal.` : 'Clean point. Good.',
+  cil: x => `CIL is ${bcilOf(x.c) && bcilOf(x.c).range ? 'about ' : ''}${fm(x.f.mcil + x.f.bcil)} on ${f0(x.o.gia_m2)} m². It comes straight off what I can offer.`,
+  time: x => `Every month costs finance at ${pctA(x.a.finance_rate)}. A faster route is worth points to me.`,
+  higher: x => `Two more storeys moves my offer from ${offTxt(x.off)} to ${offTxt(offerAt({ podium_storeys: S.params.podium_storeys + 2 }))}.`,
+  breakeven: x => `Break-even ${fpsm(x.o.breakeven_psm)} against ${fpsm(x.f.sale_psm)} assumed. Surplus ${fsm(x.f.surplus)}.`,
+  max: x => x.off.pct == null ? 'Nothing. Surplus is below zero even at 0%.' : `${offTxt(x.off)} at base values. Past that I lose money.`,
+  take35,
+  land: x => `Land price is fixed; that's the landowner's problem. I've assumed ${fm(x.a.land_value)}.`,
+  tenure: x => `Shared ownership pays me ${fpsm(x.a.so_value_psm)}, Social Rent ${fpsm(x.a.sr_transfer_psm)}. Tenure shift buys affordable %.`,
+  residents: () => 'Residents want it lower. Lower is fewer homes and less affordable.',
+  mayor: x => x.r.mayor.status === 'referable' ? 'Referable to the Mayor: one more stage. I budget for it.' : x.r.mayor.status === 'notified' ? "The Mayor's notified, not referable. Fine." : "Below the Mayor's thresholds. Good.",
+  policy: x => `Targets are fine. Viability decides what's deliverable: ${offTxt(x.off)} here.`,
+  homes: x => `${x.o.homes} homes, GDV ${fm(x.f.gdv)}. Every home above break-even counts.`,
+  hello: () => 'Developer. Ask me about break-even, my offer or land.',
+  other: () => 'Ask me about break-even, my offer, land or height.'
+};
+const REACT = {
+  max: x => x.off.pct != null && x.off.pct < x.ask ? `${x.off.pct}% against my ${x.ask}%: a ${x.ask - x.off.pct}-point gap.` : null,
+  land: () => "Then the landowner takes less. Policy doesn't bend to the price paid.",
+  higher: x => x.consv ? 'Not in a conservation area without a strong heritage case.' : null,
+  breakeven: x => x.f.surplus < 0 ? `Below zero at ${f0(x.o.affordable_hr_pct)}%? Then show me the viability assessment.` : null
+};
+function residentsLine(intent, x) {
+  const rs = x.o.residents;
+  if (['higher', 'homes', 'flags', 'hello'].includes(intent)) return `${x.o.max_height_m.toFixed(0)} m against a ${rs.neighbour_median_m.toFixed(0)} m street median: ${rs.height_ratio.toFixed(1)}×. Keep it closer to the street.`;
+  if (['tenure', 'max', 'take35', 'need', 'route', 'breakeven', 'policy'].includes(intent)) return `${rs.social_rent_homes} Social Rent homes. That's the number we care about.`;
+  return `${f0(rs.open_space_m2)} m² open at ground, ${f0(rs.play_need_m2)} m² of play needed. And ${rs.social_rent_homes} Social Rent homes.`;
+}
+const INTENTS = [
+  ['take35', /\b35\b|what would it take|get (you |us )?to|reach \d/i],
+  ['route', /route|fast.?track|viability.?tested|threshold|temporary|\bh5\b/i],
+  ['flags', /red.?flag|constraint|flood|conservation|green.?belt|heritage|listed|refus|risk|\bstop\b/i],
+  ['cil', /\bcil\b|levy|infrastructure/i],
+  ['mayor', /mayor|\bgla\b|refer/i],
+  ['tenure', /tenure|social rent|shared ownership|intermediate/i],
+  ['land', /\bland\b|landowner/i],
+  ['breakeven', /break.?even|viab|profit|surplus|margin|return|\bpay/i],
+  ['max', /\bmax|maximum|best offer|how much affordable|\boffer/i],
+  ['higher', /higher|taller|storey|height|\btall|floors?\b|go up/i],
+  ['time', /how long|\btime|days|weeks|months|quick|decision|when/i],
+  ['residents', /resident|neighbou?r|community|objection|consult/i],
+  ['policy', /local plan|policy|target|council|borough/i],
+  ['homes', /homes|units|density|dwellings/i],
+  ['need', /\bneed|\bwant|require|\bask|condition/i],
+  ['hello', /^(hi|hello|hey|morning|afternoon)\b/i]
+];
+function matchIntent(q) { for (const [id, re] of INTENTS) if (re.test(q)) return id; return 'other'; }
+function scripted(agent, intent) {
+  const x = ctx();
+  if (agent === 'residents') return residentsLine(intent, x);
+  const T = agent === 'planning' ? PL : DV;
+  return (T[intent] || T.other)(x);
+}
+
+/* ================= live hooks: window.P106LLM and /api/agent ================= */
+function liveState() {
+  const x = ctx();
+  return { stage: S.stage, site: S.site.name, council: S.council, outside_london: S.outside, homes: x.o.homes, storeys: x.o.storeys, height_m: +x.o.max_height_m.toFixed(1),
+    footprint_pct: Math.round(x.o.podium_coverage * 100), affordable_pct: Math.round(x.o.affordable_hr_pct), social_rent_share_pct: Math.round(x.o.social_rent_share * 100),
+    route: x.r.badge, route_min_pct: x.routeT, planning_ask_pct: x.ask, mayor: x.r.mayor.status, surplus_gbp: Math.round(x.f.surplus),
+    breakeven_gbp_per_m2: x.o.breakeven_psm == null ? null : Math.round(x.o.breakeven_psm), sale_gbp_per_m2: Math.round(x.f.sale_psm), land_gbp: Math.round(x.a.land_value),
+    max_affordable_pct: x.off.pct, mayoral_cil_gbp: Math.round(x.f.mcil), borough_cil_gbp: x.a.bcil_psm == null ? null : Math.round(x.f.bcil),
+    constraints: x.flags.map(f => `${f.tier}: ${f.label}`), observed_median_days: x.obs.days, observed_where: x.obs.where,
+    vision_retained_pct: Math.round(x.o.vision_retained * 100), residents_invited: S.residents };
+}
+function systemPrompt(agent, state) {
+  const role = {
+    planning: 'You are the council planning case officer in a negotiation over a new housing scheme. Firm, fair, policy-led.',
+    developer: 'You are the developer. Commercial, blunt, focused on viability and your target return.',
+    residents: 'You are local residents. Care about height, Social Rent homes and open space.'
+  }[agent];
+  return `${role} Reply in under 25 words, in character, like a chat message. Only use numbers given here; if a number is not given, say it is not known. Never give approval odds. State: ${JSON.stringify(state)}. Council pack: ${JSON.stringify(councilPack() || { name: S.council, note: 'not researched' }, (k, v) => k === 'observed' ? undefined : v)}.`;
+}
+async function askLive(agent, q) {
+  const hasHook = typeof window.P106LLM === 'function';
+  if (!hasHook && S.api === false) return null;
+  const state = liveState(), system = systemPrompt(agent, state);
+  const messages = S.history.slice(-12).concat([{ role: 'user', content: q }]);
+  const within = (p, ms) => Promise.race([p, sleepReal(ms).then(() => null)]);
+  if (hasHook) {
+    try { const r = await within(Promise.resolve(window.P106LLM({ agent, messages, state, system })), 15000); if (typeof r === 'string' && r.trim()) return r.trim(); } catch (e) { /* fall back */ }
+  }
+  if (S.api !== false) {
+    try {
+      const d = await timedJSON('/api/agent', 15000, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ agent, messages, state, system }) });
+      const t = typeof d === 'string' ? d : d && (d.text || d.reply || d.content || d.message);
+      if (typeof t === 'string' && t.trim()) { S.api = true; return t.trim(); }
+    } catch (e) { S.api = false; }
+  }
+  return null;
+}
+
+/* ================= chat: one time-aligned thread in two lanes ================= */
+/* Planning (and residents) speak in the left lane, the Developer in the right. Every turn is one row across both lanes:
+   the speaker's cell holds the bubble, the other cell an equal-height spacer, and the two lanes scroll together.
+   Your questions, notes and dividers span both lanes. */
+const LANE = { planning: 'L', residents: 'L', developer: 'R', you: 'L' };
+const lanes = () => [$('#chatPlan'), $('#chatDev')];
+let CHAIN = Promise.resolve();
+function enqueue(fn) {
+  const gen = S.gen;   // a cleared thread drops steps queued before the clear
+  const safe = async () => { if (gen !== S.gen) return null; try { return await fn(gen); } catch (e) { console.warn('chat step failed', e); return null; } };
+  CHAIN = CHAIN.then(safe, safe);
+  return CHAIN;
+}
+const RO = typeof ResizeObserver === 'function' ? new ResizeObserver(es => es.forEach(e => { if (e.target._pair) syncPair(e.target._pair); })) : null;
+function syncPair(p) {
+  const h = c => c.firstElementChild ? c.firstElementChild.offsetHeight : 0, H = Math.max(h(p.a), h(p.b)) + 'px';
+  if (p.a.style.height !== H) p.a.style.height = H;
+  if (p.b.style.height !== H) p.b.style.height = H;
+}
+function rowPair() {
+  const [L, R] = lanes(), a = document.createElement('div'), b = document.createElement('div');
+  a.className = b.className = 'row pad';
+  L.appendChild(a); R.appendChild(b);
+  return { a, b };
+}
+function put(p, lane, el) {
+  const cell = lane === 'L' ? p.a : p.b, old = cell.firstElementChild;
+  if (old && RO) RO.unobserve(old);
+  cell.replaceChildren(el); cell.classList.remove('pad');
+  el._pair = p; if (RO) RO.observe(el);
+  syncPair(p);
+  return el;
+}
+function both(cls, html) {
+  const p = rowPair();
+  for (const lane of ['L', 'R']) { const d = document.createElement('div'); d.className = cls; d.innerHTML = html; put(p, lane, d); }
+  scrollDown();
+  return p;
+}
+function scrollDown() { requestAnimationFrame(() => lanes().forEach(l => { l.scrollTop = l.scrollHeight; })); }
+function linkLanes() {
+  const [L, R] = lanes(), link = (a, b) => a.addEventListener('scroll', () => { if (Math.abs(b.scrollTop - a.scrollTop) > 1) b.scrollTop = a.scrollTop; }, { passive: true });
+  link(L, R); link(R, L);
+}
+function clearThread() { S.gen++; S.history = []; if (RO) RO.disconnect(); lanes().forEach(l => l.replaceChildren()); }
+function markUnread(agent) {
+  if (innerWidth >= 1024) return;
+  const tab = agent === 'planning' || agent === 'residents' ? $('#tabPlan') : agent === 'developer' ? $('#tabDev') : null;
+  if (tab && tab.getAttribute('aria-selected') !== 'true') tab.classList.add('unread');
+}
+function msgEl(agent, inner, typing) {
+  const ag = AG[agent], el = document.createElement('div');
+  el.className = `msg m-${agent}${typing ? ' typing' : ''}`;
+  el.innerHTML = `<span class="av sm" style="--c:${ag.color}">${ag.initial}</span>${inner}`;
+  return el;
+}
+function addMsg(agent, html, opt, p) {
+  opt = opt || {};
+  let el;
+  if (agent === 'you') {
+    p = p || rowPair();
+    for (const lane of ['L', 'R']) { const d = document.createElement('div'); d.className = 'you'; d.innerHTML = `<div class="ub"><b>You</b>${esc(html)}</div>`; el = put(p, lane, d); }
+  } else {
+    const ag = AG[agent], who = agent === 'residents' ? `<b class="who" style="--c:${ag.color}">${ag.name}</b>` : '';
+    el = put(p || rowPair(), LANE[agent], msgEl(agent, `<div class="bubble">${who}${opt.raw ? html : `<p>${esc(html)}</p>`}<time>${hhmm()}</time></div>`));
+  }
+  scrollDown(); markUnread(agent);
+  const plain = opt.plain || (opt.raw ? el.querySelector('.bubble').innerText : html);
+  S.history.push(agent === 'you' ? { role: 'user', content: plain } : { role: 'assistant', name: agent, content: plain });
+  if (S.history.length > 40) S.history.splice(0, S.history.length - 40);
+  return el;
+}
+/* say: typing dots for 0.6-1.2 s (or while a live answer loads), then the bubble replaces them in the same row. text may be an async function. */
+function say(agent, text, opt) {
+  opt = opt || {};
+  return enqueue(async gen => {
+    const p = rowPair(), ag = AG[agent], t0 = performance.now();
+    put(p, LANE[agent], msgEl(agent, `<div class="bubble" aria-label="${ag.name} is typing"><i></i><i></i><i></i></div>`, true)); scrollDown();
+    const txt = typeof text === 'function' ? await text() : text;
+    const wait = (opt.delay != null ? opt.delay : 600 + Math.random() * 600) - (performance.now() - t0);
+    if (wait > 0) await sleep(wait);
+    if (gen !== S.gen) return null;
+    if (txt == null || txt === '') { p.a.remove(); p.b.remove(); return null; }
+    return addMsg(agent, txt, opt, p);
+  });
+}
+function post(agent, text, opt) { return enqueue(async () => addMsg(agent, text, opt)); }
+function note(html) { return enqueue(async () => both('note', html)); }
+function divider(text) { return enqueue(async () => both('divider', esc(text))); }
+/* A proposed change, in the proposer's lane: nothing changes without Accept. */
+function propose(agent, title, sub, onAccept, onReject) {
+  return enqueue(async () => {
+    await sleep(220);
+    const ag = AG[agent], el = document.createElement('div');
+    el.className = 'prop';
+    el.innerHTML = `<span class="av sm" style="--c:${ag.color}">${ag.initial}</span><div class="pt"><b>${esc(title)}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</div><div class="acts"><span class="state"></span><button type="button" class="no">Reject</button><button type="button" class="yes">Accept</button></div>`;
+    el.querySelector('.yes').onclick = () => { el.classList.add('done', 'ok'); el.querySelector('.state').textContent = 'Accepted'; onAccept(); };
+    el.querySelector('.no').onclick = () => { el.classList.add('done'); el.querySelector('.state').textContent = 'Rejected'; if (onReject) onReject(); };
+    put(rowPair(), LANE[agent] || 'L', el); scrollDown(); markUnread(agent);
+    return el;
+  });
+}
+/* the opening exchange, in the current council's name */
+function greet() {
+  const x = ctx();
+  say('planning', S.outside ? 'Outside London. Show me the scheme.' : `${x.cname}. Show me the scheme.`, { delay: 900 });
+  say('developer', "And I'll tell you if it pays.");
+}
+/* the Stage 1 verdict lands as a stamp on the map for 2 s, then lives on as the results-bar chip */
+function showStamp(v) {
+  const el = $('#stamp');
+  clearTimeout(el._t);
+  el.className = `stamp v-${v.level}`; el.textContent = v.title; el.hidden = false;
+  el._t = setTimeout(() => { el.classList.add('out'); el._t = setTimeout(() => { el.hidden = true; }, 400); }, 2000);
+}
+
+/* ================= asking the table ================= */
+function askTable(raw) {
+  const q = String(raw || '').trim(); if (!q) return;
+  const target = /@plan/i.test(q) ? 'planning' : /@dev/i.test(q) ? 'developer' : /@res/i.test(q) ? 'residents' : null;
+  const clean = q.replace(/@\w+/g, '').trim() || q;
+  const intent = matchIntent(clean);
+  post('you', q);
+  if (target === 'residents' && !S.residents) setResidents(true, true);
+  const agents = target ? [target] : ['planning', 'developer'].concat(S.residents ? ['residents'] : []);
+  agents.forEach(ag => say(ag, async () => (await askLive(ag, clean)) || scripted(ag, intent)));
+  if (!target && REACT[intent]) say('planning', async () => { const x = ctx(); return REACT[intent](x); });
+}
+function setResidents(on, quiet) {
+  S.residents = on;
+  $('#resBtn').setAttribute('aria-pressed', String(on));
+  $('#resTxt').textContent = on ? 'Residents at the table' : 'Invite residents';
+  if (on) {
+    const x = ctx(), rs = x.o.residents;
+    if (!quiet) post('you', 'Inviting residents to the table.');
+    say('residents', `Residents here. ${rs.height_ratio.toFixed(1)}× the street's height, ${rs.social_rent_homes} Social Rent homes. We'll be watching.`);
+    if (S.s2done) enqueue(async () => balancedStep());
+  } else note('Residents left the table.');
+}
+
+/* ================= stages ================= */
+function setPrimary() {
+  const b = $('#primary');
+  b.disabled = S.busy;
+  b.textContent = S.busy ? 'At the table…' : S.stage === 0 ? (S.s1done || S.vision ? 'Resubmit to planning →' : 'Submit to planning →') : S.stage === 1 ? 'Section 106 →' : 'Start again ↺';
+}
+function renderTracker() {
+  $$('#tracker .node').forEach(n => { const i = +n.dataset.i; n.classList.toggle('on', i <= S.stage); n.classList.toggle('cur', i === S.stage); });
+  $$('#tracker .link').forEach(l => l.classList.toggle('on', +l.dataset.l < S.stage));
+}
+function primary() {
+  if (S.busy) return;
+  if (S.stage === 0) runStage1();
+  else if (S.stage === 1) runStage2();
+  else restart();
+}
+function resetStages() {
+  S.stage = 0; S.s1done = S.s2done = false; S.hot = false; S.agreed = false; S.noDeal = false;
+  renderHoT(); renderTracker(); setPrimary(); if (OUT) renderResults();
+}
+function restart() {
+  resetStages();
+  divider('New round · ' + hhmm());
+}
+/* manual edits after submission send the scheme back to stage 0 */
+function edited() {
+  if (S.stage > 0 && !S.busy) {
+    resetStages();
+    say('planning', 'Amended scheme. Resubmit when ready.');
+  }
+}
+async function runStage1() {
+  S.busy = true; S.vision = clone(S.params); S.stage = 1; S.s1done = S.s2done = false; S.hot = false; S.agreed = false; S.noDeal = false;
+  refresh(); renderTracker(); setPrimary(); renderHoT();
+  const o = OUT;
+  divider('Submitted · ' + hhmm());
+  post('you', `Submitted: ${o.homes} homes, ${o.storeys} storeys, ${fp(o.podium_coverage)} footprint. Saved as my vision.`);
+  await say('planning', `Checking constraints at the site point${S.council ? ', ' + S.council : ''}.`);
+  if (S.constraints.status === 'loading' && S.cPromise) await Promise.race([S.cPromise, sleepReal(9000)]);
+  compute();
+  const x = ctx(), v = verdictOf(x);
+  await say('planning', `<div class="verdict v-${v.level}">${esc(v.title)}</div><ul class="reasons">${v.reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul>`, { raw: true, plain: `${v.title}: ${v.reasons.join('; ')}`, delay: 1100 });
+  showStamp(v); S.s1done = true; renderResults();
+  await say('planning', `Route: ${x.r.badge}. ${f0(x.o.affordable_hr_pct)}% by habitable room, ${fp(x.o.social_rent_share)} Social Rent.`);
+  if (x.r.mayor.status !== 'below thresholds') await say('planning', `Mayor: ${x.r.mayor.status}, ${x.r.mayor.reasons[0]}.`);
+  await say('developer', v.level === 'red' ? "Red flags mean I'm buying a refusal. I won't fund that." : v.level === 'concerns' ? "Concerns I can price: consultants and time. Don't cut my homes to fix them." : 'Good. Then it comes down to the numbers.');
+  await say('developer', `At ${f0(x.o.affordable_hr_pct)}% I'm ${fsm(x.f.surplus)} against my return. Break-even ${fpsm(x.o.breakeven_psm)}.`);
+  S.s1done = true; S.busy = false; setPrimary(); renderTracker();
+}
+function findLevers(ask) {
+  const p = S.params, a = A(), res = {}, cur = offer().pct;
+  let bestPart = null;
+  for (let n = 1; n <= 6; n++) {
+    const q = Object.assign({}, p, { podium_storeys: p.podium_storeys + n }), b = bestOffer(q, a);
+    const L = { n, pct: b.pct, storeys: q.podium_storeys, h: q.podium_storeys * p.floor_to_floor_m, closes: b.pct != null && b.pct >= ask };
+    if (L.closes) { res.storeys = L; break; }
+    if (b.pct != null && (cur == null || b.pct > cur) && (!bestPart || b.pct > bestPart.pct)) bestPart = L;
+  }
+  if (!res.storeys && bestPart) res.storeys = bestPart;                 // partial: the best the lever can do
+  if (p.social_rent_share > 0.3) {
+    const q = Object.assign({}, p, { social_rent_share: 0.3 }), b = bestOffer(q, a);
+    if (b.pct != null && (cur == null || b.pct > cur)) res.tenure = { sr: 0.3, pct: b.pct, route: engine(Object.assign({}, q, { affordable_hr_pct: b.pct }), a).routes.badge, closes: b.pct >= ask };
+  }
+  if (res.storeys && res.tenure && !res.storeys.closes && res.tenure.closes) delete res.storeys;   // one lever: the one that closes the gap
+  return res;
+}
+function accept(changes, line) {
+  Object.assign(S.params, changes);
+  if ('podium_storeys' in changes || 'podium_coverage' in changes) S.preset = null;
+  refresh(); renderHoT();
+  if (line) note(line);
+}
+async function runStage2() {
+  S.busy = true; S.stage = 2; S.s2done = false; S.hot = false; S.agreed = false; S.noDeal = false;
+  setPrimary(); renderTracker(); refresh();
+  divider('Section 106 · ' + hhmm());
+  const x = ctx(), ask = x.ask, rn = routeName(x);
+  await say('planning', x.askLbl
+    ? `I ask ${ask}% affordable: ${poss(x.cname)} ${x.askLbl}${x.askLbl === 'site minimum' && x.ct != null && x.ct > ask ? ` (plan target ${x.ct}%)` : ''}. The ${rn} minimum is ${x.routeT}%.`
+    : `I ask ${ask}% affordable by habitable room: the ${rn} threshold for ${x.r.land_type} land.`);
+  const off = x.off, zero = engine(Object.assign({}, S.params, { affordable_hr_pct: 0 }), A());
+  await say('developer', off.pct == null ? `Nothing. Even at 0% I'm ${fsm(zero.appraisal.surplus)} against my return.`
+    : off.capped ? `I can carry 50% at base values. Surplus ${fsm(off.surplus)}.` : `Most I can carry at base values: ${off.pct}%. Past that I lose money.`);
+  const got = off.pct == null ? -1 : off.pct;
+  if (got < ask) {
+    const lev = findLevers(ask);
+    if (lev.storeys) {
+      const L = lev.storeys, f2f = S.params.floor_to_floor_m, tallNow = L.storeys > RULES.tall.storeys || L.h > RULES.tall.height_m;
+      const give = Math.min(L.pct, ask);
+      await say('developer', L.closes ? `Give me ${L.n} more storey${L.n > 1 ? 's' : ''} and I reach ${L.pct >= 50 ? '50%+' : L.pct + '%'}. Architect's call.` : `Give me ${L.n} more storeys and I get to ${L.pct}%. Still short of ${ask}%, but it moves.`);
+      await say('planning', x.consv && tallNow ? `Conservation area: ${L.storeys} storeys, ${L.h.toFixed(0)} m. That's a serious flag, not a yes.`
+        : tallNow ? `${L.h.toFixed(0)} m is a tall building here${x.tallDef ? ` (${trunc(x.tallDef, 40)})` : ''}. It needs a townscape case.`
+        : `No height flag at ${L.storeys} storeys. Your call, architect.`);
+      propose('developer', `+${L.n} storey${L.n > 1 ? 's' : ''} → ${L.storeys} storeys, ${give}% affordable`, `${(L.storeys * f2f).toFixed(0)} m · suggestion to the architect`,
+        () => accept({ podium_storeys: L.storeys, affordable_hr_pct: give }, `Accepted: ${L.storeys} storeys, ${give}% affordable.`));
+    } else if (lev.tenure) {
+      const T = lev.tenure;
+      await say('developer', `Shift tenure to shared ownership, 30% Social Rent, and I reach ${T.pct}%.`);
+      await say('planning', `Below 60% Social Rent the temporary route is off. At ${T.pct}% that's ${T.route}.`);
+      propose('developer', `Tenure: 30% Social Rent, ${T.pct}% affordable`, T.route, () => accept({ social_rent_share: T.sr, affordable_hr_pct: T.pct }, `Accepted: ${T.pct}% affordable at 30% Social Rent.`));
+    } else {
+      await say('developer', `No lever gets me to ${ask}%. Not storeys, not tenure.`);
+    }
+    await say('planning', `Or pay less for the land. ${fm(x.a.land_value)} is doing the damage.`);
+    await say('developer', "Land price is fixed; that's the landowner's problem.");
+    await say('planning', `Then Viability Tested, with early and late reviews. Observed: ${OBS.s106_medium.with} vs ${OBS.s106_medium.without} days for medium schemes.`);
+    await say('developer', off.pct == null ? 'Reviews of what? At 0% I still lose money.' : 'Reviews I can live with. The extra months go in my finance line.');
+    if (off.pct != null) propose('planning', `Viability Tested: ${off.pct}% affordable, early and late reviews`, `observed ${OBS.s106_medium.with} vs ${OBS.s106_medium.without} days for medium schemes`,
+      () => accept({ affordable_hr_pct: off.pct }, `Accepted: ${off.pct}% affordable, Viability Tested with reviews.`));
+  } else {
+    const at = engine(Object.assign({}, S.params, { affordable_hr_pct: ask }), A());
+    await say('planning', `${offTxt(off)} clears my ${ask}%. ${at.routes.badge}, no viability assessment.`);
+    await say('developer', 'Agreed. The fast route is worth it to me.');
+  }
+  await balancedStep();
+  S.hot = true; S.s2done = true; S.busy = false; renderHoT(); setPrimary(); renderTracker();
+}
+async function balancedStep() {
+  const w = { dev: 0.6, plan: null, res: S.residents ? 0.3 : -1e6, arch: 0.6 };  // residents count only when invited
+  const sw = sweep(S.params, A(), w); S.sw = sw;
+  const b = sw.balanced;
+  S.noDeal = !b;
+  if (!b) {
+    const names = { dev: 'The developer', plan: 'Planning', res: 'Residents', arch: 'The architect' };
+    await say('planning', sw.blockers.length ? `No point clears every walk-away. ${names[sw.blockers[0]]} blocks it, across ${f0(sw.count)} variants.` : `No point clears every walk-away across ${f0(sw.count)} variants. Two of us block together.`);
+    return;
+  }
+  await say('planning', `Balanced point: ${b.storeys} storeys, ${fp(b.params.podium_coverage)} footprint, ${b.affordable_hr_pct}% affordable.`);
+  await say('developer', `${b.homes} homes, surplus ${fsm(b.surplus)}, ${b.route}. I'd sign that.`);
+  if (S.residents) await say('residents', `${b.social_rent_homes} Social Rent homes at ${b.storeys} storeys. We can live with that.`);
+  propose('planning', `Balanced: ${b.storeys} storeys · ${fp(b.params.podium_coverage)} · ${b.affordable_hr_pct}% affordable`, `vision kept ${fp(b.V)} · ${f0(sw.count)} variants`,
+    () => { S.agreed = true; accept({ podium_coverage: b.params.podium_coverage, podium_storeys: b.params.podium_storeys, tower_coverage: 0, tower_storeys: 0, affordable_hr_pct: b.params.affordable_hr_pct }, 'Heads of terms agreed.'); },
+    () => say('developer', 'Then we stay where we are. Draft terms stand.'));
+}
+
+/* ================= rendering ================= */
+function countTo(el, to, fmt, dur) {
+  if (!el) return;
+  const from = el._v;
+  el._v = to;
+  if (RM || from == null || !Number.isFinite(from) || !Number.isFinite(to) || from === to) { el.textContent = fmt(to); return; }
+  cancelAnimationFrame(el._raf);
+  const t0 = performance.now(), d = dur || 750;
+  const step = t => { const k = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(k < 1 ? from + (to - from) * e : to); if (k < 1) el._raf = requestAnimationFrame(step); };
+  el._raf = requestAnimationFrame(step);
+}
+function crossfade(el, html, key) {
+  if (el.dataset.key && el.dataset.key !== key && !RM) {
+    el.dataset.key = key; el.classList.add('fade');
+    clearTimeout(el._t); el._t = setTimeout(() => { el.innerHTML = el._pending; el.classList.remove('fade'); }, 280);
+    el._pending = html;
+  } else if (el.classList.contains('fade')) el._pending = html;
+  else { el.dataset.key = key; el.innerHTML = html; }
+}
+function renderBar() {
+  const p = S.params, o = OUT;
+  $$('#scaleSeg [data-preset]').forEach(b => b.setAttribute('aria-pressed', String(S.preset === b.dataset.preset)));
+  const st = $('#storeys'); if (document.activeElement !== st) st.value = p.podium_storeys;
+  $('#storeysOut').textContent = o.storeys;
+  const ft = $('#foot'); if (document.activeElement !== ft) ft.value = Math.round(p.podium_coverage * 100);
+  $('#footOut').innerHTML = `${Math.round(o.podium_coverage * 100)}<small>%</small>`;
+  const sh = $('#siteHa'); if (document.activeElement !== sh) sh.value = Math.min(2, Math.max(0.1, S.siteHa));
+  $('#siteHaOut').textContent = S.siteHa.toFixed(2) + ' ha';
+  for (const [id, k] of [['mix1', 'mix_b1'], ['mix2', 'mix_b2'], ['mix3', 'mix_b3']]) { const el = $('#' + id); if (document.activeElement !== el) el.value = Math.round(p[k] * 100); }
+  const f2 = $('#f2f'); if (document.activeElement !== f2) f2.value = p.floor_to_floor_m; $('#f2fOut').textContent = p.floor_to_floor_m.toFixed(1) + ' m';
+  const af = $('#aff'); if (document.activeElement !== af) af.value = p.affordable_hr_pct; $('#affOut').textContent = Math.round(p.affordable_hr_pct) + '%';
+  const sr = $('#srs'); if (document.activeElement !== sr) sr.value = Math.round(p.social_rent_share * 100); $('#srsOut').textContent = fp(p.social_rent_share);
+  $$('#landSeg [data-land]').forEach(b => b.setAttribute('aria-pressed', String(p.land_type === b.dataset.land)));
+  const up = $('#upChip');
+  if (S.upload) {
+    up.classList.remove('hidden');
+    up.innerHTML = `${esc(trunc(S.upload.name, 22))}${S.upload.kind === 'OBJ' ? ` · ${S.upload.axis}-up <button type="button" id="flipAx" title="Flip the up axis">flip</button>` : ''}<button type="button" id="clearUp" aria-label="Remove uploaded model">×</button>`;
+    $('#clearUp').onclick = () => { S.upload = null; applyPreset(S.preset || 'mid'); edited(); refresh({ grow: true }); };
+    const fx = $('#flipAx'); if (fx) fx.onclick = () => { if (S.upload && S.upload.obj) applyUpload(parseOBJ(S.upload.obj, S.upload.axis === 'Y' ? 'Z' : 'Y', S.upload.name)); };
+  } else up.classList.add('hidden');
+}
+function renderCouncil() {
+  const chip = $('#councilChip'), key = S.outside ? '_out' : (S.council || '_none');
+  const name = S.outside ? 'Outside London: London policies only' : (S.council || 'Locating…');
+  if (chip.dataset.key !== key) {
+    chip.dataset.key = key;
+    if (RM) $('#councilName').textContent = name;
+    else { chip.classList.add('fade'); setTimeout(() => { $('#councilName').textContent = name; chip.classList.toggle('out', S.outside); chip.classList.remove('fade'); }, 250); }
+    chip.classList.toggle('out', S.outside);
+  }
+  $('#planSub').textContent = S.outside ? 'London Plan only' : `${S.council || 'council'} case officer`;
+  crossfade($('#pack'), packHTML(), key);
+}
+function packHTML() {
+  if (S.outside) return '<h2>Outside London</h2><div class="lp">London policies only. No council pack.</div>';
+  const c = councilPack(), name = S.council || S.site.borough || 'Council', lpo = c && c.local_plan, yr = lpo && (lpo.year || lpo.year_adopted);
+  const lp = lpo && lpo.name
+    ? `${esc(trunc(lpo.name, 38))}${yr && !String(lpo.name).includes(String(yr)) ? ' · ' + esc(yr) : ''}${safeUrl(lpo.url) ? ` <a href="${esc(lpo.url)}" target="_blank" rel="noopener" aria-label="Open the local plan">↗</a>` : ''}`
+    : `Local plan ${NR}`;
+  const ob = observed(OUT.homes);
+  const obsTxt = `<span title="Median days to decision, decided full applications 2022–25, ${ob.label}. Past decisions, not a prediction.">${f0(ob.days)} d <span class="nr" style="font-style:normal">${ob.src === 'council' ? `local, n ${f0(ob.n)}` : 'London sample'}</span></span>`;
+  const tall = c && typeof c.tall_building_definition === 'string' && c.tall_building_definition.trim() ? c.tall_building_definition.trim() : null;
+  const at = cnum(c, 'affordable_target_pct'), sm = cnum(c, 'affordable_site_min_pct'), bc = bcilOf(c), bcRaw = c && c.borough_cil_resi_per_m2, mr = cnum(c, 'mcil_rate_2026');
+  const lv = cnum(c, 'land_value_per_ha_2023'), ap = cnum(c, 'avg_house_price'), lap = cnum(c, 'london_avg_house_price');
+  const band = c && c.mcil_band != null && c.mcil_band !== '' ? `${/band/i.test(String(c.mcil_band)) ? '' : 'Band '}${esc(trunc(c.mcil_band, 14))}${mr != null ? ` · £${f0(mr)}/m²` : ''}` : (mr != null ? `£${f0(mr)}/m²` : NR);
+  const rows = [
+    ['Affordable target', at != null ? `<span title="${esc((c && c.affordable_target_note) || '')}">${f0(at)}%${sm != null ? ` <span class="nr" style="font-style:normal">· site min ${f0(sm)}%</span>` : ''}</span>` : NR],
+    ['Borough CIL', bc ? `<span title="${esc((c && c.borough_cil_note) || '')}">${bc.range && typeof bcRaw === 'string' ? esc(trunc(bcRaw, 16)) : bc.range ? `£${f0(c.borough_cil_resi_min)}–£${f0(c.borough_cil_resi_max)}` : '£' + f0(bc.v)}/m²</span>` : NR],
+    ['Tall building', tall ? `<span title="${esc(tall)}">${esc(trunc(tall, 26))}</span>` : NR],
+    ['Mayoral CIL', band],
+    ['Decision time', obsTxt],
+    ['Land value', lv != null ? `£${(lv / 1e6).toFixed(1)}m/ha` : NR],
+    ['Avg house price', ap != null ? `£${f0(ap / 1000)}k${lap != null ? ` <span class="nr" style="font-style:normal">/ £${f0(lap / 1000)}k</span>` : ''}` : NR]
+  ];
+  return `<h2>${esc(name)}</h2><div class="lp">${lp}</div><dl class="rows">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+}
+function renderDev() {
+  const o = OUT, f = o.appraisal, a = withDefaults(A()), off = offer(), li = landInfo();
+  const el = $('#devCard');
+  el.innerHTML = `<div class="kpi ${f.surplus < 0 ? 'neg' : ''}"><span class="lbl">Surplus</span><span class="big" id="devBig">${fsm(f.surplus)}</span><small>after a ${pctA(a.target_return_pct_gdv)} return on GDV<i class="tag">assumption</i></small></div>
+    <dl class="rows"><dt>Break-even</dt><dd>${fpsm(o.breakeven_psm)}</dd>
+    <dt>Sale value</dt><dd>${fpsm(f.sale_psm)}<i class="tag">assumption</i></dd>
+    <dt>Land</dt><dd><span title="${li.src === 'council' ? 'Council land value per hectare with planning permission: overstates existing use value' : 'Placeholder: enter the real figure'}">${fm(li.v)}</span><i class="tag">assumption</i></dd>
+    <dt>Max affordable</dt><dd>${off.pct == null ? 'none viable' : offTxt(off)}</dd></dl>`;
+}
+function renderResults() {
+  const o = OUT, f = o.appraisal, obs = observed(o.homes);
+  countTo($('#mHomes'), o.homes, v => f0(v));
+  $('#mHomesS').textContent = `${scaleOf(o.homes)} · ${o.storeys} storeys · ${o.max_height_m.toFixed(0)} m`;
+  countTo($('#mAff'), o.affordable_hr_pct, v => Math.round(v) + '%');
+  $('#mAffS').innerHTML = `<span class="chip ${o.routes.badge === 'Viability Tested' ? 'vt' : ''}">${o.routes.badge}</span>`;
+  const md = $('#mDev'); md.classList.toggle('neg', f.surplus < 0);
+  countTo(md, f.surplus, v => fsm(v));
+  $('#mDevS').textContent = `break-even ${fpsm(o.breakeven_psm)}`;
+  countTo($('#mDays'), obs.days, v => f0(v));
+  $('#mDaysS').textContent = `observed · ${obs.where} · ${obs.label}`;
+  countTo($('#mVis'), o.vision_retained * 100, v => Math.round(v) + '%');
+  $('#mVisS').textContent = S.vision ? 'against your submitted vision' : 'saved when you submit';
+  const chip = $('#flagChip'), st = S.constraints.status, fl = classify();
+  const red = fl.filter(x => x.tier === 'STOP').length, ser = fl.filter(x => x.tier === 'SERIOUS').length;
+  const flagTxt = red ? `${red} red flag${red > 1 ? 's' : ''}${ser ? ` · ${ser} serious` : ''}` : ser ? `${ser} serious flag${ser > 1 ? 's' : ''}` : st !== 'ok' || S.constraints.incomplete ? 'screening incomplete' : 'no red flags';
+  const v = S.stage >= 1 && S.s1done ? verdictOf(ctx()) : null;
+  chip.className = 'flagchip push' + (v ? ` ${{ red: 'red', concerns: 'amber', ok: 'ok' }[v.level]}` : st === 'ok' || st === 'cached' ? (red ? ' red' : ser || st !== 'ok' || S.constraints.incomplete ? ' amber' : ' ok') : '');
+  chip.textContent = v ? `${v.title} · ${flagTxt}` : st === 'loading' || st === 'idle' ? 'checking constraints…' : st === 'error' ? 'constraints offline' : flagTxt;
+}
+function renderFlags() {
+  const box = $('#flags'), st = S.constraints.status;
+  let html;
+  if (st === 'loading' || st === 'idle') html = `<span class="flag pulse" style="--tc:var(--muted)"><span class="d"></span>Checking constraints…</span>`;
+  else if (st === 'error') html = `<span class="flag" style="--tc:var(--muted)"><span class="d"></span>Constraint lookup offline</span>`;
+  else {
+    const fl = classify(), show = fl.filter(f => f.tier === 'STOP' || f.tier === 'SERIOUS').slice(0, 3), rest = fl.filter(f => !show.includes(f));
+    html = fl.length ? show.map(f => `<span class="flag" style="--tc:${TIER[f.tier].c}" title="${esc(flagLabel(f))}"><span class="d"></span>${esc(f.label)} <small>${TIER[f.tier].n}</small></span>`).join('')
+        + (rest.length ? `<span class="flag" style="--tc:var(--muted)" title="${esc(rest.map(f => `${TIER[f.tier].n}: ${flagLabel(f)}`).join('\n'))}"><span class="d"></span>${show.length ? '+' + rest.length : rest.length + ' to check'}</span>` : '')
+      : `<span class="flag" style="--tc:var(--support)"><span class="d"></span>No mapped constraints returned at this point</span>`;
+  }
+  if (st === 'cached' || S.constraints.incomplete) html = `<span class="flag" style="--tc:var(--muted)">Screening incomplete: some layers unavailable</span>` + (classify().length ? html : '');
+  if (box._h !== html) { box._h = html; box.innerHTML = html; }
+}
+function renderSiteTag() {
+  $('#siteTag').innerHTML = `<i></i>${esc(trunc(S.site.name || 'Site', 40))} · ${S.siteHa.toFixed(2)} ha`;
+}
+function renderHoT() {
+  const el = $('#hot'), on = !!S.hot;
+  $('#metrics').classList.toggle('off', on); $('#metrics').setAttribute('aria-hidden', String(on));
+  el.classList.toggle('off', !on); el.setAttribute('aria-hidden', String(!on));
+  $('#hotHead').classList.toggle('hidden', !on);
+  const tg = $('#hotToggle'); tg.classList.toggle('hidden', !S.s2done); tg.textContent = on ? 'Show metrics' : 'Heads of terms';
+  if (!on || !OUT) return;
+  const x = ctx(), o = x.o, f = x.f, vt = o.routes.badge === 'Viability Tested', bc = bcilOf(x.c);
+  const st = $('#hotSt'); st.textContent = S.agreed ? 'Agreed' : S.noDeal ? 'No deal yet' : 'Draft'; st.classList.toggle('ok', S.agreed);
+  const cell = (k, v, sub) => `<div class="m"><div class="k">${k}</div><div class="hv">${v}</div><div class="s">${sub || '&nbsp;'}</div></div>`;
+  el.innerHTML = [
+    cell('Affordable', `${f0(o.affordable_hr_pct)}%`, 'by habitable room'),
+    cell('Tenure', `${fp(o.social_rent_share)} SR`, `${fp(1 - o.social_rent_share)} shared ownership`),
+    cell('Route', esc(o.routes.badge), o.routes.badge === 'Temporary route' ? 'if validated by 31 Mar 2028' : vt ? 'with a viability assessment' : 'no viability assessment'),
+    cell('Reviews', vt ? 'Early, late' : 'None', vt ? 'viability reviews' : ''),
+    cell('Mayoral CIL', fm(f.mcil), 'fixed, 2026 rate'),
+    cell('Borough CIL', x.a.bcil_psm == null ? '<span class="nr">n/a</span>' : (bc && bc.range ? '≈ ' : '') + fm(f.bcil), x.a.bcil_psm == null ? 'not researched' : bc && bc.range ? 'zone midpoint, unindexed' : ''),
+    cell('S106 £', x.a.s106_per_home == null ? '£0' : fm(f.s106), x.a.s106_per_home == null ? 'not entered' : ''),
+    cell('Vision kept', fp(o.vision_retained), S.noDeal && !S.agreed ? `gap: developer offers ${offTxt(offer())}` : 'against your vision')
+  ].join('');
+}
+function refresh(opt) {
+  opt = opt || {};
+  compute();
+  renderBar(); renderCouncil(); renderDev(); renderResults(); renderFlags(); renderSiteTag(); renderHoT();
+  renderMass(!!opt.grow);
+}
+
+/* ================= map (MapLibre GL v5) ================= */
+const MAP = { map: null, loaded: false, key: '', h: 0, raf: 0 };
+function initMap() {
+  if (!window.maplibregl) { $('#mapMsg').classList.remove('hidden'); return; }
+  try {
+    const map = new maplibregl.Map({
+      container: 'map', style: 'https://tiles.openfreemap.org/styles/liberty',
+      center: [S.center.lng, S.center.lat], zoom: 13.4, pitch: 30, bearing: -17, maxPitch: 75,
+      attributionControl: { compact: true }, canvasContextAttributes: { antialias: true }
+    });
+    MAP.map = map;
+    map.on('error', e => console.warn('map:', e && e.error ? e.error.message : e));
+    map.on('styleimagemissing', () => {});
+    map.on('load', () => {
+      addLayers(); MAP.loaded = true;
+      const at = document.querySelector('.maplibregl-ctrl-attrib'); if (at) { at.classList.remove('maplibregl-compact-show'); at.removeAttribute('open'); }
+      drawSite(); renderMass(true); flyToSite();
+    });
+    map.on('click', onMapClick);
+    map.on('dblclick', e => { if (S.drawing) { e.preventDefault(); finishDraw(); } });
+  } catch (e) { console.warn('map unavailable', e); $('#mapMsg').classList.remove('hidden'); }
+}
+function addLayers() {
+  const m = MAP.map, E = FC([]);
+  if (m.getLayer('building-3d')) { m.setPaintProperty('building-3d', 'fill-extrusion-color', '#E3DFD5'); m.setPaintProperty('building-3d', 'fill-extrusion-opacity', 0.82); }
+  m.addSource('site', { type: 'geojson', data: E });
+  m.addSource('mass', { type: 'geojson', data: E });
+  m.addSource('floors', { type: 'geojson', data: E });
+  m.addSource('draw', { type: 'geojson', data: E });
+  m.addLayer({ id: 'site-fill', type: 'fill', source: 'site', paint: { 'fill-color': '#D0342C', 'fill-opacity': 0.07 } });
+  m.addLayer({ id: 'site-line', type: 'line', source: 'site', paint: { 'line-color': '#D0342C', 'line-width': 2.4, 'line-dasharray': [2, 1.4] } });
+  m.addLayer({ id: 'mass', type: 'fill-extrusion', source: 'mass', paint: { 'fill-extrusion-color': '#2E7D5B', 'fill-extrusion-height': 0, 'fill-extrusion-base': 0, 'fill-extrusion-opacity': 0.93, 'fill-extrusion-vertical-gradient': true } });
+  m.addLayer({ id: 'floors', type: 'fill-extrusion', source: 'floors', paint: { 'fill-extrusion-color': '#DCEDE2', 'fill-extrusion-base': ['get', 'b'], 'fill-extrusion-height': ['get', 'h'], 'fill-extrusion-opacity': 0.93 } });
+  m.addLayer({ id: 'draw-line', type: 'line', source: 'draw', paint: { 'line-color': '#D0342C', 'line-width': 2, 'line-dasharray': [1, 1] } });
+  m.addLayer({ id: 'draw-pts', type: 'circle', source: 'draw', filter: ['==', ['geometry-type'], 'Point'], paint: { 'circle-radius': 4.5, 'circle-color': '#fff', 'circle-stroke-color': '#D0342C', 'circle-stroke-width': 2 } });
+}
+function drawSite() { if (MAP.loaded) MAP.map.getSource('site').setData(FC([polyF(S.ring)])); }
+function renderMass(grow) {
+  if (!MAP.loaded || !OUT) return;
+  const ring = massRing(), target = ring ? OUT.max_height_m : 0;
+  const key = JSON.stringify([ring, target, OUT.storeys]);
+  if (!grow && key === MAP.key) return;
+  MAP.key = key;
+  const m = MAP.map;
+  m.getSource('mass').setData(FC(ring ? [polyF(ring)] : []));
+  m.getSource('floors').setData(FC([]));
+  animateHeight(grow ? 0 : MAP.h, target, grow ? 1400 : 380, () => setFloors(ring));
+}
+function animateHeight(from, to, dur, done) {
+  cancelAnimationFrame(MAP.raf);
+  const m = MAP.map;
+  if (RM || Math.abs(to - from) < 0.01) { MAP.h = to; m.setPaintProperty('mass', 'fill-extrusion-height', to); if (done) done(); return; }
+  const t0 = performance.now();
+  const step = t => {
+    const k = Math.max(0, Math.min(1, (t - t0) / dur)), e = 1 - Math.pow(1 - k, 3);   // rAF time can precede t0
+    MAP.h = from + (to - from) * e; m.setPaintProperty('mass', 'fill-extrusion-height', MAP.h);
+    if (k < 1) MAP.raf = requestAnimationFrame(step); else if (done) done();
+  };
+  MAP.raf = requestAnimationFrame(step);
+}
+function setFloors(ring) {
+  if (!ring || !MAP.loaded) return;
+  const o = OUT, f2f = o.floor_to_floor_m, L = LP(), feats = [];
+  const big = ring.map(p => { const q = L.fwd(p[0], p[1]); return L.inv(q[0] * 1.008, q[1] * 1.008); });
+  for (let k = 1; k < o.storeys; k++) feats.push(polyF(big, { b: k * f2f - 0.14, h: k * f2f + 0.14 }));
+  MAP.map.getSource('floors').setData(FC(feats));
+}
+function flyToSite() {
+  if (!MAP.map) return;
+  const z = Math.max(14.6, Math.min(17.4, 16.8 - Math.log2(Math.sqrt(S.params.site_area_m2 / 5000))));
+  const opts = { center: [S.center.lng, S.center.lat], zoom: z, pitch: 55, bearing: -17 };
+  const readStreet = () => { if (S.street) return; const st = streetMedian(); if (st) { S.street = st; refresh(); } };
+  MAP.map.once('moveend', () => { MAP.map.once('idle', readStreet); setTimeout(readStreet, 4000); });
+  // short hops glide at the current zoom so the tiles stay on screen; only long moves fly out and back in
+  const c = MAP.map.getCenter(), km = Math.hypot((c.lng - S.center.lng) * 111.32 * Math.cos(S.center.lat * Math.PI / 180), (c.lat - S.center.lat) * 110.57);
+  if (RM) MAP.map.jumpTo(opts);
+  else if (km < 20) { const z0 = MAP.map.getZoom(); MAP.map.easeTo(Object.assign(opts, { zoom: Math.abs(z0 - z) < 1.5 ? z0 : z, duration: 1400, essential: true })); }
+  else MAP.map.flyTo(Object.assign(opts, { duration: 2600, curve: 1.35, essential: true }));
+}
+/* neighbour heights within 150 m, from the rendered OpenStreetMap buildings (render_height) */
+function streetMedian() {
+  if (!MAP.loaded || !MAP.map.getSource('openmaptiles')) return null;
+  let feats = [];
+  try { feats = MAP.map.querySourceFeatures('openmaptiles', { sourceLayer: 'building' }); } catch (e) { return null; }
+  const L = LP(), site = S.ring.map(p => L.fwd(p[0], p[1])), seen = new Set(), hs = [];
+  for (const f of feats) {
+    const h = f.properties ? +f.properties.render_height : NaN;
+    if (!Number.isFinite(h) || h <= 0) continue;
+    const g = f.geometry, polys = g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : [];
+    for (const poly of polys) {                                   // tiles merge same-height buildings: read each part
+      const ring = poly[0]; if (!ring || ring.length < 4) continue;
+      const pts = ring.map(p => L.fwd(p[0], p[1])), c = ringCentroid(pts);
+      if (Math.hypot(c[0], c[1]) > 150 || inRing(c[0], c[1], site) || ringArea(pts) < 15) continue;
+      const id = c[0].toFixed(0) + ',' + c[1].toFixed(0);
+      if (seen.has(id)) continue; seen.add(id); hs.push(h);
+    }
+  }
+  /* OpenMapTiles gives untagged buildings a 5 m default: use only buildings with a real height, and keep the 9 m assumption when fewer than 5 have one */
+  const use = hs.filter(v => v !== 5);
+  if (use.length < 5) return null;
+  use.sort((a, b) => a - b);
+  const n = use.length;
+  return { median: n % 2 ? use[(n - 1) / 2] : (use[n / 2 - 1] + use[n / 2]) / 2, n, all: hs.length, taggedOnly: true };
+}
+function matchStreet() {
+  const st = streetMedian();
+  if (!st) { note('Fewer than 5 buildings within 150 m have a mapped height. Keeping the 9 m street assumption.'); return; }
+  S.street = st; refresh();
+  const f2f = S.params.floor_to_floor_m, s = Math.max(1, Math.round(st.median / f2f));
+  propose('you', `Match the street: ${s} storeys`, `median ${st.median.toFixed(1)} m, ${st.n}${st.taggedOnly ? ` of ${st.all}` : ''} buildings within 150 m · from OpenStreetMap; many heights estimated`,
+    () => { accept({ podium_storeys: s }); edited(); refresh(); });
+}
+
+/* ================= site placement, search, draw ================= */
+function onSiteChanged(fly) {
+  const was = S.outside ? '_out' : S.council;
+  setupSite(); detectCouncil();
+  if (S.preset) applyPreset(S.preset);
+  S.street = null;
+  const moved = !S.busy && (S.outside ? '_out' : S.council) !== was;   // a new council starts a new conversation
+  if (moved) resetStages(); else edited();
+  drawSite(); fetchConstraints(); refresh({ grow: true });
+  if (moved) { clearThread(); greet(); }
+  if (fly) flyToSite();
+}
+function placeSite(lng, lat, label) {
+  S.site = { name: label || null, lat, lng, polygon: squareAt(lng, lat, Math.min(2, Math.max(0.1, S.siteHa || 0.5))), custom: true };
+  if (!S.site.name) { const b = boroughAt(lng, lat); S.site.name = b ? `Site in ${b}` : 'Dropped pin'; }
+  onSiteChanged(true);
+}
+function onMapClick(e) {
+  if (S.drawing) { S.drawPts.push([e.lngLat.lng, e.lngLat.lat]); renderDraw(); return; }
+  const L = LP(), p = L.fwd(e.lngLat.lng, e.lngLat.lat), site = S.ring.map(q => L.fwd(q[0], q[1]));
+  if (inRing(p[0], p[1], site)) return;                      // clicks inside the red line keep the site
+  placeSite(e.lngLat.lng, e.lngLat.lat, null);
+}
+function renderDraw() {
+  if (!MAP.loaded) return;
+  const pts = S.drawPts, f = pts.map(p => ({ type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: p } }));
+  if (pts.length > 1) f.push({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: pts.length > 2 ? pts.concat([pts[0]]) : pts } });
+  MAP.map.getSource('draw').setData(FC(f));
+}
+function setDrawing(on) {
+  S.drawing = on; S.drawPts = [];
+  $('#drawBtn').setAttribute('aria-pressed', String(on));
+  $('#drawHint').classList.toggle('hidden', !on);
+  if (MAP.map) { if (on) MAP.map.doubleClickZoom.disable(); else MAP.map.doubleClickZoom.enable(); MAP.map.getCanvas().style.cursor = on ? 'crosshair' : ''; }
+  renderDraw();
+}
+function finishDraw() {
+  const pts = [];
+  for (const p of S.drawPts) { const q = pts[pts.length - 1]; if (!q || Math.hypot((p[0] - q[0]) * 69000, (p[1] - q[1]) * 111000) > 1) pts.push(p); }
+  setDrawing(false);
+  if (pts.length < 3) { note('A site needs at least three corners.'); return; }
+  S.site = { name: 'Drawn site', lat: null, lng: null, polygon: pts, custom: true };
+  onSiteChanged(false);
+}
+let lastNominatim = 0;
+async function searchPlace(q) {
+  q = q.trim(); if (!q) return;
+  const ss = $('#sstate'); ss.textContent = 'searching…';
+  try {
+    let hit = null;
+    const pc = q.replace(/\s+/g, '').toUpperCase();
+    const ll = q.match(/^\s*(-?\d{1,2}(?:\.\d+)?)\s*[, ]\s*(-?\d{1,3}(?:\.\d+)?)\s*$/);   // "51.528,-0.268" (lat, lng)
+    if (ll && Math.abs(+ll[1]) <= 90 && Math.abs(+ll[2]) <= 180) hit = { lat: +ll[1], lng: +ll[2], label: `${(+ll[1]).toFixed(4)}, ${(+ll[2]).toFixed(4)}` };
+    else if (/^[A-Z]{1,2}\d[A-Z\d]?\d[A-Z]{2}$/.test(pc)) {
+      const d = await timedJSON('https://api.postcodes.io/postcodes/' + encodeURIComponent(pc), 10000).catch(() => null);
+      if (d && d.result) hit = { lat: d.result.latitude, lng: d.result.longitude, label: d.result.postcode };
+    } else if (/^[A-Z]{1,2}\d[A-Z\d]?$/.test(pc)) {
+      const d = await timedJSON('https://api.postcodes.io/outcodes/' + encodeURIComponent(pc), 10000).catch(() => null);
+      if (d && d.result) hit = { lat: d.result.latitude, lng: d.result.longitude, label: d.result.outcode };
+    }
+    if (!hit) {
+      const wait = 1000 - (Date.now() - lastNominatim); if (wait > 0) await sleepReal(wait);  // at most one request a second
+      lastNominatim = Date.now();
+      const d = await timedJSON('https://nominatim.openstreetmap.org/search?format=json&countrycodes=gb&limit=1&q=' + encodeURIComponent(q), 10000);
+      if (Array.isArray(d) && d[0]) hit = { lat: +d[0].lat, lng: +d[0].lon, label: String(d[0].display_name || q).split(',').slice(0, 2).join(',') };
+    }
+    if (!hit || !isNum(hit.lat) || !isNum(hit.lng)) { ss.textContent = 'not found'; return; }
+    ss.textContent = '';
+    placeSite(hit.lng, hit.lat, hit.label);
+  } catch (e) { ss.textContent = 'search failed'; }
+}
+
+/* ================= upload: GeoJSON or OBJ ================= */
+function convexHull(P) {
+  const p = P.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  if (p.length < 3) return p;
+  const cr = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lo = [], up = [];
+  for (const q of p) { while (lo.length >= 2 && cr(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
+  for (let i = p.length - 1; i >= 0; i--) { const q = p[i]; while (up.length >= 2 && cr(up[up.length - 2], up[up.length - 1], q) <= 0) up.pop(); up.push(q); }
+  up.pop(); lo.pop();
+  return lo.concat(up);
+}
+function centred(pts) { const c = ringCentroid(pts); return pts.map(p => [p[0] - c[0], p[1] - c[1]]); }
+function parseGeoJSON(gj, name) {
+  const feats = gj.type === 'FeatureCollection' ? gj.features : gj.type === 'Feature' ? [gj] : [{ type: 'Feature', geometry: gj, properties: {} }];
+  let best = null;
+  for (const f of feats || []) {
+    const g = f && f.geometry; if (!g) continue;
+    const polys = g.type === 'Polygon' ? [g.coordinates] : g.type === 'MultiPolygon' ? g.coordinates : [];
+    for (const poly of polys) {
+      const raw = poly[0] || [];
+      if (!Array.isArray(raw) || !raw.every(p => Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1]))) continue;
+      const ring = ringOpen(raw); if (ring.length < 3) continue;
+      const geo = ring.every(([x, y]) => Math.abs(x) <= 180 && Math.abs(y) <= 90);
+      let pts;
+      if (geo) { const lat0 = ring.reduce((s, p) => s + p[1], 0) / ring.length, lng0 = ring.reduce((s, p) => s + p[0], 0) / ring.length, P = projector(lat0, lng0); pts = ring.map(p => P(p[0], p[1])); }
+      else pts = ring.map(p => [p[0], p[1]]);
+      const area = ringArea(pts);
+      if (!Number.isFinite(area) || area <= 0.000001) continue;
+      if (!best || area > best.area) best = { pts, area, props: f.properties || {} };
+    }
+  }
+  if (!best) throw new Error('no Polygon or MultiPolygon found');
+  const pr = best.props, num = v => { const n = parseFloat(v); return Number.isFinite(n) && n > 0 ? n : null; };
+  return { kind: 'GeoJSON', name, ring: centred(best.pts), area: best.area, height_m: num(pr.height ?? pr.Height ?? pr.HEIGHT ?? pr.render_height), storeys: num(pr.storeys ?? pr.Storeys ?? pr.levels ?? pr['building:levels']) };
+}
+function parseOBJ(txt, forceAxis, name) {
+  const V = [];
+  for (const line of txt.split(/\r?\n/)) {
+    if (line.charCodeAt(0) !== 118 || line.charCodeAt(1) !== 32) continue;           // "v "
+    const a = line.trim().split(/\s+/), x = +a[1], y = +a[2], z = +a[3];
+    if (Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z)) V.push([x, y, z]);
+  }
+  if (V.length < 4) throw new Error('no vertices found');
+  const rng = i => { let lo = Infinity, hi = -Infinity; for (const v of V) { if (v[i] < lo) lo = v[i]; if (v[i] > hi) hi = v[i]; } return hi - lo; };
+  const yR = rng(1), zR = rng(2), axis = forceAxis || (yR >= zR ? 'Y' : 'Z');                 // up axis: the larger range
+  const plan = V.map(v => axis === 'Y' ? [v[0], -v[2]] : [v[0], v[1]]);
+  const hull = convexHull(plan); if (hull.length < 3) throw new Error('flat model');
+  return { kind: 'OBJ', name, axis, obj: txt, ring: centred(hull), area: ringArea(hull), height_m: axis === 'Y' ? yR : zR, storeys: null };
+}
+function applyUpload(up) {
+  if (!up || !Number.isFinite(up.area) || up.area <= 0.000001 || !Array.isArray(up.ring) || up.ring.length < 3 || !up.ring.every(p => Array.isArray(p) && p.every(Number.isFinite))) throw new Error('The model needs a valid, non-zero footprint.');
+  const f2f = S.params.floor_to_floor_m, siteA = S.params.site_area_m2;
+  S.upload = up; S.preset = null;
+  const cov = Math.min(1, Math.max(0.01, up.area / siteA));
+  const st = up.storeys ? Math.round(up.storeys) : Math.max(1, Math.round((up.height_m || S.params.podium_storeys * f2f) / f2f));
+  Object.assign(S.params, { podium_coverage: Math.round(cov * 1000) / 1000, podium_storeys: st, tower_coverage: 0, tower_storeys: 0 });
+  edited(); refresh({ grow: true });
+  note(`${esc(up.kind)} read as its outline massing: ${f0(up.area)} m² footprint, ${(up.height_m || st * f2f).toFixed(0)} m, ${st} storeys${up.area > siteA ? ' (larger than the site: clamped to 100%)' : ''}.`);
+}
+function onUpload(file) {
+  if (!file) return;
+  const name = file.name || 'model', ext = name.split('.').pop().toLowerCase();
+  const rd = new FileReader();
+  rd.onload = () => {
+    try { const txt = String(rd.result); applyUpload(ext === 'obj' ? parseOBJ(txt, null, name) : parseGeoJSON(JSON.parse(txt), name)); }
+    catch (e) { note(`Couldn't read ${esc(name)}: ${esc(e.message)}.`); }
+  };
+  rd.readAsText(file);
+}
+
+/* ================= assumptions sheet ================= */
+function openAssumptions() {
+  const a = withDefaults(A()), li = landInfo(), r = saleRatio(), c = councilPack();
+  const rows = [
+    ['Land value', `${fm(li.v)}<small>${li.src === 'council' ? `assumption: council land value per hectare × ${S.siteHa.toFixed(2)} ha. A with-permission value, so it overstates existing use value` : 'placeholder: enter the real figure'}</small>`],
+    ['Sale value', `${fpsm(a.sale_psm.base)} base (${fpsm(a.sale_psm.low)}–${fpsm(a.sale_psm.high)})<small>${r ? `assumption: Lewisham £8,000/m² × ${S.council} average price ÷ London (${r.toFixed(2)})` : 'assumption: Lewisham placeholder, not local evidence'}</small>`],
+    ['Borough CIL', `${a.bcil_psm == null ? 'not researched' : '£' + f0(a.bcil_psm) + '/m²'}<small>${a.bcil_psm == null ? 'counted as £0' : bcilOf(c) && bcilOf(c).range ? `zoned ${esc(String(c.borough_cil_resi_per_m2))}: midpoint used, unindexed, zone not checked (assumption)` : esc(trunc((c && c.borough_cil_note) || 'council pack', 140))}</small>`],
+    ['Mayoral CIL', `£${a.mcil_psm.toFixed(2)}/m²<small>${cnum(c, 'mcil_rate_2026') != null ? 'council pack' : 'band 2 rate assumed'}</small>`],
+    ['S106', 'not entered<small>counted as £0</small>'],
+    ['Build cost', `£${f0(a.build_psm_low)} / £${f0(a.build_psm_high)} per m² GIA<small>Lewisham study, up to / above 5 storeys, +10% contingency</small>`],
+    ['Return, finance', `${pctA(a.target_return_pct_gdv)} of GDV · ${pctA(a.finance_rate)} for ${a.finance_years} years<small>assumption</small>`],
+    ['Homes', `NIA ${fp(a.nia_ratio)} of GIA · 50 / 70 / 86 m² units<small>London Plan Table 3.1</small>`],
+    ['Decision time', `${observed(OUT.homes).src === 'council' ? S.council + ' observed medians' : 'London sample medians'}<small>observed past decisions on full applications, not a prediction. A borough median is used only with 10+ decisions and at least 91 days</small>`],
+    ['Balanced point', `walk-away: developer 0.6, architect 0.6, planning ${OUT.routes.route_min_pct}% ÷ 50 = ${(OUT.routes.route_min_pct / 50).toFixed(2)}, residents 0.3 when invited<small>assumption. Scores: developer = return on GDV ÷ 25%; planning = affordable ÷ 50%; residents = height against the street and open space; architect = vision kept. Vision kept weights: storeys ${a.vision_weights.storeys}, footprint ${a.vision_weights.coverage}, homes ${a.vision_weights.homes}, open space ${a.vision_weights.open_space}</small>`],
+    ['Street height', S.street ? `${S.street.median.toFixed(1)} m median, ${S.street.n} buildings<small>from OpenStreetMap; many heights estimated</small>` : '9 m<small>assumption until the map reads the street</small>']
+  ];
+  $('#assList').innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+  const d = $('#assDlg'); if (d.showModal) d.showModal(); else d.setAttribute('open', '');
+}
+
+/* ================= hooks for teammates ================= */
+window.P106 = {
+  params() {
+    const o = OUT || compute();
+    return { site_area_m2: o.site_area_m2, podium_coverage: o.podium_coverage, podium_storeys: o.podium_storeys, tower_coverage: o.tower_coverage,
+      tower_storeys: o.tower_storeys, storeys: o.storeys, max_height_m: +o.max_height_m.toFixed(2), gia_m2: +o.gia_m2.toFixed(1), nia_m2: +o.nia_m2.toFixed(1), homes: o.homes,
+      habitable_rooms: o.habitable_rooms, mix_b1: o.mix_b1, mix_b2: o.mix_b2, mix_b3: o.mix_b3, affordable_hr_pct: o.affordable_hr_pct,
+      social_rent_share: o.social_rent_share, land_type: o.land_type, borough: S.council || S.site.borough || null, lat: S.site.lat, lng: S.site.lng };
+  },
+  engine, outputs: () => OUT, sweep, bestOffer, BASE_ASSUMPTIONS, RULES, assumptions: A, state: S, classify, ask: askTable
+};
+
+/* ================= wiring ================= */
+function bindUI() {
+  $('#searchForm').addEventListener('submit', e => { e.preventDefault(); searchPlace($('#q').value); });
+  $('#askForm').addEventListener('submit', e => { e.preventDefault(); const v = $('#askIn').value; $('#askIn').value = ''; askTable(v); });
+  $('#primary').addEventListener('click', primary);
+  $$('#scaleSeg [data-preset]').forEach(b => b.addEventListener('click', () => { applyPreset(b.dataset.preset); edited(); refresh({ grow: true }); }));
+  $('#storeys').addEventListener('input', e => { S.params.podium_storeys = Math.max(1, +e.target.value); S.preset = null; edited(); refresh(); });
+  $('#foot').addEventListener('input', e => { S.params.podium_coverage = Math.max(0.01, +e.target.value / 100); S.preset = null; edited(); refresh(); });
+  $('#siteHa').addEventListener('input', e => { scaleSite(+e.target.value); if (S.preset) applyPreset(S.preset); edited(); drawSite(); refresh(); });
+  for (const [id, k] of [['mix1', 'mix_b1'], ['mix2', 'mix_b2'], ['mix3', 'mix_b3']]) $('#' + id).addEventListener('input', e => { const v = parseFloat(e.target.value); if (Number.isFinite(v) && v >= 0) { S.params[k] = v / 100; edited(); refresh(); } });
+  $('#f2f').addEventListener('input', e => { S.params.floor_to_floor_m = +e.target.value; edited(); refresh(); });
+  $('#aff').addEventListener('input', e => { S.params.affordable_hr_pct = +e.target.value; edited(); refresh(); });
+  $('#srs').addEventListener('input', e => { S.params.social_rent_share = +e.target.value / 100; edited(); refresh(); });
+  $$('#landSeg [data-land]').forEach(b => b.addEventListener('click', () => { S.params.land_type = b.dataset.land; edited(); refresh(); }));
+  const pop = $('#morePop'), mb = $('#moreBtn');
+  mb.addEventListener('click', e => { e.stopPropagation(); pop.hidden = !pop.hidden; mb.setAttribute('aria-expanded', String(!pop.hidden)); });
+  document.addEventListener('click', e => { if (!pop.hidden && !pop.contains(e.target) && e.target !== mb) { pop.hidden = true; mb.setAttribute('aria-expanded', 'false'); } });
+  $('#streetBtn').addEventListener('click', matchStreet);
+  $('#upBtn').addEventListener('click', () => $('#upFile').click());
+  $('#upFile').addEventListener('change', e => { onUpload(e.target.files && e.target.files[0]); e.target.value = ''; });
+  $('#drawBtn').addEventListener('click', () => setDrawing(!S.drawing));
+  $('#resBtn').addEventListener('click', () => setResidents(!S.residents));
+  $('#assBtn').addEventListener('click', openAssumptions);
+  $('#assClose').addEventListener('click', () => $('#assDlg').close());
+  $('#hotToggle').addEventListener('click', () => { S.hot = !S.hot; renderHoT(); });
+  linkLanes();
+  $('#flagChip').addEventListener('click', () => { const f = $('#flags'); f.classList.remove('flash'); void f.offsetWidth; f.classList.add('flash'); });
+  $$('#tracker .node').forEach(n => n.addEventListener('click', () => {
+    const i = +n.dataset.i; if (S.busy) return;
+    if (i === 0 && S.stage > 0) { S.stage = 0; S.hot = false; renderHoT(); renderTracker(); setPrimary(); renderResults(); }
+    else if (i === 1 && S.stage === 0) runStage1();
+    else if (i === 2 && S.stage === 1 && S.s1done) runStage2();
+  }));
+  const tab = w => { document.body.dataset.tab = w; $('#tabPlan').setAttribute('aria-selected', String(w === 'plan')); $('#tabDev').setAttribute('aria-selected', String(w === 'dev')); (w === 'plan' ? $('#tabPlan') : $('#tabDev')).classList.remove('unread'); };
+  $('#tabPlan').addEventListener('click', () => tab('plan'));
+  $('#tabDev').addEventListener('click', () => tab('dev'));
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (S.drawing) setDrawing(false);
+    if (!pop.hidden) { pop.hidden = true; mb.setAttribute('aria-expanded', 'false'); }
+  });
+}
+
+/* ================= boot ================= */
+async function getJSON(u, onHeaders) { const r = await fetch(u, { cache: 'no-cache' }); if (!r.ok) throw new Error(u + ' ' + r.status); if (onHeaders) onHeaders(r.headers); return r.json(); }
+async function dataListing() { try { const r = await fetch('data/', { cache: 'no-cache' }); if (!r.ok) return null; const t = await r.text(); return /<a\s/i.test(t) ? t : null; } catch (e) { return null; } }
+async function boot() {
+  bindUI();
+  setupSite(); detectCouncil(); applyPreset('mid');
+  refresh(); renderTracker(); setPrimary();
+  initMap();
+  const list = await dataListing(), has = f => list == null || list.includes(f);
+  const q = new URLSearchParams(location.search);
+  try {
+    const site = await getJSON('data/site.json', h => { if (/SimpleHTTP/i.test(h.get('server') || '')) S.api = false; });  // a static file server has no /api/agent
+    if (site && Array.isArray(site.polygon) && site.polygon.length > 3) { S.site = Object.assign(clone(SITE_FALLBACK), site); setupSite(); applyPreset('mid'); }
+  } catch (e) { console.warn('site.json not loaded; using the inline Walworth site.', e.message); }
+  if (q.get('api') === '1') S.api = 'maybe';
+  if (q.get('api') === '0') S.api = false;
+  const jobs = [];
+  if (has('councils.json')) jobs.push(getJSON('data/councils.json').then(d => { let v = d && d.councils ? d.councils : d; if (Array.isArray(v)) v = Object.fromEntries(v.filter(x => x && x.name).map(x => [x.name, x])); S.councils = v && typeof v === 'object' ? v : {}; }).catch(e => console.warn('councils.json:', e.message)));
+  if (has('london-boroughs.geojson')) jobs.push(getJSON('data/london-boroughs.geojson').then(d => { S.boroughs = d; }).catch(e => console.warn('boroughs:', e.message)));
+  if (has('london_layers.json')) jobs.push(getJSON('data/london_layers.json').then(d => { S.layers = (d && Array.isArray(d.layers) ? d.layers : []).filter(L => L && L.url_template); }).catch(e => console.warn('london_layers.json:', e.message)));
+  await Promise.all(jobs);
+  detectCouncil(); drawSite(); fetchConstraints(); refresh({ grow: true });
+  if (MAP.loaded) flyToSite();
+  greet();
+}
+boot();
+</script>
+<script id="ai-connect">
+/* Free AI for the agents: OpenAI-compatible providers called straight from the browser.
+   The key lives only in this browser's localStorage. Every number still comes from the engine via the state in the system prompt. */
+(function(){
+  const PROVIDERS = {
+    groq:        { base: 'https://api.groq.com/openai/v1', prefer: [/qwen/i, /kimi/i, /llama-3\.3/i, /gpt-oss/i, /llama/i] },
+    openrouter:  { base: 'https://openrouter.ai/api/v1',   prefer: [/qwen.*:free/i, /kimi.*:free/i, /glm.*:free/i, /:free/i] },
+    siliconflow: { base: 'https://api.siliconflow.com/v1',  prefer: [/qwen/i, /glm/i, /deepseek/i] }
+  };
+  const $id = id => document.getElementById(id);
+  const store = { get(k){ try { return localStorage.getItem('p106_ai_' + k) || ''; } catch(e){ return ''; } },
+                  set(k,v){ try { v ? localStorage.setItem('p106_ai_' + k, v) : localStorage.removeItem('p106_ai_' + k); } catch(e){} } };
+  let cfg = { prov: store.get('prov') || 'groq', key: store.get('key'), model: store.get('model') };
+  let cooldownUntil = 0;
+  function status(kind, text){ const d = $id('aiDot'), l = $id('aiLbl'); if (!d) return; d.className = 'ai-dot' + (kind ? ' ' + kind : ''); l.textContent = text; }
+  function refresh(){ if (cfg.key && cfg.model) status('on', 'AI: ' + cfg.model.split('/').pop().slice(0, 22)); else status('', 'Connect AI'); }
+  function note(t){ const n = $id('aiNote'); if (n) n.textContent = t; }
+  async function loadModels(){
+    const prov = $id('aiProv').value, key = $id('aiKey').value.trim() || (prov === cfg.prov ? cfg.key : '');
+    if (!key) { note('Paste a key first.'); return; }
+    note('Loading models…');
+    try {
+      const r = await fetch(PROVIDERS[prov].base + '/models', { headers: { Authorization: 'Bearer ' + key } });
+      if (!r.ok) { note(r.status === 401 ? 'Key not accepted by ' + prov + '.' : 'Could not load models (' + r.status + ').'); return; }
+      const d = await r.json();
+      let ids = (d.data || []).map(m => m.id).filter(id => !/whisper|tts|guard|embed|audio|vision-only|playai/i.test(id));
+      if (prov === 'openrouter') ids = ids.filter(id => /:free$/.test(id));
+      const ranked = [];
+      PROVIDERS[prov].prefer.forEach(rx => ids.forEach(id => { if (rx.test(id) && !ranked.includes(id)) ranked.push(id); }));
+      ids.forEach(id => { if (!ranked.includes(id)) ranked.push(id); });
+      const sel = $id('aiModel'); sel.replaceChildren();
+      ranked.forEach(id => { const o = document.createElement('option'); o.value = o.textContent = id; sel.appendChild(o); });
+      if (cfg.model && ranked.includes(cfg.model)) sel.value = cfg.model;
+      note(ranked.length ? ranked.length + ' models. First choice: ' + ranked[0] + '. Press Save.' : 'No usable models on this key.');
+    } catch (e) { note('Network error: check the Wi-Fi.'); }
+  }
+  function save(){
+    const prov = $id('aiProv').value;
+    const key = $id('aiKey').value.trim() || (prov === cfg.prov ? cfg.key : ''), model = $id('aiModel').value;
+    if (!key || !model) { note('Need a key and a model.'); return; }
+    cfg = { prov: $id('aiProv').value, key, model };
+    store.set('prov', cfg.prov); store.set('key', key); store.set('model', model);
+    $id('aiKey').value = ''; refresh(); note('Saved. Ask the table a question to try it.');
+  }
+  function off(){ cfg = { prov: cfg.prov, key: '', model: '' }; store.set('key', ''); store.set('model', ''); refresh(); note('Disconnected. Prepared answers only.'); }
+  window.P106LLM = async function ({ agent, messages, system }) {
+    if (!cfg.key || !cfg.model || Date.now() < cooldownUntil) return null;
+    const msgs = [{ role: 'system', content: system }].concat((messages || []).map(m => ({
+      role: m.role === 'assistant' ? 'assistant' : 'user',
+      content: m.role === 'assistant' && m.name ? '[' + m.name + '] ' + m.content : m.content
+    })));
+    try {
+      const body = { model: cfg.model, messages: msgs, temperature: 0.6, max_tokens: 220 };
+      const r = await fetch(PROVIDERS[cfg.prov].base + '/chat/completions', {
+        method: 'POST', headers: { Authorization: 'Bearer ' + cfg.key, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      if (r.status === 429) { cooldownUntil = Date.now() + 60000; status('warn', 'AI limit: prepared answers 1 min'); setTimeout(refresh, 60000); return null; }
+      if (!r.ok) { status('warn', 'AI error ' + r.status + ': prepared answers'); setTimeout(refresh, 8000); return null; }
+      const d = await r.json();
+      let text = (((d.choices || [])[0] || {}).message || {}).content || '';
+      text = text.replace(/<think>[\s\S]*?<\/think>/gi, '').replace(/^\s*\[(planning|developer|residents)\]\s*/i, '').trim();
+      return text || null;
+    } catch (e) { return null; }
+  };
+  document.addEventListener('DOMContentLoaded', init); if (document.readyState !== 'loading') init();
+  let inited = false;
+  function init(){
+    if (inited || !$id('aiBtn')) return; inited = true;
+    $id('aiProv').value = cfg.prov; refresh();
+    $id('aiProv').addEventListener('change', () => {
+      $id('aiKey').value = ''; $id('aiModel').replaceChildren();
+      note('Enter a key for this provider and load its models. Provider charges may apply.');
+    });
+    $id('aiBtn').addEventListener('click', () => { const p = $id('aiPop'), open = p.hidden; p.hidden = !open; $id('aiBtn').setAttribute('aria-expanded', String(open)); });
+    $id('aiLoad').addEventListener('click', loadModels);
+    $id('aiSave').addEventListener('click', save);
+    $id('aiOff').addEventListener('click', off);
+    document.addEventListener('click', e => { const w = $id('aiBtn').parentElement; if (!w.contains(e.target)) { $id('aiPop').hidden = true; $id('aiBtn').setAttribute('aria-expanded', 'false'); } });
+  }
+})();
+</script>
+</body>
+</html>

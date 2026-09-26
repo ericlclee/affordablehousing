@@ -1,0 +1,247 @@
+[
+ {
+  "name": "Barking and Dagenham",
+  "local_plan": {
+   "name": "Barking and Dagenham Local Plan 2020-2037",
+   "year": 2024,
+   "url": "https://www.lbbd.gov.uk/sites/default/files/2024-09/Appendix%202a%20Barking%20and%20Dagenham%202037%20Local%20Plan%20(as%20amended)%20-%20Final%20(1).pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "SP3: 50% strategic target on all housing schemes (London Plan H4). DMH1: schemes of 10+ units or >1,000 sqm GIA must provide affordable housing measured in habitable rooms, via the London Plan H5 threshold approach with early/late review for Viability Tested Route. Tenure per Figure 13 (split not extracted). Adopted September 2024.",
+  "borough_cil_resi_per_m2": "\u00a310\u2013\u00a370",
+  "borough_cil_resi_min": 10,
+  "borough_cil_resi_max": 70,
+  "borough_cil_note": "Zoned, 2015 base rates: Zone 1 Barking Town Centre/Leftley \u00a370, Zone 2 Barking Riverside \u00a325, Zone 3 rest of borough (most of borough) \u00a310. Indexed 2024 rates \u00a3104.59 / \u00a337.35 / \u00a314.94.",
+  "tall_building_definition": "DMD2: taller than six storeys or 18m (ground to uppermost floor level), as London Plan D9. Tall Building Locations in SPP1-SPP6 on Policies Map; up to 95m in Barking TC zone, up to 50m elsewhere.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Family homes first, 50% affordable, regeneration-led growth, tenure-blind design",
+  "sources": [
+   "https://www.lbbd.gov.uk/sites/default/files/2024-09/Appendix%202a%20Barking%20and%20Dagenham%202037%20Local%20Plan%20(as%20amended)%20-%20Final%20(1).pdf",
+   "https://lbbd.gov.uk/sites/default/files/2024-05/Annual%20CIL%20Rate%20Summary%202024.pdf"
+  ]
+ },
+ {
+  "name": "Barnet",
+  "local_plan": {
+   "name": "Barnet Local Plan 2021-2036",
+   "year": 2025,
+   "url": "https://www.barnet.gov.uk/planning-and-building-control/planning-policies-and-local-plan/barnet-local-plan-2021-2036"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target that 50% of new homes are genuinely affordable (para 4.4.5); Policy HOU01 seeks a minimum 35% affordable on all developments of 10+ dwellings. Tenure split not confirmed from primary source. Plan incorporates Inspectors' Main Modifications; adoption report Jan/Feb 2025.",
+  "borough_cil_resi_per_m2": "\u00a3300",
+  "borough_cil_resi_min": 300,
+  "borough_cil_resi_max": 300,
+  "borough_cil_note": "Single borough-wide rate. Revised Charging Schedule applies from 1 April 2022 (replacing 2013 \u00a3135); \u00a3300 residential (C2, C3, C4) per submitted schedule. Indexed annually (Reg 40). barnet.gov.uk blocked direct fetch of adopted schedule.",
+  "tall_building_definition": "CDH04: tall = 8+ storeys (26m+ above ground); very tall = 15+ storeys (45m+), not permitted unless exceptional. Tall (8-14 storeys) may suit named strategic locations: Brent Cross, Brent Cross West, Colindale, Cricklewood, Edgware, West Hendon.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "Growth areas, genuinely affordable homes, heights limited to strategic locations",
+  "sources": [
+   "https://barnet.moderngov.co.uk/documents/s87852/Barnets+Local+Plan+Adoption.pdf",
+   "https://barnet.moderngov.co.uk/documents/s87855/Appendix+B+-+Inspectors+Schedule+of+Main+Modifications+to+Barnets+Local+Plan.pdf",
+   "https://barnet.moderngov.co.uk/documents/s64966/Barnet%20Community%20Infrastructure%20Levy%20Charging%20Schedule%20Review%20submission%20for%20examination.pdf",
+   "https://barnet.moderngov.co.uk/documents/b42136/Item%2013%20-%20217-219%20Golders%20Green%20Road%20NW11%209BY%20Golders%20Green%20252948FUL%2017th-Nov-2025%2019.00%20Pla.pdf?T=9"
+  ]
+ },
+ {
+  "name": "Bexley",
+  "local_plan": {
+   "name": "Bexley Local Plan",
+   "year": 2023,
+   "url": "https://www.bexley.gov.uk/sites/default/files/2023-07/bexley-local-plan-adopted-26-april-2023.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "SP2: aspiration for 50% strategic target across qualifying provision over plan period via the DP1 threshold approach (35%, or 50% in some circumstances, fast-track). Tenure 70% low cost rent / 30% intermediate. Adopted 26 April 2023.",
+  "borough_cil_resi_per_m2": "\u00a340\u2013\u00a360",
+  "borough_cil_resi_min": 40,
+  "borough_cil_resi_max": 60,
+  "borough_cil_note": "Zoned: Zone 1 (north of railway line) \u00a340, Zone 2 (south) \u00a360; also hotel and student housing. Charging schedule 2015; rates indexed.",
+  "tall_building_definition": "DP12: more than 25m (about 8 storeys). Suitable Locations for Tall Buildings near Abbey Wood and Belvedere stations, up to 45m max, on Policies Map; exception not rule.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Suburban character, human-scaled typologies, 50% affordable aspiration, low-cost rent",
+  "sources": [
+   "https://www.bexley.gov.uk/services/planning-and-building-control/planning-policy-and-guidance/development-plan",
+   "https://www.bexley.gov.uk/sites/default/files/2023-07/bexley-local-plan-adopted-26-april-2023.pdf",
+   "https://www.bexley.gov.uk/sites/default/files/2020-09/Bexley-CIL-charging-schedule.pdf"
+  ]
+ },
+ {
+  "name": "Brent",
+  "local_plan": {
+   "name": "Brent Local Plan 2019-2041",
+   "year": 2022,
+   "url": "https://www.brent.gov.uk/media/16420376/brent-local-plan-2019-2041.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "BH5: strategic target 50% of new homes to 2041; London Plan H5 threshold approach applies. Non-Build-to-Rent schemes of 10+ dwellings: 70% Social Rent/London Affordable Rent, 30% intermediate. Council prioritises social/LAR over a higher headline %. Adopted February 2022.",
+  "borough_cil_resi_per_m2": "\u00a3200",
+  "borough_cil_resi_min": 200,
+  "borough_cil_resi_max": 200,
+  "borough_cil_note": "Single borough-wide rate for residential (C3, C4, C2 except hospitals, student, HMO). 2013 schedule; indexed 2025 rate \u00a3349.11.",
+  "tall_building_definition": "BD2: more than 30m above ground (about 10 storeys). Directed to Tall Building Zones on policies map (e.g. Wembley, Alperton, South Kilburn) with general heights, stepping down to zone edges.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Social rent priority, 50% affordable, growth areas, Tall Building Zones",
+  "sources": [
+   "https://www.brent.gov.uk/media/16420376/brent-local-plan-2019-2041.pdf",
+   "https://www.brent.gov.uk/-/media/files/resident-documents/planning-and-bc-documents/brent-annual-cil-rate-summary-2025.pdf?rev=8815a2cd4d0849e9b1d348119ccbb516&hash=7F0B7C2D01F25C1BA714463D9080BADA"
+  ]
+ },
+ {
+  "name": "Bromley",
+  "local_plan": {
+   "name": "Bromley Local Plan",
+   "year": 2019,
+   "url": "https://www.bromley.gov.uk/downloads/file/51/bromley-local-plan"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Policy 2: seek 35% (habitable rooms) on sites of 11+ units or >1,000 sqm; 60% social/affordable rented, 40% intermediate; below 35% needs independently assessed viability appraisal. Adopted 16 January 2019; plan under review.",
+  "borough_cil_resi_per_m2": "\u00a3100",
+  "borough_cil_resi_min": 100,
+  "borough_cil_resi_max": 100,
+  "borough_cil_note": "Single borough-wide residential rate; effective 15 June 2021; indexed (RICS CIL index).",
+  "tall_building_definition": "Policy 47: no numeric threshold; tall buildings exceed general height of surroundings and significantly change skyline. Most of borough unsuitable (suburban); Bromley Town Centre AAP identifies potential sites.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "Suburban character protection, 35% affordable, town-centre-only tall buildings",
+  "sources": [
+   "https://www.bromley.gov.uk/planning-policy/bromley-local-plan",
+   "https://www.bromley.gov.uk/downloads/file/51/bromley-local-plan",
+   "https://www.bromley.gov.uk/downloads/file/691/bromley-community-infrastructure-levy-cil-charging-schedule"
+  ]
+ },
+ {
+  "name": "Camden",
+  "local_plan": {
+   "name": "Camden Local Plan 2017",
+   "year": 2017,
+   "url": "https://www.camden.gov.uk/documents/20142/4820180/Local+Plan.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "H4: 50% for schemes with capacity for 25+ homes; sliding scale from 2% (1 home) rising 2% per home below 25; borough target 5,300 affordable homes 2016/17-2030/31. Guideline 60% social-affordable rent, 40% intermediate. Adopted July 2017; new Local Plan submitted Oct 2025, adoption not confirmed.",
+  "borough_cil_resi_per_m2": "\u00a3150\u2013\u00a3500",
+  "borough_cil_resi_min": 150,
+  "borough_cil_resi_max": 500,
+  "borough_cil_note": "2020 charging schedule. Residential 10+ units: Zone A (central) \u00a3150, Zone B (rest of Camden) \u00a3250, Zone C (Hampstead/Highgate) \u00a3500; under 10 units \u00a3500 all zones. Indexed. Rates from council PDF via search extract (direct fetch blocked).",
+  "tall_building_definition": "D1 (para 7.35): no numeric threshold; buildings substantially taller than neighbours or significantly changing the skyline. All of Camden treated as sensitive; case-by-case design tests.",
+  "tall_building_zones_mapped": "no",
+  "priorities": "Maximise affordable homes, small-scheme contributions, heritage-sensitive design",
+  "sources": [
+   "https://www.camden.gov.uk/documents/20142/4820180/Local+Plan.pdf",
+   "https://www.camden.gov.uk/documents/20142/1267599/CIL_Charging_Schedule_30_10_20+(1).pdf/1fcb249a-a1b6-0414-0736-97d1ce617702?t=1612535336528"
+  ]
+ },
+ {
+  "name": "City of London",
+  "local_plan": {
+   "name": "City of London Local Plan 2015",
+   "year": 2015,
+   "url": "https://www.cityoflondon.gov.uk/assets/Services-Environment/planning-local-plan-adopted-2015.pdf"
+  },
+  "affordable_target_pct": 30,
+  "affordable_target_note": "CS21: 10+ unit schemes provide 30% affordable on-site; exceptionally 60% off-site or cash-in-lieu if on-site unviable; 60% social/affordable rent, 40% intermediate. City Plan 2040 not yet adopted (inspectors backed it Sept 2026; adoption expected by end of 2026).",
+  "borough_cil_resi_per_m2": "\u00a395\u2013\u00a3150",
+  "borough_cil_resi_min": 95,
+  "borough_cil_resi_max": 150,
+  "borough_cil_note": "Zoned: Residential Riverside \u00a3150, Rest of City \u00a395 (most of the City). Approved 1 May 2014, effective 1 July 2014; indexed annually.",
+  "tall_building_definition": "Local Plan 2015 CS14: no numeric threshold; tall buildings in Eastern Cluster; refused in conservation areas, St Paul's Heights, protected vistas, Monument views (Policies Map). Emerging City Plan 2040 S12: over 75m AOD.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Office-led growth, limited housing, off-site affordable, Eastern Cluster towers",
+  "sources": [
+   "https://www.cityoflondon.gov.uk/assets/Services-Environment/planning-local-plan-adopted-2015.pdf",
+   "https://www.cityoflondon.gov.uk/services/planning/planning-policy/city-plan-2040",
+   "https://www.cityoflondon.gov.uk/assets/Services-Environment/City-Plan-2040.pdf",
+   "https://news.cityoflondon.gov.uk/government-clears-path-for-city-plan-2040-as-inspectors-back-heritage-approach/",
+   "https://www.cityoflondon.gov.uk/assets/Services-Environment/planning-development-contributions-cil-charging-schedule-2014.pdf"
+  ]
+ },
+ {
+  "name": "Croydon",
+  "local_plan": {
+   "name": "Croydon Local Plan 2018",
+   "year": 2018,
+   "url": "https://www.croydon.gov.uk/sites/default/files/2022-01/croydon-local-plan-20180.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "SP2.4: negotiate up to 50% on sites of 10+ dwellings, subject to viability; 60:40 affordable rent:intermediate; SP2.5 minimum 30% on-site (with Opportunity Area alternatives). Supporting text sets a 40% strategic target of overall supply.",
+  "borough_cil_resi_per_m2": "\u00a30\u2013\u00a3120",
+  "borough_cil_resi_min": 0,
+  "borough_cil_resi_max": 120,
+  "borough_cil_note": "2013 schedule (effective 1 April 2013): Croydon Metropolitan Centre \u00a30 residential, rest of borough \u00a3120 (most of borough); indexed. Revised schedule examined 26 Feb 2026, examiner report April 2026; adoption not confirmed.",
+  "tall_building_definition": "Para 6.9: significantly taller than most surrounding buildings, or over six storeys or 25m. SP4.5: encouraged only in Croydon Opportunity Area, District Centres and well-connected transport interchanges.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "Family homes (30% 3-bed), up to 50% affordable, Opportunity Area density",
+  "sources": [
+   "https://www.croydon.gov.uk/planning-and-regeneration/planning-policy/croydons-development-plan",
+   "https://www.croydon.gov.uk/sites/default/files/2022-01/croydon-local-plan-20180.pdf",
+   "https://www.croydon.gov.uk/sites/default/files/Planning/Community-Infrastructure-Levy-charging%20schedule.pdf",
+   "https://www.croydon.gov.uk/planning-and-regeneration/planning/community-infrastructure-levy-cil-charging-schedule-review"
+  ]
+ },
+ {
+  "name": "Ealing",
+  "local_plan": {
+   "name": "Ealing Development (Core) Strategy 2026 DPD",
+   "year": 2012,
+   "url": "https://www.ealing.gov.uk/download/downloads/id/19446/development_strategy_2026_-_development_plan_document.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Policy 1.2(a): at least 50% of housing to 2026 affordable; 50% on-site starting point for 10+ units; 60% social/affordable rent, 40% intermediate. Adopted 3 April 2012; new Local Plan at examination (Reg 22), not adopted.",
+  "borough_cil_resi_per_m2": "\u00a3150\u2013\u00a3300",
+  "borough_cil_resi_min": 150,
+  "borough_cil_resi_max": 300,
+  "borough_cil_note": "First borough CIL: Central Ealing \u00a3300, rest of borough \u00a3150 (most of borough). Approved by Full Council 16 Dec 2025, charged from 1 March 2026.",
+  "tall_building_definition": "Core Strategy: no numeric threshold; tall buildings only on specified sites in Acton, Ealing and Southall town centres, Park Royal gateways and identified development sites (via Development Sites DPD/SPDs).",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "50% affordable, family homes, tall buildings only in town centres",
+  "sources": [
+   "https://www.ealing.gov.uk/localplan",
+   "https://www.ealing.gov.uk/info/201164/local_plan/3125/new_local_plan/2",
+   "https://www.ealing.gov.uk/download/downloads/id/19446/development_strategy_2026_-_development_plan_document.pdf",
+   "https://www.ealing.gov.uk/download/downloads/id/21255/cil_charging_schedule_from_1_march_2026.pdf"
+  ]
+ },
+ {
+  "name": "Enfield",
+  "local_plan": {
+   "name": "The Enfield Plan: Core Strategy 2010-2025",
+   "year": 2010,
+   "url": "https://www.enfield.gov.uk/__data/assets/pdf_file/0015/4623/planning-policy-information-the-enfield-plan-core-strategy-november-2010.pdf"
+  },
+  "affordable_target_pct": 40,
+  "affordable_target_note": "Core Policy 3: borough-wide 40% target on sites of 10+ dwellings; smaller sites pay off-site contributions against a 20% target. Tenure split not confirmed. enfield.gov.uk blocked direct fetch; values from search-index extracts of council PDFs. New Local Plan 2019-2041 still under examination.",
+  "borough_cil_resi_per_m2": "\u00a30\u2013\u00a3120",
+  "borough_cil_resi_min": 0,
+  "borough_cil_resi_max": 120,
+  "borough_cil_note": "Zoned: RR1 Meridian Water \u00a30, RR2 eastern corridor \u00a340, RR3 intermediate \u00a360, RR4 remainder of borough \u00a3120; indexed. Adoption year not confirmed; from search extract of council charging schedule.",
+  "tall_building_definition": null,
+  "tall_building_zones_mapped": null,
+  "priorities": "40% affordable, small-site contributions, Meridian Water regeneration",
+  "sources": [
+   "https://www.enfield.gov.uk/__data/assets/pdf_file/0015/4623/planning-policy-information-the-enfield-plan-core-strategy-november-2010.pdf",
+   "https://www.enfield.gov.uk/__data/assets/pdf_file/0020/5951/planning-policy-information-community-infrastructure-levy-charging-schedule.pdf"
+  ]
+ },
+ {
+  "name": "Greenwich",
+  "local_plan": {
+   "name": "Royal Greenwich Local Plan: Core Strategy with Detailed Policies",
+   "year": 2014,
+   "url": "https://www.royalgreenwich.gov.uk/download/downloads/id/2869/royal_greenwich_local_plan_core_strategy_with_detailed_policies_main_document.pdf"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Policy H3: minimum 35% affordable on 10+ homes or sites of 0.5ha+ (AMR 2024-25). Tenure split not confirmed. Adopted 30 July 2014; new Local Plan Reg 19 closed 6 Sept 2026, submission expected end 2026.",
+  "borough_cil_resi_per_m2": "\u00a396\u2013\u00a3150",
+  "borough_cil_resi_min": 96,
+  "borough_cil_resi_max": 150,
+  "borough_cil_note": "BCIL2 adopted 24 July 2024 (in force 26 July 2024): 10+ units Zone 1 \u00a3150, Zone 2 \u00a396; under 10 units \u00a3150. Replaces 2015 schedule (\u00a340/\u00a370). Indexed.",
+  "tall_building_definition": null,
+  "tall_building_zones_mapped": "yes",
+  "priorities": "35% affordable minimum, family-sized homes, identified tall building locations",
+  "sources": [
+   "https://www.royalgreenwich.gov.uk/planning-and-building-control/planning-policy-and-strategy/community-infrastructure-levy-cil",
+   "https://www.royalgreenwich.gov.uk/sites/default/files/2025-08/CIL_Charging_Schedule.pdf",
+   "https://www.royalgreenwich.gov.uk/sites/default/files/2026-02/Annual%20CIL%20Rate%20Summary_2026.pdf",
+   "https://www.royalgreenwich.gov.uk/sites/default/files/2026-04/AMR%202024-25%20FINAL.pdf",
+   "https://www.royalgreenwich.gov.uk/downloads/download/718/core_strategy_with_detailed_policies"
+  ]
+ }
+]

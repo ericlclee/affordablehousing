@@ -1,0 +1,2798 @@
+{
+ "Barking and Dagenham": {
+  "name": "Barking and Dagenham",
+  "local_plan": {
+   "name": "Barking and Dagenham Local Plan 2020-2037",
+   "year": 2024,
+   "url": "https://www.lbbd.gov.uk/sites/default/files/2024-09/Appendix%202a%20Barking%20and%20Dagenham%202037%20Local%20Plan%20(as%20amended)%20-%20Final%20(1).pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "SP3: 50% strategic target on all housing schemes (London Plan H4). DMH1: schemes of 10+ units or >1,000 sqm GIA must provide affordable housing measured in habitable rooms, via the London Plan H5 threshold approach with early/late review for Viability Tested Route. Tenure per Figure 13 (split not extracted). Adopted September 2024.",
+  "borough_cil_resi_per_m2": "£10–£70",
+  "borough_cil_resi_min": 10,
+  "borough_cil_resi_max": 70,
+  "borough_cil_note": "Zoned, 2015 base rates: Zone 1 Barking Town Centre/Leftley £70, Zone 2 Barking Riverside £25, Zone 3 rest of borough (most of borough) £10. Indexed 2024 rates £104.59 / £37.35 / £14.94.",
+  "tall_building_definition": "DMD2: taller than six storeys or 18m (ground to uppermost floor level), as London Plan D9. Tall Building Locations in SPP1-SPP6 on Policies Map; up to 95m in Barking TC zone, up to 50m elsewhere.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Family homes first, 50% affordable, regeneration-led growth, tenure-blind design",
+  "sources": [
+   "https://www.lbbd.gov.uk/sites/default/files/2024-09/Appendix%202a%20Barking%20and%20Dagenham%202037%20Local%20Plan%20(as%20amended)%20-%20Final%20(1).pdf",
+   "https://lbbd.gov.uk/sites/default/files/2024-05/Annual%20CIL%20Rate%20Summary%202024.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": null,
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 9,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 8210000,
+  "land_value_detail": {
+   "medium_density_median": 8210000,
+   "low_density_median": 5690000,
+   "high_density_median": 11370000,
+   "density_dph": {
+    "low": 90,
+    "medium": 130,
+    "high": 180
+   }
+  },
+  "avg_house_price": 375604,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Barnet": {
+  "name": "Barnet",
+  "local_plan": {
+   "name": "Barnet Local Plan 2021-2036",
+   "year": 2025,
+   "url": "https://www.barnet.gov.uk/planning-and-building-control/planning-policies-and-local-plan/barnet-local-plan-2021-2036"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target that 50% of new homes are genuinely affordable (para 4.4.5); Policy HOU01 seeks a minimum 35% affordable on all developments of 10+ dwellings. Tenure split not confirmed from primary source. Plan incorporates Inspectors' Main Modifications; adoption report Jan/Feb 2025.",
+  "borough_cil_resi_per_m2": 300,
+  "borough_cil_note": "Single borough-wide rate. Revised Charging Schedule applies from 1 April 2022 (replacing 2013 £135); £300 residential (C2, C3, C4) per submitted schedule. Indexed annually (Reg 40). barnet.gov.uk blocked direct fetch of adopted schedule.",
+  "tall_building_definition": "CDH04: tall = 8+ storeys (26m+ above ground); very tall = 15+ storeys (45m+), not permitted unless exceptional. Tall (8-14 storeys) may suit named strategic locations: Brent Cross, Brent Cross West, Colindale, Cricklewood, Edgware, West Hendon.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "Growth areas, genuinely affordable homes, heights limited to strategic locations",
+  "sources": [
+   "https://barnet.moderngov.co.uk/documents/s87852/Barnets+Local+Plan+Adoption.pdf",
+   "https://barnet.moderngov.co.uk/documents/s87855/Appendix+B+-+Inspectors+Schedule+of+Main+Modifications+to+Barnets+Local+Plan.pdf",
+   "https://barnet.moderngov.co.uk/documents/s64966/Barnet%20Community%20Infrastructure%20Levy%20Charging%20Schedule%20Review%20submission%20for%20examination.pdf",
+   "https://barnet.moderngov.co.uk/documents/b42136/Item%2013%20-%20217-219%20Golders%20Green%20Road%20NW11%209BY%20Golders%20Green%20252948FUL%2017th-Nov-2025%2019.00%20Pla.pdf?T=9",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 7,
+    "n_all_statuses": 11,
+    "n_withdrawn": 1,
+    "refusal_pct": 14.3,
+    "withdrawn_pct": 12.5,
+    "median_days": 310.0,
+    "n_with_days": 7,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 5,
+    "n_all_statuses": 10,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 221.0,
+    "n_with_days": 5,
+    "low_n": true
+   },
+   "150+": {
+    "n": 2,
+    "n_all_statuses": 12,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 33.3,
+    "median_days": 448.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 14,
+    "n_all_statuses": 33,
+    "n_withdrawn": 2,
+    "refusal_pct": 7.1,
+    "withdrawn_pct": 12.5,
+    "median_days": 285.0,
+    "n_with_days": 14,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 14730000,
+  "land_value_detail": {
+   "medium_density_median": 14730000,
+   "low_density_median": 9010000,
+   "high_density_median": 19640000,
+   "density_dph": {
+    "low": 55,
+    "medium": 90,
+    "high": 120
+   }
+  },
+  "avg_house_price": 600560,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Bexley": {
+  "name": "Bexley",
+  "local_plan": {
+   "name": "Bexley Local Plan",
+   "year": 2023,
+   "url": "https://www.bexley.gov.uk/sites/default/files/2023-07/bexley-local-plan-adopted-26-april-2023.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "SP2: aspiration for 50% strategic target across qualifying provision over plan period via the DP1 threshold approach (35%, or 50% in some circumstances, fast-track). Tenure 70% low cost rent / 30% intermediate. Adopted 26 April 2023.",
+  "borough_cil_resi_per_m2": "£40–£60",
+  "borough_cil_resi_min": 40,
+  "borough_cil_resi_max": 60,
+  "borough_cil_note": "Zoned: Zone 1 (north of railway line) £40, Zone 2 (south) £60; also hotel and student housing. Charging schedule 2015; rates indexed.",
+  "tall_building_definition": "DP12: more than 25m (about 8 storeys). Suitable Locations for Tall Buildings near Abbey Wood and Belvedere stations, up to 45m max, on Policies Map; exception not rule.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Suburban character, human-scaled typologies, 50% affordable aspiration, low-cost rent",
+  "sources": [
+   "https://www.bexley.gov.uk/services/planning-and-building-control/planning-policy-and-guidance/development-plan",
+   "https://www.bexley.gov.uk/sites/default/files/2023-07/bexley-local-plan-adopted-26-april-2023.pdf",
+   "https://www.bexley.gov.uk/sites/default/files/2020-09/Bexley-CIL-charging-schedule.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 238.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 445.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 8,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 322.0,
+    "n_with_days": 3,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 8630000,
+  "land_value_detail": {
+   "medium_density_median": 8630000,
+   "low_density_median": 5760000,
+   "high_density_median": 10790000,
+   "density_dph": {
+    "low": 40,
+    "medium": 60,
+    "high": 75
+   }
+  },
+  "avg_house_price": 413343,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Brent": {
+  "name": "Brent",
+  "local_plan": {
+   "name": "Brent Local Plan 2019-2041",
+   "year": 2022,
+   "url": "https://www.brent.gov.uk/media/16420376/brent-local-plan-2019-2041.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "BH5: strategic target 50% of new homes to 2041; London Plan H5 threshold approach applies. Non-Build-to-Rent schemes of 10+ dwellings: 70% Social Rent/London Affordable Rent, 30% intermediate. Council prioritises social/LAR over a higher headline %. Adopted February 2022.",
+  "borough_cil_resi_per_m2": 200,
+  "borough_cil_note": "Single borough-wide rate for residential (C3, C4, C2 except hospitals, student, HMO). 2013 schedule; indexed 2025 rate £349.11.",
+  "tall_building_definition": "BD2: more than 30m above ground (about 10 storeys). Directed to Tall Building Zones on policies map (e.g. Wembley, Alperton, South Kilburn) with general heights, stepping down to zone edges.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Social rent priority, 50% affordable, growth areas, Tall Building Zones",
+  "sources": [
+   "https://www.brent.gov.uk/media/16420376/brent-local-plan-2019-2041.pdf",
+   "https://www.brent.gov.uk/-/media/files/resident-documents/planning-and-bc-documents/brent-annual-cil-rate-summary-2025.pdf?rev=8815a2cd4d0849e9b1d348119ccbb516&hash=7F0B7C2D01F25C1BA714463D9080BADA",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": null,
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 202.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 2,
+    "n_all_statuses": 6,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 202.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 43640000,
+  "land_value_detail": {
+   "medium_density_median": 43640000,
+   "low_density_median": 26860000,
+   "high_density_median": 63780000,
+   "density_dph": {
+    "low": 160,
+    "medium": 260,
+    "high": 380
+   }
+  },
+  "avg_house_price": 546135,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Bromley": {
+  "name": "Bromley",
+  "local_plan": {
+   "name": "Bromley Local Plan",
+   "year": 2019,
+   "url": "https://www.bromley.gov.uk/downloads/file/51/bromley-local-plan"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Policy 2: seek 35% (habitable rooms) on sites of 11+ units or >1,000 sqm; 60% social/affordable rented, 40% intermediate; below 35% needs independently assessed viability appraisal. Adopted 16 January 2019; plan under review.",
+  "borough_cil_resi_per_m2": 100,
+  "borough_cil_note": "Single borough-wide residential rate; effective 15 June 2021; indexed (RICS CIL index).",
+  "tall_building_definition": "Policy 47: no numeric threshold; tall buildings exceed general height of surroundings and significantly change skyline. Most of borough unsuitable (suburban); Bromley Town Centre AAP identifies potential sites.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "Suburban character protection, 35% affordable, town-centre-only tall buildings",
+  "sources": [
+   "https://www.bromley.gov.uk/planning-policy/bromley-local-plan",
+   "https://www.bromley.gov.uk/downloads/file/51/bromley-local-plan",
+   "https://www.bromley.gov.uk/downloads/file/691/bromley-community-infrastructure-levy-cil-charging-schedule",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 329.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 218.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 3,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 238.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 5,
+    "n_all_statuses": 7,
+    "n_withdrawn": 0,
+    "refusal_pct": 20.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 238.0,
+    "n_with_days": 5,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 11700000,
+  "land_value_detail": {
+   "medium_density_median": 11700000,
+   "low_density_median": 9360000,
+   "high_density_median": 16380000,
+   "density_dph": {
+    "low": 40,
+    "medium": 50,
+    "high": 70
+   }
+  },
+  "avg_house_price": 511670,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Camden": {
+  "name": "Camden",
+  "local_plan": {
+   "name": "Camden Local Plan 2017",
+   "year": 2017,
+   "url": "https://www.camden.gov.uk/documents/20142/4820180/Local+Plan.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "H4: 50% for schemes with capacity for 25+ homes; sliding scale from 2% (1 home) rising 2% per home below 25; borough target 5,300 affordable homes 2016/17-2030/31. Guideline 60% social-affordable rent, 40% intermediate. Adopted July 2017; new Local Plan submitted Oct 2025, adoption not confirmed.",
+  "borough_cil_resi_per_m2": "£150–£500",
+  "borough_cil_resi_min": 150,
+  "borough_cil_resi_max": 500,
+  "borough_cil_note": "2020 charging schedule. Residential 10+ units: Zone A (central) £150, Zone B (rest of Camden) £250, Zone C (Hampstead/Highgate) £500; under 10 units £500 all zones. Indexed. Rates from council PDF via search extract (direct fetch blocked).",
+  "tall_building_definition": "D1 (para 7.35): no numeric threshold; buildings substantially taller than neighbours or significantly changing the skyline. All of Camden treated as sensitive; case-by-case design tests.",
+  "tall_building_zones_mapped": "no",
+  "priorities": "Maximise affordable homes, small-scheme contributions, heritage-sensitive design",
+  "sources": [
+   "https://www.camden.gov.uk/documents/20142/4820180/Local+Plan.pdf",
+   "https://www.camden.gov.uk/documents/20142/1267599/CIL_Charging_Schedule_30_10_20+(1).pdf/1fcb249a-a1b6-0414-0736-97d1ce617702?t=1612535336528",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": null,
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 525.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 525.0,
+    "n_with_days": 3,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 45600000,
+  "land_value_detail": {
+   "medium_density_median": 45600000,
+   "low_density_median": 24560000,
+   "high_density_median": 66650000,
+   "density_dph": {
+    "low": 70,
+    "medium": 130,
+    "high": 190
+   }
+  },
+  "avg_house_price": 815159,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "City of London": {
+  "name": "City of London",
+  "local_plan": {
+   "name": "City of London Local Plan 2015",
+   "year": 2015,
+   "url": "https://www.cityoflondon.gov.uk/assets/Services-Environment/planning-local-plan-adopted-2015.pdf"
+  },
+  "affordable_target_pct": 30,
+  "affordable_target_note": "CS21: 10+ unit schemes provide 30% affordable on-site; exceptionally 60% off-site or cash-in-lieu if on-site unviable; 60% social/affordable rent, 40% intermediate. City Plan 2040 not yet adopted (inspectors backed it Sept 2026; adoption expected by end of 2026).",
+  "borough_cil_resi_per_m2": "£95–£150",
+  "borough_cil_resi_min": 95,
+  "borough_cil_resi_max": 150,
+  "borough_cil_note": "Zoned: Residential Riverside £150, Rest of City £95 (most of the City). Approved 1 May 2014, effective 1 July 2014; indexed annually.",
+  "tall_building_definition": "Local Plan 2015 CS14: no numeric threshold; tall buildings in Eastern Cluster; refused in conservation areas, St Paul's Heights, protected vistas, Monument views (Policies Map). Emerging City Plan 2040 S12: over 75m AOD.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Office-led growth, limited housing, off-site affordable, Eastern Cluster towers",
+  "sources": [
+   "https://www.cityoflondon.gov.uk/assets/Services-Environment/planning-local-plan-adopted-2015.pdf",
+   "https://www.cityoflondon.gov.uk/services/planning/planning-policy/city-plan-2040",
+   "https://www.cityoflondon.gov.uk/assets/Services-Environment/City-Plan-2040.pdf",
+   "https://news.cityoflondon.gov.uk/government-clears-path-for-city-plan-2040-as-inspectors-back-heritage-approach/",
+   "https://www.cityoflondon.gov.uk/assets/Services-Environment/planning-development-contributions-cil-charging-schedule-2014.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 30,
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 144140000,
+  "land_value_detail": {
+   "medium_density_median": 144140000,
+   "low_density_median": 144140000,
+   "high_density_median": 144140000,
+   "density_dph": {
+    "low": 240,
+    "medium": 240,
+    "high": 240
+   }
+  },
+  "avg_house_price": 710652,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Croydon": {
+  "name": "Croydon",
+  "local_plan": {
+   "name": "Croydon Local Plan 2018",
+   "year": 2018,
+   "url": "https://www.croydon.gov.uk/sites/default/files/2022-01/croydon-local-plan-20180.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "SP2.4: negotiate up to 50% on sites of 10+ dwellings, subject to viability; 60:40 affordable rent:intermediate; SP2.5 minimum 30% on-site (with Opportunity Area alternatives). Supporting text sets a 40% strategic target of overall supply.",
+  "borough_cil_resi_per_m2": "£0–£120",
+  "borough_cil_resi_min": 0,
+  "borough_cil_resi_max": 120,
+  "borough_cil_note": "2013 schedule (effective 1 April 2013): Croydon Metropolitan Centre £0 residential, rest of borough £120 (most of borough); indexed. Revised schedule examined 26 Feb 2026, examiner report April 2026; adoption not confirmed.",
+  "tall_building_definition": "Para 6.9: significantly taller than most surrounding buildings, or over six storeys or 25m. SP4.5: encouraged only in Croydon Opportunity Area, District Centres and well-connected transport interchanges.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "Family homes (30% 3-bed), up to 50% affordable, Opportunity Area density",
+  "sources": [
+   "https://www.croydon.gov.uk/planning-and-regeneration/planning-policy/croydons-development-plan",
+   "https://www.croydon.gov.uk/sites/default/files/2022-01/croydon-local-plan-20180.pdf",
+   "https://www.croydon.gov.uk/sites/default/files/Planning/Community-Infrastructure-Levy-charging%20schedule.pdf",
+   "https://www.croydon.gov.uk/planning-and-regeneration/planning/community-infrastructure-levy-cil-charging-schedule-review",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 30,
+  "observed": {
+   "10-49": {
+    "n": 21,
+    "n_all_statuses": 28,
+    "n_withdrawn": 2,
+    "refusal_pct": 61.9,
+    "withdrawn_pct": 8.7,
+    "median_days": 242.0,
+    "n_with_days": 21,
+    "low_n": false
+   },
+   "50-149": {
+    "n": 3,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 293.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "150+": {
+    "n": 3,
+    "n_all_statuses": 5,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 25.0,
+    "median_days": 263.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 27,
+    "n_all_statuses": 38,
+    "n_withdrawn": 3,
+    "refusal_pct": 51.9,
+    "withdrawn_pct": 10.0,
+    "median_days": 243.0,
+    "n_with_days": 27,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 14280000,
+  "land_value_detail": {
+   "medium_density_median": 14280000,
+   "low_density_median": 9690000,
+   "high_density_median": 18350000,
+   "density_dph": {
+    "low": 95,
+    "medium": 140,
+    "high": 180
+   }
+  },
+  "avg_house_price": 390041,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Ealing": {
+  "name": "Ealing",
+  "local_plan": {
+   "name": "Ealing Development (Core) Strategy 2026 DPD",
+   "year": 2012,
+   "url": "https://www.ealing.gov.uk/download/downloads/id/19446/development_strategy_2026_-_development_plan_document.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Policy 1.2(a): at least 50% of housing to 2026 affordable; 50% on-site starting point for 10+ units; 60% social/affordable rent, 40% intermediate. Adopted 3 April 2012; new Local Plan at examination (Reg 22), not adopted.",
+  "borough_cil_resi_per_m2": "£150–£300",
+  "borough_cil_resi_min": 150,
+  "borough_cil_resi_max": 300,
+  "borough_cil_note": "First borough CIL: Central Ealing £300, rest of borough £150 (most of borough). Approved by Full Council 16 Dec 2025, charged from 1 March 2026.",
+  "tall_building_definition": "Core Strategy: no numeric threshold; tall buildings only on specified sites in Acton, Ealing and Southall town centres, Park Royal gateways and identified development sites (via Development Sites DPD/SPDs).",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "50% affordable, family homes, tall buildings only in town centres",
+  "sources": [
+   "https://www.ealing.gov.uk/localplan",
+   "https://www.ealing.gov.uk/info/201164/local_plan/3125/new_local_plan/2",
+   "https://www.ealing.gov.uk/download/downloads/id/19446/development_strategy_2026_-_development_plan_document.pdf",
+   "https://www.ealing.gov.uk/download/downloads/id/21255/cil_charging_schedule_from_1_march_2026.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 50,
+  "observed": {
+   "10-49": {
+    "n": 6,
+    "n_all_statuses": 11,
+    "n_withdrawn": 2,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 25.0,
+    "median_days": 132.0,
+    "n_with_days": 6,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 4,
+    "n_all_statuses": 7,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 376.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "150+": {
+    "n": 3,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 393.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 13,
+    "n_all_statuses": 21,
+    "n_withdrawn": 2,
+    "refusal_pct": 15.4,
+    "withdrawn_pct": 13.3,
+    "median_days": 347.0,
+    "n_with_days": 13,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 28200000,
+  "land_value_detail": {
+   "medium_density_median": 28200000,
+   "low_density_median": 19390000,
+   "high_density_median": 42290000,
+   "density_dph": {
+    "low": 110,
+    "medium": 160,
+    "high": 240
+   }
+  },
+  "avg_house_price": 585216,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Enfield": {
+  "name": "Enfield",
+  "local_plan": {
+   "name": "The Enfield Plan: Core Strategy 2010-2025",
+   "year": 2010,
+   "url": "https://www.enfield.gov.uk/__data/assets/pdf_file/0015/4623/planning-policy-information-the-enfield-plan-core-strategy-november-2010.pdf"
+  },
+  "affordable_target_pct": 40,
+  "affordable_target_note": "Core Policy 3: borough-wide 40% target on sites of 10+ dwellings; smaller sites pay off-site contributions against a 20% target. Tenure split not confirmed. enfield.gov.uk blocked direct fetch; values from search-index extracts of council PDFs. New Local Plan 2019-2041 still under examination.",
+  "borough_cil_resi_per_m2": "£0–£120",
+  "borough_cil_resi_min": 0,
+  "borough_cil_resi_max": 120,
+  "borough_cil_note": "Zoned: RR1 Meridian Water £0, RR2 eastern corridor £40, RR3 intermediate £60, RR4 remainder of borough £120; indexed. Adoption year not confirmed; from search extract of council charging schedule.",
+  "tall_building_definition": null,
+  "tall_building_zones_mapped": null,
+  "priorities": "40% affordable, small-site contributions, Meridian Water regeneration",
+  "sources": [
+   "https://www.enfield.gov.uk/__data/assets/pdf_file/0015/4623/planning-policy-information-the-enfield-plan-core-strategy-november-2010.pdf",
+   "https://www.enfield.gov.uk/__data/assets/pdf_file/0020/5951/planning-policy-information-community-infrastructure-levy-charging-schedule.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 40,
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 1065.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 1065.0,
+    "n_with_days": 1,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 21400000,
+  "land_value_detail": {
+   "medium_density_median": 21400000,
+   "low_density_median": 13180000,
+   "high_density_median": 12320000,
+   "density_dph": {
+    "low": 40,
+    "medium": 65,
+    "high": 90
+   }
+  },
+  "avg_house_price": 470988,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Greenwich": {
+  "name": "Greenwich",
+  "local_plan": {
+   "name": "Royal Greenwich Local Plan: Core Strategy with Detailed Policies",
+   "year": 2014,
+   "url": "https://www.royalgreenwich.gov.uk/download/downloads/id/2869/royal_greenwich_local_plan_core_strategy_with_detailed_policies_main_document.pdf"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Policy H3: minimum 35% affordable on 10+ homes or sites of 0.5ha+ (AMR 2024-25). Tenure split not confirmed. Adopted 30 July 2014; new Local Plan Reg 19 closed 6 Sept 2026, submission expected end 2026.",
+  "borough_cil_resi_per_m2": "£96–£150",
+  "borough_cil_resi_min": 96,
+  "borough_cil_resi_max": 150,
+  "borough_cil_note": "BCIL2 adopted 24 July 2024 (in force 26 July 2024): 10+ units Zone 1 £150, Zone 2 £96; under 10 units £150. Replaces 2015 schedule (£40/£70). Indexed.",
+  "tall_building_definition": null,
+  "tall_building_zones_mapped": "yes",
+  "priorities": "35% affordable minimum, family-sized homes, identified tall building locations",
+  "sources": [
+   "https://www.royalgreenwich.gov.uk/planning-and-building-control/planning-policy-and-strategy/community-infrastructure-levy-cil",
+   "https://www.royalgreenwich.gov.uk/sites/default/files/2025-08/CIL_Charging_Schedule.pdf",
+   "https://www.royalgreenwich.gov.uk/sites/default/files/2026-02/Annual%20CIL%20Rate%20Summary_2026.pdf",
+   "https://www.royalgreenwich.gov.uk/sites/default/files/2026-04/AMR%202024-25%20FINAL.pdf",
+   "https://www.royalgreenwich.gov.uk/downloads/download/718/core_strategy_with_detailed_policies",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 8,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 114.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 13.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 4,
+    "n_all_statuses": 9,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 33.3,
+    "median_days": 102.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 7,
+    "n_all_statuses": 18,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 22.2,
+    "median_days": 100.0,
+    "n_with_days": 7,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 44380000,
+  "land_value_detail": {
+   "medium_density_median": 44380000,
+   "low_density_median": 24050000,
+   "high_density_median": 73970000,
+   "density_dph": {
+    "low": 130,
+    "medium": 240,
+    "high": 400
+   }
+  },
+  "avg_house_price": 462589,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Hackney": {
+  "name": "Hackney",
+  "local_plan": {
+   "name": "Hackney Local Plan 2033 (LP33)",
+   "year": 2020,
+   "url": "https://www.hackney.gov.uk/planning-and-building/planning-policies-and-local-plan/local-plan/local-plan-2033-lp33"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "LP13: 50% genuinely affordable sought on-site, subject to viability; schemes at or above 50% avoid detailed viability review. C3 tenure 60% social rent/London Affordable Rent, 40% intermediate (London Living Rent/shared ownership). Adopted 22 Jul 2020.",
+  "borough_cil_resi_per_m2": "£0–£190",
+  "borough_cil_resi_min": 0,
+  "borough_cil_resi_max": 190,
+  "borough_cil_note": "Zoned: Zone A £190, Zone B £25, Zone C £55, Zone D £0 (2015 base rates, indexed annually under CIL Regs). Adopted 25 Feb 2015, charged from 1 Apr 2015. Share of borough per zone not confirmed.",
+  "tall_building_definition": "Taller building = 50% taller than prevailing height, or significantly changes the skyline, or 30m+. Growth areas in place policies PP2–PP10 flagged as potentially suitable; 30m+ 'very tall' buildings extremely unlikely elsewhere. Site heights via AAPs/masterplans, no borough zone map.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "Genuinely affordable homes, social rent, employment-led growth, affordable workspace",
+  "sources": [
+   "https://www.hackney.gov.uk/planning-and-building/planning-policies-and-local-plan/local-plan/local-plan-2033-lp33",
+   "https://drive.google.com/file/d/1HRu0A_fdoWUi3OBfzUT03TT4S9gYwHDq/view",
+   "https://www.hackney.gov.uk/planning-and-building/make-planning-application/submit-planning-application/hcil-development",
+   "https://drive.google.com/file/d/1i7Wd-fPzkrGrRiYwA1bSOlJL-T911lGF/view",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 50,
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 12,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 4,
+    "n_all_statuses": 17,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 64410000,
+  "land_value_detail": {
+   "medium_density_median": 64410000,
+   "low_density_median": 32210000,
+   "high_density_median": 76120000,
+   "density_dph": {
+    "low": 110,
+    "medium": 220,
+    "high": 260
+   }
+  },
+  "avg_house_price": 605729,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Hammersmith and Fulham": {
+  "name": "Hammersmith and Fulham",
+  "local_plan": {
+   "name": "Hammersmith & Fulham Local Plan 2018",
+   "year": 2018,
+   "url": "https://www.lbhf.gov.uk/sites/default/files/section_attachments/local_plan_2018_web_version.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Borough-wide target: at least 50% of all dwellings affordable; 60% social/affordable rent (especially for families), 40% intermediate. Adopted 28 Feb 2018.",
+  "borough_cil_resi_per_m2": "£100–£400",
+  "borough_cil_resi_min": 100,
+  "borough_cil_resi_max": 400,
+  "borough_cil_note": "Zoned: North £100, Central A (Hammersmith Town Centre) and Central B £200, South £400; nil at White City East and Earls Court & West Kensington. Approved 20 May 2015, effective 1 Sep 2015; base rates indexed.",
+  "tall_building_definition": "DC3: buildings significantly higher than the general prevailing height of the surrounding townscape (no metre threshold). Areas where tall buildings may be appropriate: White City, Earls Court & West Kensington, South Fulham Riverside, Hammersmith Town Centre (indicative map).",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "50% affordable, family social rent, regeneration areas, heritage-sensitive townscape",
+  "sources": [
+   "https://www.lbhf.gov.uk/planning/planning-policy/local-plan",
+   "https://www.lbhf.gov.uk/sites/default/files/section_attachments/local_plan_2018_web_version.pdf",
+   "https://www.lbhf.gov.uk/planning/planning-policy/community-infrastructure-levy-cil",
+   "https://www.lbhf.gov.uk/sites/default/files/2023-12/Community%20Infrastructure%20Levy%20Charging%20Schedule%20and%20Map.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": null,
+  "observed": {
+   "10-49": {
+    "n": 7,
+    "n_all_statuses": 18,
+    "n_withdrawn": 1,
+    "refusal_pct": 57.1,
+    "withdrawn_pct": 12.5,
+    "median_days": 194.0,
+    "n_with_days": 7,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 7,
+    "n_all_statuses": 7,
+    "n_withdrawn": 0,
+    "refusal_pct": 42.9,
+    "withdrawn_pct": 0.0,
+    "median_days": 97.0,
+    "n_with_days": 7,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 14,
+    "n_all_statuses": 27,
+    "n_withdrawn": 1,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 6.7,
+    "median_days": 150.0,
+    "n_with_days": 14,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 193900000,
+  "land_value_detail": {
+   "medium_density_median": 193900000,
+   "low_density_median": 126040000,
+   "high_density_median": 193900000,
+   "density_dph": {
+    "low": 260,
+    "medium": 400,
+    "high": 400
+   }
+  },
+  "avg_house_price": 738048,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Haringey": {
+  "name": "Haringey",
+  "local_plan": {
+   "name": "Haringey Local Plan: Strategic Policies 2013–2026 (with 2017 alterations) and Development Management DPD 2017",
+   "year": 2017,
+   "url": "https://haringey.gov.uk/sites/default/files/2024-01/final_haringey_local_plan_2017_online.pdf"
+  },
+  "affordable_target_pct": 40,
+  "affordable_target_note": "SP2: borough-wide 40% affordable on sites of 10+ units, by habitable rooms, subject to viability; tenure 60% affordable rent (including social rent), 40% intermediate.",
+  "borough_cil_resi_per_m2": "£50–£368.12",
+  "borough_cil_resi_min": 50,
+  "borough_cil_resi_max": 368.12,
+  "borough_cil_note": "Revised schedule: Western £368.12, Central £229.21, Eastern £50. Approved 14 Mar 2022, effective 1 Sep 2022; indexed annually.",
+  "tall_building_definition": "Tall = 10 storeys and over; 'taller' = 2–3 storeys above prevailing height. DM6 Figure 2.2 maps areas suitable for tall buildings; tall buildings outside them are resisted.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "40% affordable by habitable room, 60% social/affordable rent, plan-led heights",
+  "sources": [
+   "https://haringey.gov.uk/sites/default/files/2024-01/final_haringey_local_plan_2017_online.pdf",
+   "https://haringey.gov.uk/sites/default/files/final_haringey_dmp_dtp_online.pdf",
+   "https://www.haringey.gov.uk/sites/default/files/haringey_revised_cil_charging_schedule.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 40,
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 2,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 399.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 2,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 399.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 24370000,
+  "land_value_detail": {
+   "medium_density_median": 24370000,
+   "low_density_median": 15670000,
+   "high_density_median": 34810000,
+   "density_dph": {
+    "low": 90,
+    "medium": 140,
+    "high": 200
+   }
+  },
+  "avg_house_price": 638690,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Harrow": {
+  "name": "Harrow",
+  "local_plan": {
+   "name": "Harrow Local Plan 2021–2041",
+   "year": 2026,
+   "url": "https://www.harrow.gov.uk/newlocalplan"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Borough-wide 50% target by habitable rooms or floorspace; fast-track threshold 35% (50% on public, SIL/LSIS and industrial land); 70:30 low-cost rent to intermediate, prioritising social rent. Separate target: 35% of new homes 3+ bed. Adopted 24 Mar 2026.",
+  "borough_cil_resi_per_m2": 110,
+  "borough_cil_note": "Flat borough-wide residential (C3) rate £110/m2, adopted 16 Sep 2013; indexed each year (see Annual CIL Rate Summary).",
+  "tall_building_definition": "GR4: 7+ storeys or 21m+ from ground (excluding plant). Directed to designated tall building zones in the Harrow & Wealdstone Opportunity Area, shown on a Designated Tall Building Zones map.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Family homes, social rent, Metroland suburban character, Opportunity Area-led growth",
+  "sources": [
+   "https://www.harrow.gov.uk/newlocalplan",
+   "https://www.harrow.gov.uk/downloads/file/33672/local-plan-2021-2041",
+   "https://www.harrow.gov.uk/planning-developments/community-infrastructure-levy",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 4,
+    "n_withdrawn": 2,
+    "refusal_pct": null,
+    "withdrawn_pct": 100.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 1,
+    "n_all_statuses": 6,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 66.7,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 14890000,
+  "land_value_detail": {
+   "medium_density_median": 14890000,
+   "low_density_median": 11920000,
+   "high_density_median": 20850000,
+   "density_dph": {
+    "low": 80,
+    "medium": 100,
+    "high": 140
+   }
+  },
+  "avg_house_price": 526493,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Havering": {
+  "name": "Havering",
+  "local_plan": {
+   "name": "Havering Local Plan 2016–2031",
+   "year": 2021,
+   "url": "https://www.havering.gov.uk/downloads/file/5300/havering_local_plan_2016_-_2031.pdf"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Policy 4: at least 35% affordable on 10+ dwellings or >1,000 sqm, by habitable rooms (gross); 50% on public land without a portfolio agreement and on industrial land with net capacity loss. Tenure 70% affordable/social rent, 30% intermediate.",
+  "borough_cil_resi_per_m2": "£55–£125",
+  "borough_cil_resi_min": 55,
+  "borough_cil_resi_max": 125,
+  "borough_cil_note": "Zone A (North) £125, Zone B (South) £55 for residential and private care/retirement housing. Adopted Jul 2019, effective 1 Sep 2019; indexed.",
+  "tall_building_definition": "No numeric definition: 'significantly greater height than its context'. May be acceptable near Romford station, not in the Conservation Area. Local height definition and locations deferred to the Romford Masterplan SPD.",
+  "tall_building_zones_mapped": "no",
+  "priorities": "35% affordable, 70:30 rent/intermediate, Romford-focused growth, local character",
+  "sources": [
+   "https://www.havering.gov.uk/downloads/file/5300/havering_local_plan_2016_-_2031.pdf",
+   "https://www.havering.gov.uk/planning-3/planning-application-process-appeals/3",
+   "https://www.havering.gov.uk/downloads/file/3304/havering_community_infrastructure_levy_charging_schedule",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 4,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 75.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 168.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 4,
+    "n_all_statuses": 8,
+    "n_withdrawn": 0,
+    "refusal_pct": 75.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 168.0,
+    "n_with_days": 4,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 13260000,
+  "land_value_detail": {
+   "medium_density_median": 13260000,
+   "low_density_median": 9180000,
+   "high_density_median": 11180000,
+   "density_dph": {
+    "low": 45,
+    "medium": 65,
+    "high": 110
+   }
+  },
+  "avg_house_price": 448648,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Hillingdon": {
+  "name": "Hillingdon",
+  "local_plan": {
+   "name": "Hillingdon Local Plan Part 1 Strategic Policies (2012) and Part 2 Development Management Policies (2020)",
+   "year": 2020,
+   "url": "https://www.hillingdon.gov.uk/media/3084/Hillingdon-Local-Plan-Part-2-Development-Management-Policies/pdf/pdLPP2_Development_Management_Policies_-_ADOPTED_VERSION_JAN_2020_1.pdf?m=1598370641570"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Part 1 Policy H2 target: 35% of all new units. DMH 7: minimum 35% on 10+ unit sites, subject to viability; 70% social/affordable rent, 30% intermediate.",
+  "borough_cil_resi_per_m2": 95,
+  "borough_cil_note": "Flat residential (C3) rate £95/m2, adopted 10 Jul 2014, effective 1 Aug 2014; indexed 2026 rate £160.43/m2.",
+  "tall_building_definition": "DMHB 10 'High buildings': no numeric definition. Must be in Uxbridge or Hayes town centres (or an area the Borough identifies); generally inappropriate elsewhere given low-rise suburban character.",
+  "tall_building_zones_mapped": "no",
+  "priorities": "35% affordable, 70% social/affordable rent, suburban character, Uxbridge/Hayes intensification",
+  "sources": [
+   "https://www.hillingdon.gov.uk/media/3084/Hillingdon-Local-Plan-Part-2-Development-Management-Policies/pdf/pdLPP2_Development_Management_Policies_-_ADOPTED_VERSION_JAN_2020_1.pdf?m=1598370641570",
+   "https://www.hillingdon.gov.uk/community-infrastructure-levy",
+   "https://pre.hillingdon.gov.uk/downloads/file/2181/annual-cil-rate-summary-2026",
+   "https://pre.hillingdon.gov.uk/downloads/file/2180/cil-charging-schedule-on-10-july-2014",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 4,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 400.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 4,
+    "n_all_statuses": 6,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 20.0,
+    "median_days": 336.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 8,
+    "n_all_statuses": 11,
+    "n_withdrawn": 1,
+    "refusal_pct": 25.0,
+    "withdrawn_pct": 11.1,
+    "median_days": 336.0,
+    "n_with_days": 8,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 12810000,
+  "land_value_detail": {
+   "medium_density_median": 12810000,
+   "low_density_median": 11070000,
+   "high_density_median": 20960000,
+   "density_dph": {
+    "low": 95,
+    "medium": 110,
+    "high": 180
+   }
+  },
+  "avg_house_price": 470875,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Hounslow": {
+  "name": "Hounslow",
+  "local_plan": {
+   "name": "Hounslow Local Plan 2015–2030",
+   "year": 2015,
+   "url": "https://www.hounslow.gov.uk/local-plan/local-plan-1"
+  },
+  "affordable_target_pct": 40,
+  "affordable_target_note": "SC2: strategic borough-wide target of 40% of all new housing, negotiated on 10+ home sites with review mechanisms; 60% affordable/social rent, 40% intermediate. Adopted 15 Sep 2015; Local Plan Review 2020–2041 still at examination (2026).",
+  "borough_cil_resi_per_m2": "£70–£200",
+  "borough_cil_resi_min": 70,
+  "borough_cil_resi_max": 200,
+  "borough_cil_note": "Zone 1 (East) £200, Zone 2 (Central) £110, Zone 3 (West) £70. Approved 14 Jul 2015, effective 24 Jul 2015; indexed.",
+  "tall_building_definition": "CC3: over 20m, and/or significantly taller than surrounding townscape, and/or recognisably changes the skyline. Supported in Hounslow town centre; limited numbers in Feltham and Brentford town centres.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "40% affordable, 60% social/affordable rent, town-centre-focused tall buildings",
+  "sources": [
+   "https://www.hounslow.gov.uk/local-plan/local-plan-1",
+   "https://www.hounslow.gov.uk/downloads/file/13227/hounslow-local-plan-part-1-direct",
+   "https://www.hounslow.gov.uk/local-plan/local-plan-review",
+   "https://www.hounslow.gov.uk/downloads/file/13237/hounslow-community-infrastructure-levy-adopted-charging-schedule-july-2015",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": null,
+  "observed": {
+   "10-49": {
+    "n": 10,
+    "n_all_statuses": 12,
+    "n_withdrawn": 0,
+    "refusal_pct": 40.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 318.0,
+    "n_with_days": 10,
+    "low_n": false
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 7,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 66.7,
+    "median_days": 610.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 3,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 510.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 14,
+    "n_all_statuses": 22,
+    "n_withdrawn": 2,
+    "refusal_pct": 35.7,
+    "withdrawn_pct": 12.5,
+    "median_days": 357.0,
+    "n_with_days": 14,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 23030000,
+  "land_value_detail": {
+   "medium_density_median": 23030000,
+   "low_density_median": 14810000,
+   "high_density_median": 31250000,
+   "density_dph": {
+    "low": 90,
+    "medium": 140,
+    "high": 190
+   }
+  },
+  "avg_house_price": 525435,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Islington": {
+  "name": "Islington",
+  "local_plan": {
+   "name": "Islington Local Plan: Strategic and Development Management Policies",
+   "year": 2023,
+   "url": "https://www.islington.gov.uk/planning/planning-policy/islington-local-plan"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target: 50% of all new housing genuinely affordable (H3). On-site tenure 70% social rent, 30% intermediate (mostly London Living Rent). Sites under 10 units pay £50,000 per unit off-site. Adopted 28 Sep 2023.",
+  "borough_cil_resi_per_m2": "£250–£300",
+  "borough_cil_resi_min": 250,
+  "borough_cil_resi_max": 300,
+  "borough_cil_note": "Area A £300, Area B £250 (residential C3/C4). Approved 26 Jun 2014, effective 1 Sep 2014; indexed.",
+  "tall_building_definition": "DH3: over 30m is tall. Acceptable in principle only on allocated or Spatial Strategy sites identified as suitable (e.g. King's Cross, Nag's Head, Finsbury Park, Archway), with site maximum heights (Table 8.1).",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Genuinely affordable homes, 70% social rent, small-site contributions, site-specific heights",
+  "sources": [
+   "https://www.islington.gov.uk/-/media/sharepoint-lists/public-records/planningandbuildingcontrol/publicity/publicconsultation/20232024/islington-council-local-plan-strategic-and-development-management-policies.pdf",
+   "https://www.islington.gov.uk/~/media/sharepoint-lists/public-records/planningandbuildingcontrol/information/factsheets/20202021/20210114communityinfrastructurelevychargingschedule.pdf",
+   "https://www.islington.gov.uk/planning/planning-policy/community-infrastructure-levy/cil-information",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": null,
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 184.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 1105.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 325.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 7,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 25.0,
+    "median_days": 325.0,
+    "n_with_days": 3,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 50180000,
+  "land_value_detail": {
+   "medium_density_median": 50180000,
+   "low_density_median": 33460000,
+   "high_density_median": 100350000,
+   "density_dph": {
+    "low": 100,
+    "medium": 150,
+    "high": 300
+   }
+  },
+  "avg_house_price": 674592,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Kensington and Chelsea": {
+  "name": "Kensington and Chelsea",
+  "local_plan": {
+   "name": "RBKC Local Plan (New Local Plan Review)",
+   "year": 2024,
+   "url": "https://www.rbkc.gov.uk/sites/default/files/media/documents/AA_24-09-03%20Local%20Plan%202024_Final%20Clean%20Version%20_02.pdf"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "At least 35% affordable on private land, 50% on public land (council adoption notice, 24 Jul 2024). Tenure split not confirmed; the plan PDF blocked automated access.",
+  "borough_cil_resi_per_m2": "£110–£750",
+  "borough_cil_resi_min": 110,
+  "borough_cil_resi_max": 750,
+  "borough_cil_note": "Zones A–F: base £750 (A) to £110 (F); Zone G (Earl's Court) and Zone H (Kensal) nil. Effective 6 Apr 2015; indexed. 2026 indexed: A £1,158.30, B £911.20, C £664.09, D £416.99, E £293.44, F £169.88.",
+  "tall_building_definition": "Two thresholds, 21m and 30m, by neighbourhood context (first local definition). Areas identified as suitable to support the Kensal Canalside and Earl's Court opportunity areas.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "35%/50% affordable, stepped delivery, Kensal Canalside and Earl's Court growth",
+  "sources": [
+   "https://www.rbkc.gov.uk/node/45121",
+   "https://www.rbkc.gov.uk/planning-and-building-control/planning-policy/community-infrastructure-levy-cil",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 149.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 149.0,
+    "n_with_days": 1,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 92150000,
+  "land_value_detail": {
+   "medium_density_median": 92150000,
+   "low_density_median": 62540000,
+   "high_density_median": 98740000,
+   "density_dph": {
+    "low": 95,
+    "medium": 140,
+    "high": 150
+   }
+  },
+  "avg_house_price": 1232640,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Kingston upon Thames": {
+  "name": "Kingston upon Thames",
+  "local_plan": {
+   "name": "Kingston Core Strategy (LDF)",
+   "year": 2012,
+   "url": "https://www.kingston.gov.uk/sites/default/files/downloads/Core_Strategy.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "DM15: 50% of units affordable on sites of 10+ units; sliding scale for 5–10 units; 70:30 social/affordable rent to intermediate; aim of 2,000+ affordable homes 2012/13–2026/27. Adopted Apr 2012; new Local Plan due for submission by Dec 2026.",
+  "borough_cil_resi_per_m2": "£50–£210",
+  "borough_cil_resi_min": 50,
+  "borough_cil_resi_max": 210,
+  "borough_cil_note": "Residential Zone 1 £210, Zone 2 £130, Zone 3 £85, Zone 4 £50. Adopted Nov 2015; indexed against BCIS.",
+  "tall_building_definition": "No numeric definition in the Core Strategy. Tall buildings may be appropriate in town centres, judged against EH/CABE 2007 tall buildings guidance and the London Plan, with SPD guidance.",
+  "tall_building_zones_mapped": "no",
+  "priorities": "50% affordable, 70% rented tenure, protect suburban character and heritage",
+  "sources": [
+   "https://www.kingston.gov.uk/planning-and-building-control/planning-policy/adopted-development-plan",
+   "https://www.kingston.gov.uk/sites/default/files/downloads/Core_Strategy.pdf",
+   "https://www.kingston.gov.uk/planning-and-building-control/planning-policy/local-plan",
+   "https://www.kingston.gov.uk/planning-and-building-control/planning-policy/infrastructure-planning-and-delivery/about-community-infrastructure-levy-cil/charges-schedules",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 50,
+  "observed": {
+   "10-49": {
+    "n": 6,
+    "n_all_statuses": 13,
+    "n_withdrawn": 3,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 33.3,
+    "median_days": 415.0,
+    "n_with_days": 6,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 1,
+    "refusal_pct": null,
+    "withdrawn_pct": 100.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 100.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 182.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 7,
+    "n_all_statuses": 17,
+    "n_withdrawn": 4,
+    "refusal_pct": 42.9,
+    "withdrawn_pct": 36.4,
+    "median_days": 305.0,
+    "n_with_days": 7,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 11130000,
+  "land_value_detail": {
+   "medium_density_median": 11130000,
+   "low_density_median": 8350000,
+   "high_density_median": 14840000,
+   "density_dph": {
+    "low": 45,
+    "medium": 60,
+    "high": 80
+   }
+  },
+  "avg_house_price": 591555,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Lambeth": {
+  "name": "Lambeth",
+  "local_plan": {
+   "name": "Lambeth Local Plan 2021 (2020–2035)",
+   "year": 2021,
+   "url": "https://www.lambeth.gov.uk/sites/default/files/2021-09/Lambeth%20Local%20Plan%202021.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Contributes to the London Plan 50% strategic target through the threshold/fast-track approach (H2). Tenure 70% low-cost rent (Social Rent/London Affordable Rent), 30% intermediate (London Living Rent/shared ownership). Adopted 22 Sep 2021.",
+  "borough_cil_resi_per_m2": "£200–£500",
+  "borough_cil_resi_min": 200,
+  "borough_cil_resi_max": 500,
+  "borough_cil_note": "Zone A (Waterloo, Vauxhall) £500, Zone B (Kennington, Oval, Clapham) £350, Zone C (Tulse Hill, Brixton, Herne Hill) £250, Zone D (Streatham, West Norwood) £200. Approved 22 Sep 2021, effective 1 Jan 2022; indexed.",
+  "tall_building_definition": "Q26: north of the South Circular, tall is over 45m (mid-rise 15–45m); south of it, over 25m (mid-rise 9–25m). Supported only in locations identified in Annex 10.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "70% social/low-cost rent, fast-track affordable, WHS views, Opportunity Area growth",
+  "sources": [
+   "https://www.lambeth.gov.uk/sites/default/files/2021-09/Lambeth%20Local%20Plan%202021.pdf",
+   "https://love.lambeth.gov.uk/lambeth-unveils-new-local-plan/",
+   "https://www.lambeth.gov.uk/sites/default/files/2021-09/lambeth-cil-charging-schedule-2022_0.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": null,
+  "observed": {
+   "10-49": {
+    "n": 8,
+    "n_all_statuses": 18,
+    "n_withdrawn": 1,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 11.1,
+    "median_days": 428.0,
+    "n_with_days": 8,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 8,
+    "n_all_statuses": 19,
+    "n_withdrawn": 1,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 11.1,
+    "median_days": 428.0,
+    "n_with_days": 8,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 61310000,
+  "land_value_detail": {
+   "medium_density_median": 61310000,
+   "low_density_median": 45980000,
+   "high_density_median": 85830000,
+   "density_dph": {
+    "low": 150,
+    "medium": 200,
+    "high": 280
+   }
+  },
+  "avg_house_price": 536623,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Lewisham": {
+  "name": "Lewisham",
+  "local_plan": {
+   "name": "Lewisham Local Plan",
+   "year_adopted": 2025,
+   "url": "https://lewisham.gov.uk/-/media/services/planning/planning-policy/local-plan/lpnov25/adopted-lewisham-local-plan_2025_oct_tagged_final.pdf",
+   "year": 2025
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target 50% of all new homes genuinely affordable; Fast Track Route at minimum 35%; tenure 70% social rent/London Affordable Rent, 30% London Living Rent/shared ownership.",
+  "borough_cil_resi_per_m2": "£70–£100",
+  "borough_cil_note": "2015 charging schedule (in effect 1 Apr 2015), unindexed: Zone 1 £100 (SE3, SE8, SE10, SE16), Zone 2 £70 (all other postcodes, most of the borough). A new draft charging schedule was consulted on in 2025 but is not yet adopted.",
+  "tall_building_definition": "10 storeys or 32.8m or more, measured from ground to top including rooftop equipment. Tall Building Suitability Zones are mapped on the Policies Map, each with a maximum height (e.g. Deptford up to 48 storeys, Catford up to 20).",
+  "priorities": "Genuinely affordable homes, 70% social rent, zoned tall buildings",
+  "sources": [
+   "https://lewisham.gov.uk/myservices/planning/policy/adopted-local-plan/adoption-of-the-local-plan",
+   "https://lewisham.gov.uk/-/media/services/planning/planning-policy/local-plan/lpnov25/adopted-lewisham-local-plan_2025_oct_tagged_final.pdf",
+   "https://lewisham.gov.uk/myservices/planning/policy/cil",
+   "https://lewisham.gov.uk/-/media/files/imported/ciladoptedchargingschedule.ashx",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "borough_cil_resi_min": 70,
+  "borough_cil_resi_max": 100,
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 11,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 106.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 2,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 152.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 5,
+    "n_all_statuses": 13,
+    "n_withdrawn": 0,
+    "refusal_pct": 40.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 106.0,
+    "n_with_days": 5,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 30360000,
+  "land_value_detail": {
+   "medium_density_median": 30360000,
+   "low_density_median": 16870000,
+   "high_density_median": 43840000,
+   "density_dph": {
+    "low": 100,
+    "medium": 180,
+    "high": 260
+   }
+  },
+  "avg_house_price": 488658,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Merton": {
+  "name": "Merton",
+  "local_plan": {
+   "name": "Merton Local Plan 2024-2037/38",
+   "year_adopted": 2024,
+   "url": "https://www.merton.gov.uk/system/files/merton_local_plan_-_adopted_20_november_2024_compressed.pdf",
+   "year": 2024
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target 50% of new homes 2021/22-2037/38 (Policy H11.1). Sites of 10+ homes: at least 35% and up to 50%, or 50% on public or industrial land. Tenure 70% low-cost rent, 30% intermediate (min 25% First Homes). 2-9 homes pay a contribution equal to 20%.",
+  "borough_cil_resi_per_m2": "£115–£220",
+  "borough_cil_note": "2014 charging schedule (in effect 1 Apr 2014), unindexed: £220 Colliers Wood, Raynes Park and Wimbledon; £115 Mitcham, Morden and West Barnes. Indexed 2025 rates £359.92 and £188.14.",
+  "tall_building_definition": "21m or more from ground to the top of the uppermost storey (Policy D12.6). Allowed only in Wimbledon Town Centre and the Morden Regeneration Zone (both have Strategic Heights Diagrams), the Eastfields and High Path estates, and named site allocations.",
+  "priorities": "50% affordable, low-cost rent, tall buildings only in Wimbledon/Morden",
+  "sources": [
+   "https://www.merton.gov.uk/system/files/merton_local_plan_-_adopted_20_november_2024_compressed.pdf",
+   "https://www.merton.gov.uk/system/files/Annual%20CIL%20Rate%20Summary%202025%20(1).pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "borough_cil_resi_min": 115,
+  "borough_cil_resi_max": 220,
+  "observed": {
+   "10-49": {
+    "n": 10,
+    "n_all_statuses": 14,
+    "n_withdrawn": 0,
+    "refusal_pct": 30.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 371.0,
+    "n_with_days": 10,
+    "low_n": false
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 10,
+    "n_all_statuses": 15,
+    "n_withdrawn": 0,
+    "refusal_pct": 30.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 371.0,
+    "n_with_days": 10,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 23140000,
+  "land_value_detail": {
+   "medium_density_median": 23140000,
+   "low_density_median": 17360000,
+   "high_density_median": 30850000,
+   "density_dph": {
+    "low": 90,
+    "medium": 120,
+    "high": 160
+   }
+  },
+  "avg_house_price": 615890,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Newham": {
+  "name": "Newham",
+  "local_plan": {
+   "name": "Newham Local Plan 2018",
+   "year_adopted": 2018,
+   "url": "https://www.newham.gov.uk/downloads/file/1111/newham-local-plan-2018-pdf-",
+   "year": 2018
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target 50% over the plan period. Sites of 10+ units: 35-50% of units, 60% social / 40% intermediate. In the Canning Town & Custom House regeneration area: 35%, split evenly. The replacement Local Plan received its Inspector's report in Aug 2026 and awaits adoption.",
+  "borough_cil_resi_per_m2": "£40–£80",
+  "borough_cil_note": "Charging schedule in effect 2014, unindexed: Zone 1 £80 (E15 outside the LLDC area, E16, part of E3), Zone 2 £40 (E6, E7, E12, E13, part of IG11). Indexed 2026 rates £133.89 and £66.95. The former LLDC area has its own CIL schedule.",
+  "tall_building_definition": "6 or more storeys, or more than 17.05m (Policy SP4). Tallest-building areas are mapped at Stratford and Canning Town (Figures 3.1-3.2), with heights set in the Strategic Site allocations.",
+  "priorities": "35-50% affordable, 60% social rent, 39% family (3-bed) homes",
+  "sources": [
+   "https://www.newham.gov.uk/planning-development-conservation/planning-policy-local-plan/2",
+   "https://www.newham.gov.uk/downloads/file/1111/newham-local-plan-2018-pdf-",
+   "https://www.newham.gov.uk/planning-development-conservation/newham-local-plan-refresh",
+   "https://www.newham.gov.uk/downloads/file/10501/newham-annual-cil-rate-summary-2026",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "borough_cil_resi_min": 40,
+  "borough_cil_resi_max": 80,
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 6,
+    "n_withdrawn": 2,
+    "refusal_pct": null,
+    "withdrawn_pct": 100.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 2,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 175.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 2,
+    "n_all_statuses": 14,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 175.0,
+    "n_with_days": 1,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 64160000,
+  "land_value_detail": {
+   "medium_density_median": 64160000,
+   "low_density_median": 50650000,
+   "high_density_median": 67540000,
+   "density_dph": {
+    "low": 300,
+    "medium": 380,
+    "high": 400
+   }
+  },
+  "avg_house_price": 390349,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Redbridge": {
+  "name": "Redbridge",
+  "local_plan": {
+   "name": "Redbridge Local Plan 2015-2030",
+   "year_adopted": 2018,
+   "url": "https://www.redbridge.gov.uk/media/oj3hxvhl/10-redbridgelocal-plan_070318_web-1_tp.pdf",
+   "year": 2018
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Minimum strategic target 35% (Policy LP3) on sites of 10+ homes, delivering 393 affordable homes a year. Tenure 60% social/affordable rent, 40% intermediate. Viability review applies if a scheme falls below 35%.",
+  "borough_cil_resi_per_m2": 70,
+  "borough_cil_note": "Flat rate £70/m2 across one borough-wide zone for all uses, in effect since 2012, unindexed. Indexed 2025 rate £122.74.",
+  "tall_building_definition": "No metre or storey threshold in Policy LP27. Tall Building Zones are mapped on the Policies Map: Ilford town centre, the Crossrail Corridor (East Ilford, Seven Kings, Goodmayes) and Gants Hill.",
+  "priorities": "35% affordable, social/affordable rent, growth in Ilford and Crossrail corridor",
+  "sources": [
+   "https://www.redbridge.gov.uk/planning-and-building/planning-policies/local-plan/",
+   "https://www.redbridge.gov.uk/media/oj3hxvhl/10-redbridgelocal-plan_070318_web-1_tp.pdf",
+   "https://www.redbridge.gov.uk/planning-and-building/planning-policy/community-infrastructure-levy/annual-cil-rate-summary/",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 6,
+    "n_withdrawn": 2,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 40.0,
+    "median_days": 351.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 405.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 4,
+    "n_all_statuses": 9,
+    "n_withdrawn": 2,
+    "refusal_pct": 25.0,
+    "withdrawn_pct": 33.3,
+    "median_days": 378.0,
+    "n_with_days": 4,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 10330000,
+  "land_value_detail": {
+   "medium_density_median": 10330000,
+   "low_density_median": 14820000,
+   "high_density_median": 20650000,
+   "density_dph": {
+    "low": 80,
+    "medium": 100,
+    "high": 200
+   }
+  },
+  "avg_house_price": 481297,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Richmond upon Thames": {
+  "name": "Richmond upon Thames",
+  "local_plan": {
+   "name": "Richmond Local Plan 2024-2039",
+   "year_adopted": 2025,
+   "url": "https://www2.richmond.gov.uk/docs/localplan/local_plan_interim_track_changes_for_adoption_october_2025.pdf",
+   "year": 2025
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Minimum 50% affordable on sites, 70% rented / 30% intermediate by habitable room. At least 50% on industrial land (LSIS) and public land. Schemes on the Viability Tested Route below 50% must provide viability evidence.",
+  "borough_cil_resi_per_m2": "£190–£250",
+  "borough_cil_note": "2014 charging schedule (in effect 1 Nov 2014), unindexed: higher band £250, lower band £190. Indexed 2025 rates £409.00 and £310.84.",
+  "tall_building_definition": "7 or more storeys, or 21m or more (whichever is lower). Mid-rise is 5 or more storeys, or 15m or more. Tall and Mid-Rise Building Zones are mapped on the Policies Map and in Appendix 3 (Policy 45).",
+  "priorities": "50% affordable, 70% rented, heritage-sensitive height zones",
+  "sources": [
+   "https://www.richmond.gov.uk/adopted_local_plan",
+   "https://www2.richmond.gov.uk/docs/localplan/local_plan_interim_track_changes_for_adoption_october_2025.pdf",
+   "https://www.richmond.gov.uk/media/deth1tcm/cil_annual_rate_summary_2025.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 50,
+  "borough_cil_resi_min": 190,
+  "borough_cil_resi_max": 250,
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 5,
+    "n_withdrawn": 1,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 25.0,
+    "median_days": 332.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 618.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 322.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 5,
+    "n_all_statuses": 9,
+    "n_withdrawn": 2,
+    "refusal_pct": 20.0,
+    "withdrawn_pct": 28.6,
+    "median_days": 332.0,
+    "n_with_days": 5,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 14180000,
+  "land_value_detail": {
+   "medium_density_median": 14180000,
+   "low_density_median": 9030000,
+   "high_density_median": 18040000,
+   "density_dph": {
+    "low": 35,
+    "medium": 55,
+    "high": 70
+   }
+  },
+  "avg_house_price": 803249,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Southwark": {
+  "name": "Southwark",
+  "local_plan": {
+   "name": "Southwark Plan 2022",
+   "year_adopted": 2022,
+   "url": "https://services.southwark.gov.uk/assets/attach/233496/Southwark-Plan-strategic-policies-section.pdf",
+   "year": 2022
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "SP1 target: 50% of all new homes to be social rented or intermediate. Site minimum is 35% (at least 25% social rented and 10% intermediate), measured by habitable room, subject to viability.",
+  "borough_cil_resi_per_m2": "£54–£435",
+  "borough_cil_note": "Charging schedule in effect 1 Dec 2017, unindexed: Zone 1 £435, Zone 2 £218, Zone 3 £54. 2026 indexation is 400/291.",
+  "tall_building_definition": "Above 30m, or above 25m in the Thames Special Policy Area, or significantly higher than surroundings. Expected tall-building locations are shown on the Policies Map and Figure 4 (Policy P17).",
+  "priorities": "Social rent and intermediate homes, 11,000 new council homes",
+  "sources": [
+   "https://services.southwark.gov.uk/assets/attach/233496/Southwark-Plan-strategic-policies-section.pdf",
+   "https://services.southwark.gov.uk/assets/attach/233497/Southwark-Plan-development-management-policies.pdf",
+   "https://www.southwark.gov.uk/sites/default/files/2025-11/Southwark_Annual_CIL_Rate_Summary_2026.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "borough_cil_resi_min": 54,
+  "borough_cil_resi_max": 435,
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 8,
+    "n_withdrawn": 2,
+    "refusal_pct": null,
+    "withdrawn_pct": 100.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 2,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 222.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 2,
+    "n_all_statuses": 15,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 222.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 53850000,
+  "land_value_detail": {
+   "medium_density_median": 53850000,
+   "low_density_median": 36720000,
+   "high_density_median": 63640000,
+   "density_dph": {
+    "low": 150,
+    "medium": 220,
+    "high": 260
+   }
+  },
+  "avg_house_price": 572478,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Sutton": {
+  "name": "Sutton",
+  "local_plan": {
+   "name": "Sutton Local Plan 2016-2031",
+   "year_adopted": 2018,
+   "url": "https://www.sutton.gov.uk/sites/default/files/2026-04/sutton-local-plan-2016-to-2031.pdf",
+   "year": 2018
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Minimum 35% of dwellings affordable on sites of 11+ units or over 1,000m2 (Policy 8). Tenure 75% social/affordable rent, 25% intermediate. A new Local Plan is expected around late 2026.",
+  "borough_cil_resi_per_m2": 100,
+  "borough_cil_note": "Flat residential rate of £100/m2, in effect 1 Apr 2014, unindexed.",
+  "tall_building_definition": "Mid-rise 4-6 storeys (12-18m), tall 7-10 storeys (21-30m), very tall 11+ storeys. Areas of Taller Building Potential are mapped in Appendix 7 and on the Policies Map, mainly in Sutton Town Centre.",
+  "priorities": "35% affordable, 75% social/affordable rent, taller buildings in town centre",
+  "sources": [
+   "https://www.sutton.gov.uk/w/the-local-plan",
+   "https://www.sutton.gov.uk/sites/default/files/2026-04/sutton-local-plan-2016-to-2031.pdf",
+   "https://moderngov.sutton.gov.uk/documents/s30952/Sutton%20CIL%20Charging%20Schedule.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "observed": {
+   "10-49": {
+    "n": 6,
+    "n_all_statuses": 10,
+    "n_withdrawn": 1,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 14.3,
+    "median_days": 246.0,
+    "n_with_days": 6,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 100.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 235.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 7,
+    "n_all_statuses": 14,
+    "n_withdrawn": 1,
+    "refusal_pct": 42.9,
+    "withdrawn_pct": 12.5,
+    "median_days": 235.0,
+    "n_with_days": 7,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 12180000,
+  "land_value_detail": {
+   "medium_density_median": 12180000,
+   "low_density_median": 18600000,
+   "high_density_median": 17050000,
+   "density_dph": {
+    "low": 80,
+    "medium": 100,
+    "high": 140
+   }
+  },
+  "avg_house_price": 452654,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Tower Hamlets": {
+  "name": "Tower Hamlets",
+  "local_plan": {
+   "name": "Tower Hamlets Local Plan 2031: Managing Growth and Sharing Benefits",
+   "year_adopted": 2020,
+   "url": "https://www.towerhamlets.gov.uk/Documents/Planning-and-building-control/Strategic-Planning/Local-Plan/TH_Local_Plan_2031_accessibility_checked.pdf",
+   "year": 2020
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Overall target 50% of new homes affordable (Policy S.H1), with a site minimum of 35% subject to viability. Tenure 70% rented / 30% intermediate. A replacement Local Plan was submitted in Nov 2025 and is not yet adopted.",
+  "borough_cil_resi_per_m2": "£50–£280",
+  "borough_cil_note": "Charging schedule in effect 17 Jan 2020, unindexed: Zone 1 £280, Zone 2 £150, Zone 3 £50.",
+  "tall_building_definition": "More than 30m, or more than twice the height of surrounding buildings (whichever is less). Tall Building Zones are mapped on the Policies Map and Figure 7 (Policy D.DH6).",
+  "priorities": "50% affordable, 70% rented, family homes, tall building zones",
+  "sources": [
+   "https://www.towerhamlets.gov.uk/lgnl/planning_and_building_control/planning_policy_guidance/Local_plan/local_plan.aspx",
+   "https://www.towerhamlets.gov.uk/Documents/Planning-and-building-control/Strategic-Planning/Local-Plan/PoliciesPart1.pdf",
+   "https://www.towerhamlets.gov.uk/Documents/Planning-and-building-control/Development-control/CIL-Charging-Schedule-2020.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "borough_cil_resi_min": 50,
+  "borough_cil_resi_max": 280,
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 6,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 252.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 3,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 374.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 480.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 7,
+    "n_all_statuses": 12,
+    "n_withdrawn": 0,
+    "refusal_pct": 14.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 374.0,
+    "n_with_days": 7,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 98760000,
+  "land_value_detail": {
+   "medium_density_median": 98760000,
+   "low_density_median": 83950000,
+   "high_density_median": 98760000,
+   "density_dph": {
+    "low": 340,
+    "medium": 400,
+    "high": 400
+   }
+  },
+  "avg_house_price": 447796,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Waltham Forest": {
+  "name": "Waltham Forest",
+  "local_plan": {
+   "name": "Waltham Forest Local Plan Part 1: Shaping the Borough 2020-2035",
+   "year_adopted": 2024,
+   "url": "https://www.walthamforest.gov.uk/sites/default/files/2024-02/LBWF_LocalPlan_LP1_Feb2024_compressed.pdf",
+   "year": 2024
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target 50% of all new homes genuinely affordable. Fast Track minimum 35%, or 50% on public sector or industrial land. Tenure 70% low-cost rent, 30% intermediate (Policy 14), measured in habitable rooms and homes.",
+  "borough_cil_resi_per_m2": "£65–£70",
+  "borough_cil_note": "Charging schedule in effect 15 May 2014, unindexed: £65 and £70 for Zone A (north of the North Circular) and Zone B (south of it). Indexed 2026 rates £108.79 and £117.15.",
+  "tall_building_definition": "10 or more storeys, or 30m or more from ground level (Policy 54). Supported only on identified Transition or Transformation sites (Figure 14.1), generally 10-17 storeys.",
+  "priorities": "50% genuinely affordable, low-cost rent, character-led intensification",
+  "sources": [
+   "https://www.walthamforest.gov.uk/sites/default/files/2024-02/LBWF_LocalPlan_LP1_Feb2024_compressed.pdf",
+   "https://www.walthamforest.gov.uk/sites/default/files/2025-12/Annual%20CIL%20Rate%20Summary%202026.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "borough_cil_resi_min": 65,
+  "borough_cil_resi_max": 70,
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 12,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 223.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 189.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 17,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 206.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 23300000,
+  "land_value_detail": {
+   "medium_density_median": 23300000,
+   "low_density_median": 17090000,
+   "high_density_median": 29510000,
+   "density_dph": {
+    "low": 110,
+    "medium": 150,
+    "high": 190
+   }
+  },
+  "avg_house_price": 529102,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Wandsworth": {
+  "name": "Wandsworth",
+  "local_plan": {
+   "name": "Wandsworth Local Plan 2023-2038 (with Partial Review adopted March 2026)",
+   "year_adopted": 2023,
+   "url": "https://www.wandsworth.gov.uk/media/large/adopted_local_plan.pdf",
+   "year": 2023
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target 50% of all new homes affordable, by habitable room (LP23 as replaced by the Partial Review, 4 Mar 2026), prioritising social rent. Fast Track tenure: at least 70% social rent, at most 30% intermediate.",
+  "borough_cil_resi_per_m2": 250,
+  "borough_cil_note": "Charging schedule in effect 1 Nov 2012, unindexed: £250 in the rest of the borough (most of it), Nine Elms Area A £575, Nine Elms Area B £265, Roehampton £0. Indexed 2026 rate for the main zone £448.43.",
+  "tall_building_definition": "7 or more storeys, or 21m or more (whichever is lower). Allowed only in tall building zones mapped in Appendix 2, which set maximum heights; mid-rise zones are also defined (Policy LP4).",
+  "priorities": "50% affordable by habitable room, social rent prioritised, zoned heights",
+  "sources": [
+   "https://www.wandsworth.gov.uk/planning-and-building-control/planning-policy/local-plan/the-adopted-local-plan/",
+   "https://www.wandsworth.gov.uk/media/large/adopted_local_plan.pdf",
+   "https://www.wandsworth.gov.uk/media/jfxbe2u4/wandsworth_local_plan_partial_review.pdf",
+   "https://www.wandsworth.gov.uk/media/tiwhwxxh/annual_cil_rate_summary_2026.pdf",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": null,
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 248.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 100.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 173.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 5,
+    "n_withdrawn": 2,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 40.0,
+    "median_days": 210.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 77870000,
+  "land_value_detail": {
+   "medium_density_median": 77870000,
+   "low_density_median": 48670000,
+   "high_density_median": 110310000,
+   "density_dph": {
+    "low": 150,
+    "medium": 240,
+    "high": 340
+   }
+  },
+  "avg_house_price": 686076,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Westminster": {
+  "name": "Westminster",
+  "local_plan": {
+   "name": "Westminster City Plan 2019-2040 (Partial Review adopted January 2026)",
+   "year_adopted": 2026,
+   "url": "https://www.westminster.gov.uk/sites/default/files/media/documents/city-plan-2019-2040-january-2026.pdf",
+   "year": 2026
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Minimum 35% on private land. 50% on public land (or 50% across a Mayor portfolio agreement with at least 35% per site). Contributes to the London Plan 50% target. Tenure 70% social, 30% intermediate. The plan was originally adopted in April 2021.",
+  "borough_cil_resi_per_m2": "£200–£550",
+  "borough_cil_note": "Charging schedule in effect 1 May 2016, unindexed: Prime £550, Core £400, Fringe £200.",
+  "tall_building_definition": "Twice the prevailing context height or higher, or causing a significant change to the skyline; no metre threshold (Policy 46). Tall buildings may be acceptable in the Paddington and Victoria Opportunity Areas; elsewhere they are generally not acceptable.",
+  "priorities": "35% affordable, 70% social rent, retrofit-first growth",
+  "sources": [
+   "https://www.westminster.gov.uk/sites/default/files/media/documents/city-plan-2019-2040-january-2026.pdf",
+   "https://www.westminster.gov.uk/media/document/westminster-cil-charging-schedule-2016",
+   "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "https://www.london.gov.uk/media/111917/download"
+  ],
+  "affordable_site_min_pct": 35,
+  "borough_cil_resi_min": 200,
+  "borough_cil_resi_max": 550,
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 138.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 1,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 138.0,
+    "n_with_days": 1,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 87990000,
+  "land_value_detail": {
+   "medium_density_median": 87990000,
+   "low_density_median": 53430000,
+   "high_density_median": 119410000,
+   "density_dph": {
+    "low": 85,
+    "medium": 140,
+    "high": 190
+   }
+  },
+  "avg_house_price": 876788,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ }
+}

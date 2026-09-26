@@ -1,0 +1,12 @@
+# Only bundled public geometry and aggregate council data are included.
+!data/
+data/*
+!data/context.json
+!data/council_stats.json
+!data/councils.json
+!data/councils_part1.json
+!data/councils_part2.json
+!data/councils_part3.json
+!data/london-boroughs.geojson
+!data/london_layers.json
+!data/site.json

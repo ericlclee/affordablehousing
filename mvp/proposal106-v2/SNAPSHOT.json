@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-09-26T14:28:38.483857+00:00",
+  "source": "User-selected preview on localhost:4174",
+  "sha256": {
+    "index.html": "3fff25079ce6cf423b7ce8bc56b917e5d7a7f14d0e50e1345ff14d3b39f72310",
+    "merge_councils.py": "3ef2358d3f1a4027ce31876b37299f03c5e5147dcda91980eff9671d18ac1986",
+    "PROPOSAL106_SPEC_v2.md": "cbbc15c8e952726e503a5bd6866b40021e65a9afdcc211452d45307bb969adb0",
+    "analysis/build_council_stats.py": "d486cb5bce891d62914255ade1c45b5f456b17f83941747086057f5cbc6fbe51",
+    "data/councils_part1.json": "3029da827b8caba47049bda5cfee851ce7fe960f426bbd25c5de3d39f1954c9e",
+    "data/london_layers.json": "9bea59816c73238b2dd629845a3b41433e3b86eeaae4502b161f83f938f52511",
+    "data/london-boroughs.geojson": "e475140fc7e8077707495a247130f1b865ec1a37a30288ee6763fe244199c171",
+    "data/site.json": "b192c6a9b3621885109e94f5805797f14644813aff9788256f199ac64903a27c",
+    "data/council_stats.json": "1c6f60ab057ea8d19e4be7725403edb3622d95d0027a9d09509b7c98183532ae",
+    "data/context.json": "58664aca74f575adede82e034674dcf28a8e99e62742377b29947d98cb7e6923",
+    "data/councils.json": "d05f63255a4f8003aa056af1a32c00dbab47d1b790a31c5fd04d78c1558ba1dd",
+    "data/councils_part3.json": "6c878c77778dac38019e4076e9ab4024eeff84d8b47dc260082d609b26a9977b",
+    "data/councils_part2.json": "3a4a485001bba198c52e692e37643b85a8c4af872ad24651e58cac52b75b49ab"
+  },
+  "import_changes": [
+    "Provider-key isolation and accurate connection disclosure",
+    "Incomplete constraint screening state",
+    "Invalid footprint upload validation",
+    "Portable council-statistics output path"
+  ]
+}

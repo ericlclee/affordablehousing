@@ -1,0 +1,144 @@
+{
+ "_source": {
+  "service": "https://gis.london.gov.uk/arcgis/rest/services/apps/planning_data_map_02/FeatureServer",
+  "listing": "https://gis.london.gov.uk/arcgis/rest/services/apps/planning_data_map_02/FeatureServer?f=json",
+  "accessed": "2026-09-26",
+  "spatial_reference_of_service": "EPSG:27700 (queries use inSR=4326 so lng/lat works)",
+  "notes": "Point-intersects queries, attributes only. CORS echoed the requesting origin (http://localhost:4174) with Access-Control-Allow-Credentials: true. LVMF layer 213 is the union of layers 215 (Viewing Corridor), 216 (Wider Setting Consultation Area) and 220 (Extension); read attributes.classification to tell them apart. Corridors are 2D footprints only (no threshold heights)."
+ },
+ "layers": [
+  {
+   "key": "mol",
+   "name": "Designated Open Space (Metropolitan Open Land)",
+   "layer_id": 211,
+   "tier": "STOP",
+   "url_template": "https://gis.london.gov.uk/arcgis/rest/services/apps/planning_data_map_02/FeatureServer/211/query?geometry={lng},{lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json",
+   "tested_point": {
+    "lat": 51.5605,
+    "lng": -0.1623,
+    "place": "Hampstead Heath"
+   },
+   "tested_hits": 1,
+   "tested_first_hit": {
+    "sitename": "Hampstead Heath",
+    "borough": "Camden",
+    "designation": "Designated Open Space - Metropolitan Open Land"
+   },
+   "label_fields": [
+    "sitename",
+    "borough",
+    "designation"
+   ],
+   "cors": {
+    "access_control_allow_origin": "http://localhost:4174",
+    "ok": true
+   }
+  },
+  {
+   "key": "sil",
+   "name": "Strategic Industrial Land (SIL)",
+   "layer_id": 206,
+   "tier": "STOP",
+   "url_template": "https://gis.london.gov.uk/arcgis/rest/services/apps/planning_data_map_02/FeatureServer/206/query?geometry={lng},{lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json",
+   "tested_point": {
+    "lat": 51.531,
+    "lng": -0.271,
+    "place": "Park Royal"
+   },
+   "tested_hits": 1,
+   "tested_first_hit": {
+    "sitename": "Park Royal (part)",
+    "borough": null
+   },
+   "label_fields": [
+    "sitename",
+    "borough"
+   ],
+   "cors": {
+    "access_control_allow_origin": "http://localhost:4174",
+    "ok": true
+   }
+  },
+  {
+   "key": "opportunity_area",
+   "name": "Opportunity Areas",
+   "layer_id": 103,
+   "tier": "SUPPORT",
+   "url_template": "https://gis.london.gov.uk/arcgis/rest/services/apps/planning_data_map_02/FeatureServer/103/query?geometry={lng},{lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json",
+   "tested_point": {
+    "lat": 51.482,
+    "lng": -0.07,
+    "place": "Old Kent Road"
+   },
+   "tested_hits": 1,
+   "tested_first_hit": {
+    "sitename": "Old Kent Road",
+    "borough": "Southwark",
+    "status": "Adopted"
+   },
+   "label_fields": [
+    "sitename",
+    "borough",
+    "status"
+   ],
+   "cors": {
+    "access_control_allow_origin": "http://localhost:4174",
+    "ok": true
+   }
+  },
+  {
+   "key": "town_centre",
+   "name": "Town Centre Boundaries",
+   "layer_id": 104,
+   "tier": "SUPPORT",
+   "url_template": "https://gis.london.gov.uk/arcgis/rest/services/apps/planning_data_map_02/FeatureServer/104/query?geometry={lng},{lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json",
+   "tested_point": {
+    "lat": 51.3725,
+    "lng": -0.0985,
+    "place": "Croydon (Metropolitan)"
+   },
+   "tested_hits": 1,
+   "tested_first_hit": {
+    "sitename": "Croydon",
+    "classification": "Metropolitan",
+    "borough": "Croydon"
+   },
+   "label_fields": [
+    "sitename",
+    "classification",
+    "borough"
+   ],
+   "cors": {
+    "access_control_allow_origin": "http://localhost:4174",
+    "ok": true
+   }
+  },
+  {
+   "key": "lvmf_protected_vista",
+   "name": "Protected Vistas (LVMF; all classifications: Viewing Corridor, Wider Setting Consultation Area, Extension)",
+   "layer_id": 213,
+   "tier": "SERIOUS",
+   "url_template": "https://gis.london.gov.uk/arcgis/rest/services/apps/planning_data_map_02/FeatureServer/213/query?geometry={lng},{lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=false&f=json",
+   "tested_point": {
+    "lat": 51.5367,
+    "lng": -0.1245,
+    "place": "Kenwood gazebo to St Paul's corridor"
+   },
+   "tested_hits": 1,
+   "tested_first_hit": {
+    "sitename": "Kenwood viewing gazebo to St Paul's Cathedral",
+    "sitereference": "3A.1",
+    "classification": "Viewing Corridor"
+   },
+   "label_fields": [
+    "sitename",
+    "sitereference",
+    "classification"
+   ],
+   "cors": {
+    "access_control_allow_origin": "http://localhost:4174",
+    "ok": true
+   }
+  }
+ ]
+}
