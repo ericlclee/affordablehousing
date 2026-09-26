@@ -1,0 +1,19 @@
+{
+  "captured_on": "2026-09-26",
+  "source": "User-selected local preview on port 4174",
+  "sha256": {
+    "index.html": "5eadd5f7b9f5a0575cbc7118bea9ad4666b873f7c56d635d3bd981c77efdcebb",
+    "check_engine.py": "8cab653f279206767361feded3724fc526848b2eb8476bed145977bf4e6ab79e",
+    "engine_check.mjs": "6bf6f9b7edb297a8106526f7fb8c22f68500153e1a9b4e8f19e772177098b69e",
+    "data/london_layers.json": "9bea59816c73238b2dd629845a3b41433e3b86eeaae4502b161f83f938f52511",
+    "data/london-boroughs.geojson": "e475140fc7e8077707495a247130f1b865ec1a37a30288ee6763fe244199c171",
+    "data/site.json": "b192c6a9b3621885109e94f5805797f14644813aff9788256f199ac64903a27c",
+    "data/council_stats.json": "5583b74ff1a437a70fa2b9b05832988806cde6b72a596a1475d1ef5ad729c6cf",
+    "data/context.json": "58664aca74f575adede82e034674dcf28a8e99e62742377b29947d98cb7e6923",
+    "data/councils.json": "79ee09ee548be1607a27bf08e0efda9094986139f84ba7e46d5932c00055adf1",
+    "analysis/sim_parameters.py": "a6e8ccb3e6448d57c80c18b83b04baa2269101f98e74d3389c48117c0d00dff2",
+    "analysis/sim_parameters.json": "76b76e62dd73534afc4bd7390b77f978c4fbe12f033e8e40e671afb3441127a3",
+    "PROPOSAL106_SPEC.md": "7b6c1f05fa0e681e875510b2b53a3b0778c0e586dca0dcd4876f2798c2b0894f"
+  },
+  "note": "Hashes record the imported source. index.html additionally fixes resetting a cleared nested numeric assumption."
+}
