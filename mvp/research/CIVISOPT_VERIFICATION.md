@@ -30,7 +30,7 @@ The original `mvp/dist/app.js`, saved context, vendor code, root acquisition scr
 
 ## Known limits
 
-The official register boundary remains indicative; its current planning status, title and site constraints have not been cleared. The separate 2024 council schedule is proposed policy, not adopted policy. No application-specific precedent has been independently cleared for inclusion. A contributor model, full borough readiness register, professional cost evidence, grant schedule and cash-flow IRR are unavailable. The interface reports those limits instead of producing substitute values.
+The official register boundary remains indicative; its current planning status, title and site constraints have not been cleared. The separate 2024 council schedule is proposed policy, not adopted policy. No application-specific precedent has been independently cleared for inclusion. Contributor-model integration, a full borough readiness register, professional cost evidence, grant schedule and cash-flow IRR are unavailable. The model artifacts themselves arrived upstream and were preserved. The interface reports those limits instead of producing substitute values.
 
 ## Final local verification (26 September 2026)
 
@@ -42,3 +42,5 @@ The official register boundary remains indicative; its current planning status, 
 - No browser console errors were reported. The original planning room still renders its WebGL scene and the new navigation link.
 
 The UI extends the incumbent off-white, forest-green and copper palette, with the existing typography. Layout fixes address mobile containment and keyboard focus without replacing the original planning room's design.
+
+After incorporating the upstream Proposal 106 and model deliveries, the 20 CivisOpt tests, Proposal 106 input regression and model browser/Python parity check all passed. The combined branch has no unresolved conflicts.

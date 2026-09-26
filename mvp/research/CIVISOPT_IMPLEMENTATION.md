@@ -30,6 +30,8 @@ Save the structured scenario inputs with the pinned site/source snapshot. Commer
 
 ## Deferred work
 
-User-drawn sites, rigorous buildable envelopes, multiple physical massings, audited nearby precedents, professional costs, a complete borough readiness register and a validated contributor model are separate extensions. The P0 interface reports absent precedents and approval screening as unavailable.
+User-drawn sites, rigorous buildable envelopes, multiple physical massings, audited nearby precedents, professional costs, a complete borough readiness register and a validated contributor-model integration are separate extensions. The P0 interface reports absent precedents and approval screening as unavailable.
 
 Verification evidence and the independent financial row are in [CIVISOPT_VERIFICATION.md](CIVISOPT_VERIFICATION.md). The native file/print dialogs were not available to browser automation; saved data was independently restored with the production parser and the standalone brief was inspected at A4 dimensions.
+
+Upstream Proposal 106 and model deliveries (`fb3d3dc`, `ef10f6e`) were incorporated without changing their files. The README auto-merged. The supplied model remains disconnected pending the documented interface/coverage gate; see [MODEL_INTEGRATION.md](MODEL_INTEGRATION.md).

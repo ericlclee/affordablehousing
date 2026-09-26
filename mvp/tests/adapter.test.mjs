@@ -141,12 +141,10 @@ test('post-submission fields and policy/finance outputs are not passed to the mo
 
 test('screening stays unavailable even when caller supplies truthy integration-looking data', () => {
   const result = screeningAvailability({ artifact: { version: '1', validated: true }, authorized: true });
-  assert.deepEqual(result, {
-    status: 'unavailable',
-    label: 'Approval screening unavailable',
-    reasons: [
-      'No authorized, versioned contributor model artifact is installed.',
-      'The required validation manifest and integration review have not been accepted.',
-    ],
-  });
+  assert.equal(result.status, 'unavailable');
+  assert.equal(result.label, 'Approval screening unavailable');
+  assert.ok(result.reasons.length > 0);
+  assert.ok(result.reasons.every(reason => typeof reason === 'string' && reason.trim()));
+  assert.deepEqual(result, screeningAvailability());
+
 });

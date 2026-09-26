@@ -191,16 +191,16 @@ export function canonicalModelInput(scenario, siteFacts = null) {
 }
 
 /**
- * No artifact and evidence package has been authorized/evaluated for this
- * build. This deliberately cannot be enabled by passing truthy caller data.
+ * Contributor artifacts exist upstream, but their interface and coverage
+ * have not passed the integration contract for this build. This deliberately cannot be enabled by passing truthy caller data.
  */
 export function screeningAvailability() {
   return {
     status: 'unavailable',
     label: 'Approval screening unavailable',
     reasons: [
-      'No authorized, versioned contributor model artifact is installed.',
-      'The required validation manifest and integration review have not been accepted.',
+      'Contributor artifacts are available; the CivisOpt schema and coverage integration remain unverified.',
+      'The major-scheme S106 output and missing-site-fact handling do not yet meet this study’s integration contract.',
     ],
   };
 }
