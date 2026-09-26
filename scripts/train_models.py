@@ -44,6 +44,8 @@ from sklearn.model_selection import GroupKFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
+BUILD_FORMS = ["single_house", "multiple_houses", "single_flat", "flats_2_9", "apartment_block", "mixed", "hmo",
+               "student_coliving"]  # as build_features.BUILD_FORMS
 FEATURES_FILE = Path("data/processed/features.parquet")
 REPORTS, MODELS = Path("reports"), Path("models")
 TEST_YEAR = 2025
@@ -109,6 +111,9 @@ class Preprocessor:
             b[f"dev_{d}"] = (dev == d).astype(float)
         b["scheme_hmo"] = (df["scheme_type"] == "hmo").astype(float)
         b["scheme_student_coliving"] = df["scheme_type"].isin(["student", "coliving"]).astype(float)
+        for form in BUILD_FORMS:  # flats_2_9 (the most common) is the reference
+            if form != "flats_2_9":
+                b[f"bf_{form}"] = (df["build_form"] == form).astype(float)
         b["lpa_grp"] = df["lpa"].where(~df["lpa"].isin(SMALL_LPAS), "Other small")
         return b
 
@@ -408,7 +413,7 @@ def support_reasons(df: pd.DataFrame, lim: dict, lpas: list) -> pd.Series:
     return pd.Series(out, index=df.index)
 
 
-WEB_INPUTS = ["lpa", "homes_net", "homes_lost", "is_outline", "dev_type", "scheme_type", "storeys", "height_m_est",
+WEB_INPUTS = ["lpa", "homes_net", "homes_lost", "is_outline", "dev_type", "scheme_type", "build_form", "storeys", "height_m_est",
               "site_area_m2", "density_homes_per_ha", "avg_home_size_m2", "space_std_share_below", "mix_studio", "mix_1b",
               "mix_2b", "affordable_pct_units", "social_rent_pct_units", "nonresi_gia_gained_m2", "has_demolition",
               "has_basement", "has_roof_terrace", "has_commercial", "has_communal_amenity", "premium_amenity",

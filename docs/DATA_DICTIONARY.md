@@ -49,6 +49,8 @@ One row per **new housing proposal**: a full or outline application creating at 
 | `is_major` | bool | DERIVED | 10+ net homes (the affordable-housing and S106 threshold) | ✅ |
 | `is_outline` | bool | FP / PLD | Outline application (details reserved) | ✅ |
 | `dev_type` | str | TEXT | `new_build`, `change_of_use`, `conversion`, `extension`, `other`. First matching rule wins, in that order. PLD's own `unit_development_type` is **not used**: it is mostly filled after approval (leakage) | ✅ one-hot |
+| `build_form` | str | PLD unit types, else TEXT | `single_house`, `multiple_houses`, `single_flat`, `flats_2_9`, `apartment_block` (10+ flats), `mixed` (houses + flats), `hmo`, `student_coliving`. Houses = House or Bungalow / Terraced / Semi Detached / Detached units; flats = Flat Apartment Maisonette / Studio Bedsit / Cluster Flat. Where PLD has no unit types, houses vs flats comes from description wording (default flats), so it is never unknown | ✅ one-hot (`flats_2_9` reference) |
+| `build_form_source` | str | DERIVED | `pld` or `text` | ⚠️ provenance |
 | `scheme_type` | str | PLD unit types or TEXT | `standard`, `student`, `coliving`, `hmo` | ✅ one-hot (student + co-living merged) |
 
 ## Proposal: unit mix and tenure

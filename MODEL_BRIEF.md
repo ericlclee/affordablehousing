@@ -2,7 +2,7 @@
 
 **TL;DR:** I'm building a data-trained model that replaces the simulator's assumed approval multipliers. Given a proposal and its site, it outputs **P(approved)** and **P(S106 | approved)** and ships as a browser bundle (`models/web/`) that the JS sweep can score directly.
 
-**Status (26 Sep):** built. XGBoost (calibrated) is the shipped model: 2025 test ROC-AUC 0.652 vs 0.615 for a borough × size baseline. An offline variant that also reads the application description reaches 0.673 (`models/approval_with_text.joblib`; not in the browser bundle, since the simulator has no description). See `reports/model_metrics.md`, `reports/feature_importance.md` and `models/web/README.md`.
+**Status (26 Sep):** built. XGBoost (calibrated) is the shipped model: 2025 test ROC-AUC 0.655 vs 0.615 for a borough × size baseline, with stopping conditions for policy STOP sites and out-of-range schemes. An offline variant that also reads the application description reaches 0.674 (`models/approval_with_text.joblib`; not in the browser bundle, since the simulator has no description). See `reports/model_metrics.md`, `reports/feature_importance.md` and `models/web/README.md`.
 
 ## Outputs
 

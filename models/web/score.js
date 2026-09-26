@@ -22,7 +22,7 @@ const sigmoid = (z) => 1 / (1 + Math.exp(-z));
 
 // Plain-English names for the driver list
 const LABELS = {
-  borough: "Borough", avg_home_size_m2: "Average home size", scheme: "Scheme type (HMO / student / co-living)",
+  build_form: "Build form (houses / flats / block)", borough: "Borough", avg_home_size_m2: "Average home size", scheme: "Scheme type (HMO / student / co-living)",
   unit_mix: "Unit mix", log_site_area: "Site area", space_std_share_below: "Homes below minimum space standards",
   log_homes_net: "Number of homes", log_ptal: "Public transport access (PTAL)", log_density: "Density",
   log_homes_lost: "Existing homes lost", affordable_pct_major: "Affordable housing %",
@@ -39,7 +39,19 @@ const LABELS = {
 };
 const groupOf = (f) =>
   f.startsWith("lpa_") ? "borough" : f.startsWith("mix_") ? "unit_mix" : f.startsWith("dev_") ? "development_type"
-    : f.startsWith("flood_zone") ? "flood_zone" : f.startsWith("scheme_") ? "scheme" : f;
+    : f.startsWith("flood_zone") ? "flood_zone" : f.startsWith("scheme_") ? "scheme" : f.startsWith("bf_") ? "build_form" : f;
+
+/**
+ * Build form from housing_type ("houses" | "flats" | "mixed"; default "flats"), homes and scheme type.
+ * Mirrors build_features.build_form_from. Pass params.build_form to set it directly.
+ */
+export function deriveBuildForm(housingType = "flats", homes = 1, scheme = "standard") {
+  if (scheme === "hmo") return "hmo";
+  if (scheme === "student" || scheme === "coliving") return "student_coliving";
+  if (housingType === "houses") return homes <= 1 ? "single_house" : "multiple_houses";
+  if (housingType === "mixed") return "mixed";
+  return homes <= 1 ? "single_flat" : homes < 10 ? "flats_2_9" : "apartment_block";
+}
 
 /** Derive the training-time raw fields (flags, density, height) from user inputs. */
 function derive(p) {
@@ -85,6 +97,9 @@ function features(model, p, pre = model.preprocess) {
   for (const t of ["change_of_use", "conversion", "extension"]) x[`dev_${t}`] = dev === t ? 1 : 0;
   x.scheme_hmo = d.scheme_type === "hmo" ? 1 : 0;
   x.scheme_student_coliving = d.scheme_type === "student" || d.scheme_type === "coliving" ? 1 : 0;
+  const form = d.build_form || deriveBuildForm(d.housing_type, d.homes, d.scheme_type);
+  for (const f of ["single_house", "multiple_houses", "single_flat", "apartment_block", "mixed", "hmo", "student_coliving"])
+    x[`bf_${f}`] = form === f ? 1 : 0;
 
   // Fill gaps exactly as in training (training-year medians)
   for (const [k, v] of Object.entries(pre.medians)) x[k] = fill(x[k], v);

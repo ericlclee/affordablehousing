@@ -1,6 +1,6 @@
 # Model factsheet: London housing approval and S106
 
-*House London #2, 26 September 2026. Figures from `reports/model_metrics.md` and `reports/feature_importance.md` (commit `368d2df`).*
+*House London #2, 26 September 2026. Figures from `reports/model_metrics.md` and `reports/feature_importance.md` (PR #4: stopping conditions and build form).*
 
 ## What it does
 
@@ -27,7 +27,7 @@ It also reports the **historical approval rate for the same borough and scheme s
 
 ## Inputs (~40 features)
 
-- **Scheme:** homes (gained, lost), storeys, site area, density, average home size, share of homes below London Plan space standards, unit mix, affordable % and social-rent % (10+ homes), non-residential floorspace, development type, scheme type (standard / HMO / student / co-living), outline or full
+- **Scheme:** build form (single house, several houses, single flat, 2–9 flats, apartment block, mixed, HMO, student / co-living), homes (gained, lost), storeys, site area, density, average home size, share of homes below London Plan space standards, unit mix, affordable % and social-rent % (10+ homes), non-residential floorspace, development type, scheme type (standard / HMO / student / co-living), outline or full
 - **Parsed from the description:** demolition, basement, roof terrace, commercial space, communal amenity, gym / pool / concierge, backland or garden site, loss of a pub
 - **Site:** borough, conservation area, Article 4, listed building within 25 m, Green Belt, flood zone, Opportunity Area, town centre, brownfield site nearby, PTAL, deprivation decile
 - **Policy definitions:** statutory major development, Mayor referral (over 150 homes; over 30 m, or 150 m in the City)
@@ -53,9 +53,9 @@ It also reports the **historical approval rate for the same borough and scheme s
 |---|---|---|---|
 | Always guess the average (48%) | 0.500 | 0.250 | 0.52 |
 | **Baseline:** borough × size approval rate | 0.615 (0.592–0.637) | 0.240 | 0.59 |
-| Logistic regression | 0.638 (0.614–0.659) | 0.235 | 0.59 |
-| **XGBoost (shipped)** | **0.652 (0.630–0.674)** | **0.232** | **0.60** |
-| XGBoost + description text (offline only) | 0.673 (0.652–0.695) | 0.227 | 0.62 |
+| Logistic regression | 0.637 (0.613–0.658) | 0.236 | 0.60 |
+| **XGBoost (shipped)** | **0.655 (0.634–0.674)** | **0.231** | **0.60** |
+| XGBoost + description text (offline only) | 0.674 (0.654–0.696) | 0.227 | 0.62 |
 
 Brier = average squared error of the probabilities (lower is better).
 
@@ -79,6 +79,7 @@ Features with a real effect (shuffling them reliably costs accuracy). Effects ar
 | Loss of a pub | −3 pp |
 | Conservation area | +3 pp (likely self-selection: only stronger schemes get submitted) |
 | Affordable housing (10+ homes) | 0% → 100%: +20 pp (few schemes; directional) |
+| Build form | several houses +4 pp, mixed houses + flats −2 pp, HMO −2 pp on top of the scheme-type effect, vs 2–9 flats |
 | Unit mix, number of homes, development type | ±1–2 pp |
 
 **No measurable effect:** flood zone, Green Belt, listed building nearby, Opportunity Area, town centre, gym / pool / concierge (too rare: ~56 schemes), Mayor-referral flags.
@@ -96,7 +97,7 @@ The model gives **no probability** (status `policy_stop` or `out_of_range`, with
 - **Policy STOP site:** Green Belt, Strategic Industrial Location, and (when supplied) Metropolitan Open Land, functional floodplain, scheduled monument, SSSI, ancient woodland. Only modest, compliant schemes get submitted on these sites (Green Belt approval: 48%, the same as average), so historical rates would mislead
 - **Outside the training range:** more than 916 homes; density above 871 homes/ha; site under 56 m² or over 8.3 ha; taller than 99% of schemes on a similar-sized site (about 6–8 storeys for sites up to 1,150 m², 33 for larger ones); more than 70 homes lost; more than 24,300 m² non-residential; average home under 30 m²; unknown borough
 
-These stop 3.0% of 2025 test applications. On those, the model's ROC-AUC is 0.502 (no skill), against 0.656 on the rest, which confirms the cut-offs.
+These stop 3.0% of 2025 test applications. On those, the model's ROC-AUC is 0.510 (no skill), against 0.659 on the rest, which confirms the cut-offs.
 
 ## Selection bias
 
