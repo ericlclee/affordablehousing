@@ -511,6 +511,97 @@
       "n_rounds": 363
     },
     "leakage_probe_auc": 0.5058930498676799,
+    "support_limits": {
+      "homes_net_max": 916.0,
+      "homes_lost_max": 70.44400000000314,
+      "density_max": 870.8475445407613,
+      "site_area_min": 55.70432637348765,
+      "site_area_max": 83355.45328293234,
+      "avg_home_size_min": 30.0,
+      "nonresi_max": 24314.136,
+      "ptal_max": 114.105417543,
+      "storeys_by_site_area": {
+        "edges": [
+          0.0,
+          112.00105602753146,
+          151.3508397259331,
+          200.2471852472039,
+          258.41422157216493,
+          312.60376278089547,
+          383.05441966354743,
+          490.6933224069983,
+          685.8097181775803,
+          1154.8945184585853,
+          null
+        ],
+        "max_storeys": [
+          6.0,
+          6.0,
+          6.809999999999945,
+          6.0,
+          6.9500000000000455,
+          6.0,
+          7.5499999999999545,
+          8.039999999999964,
+          8.0,
+          33.0
+        ]
+      }
+    },
+    "guard": {
+      "n_test": 2328,
+      "n_guarded": 69,
+      "reasons": {
+        "STOP: Green Belt": 36,
+        "denser than 99.9% of schemes seen": 15,
+        "smaller site than 99.5% of schemes seen": 10,
+        "taller for its site size than 99% of schemes seen": 4,
+        "more existing homes lost than 99.9% of schemes seen": 3,
+        "more homes than 99.9% of schemes seen": 2,
+        "STOP: Strategic Industrial Location": 1,
+        "larger site than 99.9% of schemes seen": 1
+      },
+      "in_range": {
+        "n": 2259,
+        "positive_rate": 0.4785303231518371,
+        "threshold": 0.5,
+        "accuracy": 0.5993802567507747,
+        "precision_approved": 0.598434004474273,
+        "recall_approved": 0.49491211840888066,
+        "f1_approved": 0.5417721518987342,
+        "roc_auc": 0.6563457560675284,
+        "pr_auc_approved": 0.6217818722791523,
+        "brier": 0.2309635466118368,
+        "log_loss": 0.6538339238447837,
+        "precision_not_approved": 0.6,
+        "recall_not_approved": 0.6952461799660441,
+        "pr_auc_not_approved": 0.6690388202991615,
+        "roc_auc_ci95": [
+          0.6346111731945558,
+          0.6801821095220976
+        ]
+      },
+      "guarded": {
+        "n": 69,
+        "positive_rate": 0.5362318840579711,
+        "threshold": 0.5,
+        "accuracy": 0.4492753623188406,
+        "precision_approved": 0.48717948717948717,
+        "recall_approved": 0.5135135135135135,
+        "f1_approved": 0.5,
+        "roc_auc": 0.5016891891891893,
+        "pr_auc_approved": 0.6456949293621765,
+        "brier": 0.26854427119910335,
+        "log_loss": 0.7304078639409571,
+        "precision_not_approved": 0.4,
+        "recall_not_approved": 0.375,
+        "pr_auc_not_approved": 0.44613920838599824,
+        "roc_auc_ci95": [
+          0.3692302955665025,
+          0.6542970022808733
+        ]
+      }
+    },
     "top_coefficients": {
       "mayor_1a_over_150_homes": 0.154,
       "log_density": -0.121,
@@ -1074,6 +1165,97 @@
       "n_rounds": 401
     },
     "leakage_probe_auc": 0.4955193990180517,
+    "support_limits": {
+      "homes_net_max": 916.0,
+      "homes_lost_max": 73.79700000000048,
+      "density_max": 859.2480361908789,
+      "site_area_min": 55.641128986498714,
+      "site_area_max": 83612.88339936924,
+      "avg_home_size_min": 30.0,
+      "nonresi_max": 24314.856,
+      "ptal_max": 114.105417543,
+      "storeys_by_site_area": {
+        "edges": [
+          0.0,
+          112.96804670941209,
+          152.90141885667094,
+          203.23202510148417,
+          260.0,
+          314.41,
+          386.93544483959016,
+          494.6934050612051,
+          692.0327563169969,
+          1164.2814781453828,
+          null
+        ],
+        "max_storeys": [
+          6.0,
+          6.0,
+          7.0,
+          6.0,
+          6.0,
+          6.0,
+          7.409999999999968,
+          7.7999999999999545,
+          8.0,
+          33.0
+        ]
+      }
+    },
+    "guard": {
+      "n_test": 2185,
+      "n_guarded": 60,
+      "reasons": {
+        "STOP: Green Belt": 33,
+        "denser than 99.9% of schemes seen": 15,
+        "smaller site than 99.5% of schemes seen": 6,
+        "taller for its site size than 99% of schemes seen": 3,
+        "more existing homes lost than 99.9% of schemes seen": 2,
+        "more homes than 99.9% of schemes seen": 2,
+        "STOP: Strategic Industrial Location": 1,
+        "larger site than 99.9% of schemes seen": 1
+      },
+      "in_range": {
+        "n": 2125,
+        "positive_rate": 0.516235294117647,
+        "threshold": 0.5,
+        "accuracy": 0.6178823529411764,
+        "precision_approved": 0.6278026905829597,
+        "recall_approved": 0.6381039197812215,
+        "f1_approved": 0.6329113924050633,
+        "roc_auc": 0.672233523333889,
+        "pr_auc_approved": 0.6752014515142755,
+        "brier": 0.22705172565091705,
+        "log_loss": 0.6455388063444768,
+        "precision_not_approved": 0.6069306930693069,
+        "recall_not_approved": 0.5963035019455253,
+        "pr_auc_not_approved": 0.6461007983493203,
+        "roc_auc_ci95": [
+          0.650230965474268,
+          0.6943330784650354
+        ]
+      },
+      "guarded": {
+        "n": 60,
+        "positive_rate": 0.6,
+        "threshold": 0.5,
+        "accuracy": 0.5,
+        "precision_approved": 0.5789473684210527,
+        "recall_approved": 0.6111111111111112,
+        "f1_approved": 0.5945945945945946,
+        "roc_auc": 0.5092592592592593,
+        "pr_auc_approved": 0.6904934466006208,
+        "brier": 0.27182217269618997,
+        "log_loss": 0.7480506882118955,
+        "precision_not_approved": 0.36363636363636365,
+        "recall_not_approved": 0.3333333333333333,
+        "pr_auc_not_approved": 0.3981613472714919,
+        "roc_auc_ci95": [
+          0.36901088014460515,
+          0.6662936602870813
+        ]
+      }
+    },
     "top_coefficients": {
       "mayor_1a_over_150_homes": 0.169,
       "avg_home_size_m2": 0.132,
@@ -1408,6 +1590,90 @@
       "n_rounds": 274
     },
     "leakage_probe_auc": 0.486325079935523,
+    "support_limits": {
+      "homes_net_max": 1139.7680000000037,
+      "homes_lost_max": 200.9010000000003,
+      "density_max": 861.9215183279729,
+      "site_area_min": 57.307568710859485,
+      "site_area_max": 98557.57082316703,
+      "avg_home_size_min": 30.0,
+      "nonresi_max": 36114.81000000104,
+      "ptal_max": 114.105417543,
+      "storeys_by_site_area": {
+        "edges": [
+          0.0,
+          120.0,
+          176.91400606282897,
+          235.39603760000176,
+          293.3038259773674,
+          352.8989413050896,
+          436.756775023056,
+          548.7275293583614,
+          757.5573984942273,
+          1364.2750228320037,
+          null
+        ],
+        "max_storeys": [
+          5.0,
+          6.0,
+          5.0,
+          7.909999999999997,
+          5.0,
+          6.0,
+          13.049999999999898,
+          8.0,
+          9.259999999999962,
+          44.0
+        ]
+      }
+    },
+    "guard": {
+      "n_test": 604,
+      "n_guarded": 20,
+      "reasons": {
+        "STOP: Green Belt": 7,
+        "denser than 99.9% of schemes seen": 5,
+        "smaller site than 99.5% of schemes seen": 4,
+        "more homes than 99.9% of schemes seen": 2,
+        "STOP: Strategic Industrial Location": 1,
+        "larger site than 99.9% of schemes seen": 1,
+        "taller for its site size than 99% of schemes seen": 1
+      },
+      "in_range": {
+        "n": 584,
+        "positive_rate": 0.11301369863013698,
+        "threshold": 0.5,
+        "accuracy": 0.9058219178082192,
+        "precision_s106": 0.6078431372549019,
+        "recall_s106": 0.4696969696969697,
+        "f1_s106": 0.5299145299145299,
+        "roc_auc": 0.8782321282321283,
+        "pr_auc_s106": 0.5676161439627361,
+        "brier": 0.06885831277053611,
+        "log_loss": 0.2371979554403242,
+        "roc_auc_ci95": [
+          0.8195308341804065,
+          0.9225342291653175
+        ]
+      },
+      "guarded": {
+        "n": 20,
+        "positive_rate": 0.25,
+        "threshold": 0.5,
+        "accuracy": 0.85,
+        "precision_s106": 1.0,
+        "recall_s106": 0.4,
+        "f1_s106": 0.5714285714285714,
+        "roc_auc": 0.8,
+        "pr_auc_s106": 0.7103174603174602,
+        "brier": 0.1266837632163585,
+        "log_loss": 0.4589304413706096,
+        "roc_auc_ci95": [
+          0.5302849264705882,
+          1.0
+        ]
+      }
+    },
     "top_coefficients": {
       "log_homes_net": 1.467,
       "is_major": 1.28,

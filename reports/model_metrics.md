@@ -237,6 +237,25 @@ Largest logistic-regression coefficients (standardised; positive = raises the pr
 | `dev_change_of_use` | +0.142 |
 | `dev_conversion` | -0.125 |
 
+## Stopping conditions (approval model, 2025 test set)
+
+69 of 2,328 test applications (3.0%) get no probability: they are on a policy STOP site or outside the range of schemes the model was trained on. Reasons (a row can have several):
+
+| Reason | Test applications |
+|---|---|
+| STOP: Green Belt | 36 |
+| denser than 99.9% of schemes seen | 15 |
+| smaller site than 99.5% of schemes seen | 10 |
+| taller for its site size than 99% of schemes seen | 4 |
+| more existing homes lost than 99.9% of schemes seen | 3 |
+| more homes than 99.9% of schemes seen | 2 |
+| STOP: Strategic Industrial Location | 1 |
+| larger site than 99.9% of schemes seen | 1 |
+
+Within range: n = 2259, ROC-AUC 0.656, Brier 0.231, approval rate 47.9%.
+
+Guarded (for reference: what the model would have said): n = 69, ROC-AUC 0.502, Brier 0.269, approval rate 53.6%.
+
 ## Change from v1 (Foundations-only, 7,766 rows)
 
 | Task | Model | v1 ROC-AUC | v2 ROC-AUC | v1 Brier | v2 Brier | v1 test n | v2 test n |

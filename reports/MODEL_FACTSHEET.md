@@ -89,6 +89,21 @@ Features with a real effect (shuffling them reliably costs accuracy). Effects ar
 - Test ROC-AUC 0.945, but **this is inflated**: the label is S106 wording in the decision text, 20 of 35 boroughs never use that wording, and 5 boroughs hold 76% of positives. It mostly learns which boroughs write "S106"
 - So it's shown only for 1–9 home schemes and marked indicative. For 10+ homes it returns "S106 expected"
 
+## Stopping conditions
+
+The model gives **no probability** (status `policy_stop` or `out_of_range`, with reasons) when:
+
+- **Policy STOP site:** Green Belt, Strategic Industrial Location, and (when supplied) Metropolitan Open Land, functional floodplain, scheduled monument, SSSI, ancient woodland. Only modest, compliant schemes get submitted on these sites (Green Belt approval: 48%, the same as average), so historical rates would mislead
+- **Outside the training range:** more than 916 homes; density above 871 homes/ha; site under 56 m² or over 8.3 ha; taller than 99% of schemes on a similar-sized site (about 6–8 storeys for sites up to 1,150 m², 33 for larger ones); more than 70 homes lost; more than 24,300 m² non-residential; average home under 30 m²; unknown borough
+
+These stop 3.0% of 2025 test applications. On those, the model's ROC-AUC is 0.502 (no skill), against 0.656 on the rest, which confirms the cut-offs.
+
+## Selection bias
+
+The model estimates approval **for schemes like those that get submitted**. Schemes abandoned after pre-application advice are never observed, so hard constraints look softer than they are: Green Belt, flood zone 3, conservation areas and listed-building settings show average or above-average approval. Hence the policy STOP list above.
+
+Pending decisions also bias recent major schemes. Refusals are decided faster than approvals (median 80 vs 136 days), and 46% of 2024 and 63% of 2025 major schemes were still undecided, so the most recent data under-represent slow, S106-heavy approvals. The result holds on a more complete test year: trained on 2022–23 and tested on 2024, ROC-AUC is 0.663 vs 0.595 for the baseline. Calibration is good overall (predicted 46.9% vs actual 48.0% on 2025), but borough rates drift year to year (Islington +19 points, Barnet −18 points vs predicted in 2025).
+
 ## Known limits
 
 - **The ceiling is information, not method.** More data, 11 extra features, 12 policy rules and interaction terms each moved ROC-AUC by under ±0.005. What decides many small schemes (design, neighbour impact, officer judgement) isn't in any public dataset
