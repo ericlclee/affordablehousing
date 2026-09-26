@@ -45,7 +45,7 @@ Serve over HTTP (e.g. copy this folder to `mvp/dist/model/`); `fetch` does not w
 | Field | Meaning |
 |---|---|
 | `p_approved` | Calibrated probability of approval (withdrawn counts as not approved) |
-| `baseline_rate` | Historical approval rate for this borough and size band. **Show it next to `p_approved`**: the model beats it only modestly (test ROC-AUC 0.655 vs 0.616) |
+| `baseline_rate` | Historical approval rate for this borough and size band. **Show it next to `p_approved`**: the model beats it only modestly (test ROC-AUC 0.652 vs 0.615) |
 | `drivers` | Grouped features ranked by their effect on *this* prediction, in approximate percentage points (exact path attribution through the trees) |
 | `p_s106` | Probability of an S106 agreement given approval, for 1–9 home schemes only. `null` for 10+ homes, where an S106 is expected |
 | `p_approved_with_s106` | `p_approved × p_s106` (1–9 homes) or `p_approved` (10+ homes) |

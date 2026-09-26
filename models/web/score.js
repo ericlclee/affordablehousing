@@ -34,7 +34,8 @@ const LABELS = {
   in_green_belt: "Green Belt", is_major: "Major scheme (10+ homes)", mayor_1a_over_150_homes: "Over 150 homes",
   has_communal_amenity: "Communal amenity", is_outline: "Outline application", in_town_centre: "Town centre",
   statutory_major: "Statutory major development", listed_building_within_25m: "Listed building nearby",
-  brownfield_site_within_50m: "Brownfield register site nearby",
+  brownfield_site_within_50m: "Brownfield register site nearby", has_backland: "Backland / rear garden site",
+  has_pub_loss: "Loss of a pub", has_studio: "Studio flats",
 };
 const groupOf = (f) =>
   f.startsWith("lpa_") ? "borough" : f.startsWith("mix_") ? "unit_mix" : f.startsWith("dev_") ? "development_type"

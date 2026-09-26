@@ -7,6 +7,7 @@ Reads data/processed/features.parquet (from build_features.py) and writes:
     reports/model_metrics.json  same numbers, machine-readable
     models/model.json           logistic-regression coefficients + preprocessing for the simulator
     models/xgb_approval.json    XGBoost approval model (native format)
+    models/approval_with_text.joblib  offline approval model that also reads the description (score_with_text)
     models/web/                 browser bundle: approval_model.json + score.js (see models/web/README.md)
 
 Leakage controls
@@ -18,14 +19,24 @@ Leakage controls
 - Missingness is never a feature: missing rates differ by outcome (see build_report.md),
   so gaps are filled and no "is missing" flags are used, for both model types.
 - Only at-submission fields are used; see FEATURES below and docs/DATA_DICTIONARY.md.
+- The description model reads `description_at_submission`, which has post-submission wording
+  ("amended plans", "withdrawn", ...) stripped. Its training-year scores are out-of-fold.
+
+Description text: a TF-IDF + logistic-regression score of the description, stacked into XGBoost, added
+about 0.02 ROC-AUC on the 2025 test year in the Sep 2026 probe. The simulator has no description, so
+the text model is offline only (score_with_text) and the browser bundle stays parameter-only. Tried
+and dropped because they did not help on 2025: earlier applications on the same site, the refusal
+rate of applications within 400 m, and the borough's trailing 12-month refusal rate.
 """
 
 import json
 from pathlib import Path
 
+import joblib
 import numpy as np
 import pandas as pd
 import xgboost as xgb
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
 from sklearn.metrics import (accuracy_score, average_precision_score, brier_score_loss, f1_score,
                              log_loss, precision_score, recall_score, roc_auc_score)
@@ -42,10 +53,13 @@ SMALL_LPAS = {"LLDC", "OPDC", "City of London"}  # too few rows for their own bo
 FLAGS = ["is_major", "is_outline", "has_demolition", "has_basement", "has_roof_terrace", "has_commercial",
          "has_communal_amenity", "premium_amenity", "in_conservation_area", "in_article4_area", "in_green_belt",
          "in_opportunity_area", "in_town_centre", "listed_building_within_25m", "brownfield_site_within_50m",
-         "mayor_1a_over_150_homes", "mayor_1c_height", "statutory_major"]
+         "mayor_1a_over_150_homes", "mayor_1c_height", "statutory_major", "has_backland", "has_pub_loss", "has_studio"]
 # Numeric features that can be missing -> filled with training medians
 FILL_MEDIAN = ["mix_studio", "mix_1b", "mix_2b", "log_site_area", "log_density", "avg_home_size_m2", "log_ptal",
                "space_std_share_below"]
+TEXT_COL = "description_at_submission"
+TEXT_VEC = dict(ngram_range=(1, 2), min_df=3, sublinear_tf=True, max_features=30000)
+TEXT_MODEL = "XGBoost + description text (offline)"
 S106_FEATURES = ["log_homes_net", "is_major", "is_outline", "affordable_pct_major", "social_rent_pct_major",
                  "has_commercial", "in_opportunity_area", "log_ptal", "imd_decile", "mayor_1a_over_150_homes",
                  "statutory_major",
@@ -208,6 +222,22 @@ def fit_xgb(X, y, groups):
                                           "min_child_weight": params["min_child_weight"], "n_rounds": n_rounds}
 
 
+def fit_text(text: pd.Series, y: pd.Series, groups):
+    """TF-IDF + logistic regression on the description. Returns the model and out-of-fold scores."""
+    make = lambda: make_pipeline(TfidfVectorizer(**TEXT_VEC), LogisticRegression(C=1.0, max_iter=3000))
+    oof = np.zeros(len(y))
+    for tr, va in GroupKFold(n_splits=5).split(text, y, groups):
+        oof[va] = make().fit(text.iloc[tr], y.iloc[tr]).predict_proba(text.iloc[va])[:, 1]
+    return make().fit(text, y), oof
+
+
+def score_with_text(bundle: dict, df: pd.DataFrame) -> np.ndarray:
+    """P(approved) from models/approval_with_text.joblib for rows shaped like features.parquet."""
+    X = bundle["pre"].transform(df, interactions=False)
+    X["text_score"] = bundle["text_model"].predict_proba(df[TEXT_COL].fillna(""))[:, 1]
+    return bundle["calibrator"].predict(bundle["xgb"].predict(xgb.DMatrix(X[bundle["features"]])))
+
+
 def baseline_rates(train: pd.DataFrame, test: pd.DataFrame, label: str, m: float = 20.0):
     """Borough x size-band approval rate from training years, shrunk towards the overall rate."""
     g = train[label].mean()
@@ -218,7 +248,7 @@ def baseline_rates(train: pd.DataFrame, test: pd.DataFrame, label: str, m: float
 
 # ---------------------------------------------------------------- main
 
-def run_task(name, df, label, positive, feature_filter=None):
+def run_task(name, df, label, positive, feature_filter=None, text=False):
     df = df[df[label].notna()].copy()
     df[label] = df[label].astype(int)
     train = df[df["year"] < TEST_YEAR]
@@ -249,6 +279,18 @@ def run_task(name, df, label, positive, feature_filter=None):
     thresholds = {"Baseline (borough x size rate)": best_f1_threshold(ytr, baseline_rates(train, train, label)),
                   "Logistic regression": best_f1_threshold(ytr, lr_oof),
                   "XGBoost (calibrated)": best_f1_threshold(ytr, xgb_oof)}
+    text_out = {}
+    if text:
+        text_model, text_oof = fit_text(train[TEXT_COL].fillna(""), ytr, train["site_group"])
+        Xtr_t = Xtr_x.assign(text_score=text_oof)
+        Xte_t = Xte_x.assign(text_score=text_model.predict_proba(test[TEXT_COL].fillna(""))[:, 1])
+        xgb_t, cal_t, xgb_t_oof, _ = fit_xgb(Xtr_t, ytr, train["site_group"])
+        preds[TEXT_MODEL] = cal_t.predict(xgb_t.predict(xgb.DMatrix(Xte_t)))
+        thresholds[TEXT_MODEL] = best_f1_threshold(ytr, xgb_t_oof)
+        terms = pd.Series(text_model[-1].coef_[0], index=text_model[0].get_feature_names_out()).sort_values()
+        text_out = {"text_bundle": {"pre": pre, "text_model": text_model, "xgb": xgb_t, "calibrator": cal_t,
+                                    "features": list(Xtr_t.columns), "text_column": TEXT_COL},
+                    "text_terms": {"refusal": list(terms.index[:15]), "approval": list(terms.index[::-1][:15])}}
     results = {}
     for model, p in preds.items():
         results[model] = {
@@ -287,7 +329,7 @@ def run_task(name, df, label, positive, feature_filter=None):
                                       .sort_values(key=abs, ascending=False).head(12).round(3).to_dict(),
             "export": export, "xgb_model": xgbm, "iso": iso, "pre": pre, "xgb_cols": list(Xtr_x.columns),
             "train": train, "test": test, "label": label,
-            "xgb_test_pred": preds["XGBoost (calibrated)"]}
+            "xgb_test_pred": preds["XGBoost (calibrated)"], **text_out}
 
 
 # Raw inputs score.js accepts (same names as features.parquet); everything else is derived
@@ -296,7 +338,8 @@ WEB_INPUTS = ["lpa", "homes_net", "homes_lost", "is_outline", "dev_type", "schem
               "mix_2b", "affordable_pct_units", "social_rent_pct_units", "nonresi_gia_gained_m2", "has_demolition",
               "has_basement", "has_roof_terrace", "has_commercial", "has_communal_amenity", "premium_amenity",
               "in_conservation_area", "in_article4_area", "in_green_belt", "in_opportunity_area", "in_town_centre",
-              "listed_building_within_25m", "brownfield_site_within_50m", "flood_zone", "ptal_ai", "imd_decile"]
+              "listed_building_within_25m", "brownfield_site_within_50m", "flood_zone", "ptal_ai", "imd_decile",
+              "has_backland", "has_pub_loss", "has_studio"]
 
 
 def export_web(task: dict, s106_task: dict) -> None:
@@ -333,7 +376,8 @@ def export_web(task: dict, s106_task: dict) -> None:
     bundle = {
         "version": pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%dT%H:%MZ"),
         "trained_on": f"applications started 2022-{TEST_YEAR - 1}; tested on {TEST_YEAR}",
-        "test_metrics": {m: {k: res[m]["at_0.5"][k] for k in ("roc_auc", "brier", "accuracy")} for m in res},
+        "test_metrics": {m: {k: res[m]["at_0.5"][k] for k in ("roc_auc", "brier", "accuracy")}
+                         for m in res if m != TEXT_MODEL},
         "inputs": WEB_INPUTS,
         "preprocess": {
             "medians": pre.medians, "affordable_pct_major": pre.afford_major, "social_rent_pct_major": pre.social_major,
@@ -397,8 +441,9 @@ def main() -> None:
     MODELS.mkdir(exist_ok=True)
 
     tasks = {
-        "A. P(approved), withdrawn = not approved": run_task("approval", df, "y_approved", "approved"),
-        "A2. P(approved | decided), withdrawn excluded": run_task("approval_decided", df, "y_approved_decided", "approved"),
+        "A. P(approved), withdrawn = not approved": run_task("approval", df, "y_approved", "approved", text=True),
+        "A2. P(approved | decided), withdrawn excluded": run_task("approval_decided", df, "y_approved_decided", "approved",
+                                                                  text=True),
         "B. P(S106 | approved)": run_task("s106", df[df["outcome"] == "approved"], "y_s106", "s106", S106_FEATURES),
     }
 
@@ -439,6 +484,12 @@ def main() -> None:
                "borough effects omitted):", "", "| Feature | Coefficient |", "|---|---|"]
         md += [f"| `{k}` | {v:+.3f} |" for k, v in t["top_coefficients"].items()]
         md += [""]
+        if "text_terms" in t:
+            md += [f"**{TEXT_MODEL}** stacks a TF-IDF + logistic-regression score of `{TEXT_COL}` onto the XGBoost "
+                   "features (out-of-fold on training years). The simulator has no description, so this model is not "
+                   "in the browser bundle.", "",
+                   "- Refusal-leaning terms: " + ", ".join(f"`{w}`" for w in t["text_terms"]["refusal"]),
+                   "- Approval-leaning terms: " + ", ".join(f"`{w}`" for w in t["text_terms"]["approval"]), ""]
 
     v1 = REPORTS / "model_metrics_v1.json"
     if v1.exists():
@@ -456,7 +507,9 @@ def main() -> None:
         md.append("")
     (REPORTS / "model_metrics.md").write_text("\n".join(md) + "\n")
     (REPORTS / "model_metrics.json").write_text(json.dumps(
-        {k: {kk: vv for kk, vv in v.items() if kk not in ("export", "xgb_model", "iso", "pre", "xgb_cols", "train", "test", "label", "xgb_test_pred")} for k, v in tasks.items()},
+        {k: {kk: vv for kk, vv in v.items() if kk not in ("export", "xgb_model", "iso", "pre", "xgb_cols", "train", "test",
+                                                          "label", "xgb_test_pred", "text_bundle")}
+         for k, v in tasks.items()},
         indent=2, default=float))
     (MODELS / "model.json").write_text(json.dumps({
         "description": "Logistic-regression models. p = sigmoid(intercept + sum(coef * (x - mean) / scale)). "
@@ -465,9 +518,13 @@ def main() -> None:
         "s106_given_approved": tasks["B. P(S106 | approved)"]["export"],
     }, indent=2, default=float))
     tasks["A. P(approved), withdrawn = not approved"]["xgb_model"].save_model(MODELS / "xgb_approval.json")
+    joblib.dump(tasks["A. P(approved), withdrawn = not approved"]["text_bundle"], MODELS / "approval_with_text.joblib")
     export_web(tasks["A. P(approved), withdrawn = not approved"], tasks["B. P(S106 | approved)"])
     print(f"Wrote {REPORTS / 'model_metrics.md'}, {MODELS / 'model.json'}")
 
 
 if __name__ == "__main__":
-    main()
+    # Run through the module so approval_with_text.joblib pickles train_models.Preprocessor (loadable
+    # after `import train_models`), not __main__.Preprocessor
+    import train_models
+    train_models.main()

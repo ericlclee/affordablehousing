@@ -16,6 +16,7 @@ One row per **new housing proposal**: a full or outline application creating at 
 | `pld_id` | str | PLD | PLD record id (`<LPA>-<reference>`) | — |
 | `url` | str | FP | Link to the council's planning record | — |
 | `description` | str | FP | Proposal description as submitted | — (source of TEXT features) |
+| `description_at_submission` | str | DERIVED | `description` with post-submission wording removed ("amended plans/description", "revised", "withdrawn", "appeal", "approved", "decision"…; pattern `POST_SUBMISSION_RE`). "refuse" is kept: it almost always means bin storage | ✅ offline text model only (`models/approval_with_text.joblib`) |
 | `decision` | str | FP | Raw decision text (452 spellings) | — (source of `y_s106`) |
 | `status` | str | FP | Normalised status: Permitted / Conditions / Rejected / Withdrawn | — |
 | `outcome` | str | DERIVED | `approved` (Permitted or Conditions), `refused` (Rejected) or `withdrawn`. From Foundations `status`, or PLD `decision` for PLD-only rows | — |
@@ -83,7 +84,7 @@ Tenure groups: **market** = Market for sale, Market for rent, Self-Build and Cus
 
 ## Proposal: features parsed from the description (TEXT)
 
-Case-insensitive regular expressions on `description`. Full patterns: `TEXT_FLAGS` in `scripts/build_features.py`.
+Case-insensitive regular expressions on `description`. Full patterns: `TEXT_FLAGS` in `scripts/build_features.py`. `has_backland`, `has_pub_loss` and `has_studio` come from the most refusal-leaning terms of the description text model (see `reports/model_metrics.md`).
 
 | Column | Matches | Notes | Model |
 |---|---|---|---|
@@ -97,6 +98,9 @@ Case-insensitive regular expressions on `description`. Full patterns: `TEXT_FLAG
 | `has_demolition` | demoli… | | ✅ |
 | `has_affordable_mention` | affordable | | ⚠️ 52 rows; duplicates tenure data |
 | `gym_removed`, `pool_removed` | Loss, removal, demolition, infill of a gym / pool | Rows here have `has_gym` / `has_pool` = False | ⚠️ too rare |
+| `has_backland` | land/site/garden/plot (to the) rear of, backland, garden land, rear garden of, land adjacent to / adjoining | 261 rows, 38% approved vs 48% overall | ✅ |
+| `has_pub_loss` | public house, pub, drinking establishment | Almost always a pub being converted or redeveloped. 130 rows, 44% approved | ✅ |
+| `has_studio` | studio… | Complements `mix_studio`, which is often missing. 787 rows, 43% approved | ✅ |
 | `storeys` (when `storeys_source = "text"`) | "N storey", "N-M storey", "part three part five storey" (numbers 1–60 or words one–twenty) | Takes the maximum; skips matches preceded by "existing"/"current" | ✅ via `storeys` |
 | `dev_type` | See above | | ✅ |
 

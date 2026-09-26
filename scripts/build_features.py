@@ -57,6 +57,7 @@ TENURE = {
 
 # Follow-up applications on an existing permission, certificates and prior approvals.
 FOLLOWUP_RE = (r"variation|section 73|\bs73\b|non[- ]material|reserved matters|discharge|details pursuant|"
+               r"pursuant to condition|details (?:of|for|submitted)[^.;]{0,40}condition \d|"
                r"approval of details|lawful development|certificate of lawful|prior approval|prior notification")
 FP_NON_PROPOSAL_SUFFIX = r"/(?:HSE|HOU|HOT|HH|LDCP|PLUD|CLUE|CLUP|192|DISC|NMA|PA|PRE)\b"
 PLD_PROPOSAL_TYPES = r"^(?:Full planning|Outline planning)"
@@ -82,7 +83,17 @@ TEXT_FLAGS = {
     "student": (r"student", None),
     "coliving": (r"co-?living|large[- ]scale purpose[- ]built shared", None),
     "hmo": (r"\bhmo\b|house in multiple occupation", None),
+    # Refusal-leaning wording found by the description text model (reports/model_metrics.md)
+    "backland": (r"(?:land|site|garden|plot)s? (?:to the |at the |at )?rear of|backland|garden land|"
+                 r"rear gardens? of|land adjacent to|land adjoining", None),
+    "pub_loss": (r"public house|\bpub\b|drinking establishment", None),
+    "studio": (r"\bstudio", None),
 }
+# Wording added to a description after submission (amended plans, withdrawals, decisions). Stripped
+# from `description_at_submission`, the text the description model trains on. "refuse" is kept:
+# it almost always means refuse (bin) storage.
+POST_SUBMISSION_RE = (r"\b\w*(?:withdrawn|amend|revis|approv|appeal|dismiss|decision|superseded|deferred)\w*\b"
+                      r"(?:\s+(?:description|drawings?|plans?))?")
 POOL_FALSE_POS = r"liverpool|pool road|pool street|poole|whirlpool|car ?pool"
 
 # "erection of 4 dwellings", "2 x 1-bed flats", "conversion into three self-contained flats"
@@ -273,6 +284,8 @@ def text_features(desc: pd.Series) -> pd.DataFrame:
             out[f"{flag}_removed"] = removed
             has &= ~removed
         out[f"has_{flag}"] = has
+    out["description_at_submission"] = (desc.fillna("").str.replace(POST_SUBMISSION_RE, " ", case=False, regex=True)
+                                        .str.replace(r"\s+", " ", regex=True).str.strip())
     out["dev_type"] = d.map(dev_type)
     out["text_storeys"] = d.map(parse_storeys)
     return out
@@ -497,7 +510,8 @@ def main() -> None:
     df["y_s106"] = np.where((df["outcome"] == "approved") & (df["label_source"] == "foundations"),
                             s106.astype(float), np.nan)
 
-    id_cols = ["uid", "lpa", "nref", "pld_id", "url", "description", "decision", "status", "outcome", "label_source",
+    id_cols = ["uid", "lpa", "nref", "pld_id", "url", "description", "description_at_submission", "decision", "status",
+               "outcome", "label_source",
                "start_date", "year", "site_group", "lat", "lng", "homes_source", "storeys_source", "in_pld", "lsoa21"]
     label_cols = ["y_approved", "y_approved_decided", "y_s106"]
     feature_cols = [
@@ -511,7 +525,7 @@ def main() -> None:
         "car_spaces", "cycle_spaces", "dev_type", "scheme_type",
         "has_gym", "has_pool", "has_basement", "has_roof_terrace", "has_concierge", "has_communal_amenity",
         "has_commercial", "has_demolition", "has_affordable_mention", "premium_amenity",
-        "gym_removed", "pool_removed",
+        "gym_removed", "pool_removed", "has_backland", "has_pub_loss", "has_studio",
         # site
         "lpa", "in_conservation_area", "in_article4_area", "in_tpo_zone", "in_green_belt",
         "in_opportunity_area", "in_sil", "in_town_centre", "listed_building_within_25m",
