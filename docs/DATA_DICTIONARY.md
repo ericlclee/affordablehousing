@@ -1,6 +1,6 @@
 # Data dictionary: `data/processed/features.parquet`
 
-One row per **new housing proposal**: a full or outline application creating at least one net home, which was approved, refused or withdrawn. Built by `scripts/build_features.py`; row counts and per-field missing rates are in `data/processed/build_report.md`.
+One row per **new housing proposal**: a full or outline application creating at least one net home, which was approved, refused or withdrawn. Rows come from Foundations (with PLD features joined) plus PLD applications that Foundations doesn't contain (`label_source`). Built by `scripts/build_features.py`; row counts and per-field missing rates are in `data/processed/build_report.md`.
 
 **Source codes:** FP = Foundations, PLD = Planning London Datahub, TEXT = parsed from the Foundations `description`, SPATIAL = spatial join (see [DATA_SOURCES.md](DATA_SOURCES.md)), DERIVED = calculated from other columns.
 
@@ -18,7 +18,8 @@ One row per **new housing proposal**: a full or outline application creating at 
 | `description` | str | FP | Proposal description as submitted | — (source of TEXT features) |
 | `decision` | str | FP | Raw decision text (452 spellings) | — (source of `y_s106`) |
 | `status` | str | FP | Normalised status: Permitted / Conditions / Rejected / Withdrawn | — |
-| `outcome` | str | DERIVED | `approved` (Permitted or Conditions), `refused` (Rejected) or `withdrawn` | — |
+| `outcome` | str | DERIVED | `approved` (Permitted or Conditions), `refused` (Rejected) or `withdrawn`. From Foundations `status`, or PLD `decision` for PLD-only rows | — |
+| `label_source` | str | DERIVED | `foundations` or `pld`: which dataset supplied the row, its label and its description | ⚠️ provenance, not a proposal property |
 | `start_date` | str | FP | Application start date (YYYY-MM-DD) | — |
 | `year` | int | DERIVED | Year of `start_date`; used for the train (2022–24) / test (2025) split | ⚠️ can't extrapolate to future years |
 | `site_group` | str | DERIVED | Rounded `lat,lng` (4 dp, about 10 m). Keeps applications on the same site together in cross-validation | — |
@@ -34,7 +35,7 @@ One row per **new housing proposal**: a full or outline application creating at 
 |---|---|---|
 | `y_approved` | 0/1 | 1 = approved. **Withdrawn counts as 0** (the applicant did not get permission) |
 | `y_approved_decided` | 0/1/NaN | 1 = approved, 0 = refused, NaN = withdrawn. For the sensitivity check |
-| `y_s106` | 0/1/NaN | Approved rows only: 1 if the decision text mentions S106 / legal agreement / planning obligation / unilateral undertaking. NaN if not approved. **Under-records S106 for major schemes** (only 32% of approved 10+ home schemes are positive) |
+| `y_s106` | 0/1/NaN | Approved rows labelled by Foundations only (PLD has no usable S106 field): 1 if the decision text mentions S106 / legal agreement / planning obligation / unilateral undertaking. NaN if not approved. **Under-records S106 for major schemes** (only 32% of approved 10+ home schemes are positive) |
 
 ## Proposal: size and type
 
@@ -72,7 +73,9 @@ Tenure groups: **market** = Market for sale, Market for rent, Self-Build and Cus
 | `height_m_est` | float | DERIVED | `height_m`, else storeys × 3.2 m | ⚠️ used only for `mayor_referable` |
 | `n_buildings` | float | PLD | Number of buildings in the scheme | ⚠️ 69% coverage |
 | `site_area_m2` | float | PLD | Area of the PLD site polygon; else stated site area (hectares if ≤ 50, m² above). Kept if 10 m² – 500 ha | ✅ log |
-| `resi_gia_m2` | float | PLD | Gross internal area of the new homes (nulled outside 15–400 m² per home) | ✅ via planned `avg_home_size_m2` |
+| `resi_gia_m2` | float | PLD | Gross internal area of the new homes (nulled outside 30–400 m² per home) | ✅ via `avg_home_size_m2` |
+| `avg_home_size_m2` | float | DERIVED | `resi_gia_m2` ÷ `homes_gained`, capped at 200 m² | ✅ |
+| `space_std_share_below` | float 0–1 | PLD | Share of self-contained new homes whose GIA is below the London Plan Table 3.1 minimum for their bedroom count (studio 37, 1b 50, 2b 61, 3b 74, 4b+ 90 m²; smallest occupancy) | ✅ |
 | `density_homes_per_ha` | float | DERIVED | `homes_net` ÷ site area in hectares (nulled above 5,000) | ✅ log |
 | `density_habrooms_per_ha` | float | DERIVED | Habitable rooms per hectare | ⚠️ leakage flag (habitable rooms) |
 | `nonresi_gia_gained_m2` | float | PLD | Non-residential floorspace gained (use classes not starting with C) | ✅ log(1+x) |
@@ -97,7 +100,7 @@ Case-insensitive regular expressions on `description`. Full patterns: `TEXT_FLAG
 | `storeys` (when `storeys_source = "text"`) | "N storey", "N-M storey", "part three part five storey" (numbers 1–60 or words one–twenty) | Takes the maximum; skips matches preceded by "existing"/"current" | ✅ via `storeys` |
 | `dev_type` | See above | | ✅ |
 
-**Planned model-time features** (calculated in the training script, not stored): `premium_amenity` = gym or pool or concierge; `social_rent_pct_units` = `affordable_pct_units` × social-rent share (0 if no affordable homes); `avg_home_size_m2` = `resi_gia_m2` ÷ `homes_gained`.
+Also stored: `premium_amenity` = gym or pool or concierge (✅); `social_rent_pct_units` = `affordable_pct_units` × social-rent share, 0 if no affordable homes (✅).
 
 ## Site context (SPATIAL)
 
@@ -118,7 +121,10 @@ Case-insensitive regular expressions on `description`. Full patterns: `TEXT_FLAG
 | `ptal_ordinal` | float 0–8 | `ptal_level` as an ordered number | ⚠️ duplicates `ptal_ai` |
 | `imd_decile` | int 1–10 | IMD 2025 decile of the LSOA (1 = most deprived 10%) | ✅ |
 | `imd_score` | float | IMD 2025 score (higher = more deprived) | ⚠️ duplicates `imd_decile` |
-| `mayor_referable` | bool | DERIVED: 150+ net homes or estimated height ≥ 30 m (Mayor of London Order 2008) | ✅ |
+| `mayor_referable` | bool | DERIVED: `mayor_1a_over_150_homes` or `mayor_1c_height` | ⚠️ replaced by its two parts |
+| `mayor_1a_over_150_homes` | bool | DERIVED: more than 150 net homes (Mayor of London Order 2008, Category 1A) | ✅ |
+| `mayor_1c_height` | bool | DERIVED: estimated height over 30 m, or over 150 m in the City (Category 1C; the 25 m Thames-side rule is not modelled). Other referral categories (Green Belt/MOL, 2026 Category 3J) not covered | ✅ |
+| `statutory_major` | bool | DERIVED: 10+ net homes or a site of 0.5 ha or more (statutory major residential definition) | ✅ |
 
 ## Excluded on purpose (not in the table)
 

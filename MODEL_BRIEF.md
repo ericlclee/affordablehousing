@@ -1,6 +1,8 @@
 # Approval + S106 model: what I'm building (so we don't overlap)
 
-**TL;DR:** I'm building a data-trained model that replaces the simulator's assumed approval multipliers. Given a proposal and its site, it outputs **P(approved)** and **P(S106 | approved)** and ships as a `model.json` that the JS sweep can score directly.
+**TL;DR:** I'm building a data-trained model that replaces the simulator's assumed approval multipliers. Given a proposal and its site, it outputs **P(approved)** and **P(S106 | approved)** and ships as a browser bundle (`models/web/`) that the JS sweep can score directly.
+
+**Status (26 Sep):** built. XGBoost (calibrated) is the shipped model: 2025 test ROC-AUC 0.655 vs 0.616 for a borough × size baseline. See `reports/model_metrics.md`, `reports/feature_importance.md` and `models/web/README.md`.
 
 ## Outputs
 
@@ -35,8 +37,8 @@
 
 ## Model
 
-- **Logistic regression (L2)** is what ships, because it runs in JS inside the ~7,900-variant sweep.
-- **XGBoost** is the offline benchmark. It only replaces logistic regression if it's clearly better on held-out data.
+- **Plan:** logistic regression ships unless XGBoost is clearly better on held-out data.
+- **Outcome:** XGBoost was better (+0.015 ROC-AUC, 95% CI +0.004 to +0.027, paired on the same test rows), so it ships. Its trees run in JS (`score.js`) and match Python to within 1e-6.
 - Train on 2022–24, test on 2025. Metrics: Brier score, calibration, and refusal PR-AUC, against a borough × size baseline. The CivisOpt PRD's model gate is satisfied.
 - Two models: P(approved) on all decided residential schemes, P(S106) on approved ones only.
 
@@ -45,15 +47,15 @@
 - `./setup.sh`, then `python scripts/download_pld.py` (GLA Planning London Datahub, 447k applications 2022–25, ~8 min).
 - `python scripts/download_spatial.py` downloads conservation areas, Article 4 areas, listed buildings, flood zones, green belt, brownfield land, TPOs, Opportunity Areas, SIL, town centres, PTAL, LSOA + IMD 2025, and Mayor referrals. All are clipped to London.
 - Join: Foundations (labels) ↔ PLD (proposal features) on borough + normalised reference number. Tested at **97–100% match**.
-- Approval labels come from Foundations, because PLD under-records refusals. Proposal features come from PLD.
+- Approval labels come from Foundations, or from PLD for applications Foundations doesn't have (the two agree 99.7% where both have a decision). Proposal features come from PLD.
 - FYI: we **do have EPC** locally (London, 3.6M certificates). It's not needed for this model.
 
 See `README.md` for setup, the dataset table and join details.
 
 ## Interface for the simulator (engine + UI)
 
-- `model.json`: coefficients, feature means/scales, borough effects.
-- `score(params) → {p_approved, p_s106, p_approved_with_s106, drivers}`: about 20 lines of JS; I'll provide it.
+- `models/web/approval_model.json` + `models/web/score.js`: `score(model, params) → {p_approved, baseline_rate, p_s106, p_approved_with_s106, drivers, warnings}`. Usage in `models/web/README.md`.
+- `p_s106` is `null` for 10+ homes (an S106 is expected); indicative only for smaller schemes.
 - Parameters the user doesn't set get filled from the architect formulas (GIA = site × coverage × storeys, etc.) plus medians of comparable schemes. That includes refused schemes, so the defaults aren't biased towards approval.
 
 ## What I'm NOT doing (yours if you want it)

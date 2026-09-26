@@ -35,12 +35,27 @@ The Foundations file comes from the hackathon organisers ([Foreman/Foundations](
 
 Full details: [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) (every source, access method, snapshot date, join logic) and [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md) (every column in `features.parquet`, its source, and whether it's a model input).
 
+## Train the models
+
+```bash
+python scripts/train_models.py
+python scripts/feature_importance.py
+```
+
+`train_models.py` (~3 min) trains the approval and S106 models with a time split (train 2022–24, test 2025) and writes `reports/model_metrics.md`, `models/model.json` (logistic regression), `models/xgb_approval.json` and the browser bundle in `models/web/`. `feature_importance.py` writes `reports/feature_importance.md`.
+
+**Current results (2025 test set, 2,333 proposals):** XGBoost ROC-AUC 0.655, Brier 0.231, against 0.616 / 0.239 for a borough × size-band baseline. A modest gain: borough and scheme size explain most of what public data can predict about approval.
+
+## Use the model in the website
+
+See [models/web/README.md](models/web/README.md): `score.js` loads `approval_model.json` and returns the approval probability, the baseline rate, per-prediction drivers and the S106 estimate. Check it with `node models/web/check_parity.mjs`.
+
 ## What each dataset is for
 
 | Dataset | Source | Role |
 |---|---|---|
-| Foundations (182k applications) | Hackathon file, PlanIt-based | **Labels**: approved/refused from `status`; S106 from `decision` text ("subject to S106 / legal agreement"). Description text for amenity flags |
-| PLD applications | [GLA Planning London Datahub API](https://www.london.gov.uk/programmes-strategies/planning/digital-planning/planning-london-datahub) | **Proposal features**: units, tenure mix, bedrooms, storeys, height, GIA, site area, use classes, parking, `s106_agreement` |
+| Foundations (182k applications) | Hackathon file, PlanIt-based | **Labels** for its applications: approved/refused from `status`; S106 from `decision` text ("subject to S106 / legal agreement"). Description text for amenity flags |
+| PLD applications (also labels for the ~7,400 proposals not in Foundations) | [GLA Planning London Datahub API](https://www.london.gov.uk/programmes-strategies/planning/digital-planning/planning-london-datahub) | **Proposal features**: units, tenure mix, bedrooms, storeys, height, GIA, site area, use classes, parking, `s106_agreement` |
 | conservation-area, article-4-direction-area, listed-building-outline, green-belt, brownfield-land, tree-preservation-zone, flood-risk-zone | [planning.data.gov.uk](https://www.planning.data.gov.uk/) | Constraint flags (point-in-polygon) |
 | opportunity-areas, strategic-industrial-land, town-centres | London Datastore | London Plan designations |
 | ptal-2023-grid | TfL (100 m grid) | Public transport accessibility |
@@ -57,7 +72,7 @@ Full details: [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) (every source, access
 
 ## Known data issues
 
-- PLD under-records refusals (94–96% approval), so take approval labels from Foundations and features from PLD.
+- Outcome labels come from Foundations `status` where the application is in Foundations, otherwise from PLD `decision`. On the 7,230 applications both sources decide, they agree 99.7%, so PLD does **not** under-record refusals for new housing proposals (an earlier team note assumed it did). S106 labels come from Foundations decision text only.
 - PLD `affordable_percentage` is present on every record with a unit count, so it likely defaults to 0; recompute it from tenure counts.
 - Storeys is PLD's sparsest proposal field; supplement from description text.
 - Don't use post-submission fields as features: `days_to_decision`, `decided_by`, `n_comments`, `n_documents`, `last_changed`, decision dates, final S106 terms.
