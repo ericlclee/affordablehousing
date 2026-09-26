@@ -31,6 +31,8 @@ Both download scripts are safe to re-run: `download_pld.py` resumes from the las
 
 The Foundations file comes from the hackathon organisers ([Foreman/Foundations](https://foreman.house-london.uk/)); it is not publicly downloadable by script. The London EPC file (`london-domestic-epc.csv`) is not needed for the model.
 
+Full details: [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) (every source, access method, snapshot date, join logic) and [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md) (every column in `features.parquet`, its source, and whether it's a model input).
+
 ## What each dataset is for
 
 | Dataset | Source | Role |
