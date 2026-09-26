@@ -1,0 +1,18 @@
+# Proposal 106 sample massing: minor_terrace_4st
+# Minor: 30 x 10 m footprint, 4 storeys (12.8 m). About 25-30 homes on a small site.
+# Units: metres. Up axis: Z (Rhino default).
+o minor_terrace_4st
+v -15.000 -5.000 0.000
+v 15.000 -5.000 0.000
+v 15.000 5.000 0.000
+v -15.000 5.000 0.000
+v -15.000 -5.000 12.800
+v 15.000 -5.000 12.800
+v 15.000 5.000 12.800
+v -15.000 5.000 12.800
+f 1 4 3 2
+f 5 6 7 8
+f 1 2 6 5
+f 2 3 7 6
+f 3 4 8 7
+f 4 1 5 8

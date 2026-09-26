@@ -1,0 +1,133 @@
+{
+ "name": "Morrisons, Walworth Road",
+ "register_reference": "NSP83",
+ "entity": 1710099,
+ "dataset": "brownfield-land",
+ "organisation_entity": 329,
+ "borough": "Southwark",
+ "source_url": "https://www.planning.data.gov.uk/entity/1710099",
+ "hectares": 0.51,
+ "dwellings_min": 135,
+ "dwellings_max": 165,
+ "ownership_status": "unknown-ownership",
+ "planning_permission_status": "not-permissioned",
+ "entry_date": "2017-12-20",
+ "start_date": "2017-12-20",
+ "lat": 51.487291,
+ "lng": -0.09615,
+ "polygon": [
+  [
+   -0.09565,
+   51.487749
+  ],
+  [
+   -0.095962,
+   51.487696
+  ],
+  [
+   -0.095964,
+   51.487701
+  ],
+  [
+   -0.095978,
+   51.487698
+  ],
+  [
+   -0.096008,
+   51.487772
+  ],
+  [
+   -0.096053,
+   51.487764
+  ],
+  [
+   -0.096133,
+   51.48774
+  ],
+  [
+   -0.096291,
+   51.487687
+  ],
+  [
+   -0.096788,
+   51.48753
+  ],
+  [
+   -0.096562,
+   51.487216
+  ],
+  [
+   -0.096615,
+   51.487201
+  ],
+  [
+   -0.096575,
+   51.487128
+  ],
+  [
+   -0.096462,
+   51.48716
+  ],
+  [
+   -0.096391,
+   51.487068
+  ],
+  [
+   -0.096525,
+   51.487033
+  ],
+  [
+   -0.096414,
+   51.486811
+  ],
+  [
+   -0.09637,
+   51.486824
+  ],
+  [
+   -0.09587,
+   51.486958
+  ],
+  [
+   -0.096011,
+   51.487181
+  ],
+  [
+   -0.096,
+   51.48729
+  ],
+  [
+   -0.095652,
+   51.487364
+  ],
+  [
+   -0.095552,
+   51.487379
+  ],
+  [
+   -0.095498,
+   51.487383
+  ],
+  [
+   -0.09565,
+   51.487749
+  ]
+ ],
+ "polygon_area_m2": 5089.5,
+ "polygon_source": "brownfield-land.csv geometry column is EMPTY for entity 1710099; red line taken from planning.data.gov.uk brownfield-site entity 1802025 (same reference NSP83, same organisation 329): https://www.planning.data.gov.uk/entity/1802025",
+ "also_on_register": "Duplicate brownfield-land entity 1719847 (reference NSP80, 0.51 ha, no dwelling range) at the same point.",
+ "constraints_point_query": {
+  "source": "https://www.planning.data.gov.uk/entity.json?longitude=-0.09615&latitude=51.487291 (queried 26 Sep 2026, point only, screening not a site check)",
+  "conservation_area": "Walworth Road (ref 48), entity 44010264",
+  "flood_risk_zone": "Flood zone 3 and 2 (EA tidal models; defended status not checked), entities 65657427, 65232137",
+  "article_4": "Site allocation NSP83 article 4 areas 61 and 180 (demolition of commercial to residential; Class E to residential restricted)",
+  "archaeological_priority_area": "Walworth, entity 40108",
+  "heritage_at_risk": "Walworth Road, Walworth (entity 7500375)",
+  "air_quality_management_area": "Southwark AQMA",
+  "tall_building_zone": "not checked"
+ },
+ "land_type_default": "private",
+ "land_type_note": "Register says 'unknown-ownership'. Defaulted to private: verify ownership.",
+ "note": "Register entry dated 2017-12-20, status 'not-permissioned'. Verify current status on Southwark's planning register before relying on it.",
+ "retrieved": "2026-09-26"
+}
