@@ -1,0 +1,32 @@
+[
+  {
+    "id": "stratford",
+    "name": "Stratford",
+    "lat": 51.541508,
+    "lng": -0.00241,
+    "borough": "Newham",
+    "tflId": "HUBSRA",
+    "role": "neighbourhood anchor, not a development parcel",
+    "boroughVerification": "point-in-polygon against GLA London Borough layer 301"
+  },
+  {
+    "id": "dalston",
+    "name": "Dalston Junction Rail Station",
+    "lat": 51.546116,
+    "lng": -0.075137,
+    "borough": "Hackney",
+    "tflId": "910GDALS",
+    "role": "neighbourhood anchor, not a development parcel",
+    "boroughVerification": "point-in-polygon against GLA London Borough layer 301"
+  },
+  {
+    "id": "kentish",
+    "name": "Kentish Town",
+    "lat": 51.550409,
+    "lng": -0.140545,
+    "borough": "Camden",
+    "tflId": "HUBKTN",
+    "role": "neighbourhood anchor, not a development parcel",
+    "boroughVerification": "point-in-polygon against GLA London Borough layer 301"
+  }
+]

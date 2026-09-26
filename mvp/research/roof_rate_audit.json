@@ -1,0 +1,258 @@
+{
+  "warning": "Exploratory text filters only. Not validated rooftop-new-home versus existing-home-room categories. Does not reproduce the original 75%/56% claim.",
+  "source_file": "foundations_london_housing_2022_2025_20260810T013626Z.csv",
+  "source_url": "https://foreman.house-london.uk/download/csv/",
+  "source_bytes": 115473911,
+  "sha256": "fe425a1c1c5e95455a0861c75e0e7eb142f0f2d9c0b7ef22e448b74c474b840a",
+  "rows": 181929,
+  "fields": [
+    "name",
+    "area_name",
+    "reference",
+    "uid",
+    "url",
+    "description",
+    "app_type",
+    "app_size",
+    "status",
+    "decision",
+    "decided_by",
+    "start_date",
+    "decided_date",
+    "target_decision_date",
+    "days_to_decision",
+    "last_changed",
+    "fetched_at",
+    "n_comments",
+    "n_documents",
+    "n_statutory_days",
+    "n_dwellings",
+    "housing_relevance_score",
+    "lat",
+    "lng",
+    "ward_name",
+    "agent_company",
+    "case_officer"
+  ],
+  "duplicate_names": 0,
+  "missing_n_dwellings": 174000,
+  "start_date_min": "2022-01-01",
+  "start_date_max": "2025-12-31",
+  "regexes": {
+    "roof": "\\b(?:roof extension|roof extensions|loft conversion|loft conversions|mansard|dormer|roof enlargement|additional storey|additional storeys|upward extension)\\b",
+    "new": "\\b(?:new|additional|create|creation|creating|provide|providing|form|formation|forming|comprising|accommodate)\\b.{0,90}\\b(?:dwellings?|flats?|apartments?|residential units?|self[- ]contained units?)\\b|\\bself[- ]contained (?:flat|flats|dwelling|dwellings)\\b",
+    "room": "\\b(?:bedroom|bedrooms|room in (?:the )?roof|rooms in (?:the )?roof|habitable|living accommodation|living space|additional accommodation)\\b",
+    "exclude_procedural": "\\b(?:prior approval|certificate of lawfulness|lawful development certificate|certificate of lawful|discharge of condition|discharge of conditions|variation of condition|variation of conditions|non[- ]material amendment|minor material amendment)\\b"
+  },
+  "cohorts": {
+    "all_roof_keywords": {
+      "all_types": {
+        "all_records": 58104,
+        "granted_status": 43485,
+        "refused_status": 9830,
+        "decided_denominator": 53315,
+        "approval_percent": 81.56241207915221,
+        "status_counts": {
+          "Permitted": 34344,
+          "Rejected": 9830,
+          "Withdrawn": 1983,
+          "Undecided": 2324,
+          "": 468,
+          "Conditions": 9141,
+          "Unresolved": 12,
+          "Referred": 2
+        }
+      },
+      "full_type": {
+        "all_records": 28408,
+        "granted_status": 19174,
+        "refused_status": 6343,
+        "decided_denominator": 25517,
+        "approval_percent": 75.142062154642,
+        "status_counts": {
+          "Permitted": 11502,
+          "Rejected": 6343,
+          "Withdrawn": 1229,
+          "Undecided": 1399,
+          "Conditions": 7672,
+          "": 251,
+          "Unresolved": 11,
+          "Referred": 1
+        }
+      },
+      "full_type_excluding_obvious_procedural_text": {
+        "all_records": 26703,
+        "granted_status": 17699,
+        "refused_status": 6224,
+        "decided_denominator": 23923,
+        "approval_percent": 73.98319608744723,
+        "status_counts": {
+          "Permitted": 10067,
+          "Rejected": 6224,
+          "Withdrawn": 1180,
+          "Undecided": 1337,
+          "Conditions": 7632,
+          "": 251,
+          "Unresolved": 11,
+          "Referred": 1
+        }
+      }
+    },
+    "roof_and_new_home_language": {
+      "all_types": {
+        "all_records": 3450,
+        "granted_status": 1926,
+        "refused_status": 940,
+        "decided_denominator": 2866,
+        "approval_percent": 67.20167480809491,
+        "status_counts": {
+          "Permitted": 1217,
+          "Rejected": 940,
+          "Withdrawn": 253,
+          "Undecided": 293,
+          "Conditions": 709,
+          "Unresolved": 3,
+          "": 35
+        }
+      },
+      "full_type": {
+        "all_records": 2193,
+        "granted_status": 1083,
+        "refused_status": 707,
+        "decided_denominator": 1790,
+        "approval_percent": 60.502793296089386,
+        "status_counts": {
+          "Permitted": 581,
+          "Rejected": 707,
+          "Undecided": 227,
+          "Withdrawn": 148,
+          "Conditions": 502,
+          "Unresolved": 2,
+          "": 26
+        }
+      },
+      "full_type_excluding_obvious_procedural_text": {
+        "all_records": 2118,
+        "granted_status": 1037,
+        "refused_status": 695,
+        "decided_denominator": 1732,
+        "approval_percent": 59.8729792147806,
+        "status_counts": {
+          "Permitted": 548,
+          "Rejected": 695,
+          "Undecided": 215,
+          "Withdrawn": 143,
+          "Conditions": 489,
+          "Unresolved": 2,
+          "": 26
+        }
+      }
+    },
+    "roof_and_room_language_without_new_home_language": {
+      "all_types": {
+        "all_records": 5787,
+        "granted_status": 4423,
+        "refused_status": 989,
+        "decided_denominator": 5412,
+        "approval_percent": 81.72579453067257,
+        "status_counts": {
+          "Permitted": 3835,
+          "Rejected": 989,
+          "Withdrawn": 181,
+          "Undecided": 172,
+          "": 19,
+          "Conditions": 588,
+          "Unresolved": 2,
+          "Referred": 1
+        }
+      },
+      "full_type": {
+        "all_records": 3860,
+        "granted_status": 2788,
+        "refused_status": 799,
+        "decided_denominator": 3587,
+        "approval_percent": 77.72511848341232,
+        "status_counts": {
+          "Permitted": 2298,
+          "Rejected": 799,
+          "Withdrawn": 131,
+          "Undecided": 124,
+          "Conditions": 490,
+          "": 15,
+          "Unresolved": 2,
+          "Referred": 1
+        }
+      },
+      "full_type_excluding_obvious_procedural_text": {
+        "all_records": 2440,
+        "granted_status": 1492,
+        "refused_status": 716,
+        "decided_denominator": 2208,
+        "approval_percent": 67.57246376811594,
+        "status_counts": {
+          "Permitted": 1012,
+          "Rejected": 716,
+          "Withdrawn": 102,
+          "Undecided": 112,
+          "Conditions": 480,
+          "": 15,
+          "Unresolved": 2,
+          "Referred": 1
+        }
+      }
+    },
+    "roof_without_new_home_language": {
+      "all_types": {
+        "all_records": 54654,
+        "granted_status": 41559,
+        "refused_status": 8890,
+        "decided_denominator": 50449,
+        "approval_percent": 82.37824337449702,
+        "status_counts": {
+          "Permitted": 33127,
+          "Rejected": 8890,
+          "Withdrawn": 1730,
+          "Undecided": 2031,
+          "": 433,
+          "Conditions": 8432,
+          "Unresolved": 9,
+          "Referred": 2
+        }
+      },
+      "full_type": {
+        "all_records": 26215,
+        "granted_status": 18091,
+        "refused_status": 5636,
+        "decided_denominator": 23727,
+        "approval_percent": 76.24647026594175,
+        "status_counts": {
+          "Permitted": 10921,
+          "Rejected": 5636,
+          "Withdrawn": 1081,
+          "Undecided": 1172,
+          "Conditions": 7170,
+          "": 225,
+          "Unresolved": 9,
+          "Referred": 1
+        }
+      },
+      "full_type_excluding_obvious_procedural_text": {
+        "all_records": 24585,
+        "granted_status": 16662,
+        "refused_status": 5529,
+        "decided_denominator": 22191,
+        "approval_percent": 75.0844937136677,
+        "status_counts": {
+          "Permitted": 9519,
+          "Rejected": 5529,
+          "Withdrawn": 1037,
+          "Undecided": 1122,
+          "Conditions": 7143,
+          "": 225,
+          "Unresolved": 9,
+          "Referred": 1
+        }
+      }
+    }
+  }
+}
