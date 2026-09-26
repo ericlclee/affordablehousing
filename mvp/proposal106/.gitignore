@@ -1,0 +1,6 @@
+# Only these small public map assets are bundled; modelling datasets stay ignored.
+!data/
+data/*
+!data/site.json
+!data/context.json
+engine_check_inputs.json

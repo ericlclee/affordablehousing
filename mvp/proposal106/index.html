@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposal 106</title>
+<meta name="description" content="A what-if model for a real Southwark site: the architect's vision tested against the developer's break-even, London's affordable-housing routes and the neighbours. Stated assumptions, no approval odds.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23245e4a'/%3E%3Cpath d='M9 30V17l11-8 11 8v13' fill='none' stroke='%23fff' stroke-width='3'/%3E%3Cpath d='M16 30v-8h8v8' fill='none' stroke='%23ddeaac' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f5f7f3;--card:#ffffff;--ink:#1d302a;--muted:#5f6d65;--line:#dfe5df;--soft:#edf2ea;
+  --green:#245e4a;--green-2:#2e7154;--lime:#ddeaac;--orange:#b0643a;--red:#c0392b;
+  --ok:#1f6b45;--ok-bg:#e2f0e6;--bad:#a8342a;--bad-bg:#fbe6e2;--rev:#8a5a00;--rev-bg:#fbf0d6;--info-bg:#e8eef6;--info:#35557f;
+  --arch:#617eaa;--dev:#b0643a;--plan:#245e4a;--res:#8a6aa8;
+  --scene-bg:#e9eee7;--ground:#e1e7db;--ctx:#c3c9bb;--ctx-est:#d3d8cb;--road:#aab4a0;--road-minor:#c3cbba;
+  --mass:#3f8a66;--mass-line:#e6f1de;--redline:#d0342c;--median:#6b7670;--ghost:#8d978f;
+  --shadow:0 1px 2px rgba(20,40,30,.05),0 6px 18px rgba(20,40,30,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1512;--card:#17201b;--ink:#e3ebe5;--muted:#9fb0a6;--line:#29352f;--soft:#1d2923;
+    --green:#86c9a6;--green-2:#4f9c77;--lime:#3a4d2c;--orange:#e39b6d;--red:#ff6f61;
+    --ok:#8fd6ad;--ok-bg:#16291f;--bad:#ff8f84;--bad-bg:#3a1f1c;--rev:#f0c36a;--rev-bg:#2f2615;--info-bg:#1b2533;--info:#9fbde6;
+    --arch:#93acd6;--dev:#e39b6d;--plan:#86c9a6;--res:#c2a3de;
+    --scene-bg:#141b17;--ground:#1a221d;--ctx:#4b554f;--ctx-est:#3b443f;--road:#5f6d63;--road-minor:#46514a;
+    --mass:#4fa37b;--mass-line:#bfe5cf;--redline:#ff5a4e;--median:#a9b6ae;--ghost:#7c877f;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1512;--card:#17201b;--ink:#e3ebe5;--muted:#9fb0a6;--line:#29352f;--soft:#1d2923;
+  --green:#86c9a6;--green-2:#4f9c77;--lime:#3a4d2c;--orange:#e39b6d;--red:#ff6f61;
+  --ok:#8fd6ad;--ok-bg:#16291f;--bad:#ff8f84;--bad-bg:#3a1f1c;--rev:#f0c36a;--rev-bg:#2f2615;--info-bg:#1b2533;--info:#9fbde6;
+  --arch:#93acd6;--dev:#e39b6d;--plan:#86c9a6;--res:#c2a3de;
+  --scene-bg:#141b17;--ground:#1a221d;--ctx:#4b554f;--ctx-est:#3b443f;--road:#5f6d63;--road-minor:#46514a;
+  --mass:#4fa37b;--mass-line:#bfe5cf;--redline:#ff5a4e;--median:#a9b6ae;--ghost:#7c877f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:15px/1.45 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--green)}
+:focus-visible{outline:3px solid #cf913e;outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+.top{display:flex;align-items:center;gap:14px;padding:10px 20px;background:var(--card);border-bottom:1px solid var(--line)}
+.mark{flex:none;width:38px;height:38px;border-radius:9px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;letter-spacing:.5px}
+:root[data-theme="dark"] .mark{color:#0f1512}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mark{color:#0f1512}}
+.brand b{display:block;font-size:16px;letter-spacing:-.2px}
+.brand small{color:var(--muted);font-size:12.5px}
+.top-note{margin-left:auto;font-size:12px;color:var(--muted);max-width:420px;text-align:right}
+.icon-btn{border:1px solid var(--line);background:var(--card);border-radius:8px;height:34px;min-width:34px;padding:0 10px;font-size:13px}
+
+/* voices */
+.voices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:10px 20px}
+.voice{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--vc);border-radius:10px;padding:8px 12px 9px;box-shadow:var(--shadow);min-width:0}
+.voice h3{margin:0;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.voice .big{font-size:22px;font-weight:750;letter-spacing:-.5px;line-height:1.2;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.voice .sub{font-size:12px;line-height:1.35;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.voice .vtag{font-size:11.5px;line-height:1.3;color:var(--muted);margin-top:3px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.big.neg{color:var(--bad)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 10px}
+.chip{background:var(--bad-bg);color:var(--bad);border-radius:999px;padding:2px 9px;font-size:12px;font-weight:650}
+.chip.rev{background:var(--rev-bg);color:var(--rev)}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:13px;font-weight:700;vertical-align:middle}
+.b-ok{background:var(--ok-bg);color:var(--ok)}.b-bad{background:var(--bad-bg);color:var(--bad)}.b-rev{background:var(--rev-bg);color:var(--rev)}.b-info{background:var(--info-bg);color:var(--info)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 450px;gap:12px;padding:0 20px 16px;align-items:start}
+.viewer{position:sticky;top:10px;height:calc(100vh - 150px);min-height:440px;border-radius:12px;overflow:hidden;background:var(--scene-bg);border:1px solid var(--line)}
+#scene{position:absolute;inset:0;touch-action:none;cursor:grab}
+#scene:active{cursor:grabbing}
+#scene canvas{display:block}
+.legend{position:absolute;left:10px;top:10px;background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:12px;line-height:1.55;pointer-events:none;max-width:calc(100% - 20px)}
+.legend i{display:inline-block;width:18px;height:0;vertical-align:middle;margin-right:6px}
+.lg-red{border-top:2px dashed var(--redline)}.lg-mass{height:9px!important;background:var(--mass);border-radius:2px}.lg-ctx{height:9px!important;background:var(--ctx);border-radius:2px}.lg-med{border-top:2px dashed var(--median)}
+.mass-sum{position:absolute;left:10px;bottom:10px;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-size:13px;font-weight:650;max-width:calc(100% - 130px)}
+.view-btns{position:absolute;right:10px;bottom:10px;display:flex;gap:6px}
+.view-btns button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--card);font-size:16px;line-height:1}
+.scene-msg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-size:14px}
+
+/* panel */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);min-width:0}
+.steps{display:flex;gap:4px;padding:8px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.steps::-webkit-scrollbar{display:none}
+.steps button{flex:1 1 0;min-width:0;border:0;background:transparent;border-radius:8px;padding:6px 4px;font-size:12px;color:var(--muted);text-align:left;line-height:1.2}
+.steps button b{display:block;font-size:11px;letter-spacing:.8px;color:var(--muted)}
+.steps button[aria-current="step"]{background:var(--soft);color:var(--ink);font-weight:650}
+.steps button[aria-current="step"] b{color:var(--green)}
+.stage{padding:14px 16px 6px}
+.stage h2{margin:0 0 2px;font-size:19px;letter-spacing:-.3px}
+.lede{margin:0 0 12px;color:var(--muted);font-size:13.5px}
+.headline{background:var(--soft);border-radius:10px;padding:10px 12px;margin:10px 0 12px}
+.headline .k{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.headline .v{font-size:24px;font-weight:780;letter-spacing:-.6px;line-height:1.2}
+.headline .s{font-size:13px;color:var(--muted)}
+.ctl{display:block;margin:0 0 12px}
+.ctl-h{display:flex;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:600}
+.ctl-h output{font-variant-numeric:tabular-nums;color:var(--green);font-weight:700}
+.ctl small,.note{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+fieldset{border:1px solid var(--line);border-radius:10px;padding:8px 12px 2px;margin:0 0 10px;min-width:0}
+legend{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);padding:0 4px}
+input[type=range]{width:100%;accent-color:var(--green);margin:6px 0 0}
+input[type=number]{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:5px 7px;font-variant-numeric:tabular-nums}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.row3 label{font-size:12.5px;color:var(--muted)}
+.seg{display:flex;border:1px solid var(--line);border-radius:9px;padding:3px;gap:3px;background:var(--paper);margin-top:6px}
+.seg button{flex:1;border:0;background:transparent;border-radius:6px;padding:6px 4px;font-size:13px}
+.seg button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:700;color:var(--green)}
+.quick{display:flex;gap:6px;margin-top:6px}
+.quick button{flex:1;border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:5px 0;font-size:13px;font-weight:650}
+.quick button[aria-pressed="true"]{border-color:var(--green);color:var(--green);background:var(--ok-bg)}
+.btn{border:0;background:var(--green);color:#fff;border-radius:9px;padding:9px 14px;font-weight:700;font-size:14px}
+:root[data-theme="dark"] .btn:not(.ghost){color:#0f1512}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn:not(.ghost){color:#0f1512}}
+.btn.ghost{background:transparent;color:var(--green);border:1px solid var(--line)}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 10px}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;border-radius:5px;padding:1px 5px;vertical-align:1px}
+.t-a{background:var(--rev-bg);color:var(--rev)}.t-s{background:var(--info-bg);color:var(--info)}.t-o{background:var(--ok-bg);color:var(--ok)}.t-w{background:var(--bad-bg);color:var(--bad)}
+.warn{background:var(--rev-bg);color:var(--rev);border-radius:8px;padding:6px 9px;font-size:12.5px;margin:0 0 6px}
+.facts{margin:0 0 10px;padding:0;list-style:none;font-size:13px}
+.facts li{padding:5px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:10px}
+.facts li span:first-child{color:var(--muted)}
+.facts li span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+details{border:1px solid var(--line);border-radius:10px;padding:6px 10px;margin:0 0 10px}
+summary{cursor:pointer;font-weight:650;font-size:13.5px}
+.ass-grid{display:grid;grid-template-columns:minmax(0,1fr) 110px;gap:6px 10px;align-items:center;font-size:12.5px;margin-top:8px}
+.ass-grid span small{color:var(--muted);display:block;font-size:11px}
+.chart{width:100%;height:auto;display:block}
+.chart .gl{stroke:var(--line)}
+.chart .ax{fill:var(--muted);font-size:10px}
+.chart .be{stroke:var(--green);fill:none;stroke-width:2.2}
+.chart .sv{stroke:var(--orange);stroke-dasharray:4 3;stroke-width:1.3}
+.chart .sv.base{stroke-width:2}
+.chart .svt{fill:var(--orange);font-size:10px}
+.chart .cur{fill:var(--green);stroke:var(--card);stroke-width:2}
+.chart .off{fill:none;stroke:var(--ink);stroke-width:1.5}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+.card{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--card);text-align:left;min-width:0}
+.card[aria-pressed="true"]{border-color:var(--green);box-shadow:0 0 0 2px var(--green) inset}
+.card h4{margin:0;font-size:13.5px}
+.card .cs{font-size:11px;color:var(--muted);line-height:1.3;margin-bottom:4px}
+.card .cv{font-size:12.5px;line-height:1.45;font-variant-numeric:tabular-nums}
+.card.none{opacity:.7}
+.bars{margin:0 0 12px}
+.bar{display:grid;grid-template-columns:78px minmax(0,1fr) 92px;gap:8px;align-items:center;font-size:12.5px;margin:5px 0}
+.track{position:relative;height:12px;background:var(--soft);border-radius:6px;overflow:visible}
+.track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--vc)}
+.track .best{position:absolute;top:0;bottom:0;border-radius:0 6px 6px 0;background:repeating-linear-gradient(45deg,transparent 0 3px,color-mix(in srgb,var(--vc) 35%,transparent) 3px 5px)}
+.track .walk{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.proc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:6px 0}
+.proc div{border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:12px}
+.proc div.on{border-color:var(--green);background:var(--ok-bg)}
+.proc b{display:block;font-size:15px}
+.gap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 0}
+.gap div{background:var(--soft);border-radius:9px;padding:8px}
+.gap .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700}
+.gap .v{font-size:21px;font-weight:780}
+.stage-nav{display:flex;justify-content:space-between;gap:8px;padding:10px 16px 14px;border-top:1px solid var(--line)}
+footer{padding:4px 20px 24px;font-size:12px;color:var(--muted)}
+footer p{margin:4px 0}
+.hidden{display:none!important}
+
+/* desktop: one screen. Voices and 3D stay put; only the stage content scrolls. */
+@media (min-width:981px){
+  .layout{height:calc(100vh - var(--top-h,170px));min-height:480px;grid-template-rows:minmax(0,1fr);align-items:stretch}
+  .viewer{position:relative;top:auto;height:auto;min-height:0}
+  .panel{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .steps,.stage-nav{flex:none}
+  .stage{flex:1 1 auto;min-height:0;overflow-y:auto}
+}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;padding:0 16px 16px}
+  .voices{grid-template-columns:1fr 1fr;padding:10px 16px;gap:8px}
+  .viewer{top:0;height:40vh;min-height:250px;z-index:5;border-radius:0 0 12px 12px}
+  .top{padding:10px 16px}
+  .top-note{display:none}
+  footer{padding:4px 16px 24px}
+}
+@media (max-width:420px){
+  .voice .big{font-size:18px}
+  .voice .vtag{-webkit-line-clamp:2;font-size:11px}
+  .steps button{flex:1 0 auto;padding:6px 7px}
+  .legend{font-size:11px;padding:6px 8px}
+  .legend .lg-extra{display:none}
+  .cards{grid-template-columns:1fr}
+  .bar{grid-template-columns:64px minmax(0,1fr) 80px}
+  .stage{padding:12px 12px 4px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="mark" aria-hidden="true">106</div>
+  <div class="brand"><b>Proposal 106</b><small id="siteLine">Morrisons, Walworth Road · Southwark · 0.51 ha</small></div>
+  <div class="top-note">A what-if model on stated assumptions. Not planning advice, not a viability assessment, and no approval odds.</div>
+  <button class="icon-btn" id="themeBtn" title="Switch light or dark theme" aria-label="Switch theme">Theme</button>
+</header>
+
+<section class="voices" aria-label="Four voices, as measured quantities">
+  <article class="voice" style="--vc:var(--arch)"><h3>Architect</h3><div class="big num" id="vArchBig">–</div><div class="sub" id="vArchSub">vision retained</div></article>
+  <article class="voice" style="--vc:var(--dev)"><h3>Developer</h3><div class="big num" id="vDevBig">–</div><div class="sub" id="vDevSub">surplus vs target return</div><div class="vtag" id="vDevTag"></div></article>
+  <article class="voice" style="--vc:var(--plan)"><h3>Planning</h3><div class="big" id="vPlanBig">–</div><div class="sub" id="vPlanSub">route</div></article>
+  <article class="voice" style="--vc:var(--res)"><h3>Residents</h3><div class="big num" id="vResBig">–</div><div class="sub" id="vResSub">Social Rent homes</div><div class="vtag" id="vResTag"></div></article>
+</section>
+
+<main class="layout">
+  <section class="viewer" aria-label="3D view of the site and proposal">
+    <div id="scene"></div>
+    <div class="legend">
+      <div><i class="lg-red"></i>Site red line (register NSP83)</div>
+      <div><i class="lg-mass"></i>Proposal massing</div>
+      <div class="lg-extra"><i class="lg-ctx"></i>OSM neighbours (ODbL)</div>
+      <div><i class="lg-med"></i><span id="lgMedian">Neighbour median</span></div>
+    </div>
+    <div class="mass-sum num" id="massSum">–</div>
+    <div class="view-btns">
+      <button id="zIn" aria-label="Zoom in">+</button><button id="zOut" aria-label="Zoom out">−</button><button id="zReset" aria-label="Reset view">⟲</button>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Planning stages">
+    <nav class="steps" id="steps"></nav>
+    <div class="stage" id="stage"></div>
+    <div class="stage-nav"><button class="btn ghost" id="prevBtn">← Back</button><button class="btn" id="nextBtn">Next →</button></div>
+  </section>
+</main>
+
+<footer>
+  <p><b>Sources.</b> Site: <a href="https://www.planning.data.gov.uk/entity/1710099" target="_blank" rel="noopener">brownfield register entity 1710099 (NSP83)</a>; red line from <a href="https://www.planning.data.gov.uk/entity/1802025" target="_blank" rel="noopener">brownfield-site entity 1802025</a>. Context: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> (ODbL), Overpass, 26 Sep 2026. Unit sizes: London Plan Table 3.1. Costs and values: Lewisham CIL viability study (placeholder, not Southwark evidence). Observed medians: hackathon planning data (analysis/sim_parameters.py).</p>
+  <p>Tags: <span class="tag t-a">assumption</span> editable guess · <span class="tag t-s">source</span> published figure · <span class="tag t-o">observed</span> past data, not a prediction · <span class="tag t-w">not entered</span> unknown, counted as zero.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script id="engine-src">
+/* ENGINE-START */
+/* Pure functions only: no DOM, no globals read. engine(params, assumptions) -> outputs. */
+const clamp = (v, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
+
+const BASE_ASSUMPTIONS = {
+  nia_ratio: 0.80,                                  // assumption
+  unit_nia_m2: { b1: 50, b2: 70, b3: 86 },          // London Plan Table 3.1: 1b2p, 2b4p, 3b5p
+  hab_rooms: { b1: 2, b2: 3, b3: 4 },
+  sale_psm: { low: 7200, base: 8000, high: 9000 },  // Lewisham placeholder, NOT Southwark evidence
+  scenario: 'base',
+  sr_transfer_psm: 2987,                            // Lewisham LAR transfer value; Social Rent not verified
+  so_value_psm: 4500,                               // shared ownership, assumption
+  build_psm_low: 2014,                              // Lewisham, up to 5 storeys
+  build_psm_high: 2364,                             // Lewisham, above 5 storeys
+  build_high_above_storeys: 5,
+  contingency: 0.10,
+  fees_pct_build: 0.10,
+  sales_pct_market_gdv: 0.0275,
+  mcil_psm: 72.73,                                  // Mayoral CIL band 2 (confirm Southwark's band)
+  bcil_psm: null,                                   // borough CIL: not entered
+  s106_per_home: null,                              // S106 contributions: not entered
+  finance_rate: 0.065, finance_years: 2,            // assumption
+  land_value: 12000000,                             // EUV + premium: assumption
+  target_return_pct_gdv: 0.175,
+  child_yield: { b1: 0, b2: 0.2, b3: 0.6 },         // assumption
+  play_m2_per_child: 10,                            // London Plan S4
+  neighbour_median_m: 9,
+  breakeven_iterations: 5,
+  vision_weights: { storeys: 0.3, coverage: 0.3, homes: 0.2, open_space: 0.2 },
+  vision: null                                      // Concept 0 params (the saved vision)
+};
+
+const RULES = {
+  temporary: { name: 'Temporary route', source: 'March 2026 guidance; applications validated by 31 Mar 2028', threshold: { private: 20, public: 35, industrial: 35 }, min_social_rent_share: 0.60, metric: 'habitable rooms', status: 'guidance' },
+  fast_track: { name: 'H5 Fast Track', source: 'London Plan 2021 H5', threshold: { private: 35, public: 50, industrial: 50 }, min_low_cost_rent_share: 0.30, min_intermediate_share: 0.30, metric: 'habitable rooms', status: 'adopted' },
+  viability: { name: 'H5 Viability Tested', source: 'London Plan 2021 H5', status: 'adopted' },
+  mayor: { notify_homes: 50, refer_homes: 150, refer_height_m: 30 },
+  tall: { storeys: 6, height_m: 18 },
+  draft_bands: { A: 35, B: 25, C: 20 }
+};
+
+function withDefaults(assumptions) {
+  const src = assumptions || {};
+  const a = Object.assign({}, BASE_ASSUMPTIONS, src);
+  for (const k of ['unit_nia_m2', 'hab_rooms', 'sale_psm', 'child_yield', 'vision_weights']) a[k] = Object.assign({}, BASE_ASSUMPTIONS[k], src[k] || {});
+  return a;
+}
+
+/* --- geometry helpers (pure) --- */
+function projector(lat0, lon0) {
+  const kx = 111320 * Math.cos(lat0 * Math.PI / 180), ky = 110574;
+  return (lon, lat) => [(lon - lon0) * kx, (lat - lat0) * ky]; // [east, north] metres
+}
+function ringArea(pts) { let s = 0; for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) s += pts[j][0] * pts[i][1] - pts[i][0] * pts[j][1]; return Math.abs(s) / 2; }
+function ringCentroid(pts) {
+  let a = 0, cx = 0, cy = 0;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) { const f = pts[j][0] * pts[i][1] - pts[i][0] * pts[j][1]; a += f; cx += (pts[j][0] + pts[i][0]) * f; cy += (pts[j][1] + pts[i][1]) * f; }
+  if (Math.abs(a) < 1e-9) return [pts.reduce((s, p) => s + p[0], 0) / pts.length, pts.reduce((s, p) => s + p[1], 0) / pts.length];
+  return [cx / (3 * a), cy / (3 * a)];
+}
+function inRing(x, y, ring) { let hit = false; for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const a = ring[i], b = ring[j]; if ((a[1] > y) !== (b[1] > y) && x < (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1]) + a[0]) hit = !hit; } return hit; }
+function heightOf(tags) {
+  const h = parseFloat(tags.height), l = parseFloat(tags['building:levels']);
+  if (Number.isFinite(h)) return { h: clamp(h, 2, 200), src: 'height' };
+  if (Number.isFinite(l)) return { h: clamp(l * 3, 2, 200), src: 'levels' };      // levels x 3 m (assumption)
+  if (tags.building === 'roof') return { h: 3, src: 'assumed' };
+  return { h: 9, src: 'assumed' };                                                   // no tag: 9 m (assumption)
+}
+/* Neighbour median height: all mapped buildings in context.json whose centroid lies outside the site; canopies (building=roof) excluded. */
+function neighbourStats(elements, siteRingLonLat, lat0, lon0) {
+  const P = projector(lat0, lon0), site = siteRingLonLat.map(p => P(p[0], p[1]));
+  const hs = [], tagged = []; let assumed = 0, onSite = 0;
+  for (const e of elements || []) {
+    const t = e.tags || {}, g = e.geometry || [];
+    if (!t.building || g.length < 4) continue;
+    const pts = g.map(q => P(q.lon, q.lat)), c = ringCentroid(pts);
+    if (inRing(c[0], c[1], site)) { onSite++; continue; }
+    if (t.building === 'roof') continue;
+    const r = heightOf(t); hs.push(r.h); if (r.src === 'assumed') assumed++; else tagged.push(r.h);
+  }
+  const med = arr => { const s = arr.slice().sort((x, y) => x - y), n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : null; };
+  return { median_m: med(hs), n: hs.length, assumed, on_site: onSite, tagged_median_m: med(tagged), tagged_n: tagged.length };
+}
+
+/* --- stage 0: massing --- */
+function massing(p, a) {
+  const site = +p.site_area_m2 || 0;
+  const ps = Math.max(0, Math.round(+p.podium_storeys || 0));
+  const pc = ps > 0 ? clamp(+p.podium_coverage || 0) : 0;
+  let tc = clamp(+p.tower_coverage || 0);
+  if (ps > 0) tc = Math.min(tc, pc);
+  const ts = tc > 0 ? Math.max(0, Math.round(+p.tower_storeys || 0)) : 0;
+  if (ts === 0) tc = 0;
+  const storeys = ps + ts;
+  const f2f = +p.floor_to_floor_m || 3.2;
+  const gia = site * (pc * ps + tc * ts);
+  const nia = a.nia_ratio * gia;
+  let m1 = Math.max(0, +p.mix_b1 || 0), m2 = Math.max(0, +p.mix_b2 || 0), m3 = Math.max(0, +p.mix_b3 || 0);
+  const ms = m1 + m2 + m3; if (ms > 0) { m1 /= ms; m2 /= ms; m3 /= ms; } else { m1 = m2 = m3 = 1 / 3; }
+  const u = a.unit_nia_m2, avg = m1 * u.b1 + m2 * u.b2 + m3 * u.b3;
+  const homes = avg > 0 ? Math.floor(nia / avg + 1e-9) : 0;
+  // largest-remainder rounding of homes by type (remainder goes to the largest fractions)
+  const raw = [homes * m1, homes * m2, homes * m3], cnt = raw.map(x => Math.floor(x + 1e-9));
+  const fr = raw.map((x, i) => Math.round((x - cnt[i]) * 1e9));
+  const order = [0, 1, 2].sort((i, j) => fr[j] - fr[i] || i - j);
+  for (let k = 0, left = homes - cnt[0] - cnt[1] - cnt[2]; left > 0; k++, left--) cnt[order[k % 3]]++;
+  const [n1, n2, n3] = cnt;
+  const hr = a.hab_rooms, hab = n1 * hr.b1 + n2 * hr.b2 + n3 * hr.b3;
+  const footprint = Math.max(pc, tc);
+  return {
+    site_area_m2: site, podium_coverage: pc, podium_storeys: ps, tower_coverage: tc, tower_storeys: ts,
+    storeys, floor_to_floor_m: f2f, max_height_m: storeys * f2f, gia_m2: gia, nia_m2: nia,
+    mix_b1: m1, mix_b2: m2, mix_b3: m3, avg_unit_m2: avg, homes, homes_b1: n1, homes_b2: n2, homes_b3: n3,
+    habitable_rooms: hab, open_space_share: 1 - footprint, open_space_m2: site * (1 - footprint)
+  };
+}
+
+/* Affordable homes are assumed to follow the same unit mix, so % by habitable room = % by NIA. */
+function tenure(m, p) {
+  const aff = clamp((+p.affordable_hr_pct || 0) / 100), sr = clamp(+p.social_rent_share || 0);
+  const affNia = m.nia_m2 * aff;
+  return {
+    affordable_hr_pct: aff * 100, social_rent_share: sr,
+    affordable_nia_m2: affNia, social_rent_nia_m2: affNia * sr, intermediate_nia_m2: affNia * (1 - sr), market_nia_m2: m.nia_m2 - affNia,
+    affordable_hab_rooms: m.habitable_rooms * aff, social_rent_hab_rooms: m.habitable_rooms * aff * sr,
+    affordable_homes: Math.round(m.homes * aff), social_rent_homes: Math.round(m.homes * aff * sr)
+  };
+}
+
+/* --- stage 2: developer appraisal at a given market sale value --- */
+function appraisal(m, t, a, salePsm) {
+  const market_gdv = t.market_nia_m2 * salePsm;
+  const sr_receipts = t.social_rent_nia_m2 * a.sr_transfer_psm;
+  const so_receipts = t.intermediate_nia_m2 * a.so_value_psm;
+  const affordable_receipts = sr_receipts + so_receipts;
+  const gdv = market_gdv + affordable_receipts;
+  const build_rate = m.storeys > a.build_high_above_storeys ? a.build_psm_high : a.build_psm_low;
+  const build_base = m.gia_m2 * build_rate;
+  const contingency = build_base * a.contingency;
+  const build = build_base + contingency;                       // build incl. 10% contingency
+  const fees = a.fees_pct_build * build;
+  const sales = a.sales_pct_market_gdv * market_gdv;
+  const mcil = a.mcil_psm * m.gia_m2;
+  const bcil = (a.bcil_psm == null ? 0 : a.bcil_psm) * m.gia_m2;
+  const s106 = (a.s106_per_home == null ? 0 : a.s106_per_home) * m.homes;
+  const land = a.land_value;
+  const finance = a.finance_rate * (land + 0.5 * build) * a.finance_years;
+  const total_cost = build + fees + sales + mcil + bcil + s106 + finance + land;
+  const target_return = a.target_return_pct_gdv * gdv;
+  const profit = gdv - total_cost;
+  const surplus = profit - target_return;                         // surplus = GDV - costs - target return
+  return { sale_psm: salePsm, market_gdv, sr_receipts, so_receipts, affordable_receipts, gdv, build_rate, build_base, contingency, build, fees, sales, mcil, bcil, s106, finance, land, total_cost, target_return, profit, surplus,
+    profit_on_gdv: gdv > 0 ? profit / gdv : 0, profit_on_cost: total_cost > 0 ? profit / total_cost : 0 };
+}
+
+/* break-even market £/m² = (total cost incl. land + target return - affordable receipts) / market NIA.
+   Sales cost and target return depend on GDV, so iterate 5 times starting from the base sale value. */
+function breakEven(m, t, a) {
+  if (t.market_nia_m2 <= 0) return { psm: null, trace: [] };
+  let p = a.sale_psm.base; const trace = [];
+  for (let i = 0; i < a.breakeven_iterations; i++) {
+    const v = appraisal(m, t, a, p);
+    p = (v.total_cost + v.target_return - v.affordable_receipts) / t.market_nia_m2;
+    trace.push(p);
+  }
+  return { psm: p, trace };
+}
+
+/* --- stage 1: route matrix (adopted rules + March 2026 guidance; draft only as what-if) --- */
+function routeMatrix(m, t, landType) {
+  const lt = ['private', 'public', 'industrial'].includes(landType) ? landType : 'private';
+  const aff = t.affordable_hr_pct, sr = t.social_rent_share, inter = 1 - sr;
+  const R = RULES, pct = v => Math.round(v * 10) / 10;
+  const tempT = R.temporary.threshold[lt], ftT = R.fast_track.threshold[lt];
+  const tf = [];
+  if (aff < tempT) tf.push(`affordable ${pct(aff)}% is below ${tempT}% by habitable room`);
+  if (sr < R.temporary.min_social_rent_share) tf.push(`Social Rent ${Math.round(sr * 100)}% is below 60% of the affordable`);
+  const temporary = { threshold: tempT, status: tf.length ? 'fails stated condition' : 'likely eligible',
+    reasons: tf.length ? tf : [`${pct(aff)}% ≥ ${tempT}% with ${Math.round(sr * 100)}% Social Rent; assumes validation by 31 Mar 2028`] };
+  const ff = [];
+  if (aff < ftT) ff.push(`affordable ${pct(aff)}% is below ${ftT}% by habitable room`);
+  if (sr < R.fast_track.min_low_cost_rent_share) ff.push(`low-cost rent ${Math.round(sr * 100)}% is below 30%`);
+  if (inter < R.fast_track.min_intermediate_share - 1e-9) ff.push(`intermediate ${Math.round(inter * 100)}% is below 30%`);
+  const fast_track = { threshold: ftT, status: ff.length ? 'fails stated condition' : 'likely eligible',
+    reasons: ff.length ? ff : [`${pct(aff)}% ≥ ${ftT}% with ≥30% low-cost rent and ≥30% intermediate`] };
+  const viability_tested = { status: 'requires review', reasons: ['Needs a viability assessment, with early and late-stage reviews'] };
+  const tempTenureOk = sr >= R.temporary.min_social_rent_share;
+  const route_min_pct = tempTenureOk ? tempT : ftT;
+  const badge = fast_track.status === 'likely eligible' ? 'Fast Track' : temporary.status === 'likely eligible' ? 'Temporary route' : 'Viability Tested';
+  const refer = [], notify = [];
+  if (m.homes >= R.mayor.refer_homes) refer.push(`${m.homes} homes ≥ 150`);
+  if (m.max_height_m > R.mayor.refer_height_m) refer.push(`${pct(m.max_height_m)} m > 30 m`);
+  if (m.homes >= R.mayor.notify_homes) notify.push(`${m.homes} homes ≥ 50 (Category 3J)`);
+  const mayor = { status: refer.length ? 'referable' : notify.length ? 'notified' : 'below thresholds', reasons: refer.length ? refer : notify.length ? notify : ['under 50 homes and 30 m'] };
+  const isTall = m.storeys > R.tall.storeys || m.max_height_m > R.tall.height_m;
+  const tall = { status: isTall ? 'not checked' : 'below trigger', reasons: [isTall ? `${m.storeys} storeys / ${pct(m.max_height_m)} m: check Southwark's tall-building zones` : 'up to 6 storeys and 18 m'] };
+  const draft = Object.fromEntries(Object.entries(R.draft_bands).map(([k, v]) => [k, { threshold: v, meets: aff >= v }]));
+  return { land_type: lt, temporary, fast_track, viability_tested, route_min_pct, badge, no_viability_assessment: badge !== 'Viability Tested', mayor, tall, draft };
+}
+
+/* --- stage 3: residents --- */
+function residents(m, t, a) {
+  const med = a.neighbour_median_m > 0 ? a.neighbour_median_m : 9;
+  const y = a.child_yield, children = m.homes_b1 * y.b1 + m.homes_b2 * y.b2 + m.homes_b3 * y.b3;
+  return { neighbour_median_m: med, height_ratio: m.max_height_m / med, children, play_need_m2: children * a.play_m2_per_child,
+    open_space_m2: m.open_space_m2, open_space_share: m.open_space_share, social_rent_homes: t.social_rent_homes };
+}
+
+/* V = 1 - (0.3|dStoreys|/seed + 0.3|dCoverage|/seed + 0.2|dHomes|/seed + 0.2|dOpen|/seed), clamped 0..1 */
+function visionRetained(m, a) {
+  if (!a.vision) return 1;
+  const s = massing(a.vision, a), w = a.vision_weights;
+  const rel = (x, x0) => x0 > 0 ? Math.abs(x - x0) / x0 : (x === x0 ? 0 : 1);
+  return clamp(1 - (w.storeys * rel(m.storeys, s.storeys) + w.coverage * rel(m.podium_coverage, s.podium_coverage) + w.homes * rel(m.homes, s.homes) + w.open_space * rel(m.open_space_m2, s.open_space_m2)));
+}
+
+function engine(params, assumptions) {
+  const a = withDefaults(assumptions);
+  const m = massing(params, a), t = tenure(m, params);
+  const sale = a.sale_psm[a.scenario] != null ? a.sale_psm[a.scenario] : a.sale_psm.base;
+  const f = appraisal(m, t, a, sale);
+  const be = breakEven(m, t, a);
+  const routes = routeMatrix(m, t, params.land_type);
+  const res = residents(m, t, a);
+  const V = visionRetained(m, a);
+  const U = {
+    dev: Math.min(1, f.profit_on_gdv / 0.25),
+    plan: Math.min(1, t.affordable_hr_pct / 50),
+    res: 0.5 * (1 - clamp((res.height_ratio - 1) / 4)) + 0.5 * Math.min(1, m.open_space_share / 0.5),
+    arch: V
+  };
+  const warnings = [];
+  if (a.bcil_psm == null) warnings.push('Borough CIL not entered: counted as £0.');
+  if (a.s106_per_home == null) warnings.push('S106 contributions not entered: counted as £0.');
+  return Object.assign({}, m, t, { land_type: routes.land_type, scenario: a.scenario, appraisal: f, surplus: f.surplus,
+    breakeven_psm: be.psm, breakeven_trace: be.trace, routes, residents: res, vision_retained: V, U, warnings });
+}
+
+/* Developer's best offer: highest affordable % (0..50, step 1) keeping surplus >= 0.
+   Uses the selected sale scenario (assumptions.scenario, 'base' by default, as in the spec). */
+function bestOffer(params, assumptions) {
+  const a = withDefaults(assumptions);
+  let best = null;
+  for (let pct = 0; pct <= 50; pct++) {
+    const o = engine(Object.assign({}, params, { affordable_hr_pct: pct }), a);
+    if (o.appraisal.surplus >= 0) best = { pct, surplus: o.appraisal.surplus };
+  }
+  return { pct: best ? best.pct : null, surplus: best ? best.surplus : null, capped: !!best && best.pct === 50 };
+}
+
+/* Breakeven curve vs affordable % for the chart. */
+function breakEvenCurve(params, assumptions, step) {
+  const out = [];
+  for (let pct = 0; pct <= 50; pct += (step || 5)) { const o = engine(Object.assign({}, params, { affordable_hr_pct: pct }), assumptions); out.push({ pct, be: o.breakeven_psm, surplus: o.appraisal.surplus }); }
+  return out;
+}
+
+/* --- stage 5: sweep + Nash "Balanced" --- */
+function sweep(params, assumptions, walk) {
+  const a = withDefaults(assumptions);
+  const seed = massing(a.vision || params, a);
+  const S0 = seed.storeys, towerShare = S0 > 0 ? seed.tower_storeys / S0 : 0;
+  const covRatio = seed.podium_coverage > 0 ? seed.tower_coverage / seed.podium_coverage : 0;
+  const keys = ['dev', 'plan', 'res', 'arch'];
+  const variants = [];
+  for (let S = 2; S <= S0 + 6; S++) {
+    let ts = Math.round(S * towerShare), ps = S - ts; if (ps < 1) { ps = 1; ts = S - 1; }
+    for (let ci = 6; ci <= 14; ci++) {
+      const pc = ci / 20, tc = ts > 0 ? pc * covRatio : 0;
+      for (let aff = 0; aff <= 50; aff += 5) {
+        const vp = Object.assign({}, params, { podium_coverage: pc, podium_storeys: ps, tower_coverage: tc, tower_storeys: ts, affordable_hr_pct: aff });
+        const o = engine(vp, a);
+        variants.push({ params: vp, U: o.U, homes: o.homes, storeys: o.storeys, height_m: o.max_height_m, affordable_hr_pct: aff,
+          affordable_hab_rooms: o.affordable_hab_rooms, social_rent_homes: o.social_rent_homes, profit_on_gdv: o.appraisal.profit_on_gdv,
+          surplus: o.appraisal.surplus, breakeven_psm: o.breakeven_psm, route: o.routes.badge, open_space_m2: o.open_space_m2, V: o.vision_retained });
+      }
+    }
+  }
+  // Default walk-away points; planning defaults to the route minimum / 50 (so a direct call with plan: null matches the UI).
+  const d = Object.assign({ dev: 0.6, res: 0.3, arch: 0.6 }, walk || {});
+  if (d.plan == null) d.plan = engine(params, a).routes.route_min_pct / 50;
+  const passes = (v, skip) => keys.every(k => k === skip || v.U[k] > d[k]);
+  const feasible = variants.filter(v => passes(v));
+  let balanced = null;
+  for (const v of feasible) {
+    v.nash = keys.reduce((acc, k) => acc * (v.U[k] - d[k]), 1);
+    v.usum = keys.reduce((s, k) => s + v.U[k], 0);
+    if (!balanced || v.nash > balanced.nash + 1e-12 || (Math.abs(v.nash - balanced.nash) <= 1e-12 && v.usum > balanced.usum)) balanced = v;
+  }
+  const pick = (list, f) => list.reduce((b, v) => (!b || f(v) > f(b) + 1e-9 || (Math.abs(f(v) - f(b)) <= 1e-9 && v.V > b.V)) ? v : b, null);
+  const higher_return = pick(variants.filter(v => v.U.plan >= d.plan - 1e-9), v => v.profit_on_gdv);
+  const more_affordable = pick(variants.filter(v => v.U.dev >= d.dev - 1e-9), v => v.affordable_hab_rooms);
+  const best = Object.fromEntries(keys.map(k => [k, Math.max(...variants.map(v => v.U[k]))]));
+  const blockers = feasible.length ? [] : keys.filter(k => variants.some(v => passes(v, k)));
+  return { count: variants.length, feasible: feasible.length, balanced, higher_return, more_affordable, best, blockers, walk: d, variants };
+}
+/* ENGINE-END */
+</script>
+
+<script>
+'use strict';
+/* ================= UI (DOM) ================= */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const nf = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 });
+const f0 = v => v == null || !Number.isFinite(v) ? '–' : nf.format(Math.round(v));
+const fm = v => (v < 0 ? '−' : '') + '£' + Math.abs(v / 1e6).toFixed(1) + 'm';
+const fsm = v => (v >= 0 ? '+' : '−') + '£' + Math.abs(v / 1e6).toFixed(1) + 'm';
+const fpsm = v => v == null ? 'n/a' : '£' + f0(v) + '/m²';
+const fp = v => Math.round(v * 100) + '%';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const TAG = { a: '<span class="tag t-a">assumption</span>', s: '<span class="tag t-s">source</span>', o: '<span class="tag t-o">observed</span>', w: '<span class="tag t-w">not entered</span>' };
+
+/* Inline fallback so the page works even if data/site.json cannot be fetched. */
+const SITE_FALLBACK = {
+  name: 'Morrisons, Walworth Road', register_reference: 'NSP83', entity: 1710099, borough: 'Southwark',
+  source_url: 'https://www.planning.data.gov.uk/entity/1710099', hectares: 0.51, dwellings_min: 135, dwellings_max: 165,
+  entry_date: '2017-12-20', lat: 51.487291, lng: -0.09615, ownership_status: 'unknown-ownership', planning_permission_status: 'not-permissioned',
+  polygon: [[-0.09565,51.487749],[-0.095962,51.487696],[-0.095964,51.487701],[-0.095978,51.487698],[-0.096008,51.487772],[-0.096053,51.487764],[-0.096133,51.48774],[-0.096291,51.487687],[-0.096788,51.48753],[-0.096562,51.487216],[-0.096615,51.487201],[-0.096575,51.487128],[-0.096462,51.48716],[-0.096391,51.487068],[-0.096525,51.487033],[-0.096414,51.486811],[-0.09637,51.486824],[-0.09587,51.486958],[-0.096011,51.487181],[-0.096,51.48729],[-0.095652,51.487364],[-0.095552,51.487379],[-0.095498,51.487383],[-0.09565,51.487749]],
+  polygon_source: 'planning.data.gov.uk brownfield-site entity 1802025 (NSP83)',
+  constraints_point_query: { source: 'planning.data.gov.uk point query, 26 Sep 2026 (screening, not a site check)', conservation_area: 'Walworth Road (ref 48)', flood_risk_zone: 'Flood zone 3 and 2 (defended status not checked)',
+    article_4: 'Article 4 areas 61 and 180', archaeological_priority_area: 'Walworth', heritage_at_risk: 'Walworth Road, Walworth', tall_building_zone: 'not checked' },
+  note: "Register entry dated 2017-12-20, status 'not-permissioned'. Verify current status on Southwark's planning register before relying on it."
+};
+
+const OBS = { // observed, hackathon data (analysis/sim_parameters.py), full applications of 10+ homes
+  all: { days: 289, refused: 26.6 },
+  size: [{ label: '10–49 homes', lo: 10, hi: 49, days: 252, refused: 35.4 }, { label: '50–149 homes', lo: 50, hi: 149, days: 374, refused: 10.0 }, { label: '150+ homes', lo: 150, hi: Infinity, days: 322, refused: 8.0 }],
+  s106_medium: { with: 359, without: 91 }
+};
+
+const S = {
+  stage: 0, site: SITE_FALLBACK, context: null,
+  median: { median_m: 9, n: 0, assumed: 0, on_site: 0, loaded: false },
+  params: { site_area_m2: 5090, podium_coverage: 0.55, podium_storeys: 6, tower_coverage: 0.15, tower_storeys: 8, floor_to_floor_m: 3.2,
+    mix_b1: 0.40, mix_b2: 0.40, mix_b3: 0.20, affordable_hr_pct: 35, social_rent_share: 0.60, land_type: 'private' },
+  assumptions: withDefaults({}),
+  vision: null,
+  walk: { dev: 0.6, plan: null, res: 0.3, arch: 0.6 },
+  medianOverride: null,                              // stage 3: neighbour median entered by the user (m)
+  card: 'bal', sweep: null, sweepKey: ''
+};
+let OUT = null;
+
+function medianM() { return S.medianOverride != null ? S.medianOverride : (S.median.median_m || 9); }
+/* One label for the neighbour median wherever it appears: it is mostly the 9 m default, not a measurement. */
+function medianLabel(short) {
+  const m = S.median, v = medianM().toFixed(1) + ' m';
+  if (S.medianOverride != null) return `median ${v} (entered)`;
+  if (!m.loaded) return `median ${v} (assumed: context not loaded)`;
+  return short ? `median ${v} (assumed: ${m.assumed}/${m.n} untagged)` : `neighbour median ${v} (assumed: ${m.assumed}/${m.n} buildings untagged)`;
+}
+function A() { return Object.assign({}, S.assumptions, { vision: S.vision, neighbour_median_m: medianM() }); }
+function compute() { OUT = engine(S.params, A()); return OUT; }
+function walk() { return Object.assign({}, S.walk, { plan: S.walk.plan == null ? OUT.routes.route_min_pct / 50 : S.walk.plan }); }
+
+/* Model hook for the teammate's approval model. Exact names. */
+window.P106 = {
+  params() {
+    const o = OUT || compute();
+    return { site_area_m2: o.site_area_m2, podium_coverage: o.podium_coverage, podium_storeys: o.podium_storeys, tower_coverage: o.tower_coverage,
+      tower_storeys: o.tower_storeys, storeys: o.storeys, max_height_m: +o.max_height_m.toFixed(2), gia_m2: +o.gia_m2.toFixed(1), nia_m2: +o.nia_m2.toFixed(1), homes: o.homes,
+      habitable_rooms: o.habitable_rooms, mix_b1: o.mix_b1, mix_b2: o.mix_b2, mix_b3: o.mix_b3, affordable_hr_pct: o.affordable_hr_pct,
+      social_rent_share: o.social_rent_share, land_type: o.land_type, borough: S.site.borough || 'Southwark', lat: S.site.lat, lng: S.site.lng };
+  },
+  outputs: () => OUT, engine, sweep, bestOffer, BASE_ASSUMPTIONS, RULES, state: S
+};
+
+/* ---------------- voices ---------------- */
+function renderVoices() {
+  const o = OUT, f = o.appraisal;
+  $('#vArchBig').textContent = fp(o.vision_retained);
+  $('#vArchSub').textContent = 'vision retained vs Concept 0';
+  const vd = $('#vDevBig'); vd.textContent = fsm(f.surplus); vd.classList.toggle('neg', f.surplus < 0);
+  $('#vDevSub').textContent = `vs ${(S.assumptions.target_return_pct_gdv * 100).toFixed(1)}% return · break-even ${fpsm(o.breakeven_psm)}`;
+  const a = S.assumptions, B = BASE_ASSUMPTIONS, dp = [];
+  dp.push(Math.abs(a.land_value - B.land_value) < 1 ? `land ${fm(a.land_value)} assumed` : `land ${fm(a.land_value)} entered`);
+  if (['low', 'base', 'high'].every(k => a.sale_psm[k] === B.sale_psm[k])) dp.push('Lewisham values');
+  const ne = []; if (a.bcil_psm == null) ne.push('borough CIL'); if (a.s106_per_home == null) ne.push('S106'); if (ne.length) dp.push(ne.join('/') + ' not entered');
+  $('#vDevTag').innerHTML = `<span class="tag t-a">placeholder</span> ${esc(dp.join(' · '))}`;
+  const b = o.routes.badge, cls = b === 'Viability Tested' ? 'b-rev' : 'b-ok';
+  $('#vPlanBig').innerHTML = `<span class="badge ${cls}">${b}</span>`;
+  $('#vPlanSub').textContent = `${f0(o.affordable_hr_pct)}% affordable by hab. room · Mayor: ${o.routes.mayor.status}`;
+  $('#vResBig').textContent = `${o.social_rent_homes} SR · ${o.residents.height_ratio.toFixed(1)}×`;
+  $('#vResSub').textContent = 'Social Rent homes · height ÷ median';
+  $('#vResTag').innerHTML = `<span class="tag ${S.medianOverride != null ? 't-o' : 't-a'}">${S.medianOverride != null ? 'entered' : 'assumption'}</span> ${esc(medianLabel(true))}`;
+  $('#massSum').textContent = `${o.storeys} storeys · ${o.max_height_m.toFixed(1)} m · ${o.homes} homes · ${f0(o.affordable_hr_pct)}% affordable`;
+  $('#lgMedian').textContent = 'Neighbour ' + medianLabel(true);
+}
+
+/* ---------------- controls ---------------- */
+const FMT = {
+  podium_coverage: v => fp(v) + ' of site', podium_storeys: v => v + ' storeys', tower_coverage: v => v > 0 ? fp(v) + ' of site' : 'no tower',
+  tower_storeys: v => '+' + v + ' storeys', floor_to_floor_m: v => v.toFixed(1) + ' m', affordable_hr_pct: v => v + '%', social_rent_share: v => fp(v)
+};
+function slider(key, label, min, max, step, scale, note) {
+  return `<label class="ctl"><span class="ctl-h"><span>${label}</span><output data-v="${key}"></output></span>
+    <input type="range" data-p="${key}" data-scale="${scale}" min="${min}" max="${max}" step="${step}" aria-label="${esc(label)}">${note ? `<small>${note}</small>` : ''}</label>`;
+}
+function seg(key, opts, isA) {
+  return `<div class="seg" role="group">${opts.map(([v, l]) => `<button type="button" ${isA ? 'data-sega' : 'data-seg'}="${key}" data-val="${v}">${l}</button>`).join('')}</div>`;
+}
+function syncControls() {
+  $$('[data-p]').forEach(el => { const k = el.dataset.p, sc = +el.dataset.scale || 1; const v = S.params[k] * sc; if (document.activeElement !== el) el.value = el.type === 'number' ? +v.toFixed(2) : v; });
+  $$('[data-v]').forEach(el => { const k = el.dataset.v; el.textContent = FMT[k] ? FMT[k](S.params[k]) : S.params[k]; });
+  $$('[data-seg]').forEach(el => el.setAttribute('aria-pressed', String(S.params[el.dataset.seg] === el.dataset.val)));
+  $$('[data-sega]').forEach(el => el.setAttribute('aria-pressed', String(S.assumptions[el.dataset.sega] === el.dataset.val)));
+  $$('[data-quick]').forEach(el => el.setAttribute('aria-pressed', String(S.params.affordable_hr_pct === +el.dataset.quick)));
+  $$('[data-w]').forEach(el => { const k = el.dataset.w; const w = walk(); if (document.activeElement !== el) el.value = w[k]; const out = $(`[data-wv="${k}"]`); if (out) out.textContent = wLabel(k, w[k]); });
+}
+function wLabel(k, v) {
+  if (k === 'dev') return v.toFixed(2) + ` (${(v * 25).toFixed(1)}% on GDV)`;
+  if (k === 'plan') return v.toFixed(2) + ` (${Math.round(v * 50)}% affordable)`;
+  return v.toFixed(2);
+}
+function bindControls(root) {
+  root.querySelectorAll('[data-p]').forEach(el => el.addEventListener('input', () => {
+    const k = el.dataset.p, sc = +el.dataset.scale || 1, v = parseFloat(el.value);
+    if (!Number.isFinite(v)) return;
+    S.params[k] = v / sc; refresh();
+  }));
+  root.querySelectorAll('[data-seg]').forEach(el => el.addEventListener('click', () => { S.params[el.dataset.seg] = el.dataset.val; refresh(); }));
+  root.querySelectorAll('[data-sega]').forEach(el => el.addEventListener('click', () => { S.assumptions[el.dataset.sega] = el.dataset.val; refresh(); }));
+  root.querySelectorAll('[data-quick]').forEach(el => el.addEventListener('click', () => { S.params.affordable_hr_pct = +el.dataset.quick; refresh(); }));
+  root.querySelectorAll('[data-a]').forEach(el => el.addEventListener('input', () => {
+    const path = el.dataset.a.split('.'), sc = +el.dataset.scale || 1, raw = el.value.trim();
+    const v = raw === '' ? null : parseFloat(raw) / sc;
+    if (raw !== '' && !Number.isFinite(v)) return;
+    const nullable = el.dataset.nullable === '1';
+    const fallback = path.length === 2 ? BASE_ASSUMPTIONS[path[0]][path[1]] : BASE_ASSUMPTIONS[path[0]];
+    const val = v == null ? (nullable ? null : fallback) : v;
+    if (path.length === 2) S.assumptions[path[0]] = Object.assign({}, S.assumptions[path[0]], { [path[1]]: val == null ? BASE_ASSUMPTIONS[path[0]][path[1]] : val });
+    else S.assumptions[path[0]] = val;
+    refresh();
+  }));
+  root.querySelectorAll('[data-w]').forEach(el => el.addEventListener('input', () => { S.walk[el.dataset.w] = +el.value; refresh(); }));
+}
+function assInput(path, label, sub, scale, step, nullable) {
+  const parts = path.split('.'); let v = parts.length === 2 ? S.assumptions[parts[0]][parts[1]] : S.assumptions[parts[0]];
+  const val = v == null ? '' : +(v * (scale || 1)).toFixed(4);
+  return `<span>${label}${sub ? `<small>${sub}</small>` : ''}</span><input type="number" data-a="${path}" data-scale="${scale || 1}" step="${step || 'any'}" ${nullable ? 'data-nullable="1" placeholder="not entered"' : ''} value="${val}" aria-label="${esc(label)}">`;
+}
+
+/* ---------------- stages ---------------- */
+const STAGES = [
+  { t: 'Vision', title: "The architect's proposal" },
+  { t: 'Site & policy', title: 'Site and policy' },
+  { t: 'Developer', title: 'Developer: must break even' },
+  { t: 'Residents', title: 'Residents: what the scheme gives' },
+  { t: 'Section 106', title: 'Section 106: the negotiation' },
+  { t: 'Middle ground', title: 'Middle ground' }
+];
+
+function stageHTML(i) {
+  const o = OUT, st = STAGES[i];
+  let h = `<h2>${i}. ${st.title}</h2>`;
+  if (i === 0) {
+    h += `<p class="lede">Enter the massing. “Save as my vision” freezes it as Concept 0; every alternative is measured against it.</p>
+    <div class="headline"><div class="k">Proposal</div><div class="v num" id="o0v"></div><div class="s num" id="o0s"></div><div class="s num" id="o0cap" style="margin-top:3px"></div></div>
+    <fieldset><legend>Podium</legend>${slider('podium_coverage', 'Coverage', 20, 80, 5, 100)}${slider('podium_storeys', 'Storeys', 1, 12, 1, 1)}</fieldset>
+    <fieldset><legend>Tower (0 = no tower)</legend>${slider('tower_coverage', 'Coverage', 0, 40, 5, 100)}${slider('tower_storeys', 'Storeys above podium', 0, 30, 1, 1)}</fieldset>
+    <details><summary>Unit mix &amp; floor height</summary><div class="row3" style="margin-top:8px">
+      <label>1b2p %<input type="number" data-p="mix_b1" data-scale="100" min="0" max="100" step="5"></label>
+      <label>2b4p %<input type="number" data-p="mix_b2" data-scale="100" min="0" max="100" step="5"></label>
+      <label>3b5p %<input type="number" data-p="mix_b3" data-scale="100" min="0" max="100" step="5"></label></div>
+      <small class="note" id="mixNote"></small>
+      ${slider('floor_to_floor_m', 'Floor-to-floor', 2.8, 4.0, 0.1, 1)}</details>
+    <div class="btn-row"><button class="btn" id="saveVision">Save as my vision</button><button class="btn ghost" id="restoreVision">Restore Concept 0</button></div>
+    <p class="note" id="visionNote"></p>
+    <ul class="facts">
+      <li><span>GIA = site × (podium cov × storeys + tower cov × storeys)</span><span id="o0gia"></span></li>
+      <li><span>NIA = 0.80 × GIA ${TAG.a}</span><span id="o0nia"></span></li>
+      <li><span>Unit sizes 50 / 70 / 86 m² NIA ${TAG.s} London Plan Table 3.1</span><span id="o0avg"></span></li>
+      <li><span>Habitable rooms 2 / 3 / 4 per 1b / 2b / 3b</span><span id="o0hab"></span></li>
+      <li><span>Register capacity (2017 entry) ${TAG.s}</span><span>${S.site.dwellings_min}–${S.site.dwellings_max} homes</span></li>
+    </ul>`;
+  }
+  if (i === 1) {
+    const s = S.site, c = s.constraints_point_query || {};
+    h += `<p class="lede">The real site from the brownfield register, and which adopted affordable-housing route applies.</p>
+    <ul class="facts">
+      <li><span>Register entry ${TAG.s}</span><span><a href="${esc(s.source_url)}" target="_blank" rel="noopener">entity ${s.entity}</a> · ${esc(s.register_reference || 'NSP83')}</span></li>
+      <li><span>Area</span><span>${s.hectares} ha (red line ${f0(S.params.site_area_m2)} m²)</span></li>
+      <li><span>Capacity on register</span><span>${s.dwellings_min}–${s.dwellings_max} homes</span></li>
+      <li><span>Entry date · status</span><span>${esc(s.entry_date)} · ${esc(s.planning_permission_status || 'not-permissioned')}</span></li>
+    </ul>
+    <div class="chips" aria-label="Site constraints (point query)">${[
+      c.conservation_area && ['Conservation area', ''], c.flood_risk_zone && ['Flood zone 3', ''], c.heritage_at_risk && ['Heritage at risk', ''],
+      c.article_4 && ['Article 4 areas', ''], ['Tall-building zone not checked', 'rev']].filter(Boolean).map(([t, k]) => `<span class="chip ${k}">${t}</span>`).join('')}</div>
+    <div class="warn">Verify current status on Southwark's planning register: the entry dates from ${esc(s.entry_date)}. Red line: ${esc(s.polygon_source || '')}.</div>
+    <label class="ctl"><span class="ctl-h"><span>Land type</span><span class="tag t-w">verify ownership</span></span>
+      ${seg('land_type', [['private', 'Private'], ['public', 'Public'], ['industrial', 'Industrial']])}
+      <small>Register says “${esc(s.ownership_status || 'unknown-ownership')}”. Defaulted to private.</small></label>
+    <div class="headline"><div class="k">Route for this scheme</div><div class="v" id="o1v"></div><div class="s" id="o1s"></div></div>
+    <table><thead><tr><th>Rule</th><th>Status</th><th>Why</th></tr></thead><tbody id="routeRows"></tbody></table>
+    <p class="note" id="draftLine"></p>
+    ${Object.keys(c).length ? `<details><summary>Site screening details (point query, not a site check)</summary><ul class="facts">
+      ${[['Conservation area', c.conservation_area], ['Flood risk', c.flood_risk_zone], ['Article 4', c.article_4], ['Archaeology', c.archaeological_priority_area], ['Heritage at risk', c.heritage_at_risk], ['Tall-building zone', c.tall_building_zone]].filter(r => r[1]).map(r => `<li><span>${r[0]}</span><span>${esc(r[1])}</span></li>`).join('')}
+      </ul><small class="note">${esc(c.source || '')}</small></details>` : ''}`;
+  }
+  if (i === 2) {
+    const a = S.assumptions;
+    h += `<p class="lede">Affordable housing is counted by habitable room. Every input below is editable and labelled.</p>
+    <label class="ctl"><span class="ctl-h"><span>Affordable, by habitable room</span><output data-v="affordable_hr_pct"></output></span>
+      <div class="quick"><button type="button" data-quick="20">20%</button><button type="button" data-quick="35">35%</button><button type="button" data-quick="50">50%</button></div>
+      <input type="range" data-p="affordable_hr_pct" data-scale="1" min="0" max="50" step="1" aria-label="Affordable percentage by habitable room"></label>
+    ${slider('social_rent_share', 'Social Rent share of the affordable', 0, 100, 5, 100, 'The rest is shared ownership (intermediate).')}
+    <label class="ctl"><span class="ctl-h"><span>Market sale value ${TAG.a}</span><span id="saleNow"></span></span>
+      ${seg('scenario', [['low', 'Low £7,200'], ['base', 'Base £8,000'], ['high', 'High £9,000']], true)}
+      <small>Placeholder from the Lewisham study, not Southwark evidence.</small></label>
+    <div class="headline"><div class="k">Surplus against the target return</div><div class="v num" id="o2v"></div><div class="s num" id="o2s"></div></div>
+    <div id="chartBox"></div>
+    <p class="note">Green: market £/m² needed to break even, by affordable %. Dashed: low / base / high sale values. Circle: this scheme.</p>
+    <div id="warnBox"></div>
+    <details><summary>Appraisal lines</summary><table><tbody id="apprRows"></tbody></table></details>
+    <details><summary>Edit assumptions</summary><div class="ass-grid">
+      ${assInput('sale_psm.low', 'Sale value, low £/m²', 'assumption (Lewisham)', 1, 50)}
+      ${assInput('sale_psm.base', 'Sale value, base £/m²', 'assumption (Lewisham)', 1, 50)}
+      ${assInput('sale_psm.high', 'Sale value, high £/m²', 'assumption (Lewisham)', 1, 50)}
+      ${assInput('sr_transfer_psm', 'Social Rent transfer £/m²', 'Lewisham LAR figure; SR not verified', 1, 1)}
+      ${assInput('so_value_psm', 'Shared ownership £/m²', 'assumption', 1, 50)}
+      ${assInput('build_psm_low', 'Build £/m² GIA, ≤5 storeys', 'Lewisham', 1, 1)}
+      ${assInput('build_psm_high', 'Build £/m² GIA, >5 storeys', 'Lewisham', 1, 1)}
+      ${assInput('contingency', 'Contingency %', 'on build', 100, 0.5)}
+      ${assInput('fees_pct_build', 'Fees % of build', 'assumption', 100, 0.5)}
+      ${assInput('sales_pct_market_gdv', 'Sales % of market GDV', 'assumption', 100, 0.25)}
+      ${assInput('mcil_psm', 'Mayoral CIL £/m² GIA', 'band 2; confirm Southwark band', 1, 0.01)}
+      ${assInput('bcil_psm', 'Borough CIL £/m² GIA', 'not entered = unknown', 1, 1, true)}
+      ${assInput('s106_per_home', 'S106 £ per home', 'not entered = unknown', 1, 100, true)}
+      ${assInput('finance_rate', 'Finance rate %', '× (land + ½ build) × 2 yrs', 100, 0.1)}
+      ${assInput('land_value', 'Land £m (EUV + premium)', 'assumption: enter the real figure', 1e-6, 0.1)}
+      ${assInput('target_return_pct_gdv', 'Target return % of GDV', 'Lewisham; VPPG range 15–20%', 100, 0.5)}
+    </div></details>`;
+  }
+  if (i === 3) {
+    h += `<p class="lede">Outputs the neighbourhood lives with. Screening only: not a daylight or townscape assessment.</p>
+    ${slider('podium_coverage', 'Podium coverage (open space kept = the rest)', 20, 80, 5, 100)}
+    <label class="ctl"><span class="ctl-h"><span>Neighbour median height ${TAG.a}</span><output id="medOut"></output></span>
+      <input type="range" id="medIn" min="3" max="30" step="0.5" aria-label="Neighbour median height in metres">
+      <small id="medHint"></small></label>
+    <div class="headline"><div class="k">Height against the neighbours</div><div class="v num" id="o3v"></div><div class="s num" id="o3s"></div></div>
+    <ul class="facts">
+      <li><span>Social Rent homes</span><span id="o3sr"></span></li>
+      <li><span>Open space at ground</span><span id="o3open"></span></li>
+      <li><span>Play space need (10 m² per child) ${TAG.a}</span><span id="o3play"></span></li>
+      <li><span>Child yield 0.2 per 2b, 0.6 per 3b ${TAG.a}</span><span id="o3kids"></span></li>
+    </ul>
+    <p class="note" id="medNote"></p>
+    <div class="warn">${TAG.o} In the hackathon data, small full applications are refused 18% of the time with 0 public comments and 68% with 25–99 comments (14 boroughs). A correlation, not a prediction: comments can be support as well as objection.</div>`;
+  }
+  if (i === 4) {
+    h += `<p class="lede">Section 106 is the negotiation, signed before the decision notice. Planning asks for the route threshold this land type needs; the developer offers the most affordable housing that keeps surplus at or above zero at the selected sale value.</p>
+    <label class="ctl"><span class="ctl-h"><span>Land value (developer's figure) ${TAG.a}</span><output id="landOut"></output></span>
+      <input type="range" id="landIn" min="12" max="35" step="0.5" aria-label="Land value in millions of pounds">
+      <small id="landHint">Existing use value plus premium. The real figure is not known: drag to see how the offer moves.</small></label>
+    <div class="gap"><div><div class="k">Ask</div><div class="v num" id="o4ask"></div></div><div><div class="k">Max affordable at surplus ≥ 0</div><div class="v num" id="o4off"></div><div class="note">placeholder values</div></div><div><div class="k" id="o4gapk">Gap</div><div class="v num" id="o4gap"></div></div></div>
+    <div class="headline"><div class="k">Route at the offer</div><div class="v" id="o4v"></div><div class="s" id="o4s"></div></div>
+    <div class="btn-row"><button class="btn" id="acceptOffer">Accept the offer</button><span class="note" id="acceptNote"></span></div>
+    <ul class="facts">
+      <li><span>Mayoral CIL (fixed, not negotiable) ${TAG.s} band 2 (confirm Southwark band)</span><span id="o4cil"></span></li>
+      <li><span>Borough CIL</span><span id="o4bcil"></span></li>
+      <li><span>S106 contributions</span><span id="o4s106"></span></li>
+    </ul>
+    <p class="note" id="o4note"></p>`;
+  }
+  if (i === 5) {
+    h += `<p class="lede">About 2,000 variants, all run in your browser: storeys 2 to vision + 6, podium coverage 30–70%, affordable 0–50%, keeping the tower ratio. Balanced is the Nash compromise of your walk-away points.</p>
+    <details><summary>Walk-away points</summary>
+      <label class="ctl"><span class="ctl-h"><span>Developer</span><output data-wv="dev"></output></span><input type="range" data-w="dev" min="0" max="1" step="0.05"></label>
+      <label class="ctl"><span class="ctl-h"><span>Planning</span><output data-wv="plan"></output></span><input type="range" data-w="plan" min="0" max="1" step="0.02"><small>Defaults to the route minimum ÷ 50.</small></label>
+      <label class="ctl"><span class="ctl-h"><span>Residents</span><output data-wv="res"></output></span><input type="range" data-w="res" min="0" max="1" step="0.05"></label>
+      <label class="ctl"><span class="ctl-h"><span>Architect</span><output data-wv="arch"></output></span><input type="range" data-w="arch" min="0" max="1" step="0.05"></label>
+      <small class="note">U_dev = profit on GDV ÷ 25% · U_plan = affordable % ÷ 50 · U_res = ½(1 − height excess) + ½(open share ÷ 50%) · U_arch = vision retained. All capped at 1.</small>
+    </details>
+    <div class="headline"><div class="k" id="o5k">Balanced</div><div class="v num" id="o5v"></div><div class="s" id="o5s"></div></div>
+    <div class="cards" id="cards"></div>
+    <div class="k note" id="barsTitle"></div>
+    <div class="bars" id="bars"></div>
+    <div id="modelBox" class="hidden"></div>
+    <div class="k note"><b>Process</b> ${TAG.o} observed medians, not a prediction for this scheme</div>
+    <div class="proc" id="proc"></div>
+    <p class="note">Full applications of 10+ homes: median ${OBS.all.days} days, ${OBS.all.refused}% refused. With Section 106 wording, medium schemes took ${OBS.s106_medium.with} vs ${OBS.s106_medium.without} days. Medians are lower bounds: many recent applications are undecided.</p>`;
+  }
+  return h;
+}
+
+function renderStage() {
+  $('#steps').innerHTML = STAGES.map((s, i) => `<button type="button" data-step="${i}" aria-current="${i === S.stage ? 'step' : 'false'}"><b>${i}</b>${s.t}</button>`).join('');
+  $$('#steps [data-step]').forEach(b => b.addEventListener('click', () => goStage(+b.dataset.step)));
+  const strip = $('#steps'), cur = $('#steps [aria-current="step"]');
+  if (cur) { const r = cur.getBoundingClientRect(), sr = strip.getBoundingClientRect(); if (r.left < sr.left || r.right > sr.right) strip.scrollLeft += r.left - sr.left - 8; }
+  const root = $('#stage'); root.innerHTML = stageHTML(S.stage); bindControls(root);
+  if (S.stage === 0) {
+    $('#saveVision').onclick = () => { S.vision = Object.assign({}, S.params); S.card = 'c0'; refresh(); };
+    $('#restoreVision').onclick = () => { if (S.vision) { Object.assign(S.params, S.vision); refresh(); } };
+  }
+  if (S.stage === 3) {
+    const mi = $('#medIn'); mi.value = medianM();
+    mi.oninput = () => { S.medianOverride = +mi.value; refresh(); };
+  }
+  if (S.stage === 4) {
+    $('#acceptOffer').onclick = () => { const off = bestOffer(S.params, A()); if (off.pct != null) { S.params.affordable_hr_pct = off.pct; refresh(); } };
+    const li = $('#landIn'); li.value = S.assumptions.land_value / 1e6;
+    li.oninput = () => { S.assumptions.land_value = Math.round(+li.value * 2) * 5e5; refresh(); };
+  }
+  $('#prevBtn').disabled = S.stage === 0; $('#prevBtn').style.visibility = S.stage === 0 ? 'hidden' : 'visible';
+  $('#nextBtn').textContent = S.stage === 5 ? 'Start again ↺' : `Next: ${STAGES[S.stage + 1].t} →`;
+  $('#stage').scrollTop = 0;
+  updateStage();
+}
+
+function statusBadge(s) { const c = s === 'likely eligible' || s === 'below thresholds' || s === 'below trigger' ? 'b-ok' : s === 'fails stated condition' ? 'b-bad' : s === 'not checked' || s === 'requires review' ? 'b-rev' : 'b-info'; return `<span class="badge ${c}" style="font-size:11.5px">${s}</span>`; }
+
+function updateStage() {
+  const o = OUT, f = o.appraisal, i = S.stage;
+  syncControls();
+  if (i === 0) {
+    $('#o0v').textContent = `${o.homes} homes · ${o.storeys} storeys`;
+    $('#o0s').textContent = `${f0(o.habitable_rooms)} habitable rooms · ${o.max_height_m.toFixed(1)} m high · ${o.homes_b1}/${o.homes_b2}/${o.homes_b3} 1b/2b/3b`;
+    const lo = S.site.dwellings_min, hi = S.site.dwellings_max, cap = $('#o0cap');
+    if (lo && hi) {
+      const over = o.homes > hi, under = o.homes < lo;
+      cap.innerHTML = over ? `<span class="tag t-w">check</span> ${o.homes} homes = ${(o.homes / hi).toFixed(1)}–${(o.homes / lo).toFixed(1)}× the register capacity (${lo}–${hi}). Conservation area and flood zone 3: see stage 1.`
+        : under ? `${o.homes} homes is below the register capacity (${lo}–${hi}).` : `${o.homes} homes is within the register capacity (${lo}–${hi}).`;
+      cap.style.color = over ? 'var(--bad)' : '';
+    } else cap.textContent = '';
+    $('#o0gia').textContent = f0(o.gia_m2) + ' m²'; $('#o0nia').textContent = f0(o.nia_m2) + ' m²';
+    $('#o0avg').textContent = 'avg ' + o.avg_unit_m2.toFixed(1) + ' m²'; $('#o0hab').textContent = f0(o.habitable_rooms);
+    const sum = Math.round((S.params.mix_b1 + S.params.mix_b2 + S.params.mix_b3) * 100);
+    $('#mixNote').textContent = sum === 100 ? 'Mix adds to 100%.' : `Mix adds to ${sum}%: normalised to 100% for the calculation.`;
+    const v = S.vision ? engine(S.vision, A()) : null;
+    $('#visionNote').textContent = v ? `Concept 0 saved: ${v.storeys} storeys, ${fp(v.podium_coverage)} podium, ${v.homes} homes, ${f0(v.affordable_hr_pct)}% affordable. Vision retained now: ${fp(o.vision_retained)}.` : 'No vision saved yet.';
+  }
+  if (i === 1) {
+    const r = o.routes, b = r.badge;
+    $('#o1v').innerHTML = `<span class="badge ${b === 'Viability Tested' ? 'b-rev' : 'b-ok'}" style="font-size:18px">${b}</span>`;
+    $('#o1s').textContent = `${f0(o.affordable_hr_pct)}% affordable by habitable room, ${fp(o.social_rent_share)} Social Rent, ${r.land_type} land. Route minimum: ${r.route_min_pct}%.`;
+    const rows = [
+      ['Temporary route', 'Mar 2026 guidance: private ≥20% by hab. room with ≥60% Social Rent; public or industrial ≥35% (with ≥60% Social Rent: this model applies it to all land; confirm). Validated by 31 Mar 2028.', r.temporary],
+      ['H5 Fast Track', 'Adopted: ≥35% (50% public or industrial), ≥30% low-cost rent and ≥30% intermediate.', r.fast_track],
+      ['H5 Viability Tested', 'Adopted: everything else.', r.viability_tested],
+      ['Mayor', '50+ homes notified; 150+ homes or over 30 m referable.', r.mayor],
+      ['Tall building', 'Over 6 storeys or 18 m.', r.tall]
+    ];
+    $('#routeRows').innerHTML = rows.map(([n, rule, x]) => `<tr><td><b>${n}</b><br><span class="note">${rule}</span></td><td>${statusBadge(x.status)}</td><td>${x.reasons.map(esc).join('; ')}</td></tr>`).join('');
+    const d = r.draft;
+    $('#draftLine').innerHTML = `<b>What-if only, draft London Plan (not adopted):</b> band A 35% ${d.A.meets ? 'met' : 'not met'} · B 25% ${d.B.meets ? 'met' : 'not met'} · C 20% ${d.C.meets ? 'met' : 'not met'}. Southwark's band: not checked.`;
+  }
+  if (i === 2) {
+    const tr = S.assumptions.target_return_pct_gdv;
+    const v2 = $('#o2v'); v2.textContent = `${fsm(f.surplus)} · break-even ${fpsm(o.breakeven_psm)}`; v2.style.color = f.surplus < 0 ? 'var(--bad)' : '';
+    $('#o2s').textContent = `GDV ${fm(f.gdv)} − costs ${fm(f.total_cost)} − ${(tr * 100).toFixed(1)}% return ${fm(f.target_return)}. Profit on GDV ${(f.profit_on_gdv * 100).toFixed(1)}%. Sale value used ${fpsm(f.sale_psm)}.`;
+    $('#saleNow').textContent = fpsm(f.sale_psm);
+    $('#chartBox').innerHTML = chartSVG(breakEvenCurve(S.params, A(), 2.5), o, bestOffer(S.params, A()));
+    const w = [...o.warnings];
+    w.push(`Land ${fm(S.assumptions.land_value)} is an assumption (existing use value plus premium): enter the real figure.`);
+    w.push('Market sale value is a Lewisham placeholder, not Southwark evidence.');
+    $('#warnBox').innerHTML = w.map(x => `<div class="warn">${esc(x)}</div>`).join('');
+    const L = [['Market receipts', f.market_gdv, `${f0(o.market_nia_m2)} m² × ${fpsm(f.sale_psm)}`], ['Social Rent receipts', f.sr_receipts, `${f0(o.social_rent_nia_m2)} m² × ${fpsm(S.assumptions.sr_transfer_psm)}`], ['Shared ownership receipts', f.so_receipts, `${f0(o.intermediate_nia_m2)} m² × ${fpsm(S.assumptions.so_value_psm)}`], ['GDV', f.gdv, ''],
+      ['Build incl. contingency', -f.build, `${f0(o.gia_m2)} m² × ${fpsm(f.build_rate)} × ${(1 + S.assumptions.contingency).toFixed(2)}`], ['Fees', -f.fees, `${(S.assumptions.fees_pct_build * 100).toFixed(1)}% of build`], ['Sales', -f.sales, `${(S.assumptions.sales_pct_market_gdv * 100).toFixed(2)}% of market GDV`],
+      ['Mayoral CIL', -f.mcil, `£${S.assumptions.mcil_psm}/m² GIA`], ['Borough CIL', -f.bcil, S.assumptions.bcil_psm == null ? 'not entered' : ''], ['S106', -f.s106, S.assumptions.s106_per_home == null ? 'not entered' : ''],
+      ['Finance', -f.finance, `${(S.assumptions.finance_rate * 100).toFixed(1)}% × (land + ½ build) × 2`], ['Land', -f.land, 'assumption'], ['Target return', -f.target_return, `${(tr * 100).toFixed(1)}% of GDV`], ['Surplus', f.surplus, '']];
+    $('#apprRows').innerHTML = L.map(([n, v, s]) => `<tr><td>${n}<br><span class="note">${esc(s)}</span></td><td class="r">${fm(v)}</td></tr>`).join('');
+  }
+  if (i === 3) {
+    const r = o.residents;
+    $('#o3v').textContent = `${r.height_ratio.toFixed(1)}× the neighbour median`;
+    $('#o3s').textContent = `${o.max_height_m.toFixed(1)} m (${o.storeys} storeys) against a ${medianLabel(false)}`;
+    $('#medOut').textContent = medianM().toFixed(1) + ' m';
+    const mm = S.median;
+    $('#medHint').textContent = !mm.loaded ? 'Context not loaded: 9 m assumed. Enter a surveyed figure if you have one.'
+      : `Computed from OSM: ${mm.median_m.toFixed(1)} m over ${mm.n} buildings, but ${mm.assumed} have no height tag and default to 9 m. Tagged buildings only: ${mm.tagged_median_m == null ? 'none' : mm.tagged_median_m.toFixed(1) + ' m'} (n = ${mm.tagged_n}). Drag to test another figure.`;
+    $('#o3sr').textContent = `${o.social_rent_homes} of ${o.homes} homes`;
+    $('#o3open').textContent = `${f0(r.open_space_m2)} m² (${fp(r.open_space_share)})`;
+    $('#o3play').textContent = `${f0(r.play_need_m2)} m² ${r.open_space_m2 >= r.play_need_m2 ? '(fits in open space)' : '(more than the open space)'}`;
+    $('#o3kids').textContent = r.children.toFixed(1) + ' children';
+    const m = S.median;
+    $('#medNote').textContent = m.loaded ? `Heights: OSM height tag, else levels × 3 m, else 9 m (assumption). The ${m.on_site} building(s) on the site and canopies are excluded.` : '';
+  }
+  if (i === 4) {
+    const off = bestOffer(S.params, A()), ask = o.routes.route_min_pct, sc = S.assumptions.scenario, salePsm = S.assumptions.sale_psm[sc];
+    $('#landOut').textContent = fm(S.assumptions.land_value);
+    $('#o4ask').textContent = ask + '%';
+    $('#o4off').textContent = off.pct == null ? 'none' : (off.capped ? '≥50%' : off.pct + '%');
+    const diff = off.pct == null ? null : off.pct - ask;            // signed: + headroom, − gap
+    $('#o4gapk').textContent = diff != null && diff > 0 ? 'Headroom' : 'Gap';
+    const gv = $('#o4gap');
+    gv.textContent = diff == null ? '–' : diff > 0 ? `${off.capped ? '≥ ' : ''}+${diff} pts` : diff === 0 ? '0 pts' : `${-diff} pts`;
+    gv.style.color = diff == null || diff < 0 ? 'var(--bad)' : 'var(--ok)';
+    // Presenter line: land value at which the offer drops below the ask and below Fast Track (offer falls as land rises).
+    const ftT = RULES.fast_track.threshold[o.routes.land_type];
+    const landBelow = thr => { if (thr <= 0) return null; const at = L => { const x = bestOffer(S.params, Object.assign(A(), { land_value: L * 1e6 })); return x.pct == null ? -1 : x.pct; };
+      if (at(12) < thr) return 12; if (at(35) >= thr) return null; let lo = 24, hi = 70; while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (at(mid / 2) < thr) hi = mid; else lo = mid; } return hi / 2; };
+    const lf = landBelow(ftT), la = ask === ftT ? lf : landBelow(ask);
+    const lp = [];
+    if (ask !== ftT) lp.push(lf == null ? `stays at or above ${ftT}% (Fast Track) up to £35m` : lf <= 12 ? `is already below ${ftT}% (Fast Track) at £12m` : `drops below ${ftT}% (Fast Track) from about £${lf}m`);
+    lp.push(la == null ? `stays at or above the ${ask}% ask up to £35m` : la <= 12 ? `is already below the ${ask}% ask at £12m` : `drops below the ${ask}% ask from about £${la}m`);
+    $('#landHint').textContent = `Existing use value plus premium, not known. At the ${sc} sale value the offer ${lp.join(' and ')}.`;
+    const atOffer = off.pct == null ? null : engine(Object.assign({}, S.params, { affordable_hr_pct: off.pct }), A());
+    const fast = atOffer && atOffer.routes.no_viability_assessment;
+    $('#o4v').innerHTML = off.pct == null ? '<span class="badge b-bad" style="font-size:16px">Not viable even at 0%</span>' : fast ? `<span class="badge b-ok" style="font-size:16px">${atOffer.routes.badge} (no viability assessment)</span>` : `<span class="badge b-rev" style="font-size:16px">Viability Tested (assessment + reviews)</span>`;
+    $('#o4s').textContent = off.pct == null ? `Surplus is below zero at 0% affordable at the ${sc} sale value: change the massing or the land value.` : `At ${off.pct}% by habitable room with ${fp(o.social_rent_share)} Social Rent, ${sc} sale value ${fpsm(salePsm)}: ${atOffer.routes.badge}. Ask is the ${o.routes.land_type}-land minimum for a route without a viability assessment${o.social_rent_share < 0.6 ? ' (Social Rent below 60% rules out the temporary route)' : ''}.`;
+    $('#acceptNote').textContent = off.pct == null ? '' : `Sets affordable to ${off.pct}% (now ${f0(o.affordable_hr_pct)}%).`;
+    $('#acceptOffer').disabled = off.pct == null;
+    $('#o4cil').textContent = fm(f.mcil);
+    $('#o4bcil').innerHTML = S.assumptions.bcil_psm == null ? `${TAG.w} counted as £0` : fm(f.bcil);
+    $('#o4s106').innerHTML = S.assumptions.s106_per_home == null ? `${TAG.w} counted as £0` : fm(f.s106);
+    $('#o4note').textContent = off.capped ? `The surplus stays positive up to the 50% cap at the ${sc} sale value with land at ${fm(S.assumptions.land_value)}. Both are placeholders: raise the land value to test the offer.` : '';
+  }
+  if (i === 5) updateStage5();
+}
+
+function chartSVG(curve, o, off) {
+  const W = 360, H = 190, L = 46, R = 72, T = 10, B = 28, a = S.assumptions;
+  const vals = curve.map(c => c.be).filter(v => v != null).concat([a.sale_psm.low, a.sale_psm.high]);
+  if (o.breakeven_psm != null) vals.push(o.breakeven_psm);
+  const y0 = Math.floor((Math.min(...vals) - 300) / 1000) * 1000, y1 = Math.ceil((Math.max(...vals) + 300) / 1000) * 1000;
+  const X = v => L + v / 50 * (W - L - R), Y = v => T + (1 - (v - y0) / (y1 - y0)) * (H - T - B);
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Break-even market value per square metre against affordable percentage">`;
+  for (let v = y0; v <= y1; v += 1000) s += `<line class="gl" x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ax" x="${L - 5}" y="${Y(v) + 3}" text-anchor="end">£${v / 1000}k</text>`;
+  for (let p = 0; p <= 50; p += 10) s += `<text class="ax" x="${X(p)}" y="${H - 12}" text-anchor="middle">${p}%</text>`;
+  s += `<text class="ax" x="${(L + W - R) / 2}" y="${H - 1}" text-anchor="middle">affordable, by habitable room</text>`;
+  for (const [k, lab] of [['low', 'low'], ['base', 'base'], ['high', 'high']]) s += `<line class="sv ${k === a.scenario ? 'base' : ''}" x1="${L}" x2="${W - R}" y1="${Y(a.sale_psm[k])}" y2="${Y(a.sale_psm[k])}"/><text class="svt" x="${W - R + 4}" y="${Y(a.sale_psm[k]) + 3}">${lab} £${f0(a.sale_psm[k])}</text>`;
+  const pts = curve.filter(c => c.be != null).map(c => `${X(c.pct).toFixed(1)},${Y(c.be).toFixed(1)}`).join(' ');
+  s += `<polyline class="be" points="${pts}"/>`;
+  if (off && off.pct != null && !off.capped) s += `<circle class="off" cx="${X(off.pct)}" cy="${Y(a.sale_psm[a.scenario])}" r="6"><title>Developer's best offer at the ${a.scenario} sale value: ${off.pct}%</title></circle>`;
+  if (o.breakeven_psm != null) s += `<circle class="cur" cx="${X(o.affordable_hr_pct)}" cy="${Y(o.breakeven_psm)}" r="5.5"><title>This scheme: ${fpsm(o.breakeven_psm)}</title></circle>`;
+  return s + '</svg>';
+}
+
+function summarize(o) {
+  return { params: null, U: o.U, homes: o.homes, storeys: o.storeys, height_m: o.max_height_m, affordable_hr_pct: o.affordable_hr_pct, affordable_hab_rooms: o.affordable_hab_rooms,
+    social_rent_homes: o.social_rent_homes, profit_on_gdv: o.appraisal.profit_on_gdv, surplus: o.appraisal.surplus, breakeven_psm: o.breakeven_psm, route: o.routes.badge, open_space_m2: o.open_space_m2, V: o.vision_retained };
+}
+
+function getSweep() {
+  const w = walk();
+  const key = JSON.stringify([S.vision, S.params.mix_b1, S.params.mix_b2, S.params.mix_b3, S.params.social_rent_share, S.params.land_type, S.params.floor_to_floor_m, S.params.site_area_m2, S.assumptions, w, medianM()]);
+  if (key !== S.sweepKey) { const t0 = performance.now(); S.sweep = sweep(S.params, A(), w); S.sweep.ms = performance.now() - t0; S.sweepKey = key; }
+  return S.sweep;
+}
+
+function updateStage5() {
+  const sw = getSweep(), w = sw.walk;
+  const c0p = S.vision || S.params, c0 = Object.assign(summarize(engine(c0p, A())), { params: c0p });
+  const cards = [
+    { id: 'c0', name: "Architect's proposal", sub: 'Concept 0, your saved vision', v: c0 },
+    { id: 'hr', name: 'Higher return', sub: 'max profit on GDV that meets the planning walk-away', v: sw.higher_return },
+    { id: 'ma', name: 'More affordable rooms', sub: 'max affordable rooms with the developer at walk-away or better', v: sw.more_affordable },
+    { id: 'bal', name: 'Balanced', sub: 'Nash compromise: max Π(Uᵢ − dᵢ), all strictly above walk-away', v: sw.balanced }
+  ];
+  const line = v => `${v.storeys} st · ${fp(v.params.podium_coverage)} podium · ${v.affordable_hr_pct.toFixed(0)}% aff.<br>${v.homes} homes · ${v.social_rent_homes} SR · ${fsm(v.surplus)}<br>vision ${fp(v.V)} · ${v.route}`;
+  $('#cards').innerHTML = cards.map(c => c.v ? `<button type="button" class="card" data-card="${c.id}" aria-pressed="${S.card === c.id}"><h4>${c.name}</h4><div class="cs">${c.sub}</div><div class="cv">${line(c.v)}</div></button>`
+    : `<div class="card none"><h4>${c.name}</h4><div class="cs">${c.sub}</div><div class="cv">No variant qualifies.</div></div>`).join('');
+  $$('#cards [data-card]').forEach(b => b.addEventListener('click', () => {
+    const c = cards.find(x => x.id === b.dataset.card); if (!c || !c.v) return;
+    S.card = c.id; const p = c.v.params;
+    Object.assign(S.params, { podium_coverage: p.podium_coverage, podium_storeys: p.podium_storeys, tower_coverage: p.tower_coverage, tower_storeys: p.tower_storeys, affordable_hr_pct: p.affordable_hr_pct });
+    if (c.id === 'c0') Object.assign(S.params, p);
+    refresh();
+  }));
+  const bal = sw.balanced;
+  if (bal) {
+    $('#o5k').textContent = 'Balanced (your walk-away points)';
+    $('#o5v').textContent = `${bal.storeys} storeys · ${bal.affordable_hr_pct}% affordable · ${bal.homes} homes`;
+    $('#o5s').textContent = `${fp(bal.params.podium_coverage)} podium · ${fsm(bal.surplus)} · vision ${fp(bal.V)} · ${bal.route}. ${sw.feasible} of ${f0(sw.count)} variants clear every walk-away (${sw.ms.toFixed(0)} ms).`;
+  } else {
+    const names = { dev: 'Developer', plan: 'Planning', res: 'Residents', arch: 'Architect' };
+    $('#o5k').textContent = 'No middle ground';
+    $('#o5v').textContent = 'No variant clears every walk-away';
+    $('#o5s').textContent = sw.blockers.length ? `Blocked by: ${sw.blockers.map(k => names[k]).join(' or ')}. Relaxing that walk-away point opens a middle ground.` : 'Two or more parties block together: relax at least two walk-away points.';
+  }
+  const sel = cards.find(c => c.id === S.card && c.v) || cards.find(c => c.id === 'bal' && c.v) || cards[0];
+  $('#barsTitle').innerHTML = `<b>What each gave up</b>: ${sel.name}. Bar = utility; hatched = gave up vs the best in the sweep; line = walk-away.`;
+  const P = [['arch', 'Architect', 'var(--arch)'], ['dev', 'Developer', 'var(--dev)'], ['plan', 'Planning', 'var(--plan)'], ['res', 'Residents', 'var(--res)']];
+  $('#bars').innerHTML = P.map(([k, n, c]) => {
+    const u = Math.max(0, sel.v.U[k]), best = Math.max(u, sw.best[k]), gave = Math.max(0, best - u);
+    return `<div class="bar" style="--vc:${c}"><span>${n}</span><div class="track"><div class="fill" style="width:${u * 100}%"></div><div class="best" style="left:${u * 100}%;width:${gave * 100}%"></div><div class="walk" style="left:calc(${w[k] * 100}% - 1px)" title="walk-away ${w[k].toFixed(2)}"></div></div><span class="num">${sel.v.U[k].toFixed(2)} · −${gave.toFixed(2)}</span></div>`;
+  }).join('');
+  const mb = $('#modelBox');
+  if (window.P106Model && typeof window.P106Model.score === 'function') {
+    let txt; try { const r = window.P106Model.score(window.P106.params()); txt = typeof r === 'object' ? JSON.stringify(r) : String(r); } catch (e) { txt = 'model error: ' + e.message; }
+    mb.className = 'warn'; mb.innerHTML = `<b>Historical pattern (teammate model, not used in the optimisation):</b> ${esc(txt)}`;
+  } else mb.className = 'hidden';
+  const h = OUT.homes;
+  $('#proc').innerHTML = OBS.size.map(b => `<div class="${h >= b.lo && h <= b.hi ? 'on' : ''}">${b.label}<b>${b.days} days</b>${b.refused.toFixed(1)}% refused</div>`).join('');
+}
+
+/* ---------------- refresh ---------------- */
+function refresh() { compute(); renderVoices(); updateStage(); schedule3D(); }
+
+function goStage(i) {
+  S.stage = i; renderStage();
+  // Desktop: back to the top (voices + 3D + stage all in one screen). Narrow: put the stage heading just under the sticky 3D view.
+  const top = innerWidth > 980 ? 0 : Math.max(0, $('.panel').getBoundingClientRect().top + scrollY - $('.viewer').offsetHeight - 8);
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+$('#prevBtn').addEventListener('click', () => { if (S.stage > 0) goStage(S.stage - 1); });
+$('#nextBtn').addEventListener('click', () => goStage(S.stage === 5 ? 0 : S.stage + 1));
+/* Desktop fits one screen: the layout takes the height left under the header and the voices. */
+function setTopH() { document.documentElement.style.setProperty('--top-h', ($('.top').offsetHeight + $('.voices').offsetHeight) + 'px'); }
+try { const ro = new ResizeObserver(setTopH); ro.observe($('.top')); ro.observe($('.voices')); } catch (e) { setTopH(); }
+
+/* ---------------- theme ---------------- */
+const THEMES = ['auto', 'light', 'dark'];
+function setTheme(t) {
+  if (t === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', t);
+  $('#themeBtn').textContent = t === 'auto' ? 'Auto' : t === 'light' ? 'Light' : 'Dark';
+  try { localStorage.setItem('p106-theme', t); } catch (e) { /* storage unavailable */ }
+  theme3D();
+}
+$('#themeBtn').addEventListener('click', () => { const cur = document.documentElement.getAttribute('data-theme') || 'auto'; setTheme(THEMES[(THEMES.indexOf(cur) + 1) % 3]); });
+try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => theme3D()); } catch (e) { /* old browser */ }
+
+/* ================= 3D (Three.js r128) ================= */
+const G = { ok: false, D: 330, pitch: 0.62, yaw: 0.85, target: null, pending: false };
+let P = null, SITE_EN = [], SITE_C = [0, 0], SITE_ANGLE = 0;
+
+function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim() || '#888888'; }
+function setupSiteGeometry() {
+  P = projector(S.site.lat, S.site.lng);
+  SITE_EN = S.site.polygon.map(p => P(p[0], p[1]));
+  if (SITE_EN.length > 1 && SITE_EN[0][0] === SITE_EN[SITE_EN.length - 1][0] && SITE_EN[0][1] === SITE_EN[SITE_EN.length - 1][1]) SITE_EN.pop();
+  SITE_C = ringCentroid(SITE_EN);
+  S.params.site_area_m2 = Math.round(ringArea(SITE_EN));
+  let best = 0;
+  for (let i = 0; i < SITE_EN.length; i++) { const a = SITE_EN[i], b = SITE_EN[(i + 1) % SITE_EN.length], l = Math.hypot(b[0] - a[0], b[1] - a[1]); if (l > best) { best = l; SITE_ANGLE = Math.atan2(b[1] - a[1], b[0] - a[0]); } }
+}
+const V3 = (e, y, n) => new THREE.Vector3(e, y, -n);
+function shapeFrom(pts) { const s = new THREE.Shape(); pts.forEach((p, i) => i ? s.lineTo(p[0], p[1]) : s.moveTo(p[0], p[1])); return s; }
+function extrude(pts, h, base) { const g = new THREE.ExtrudeGeometry(shapeFrom(pts), { depth: h, bevelEnabled: false }); g.rotateX(-Math.PI / 2); if (base) g.translate(0, base, 0); return g; }
+function clearGroup(g) { if (!g) return; g.traverse(o => { if (o.geometry) o.geometry.dispose(); }); while (g.children.length) g.remove(g.children[0]); }
+function loopSegments(pts, ys) { const arr = []; for (const y of ys) for (let i = 0; i < pts.length; i++) { const a = pts[i], b = pts[(i + 1) % pts.length]; arr.push(a[0], y, -a[1], b[0], y, -b[1]); } const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(arr, 3)); return g; }
+
+function initScene() {
+  const el = $('#scene');
+  if (!window.THREE) { el.innerHTML = '<div class="scene-msg">3D library did not load. Every number on the right still works.</div>'; return; }
+  try {
+    G.renderer = new THREE.WebGLRenderer({ antialias: true });
+    G.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    G.renderer.shadowMap.enabled = true; G.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    el.appendChild(G.renderer.domElement);
+    G.scene = new THREE.Scene();
+    G.camera = new THREE.PerspectiveCamera(40, 1, 1, 4000);
+    G.hemi = new THREE.HemisphereLight(0xffffff, 0x8f9a8c, 0.9); G.scene.add(G.hemi);
+    const sun = new THREE.DirectionalLight(0xfffaf0, 0.75); sun.position.set(-160, 320, 140); sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, { left: -280, right: 280, top: 280, bottom: -280, near: 10, far: 1000 }); sun.shadow.camera.updateProjectionMatrix(); sun.shadow.bias = -0.0008;
+    G.scene.add(sun);
+    G.mat = {
+      ground: new THREE.MeshStandardMaterial({ roughness: 1 }), ctx: new THREE.MeshStandardMaterial({ roughness: 1 }), ctxEst: new THREE.MeshStandardMaterial({ roughness: 1, transparent: true, opacity: 0.92 }),
+      road: new THREE.LineBasicMaterial(), roadMinor: new THREE.LineBasicMaterial(), mass: new THREE.MeshStandardMaterial({ roughness: 0.75 }), massLine: new THREE.LineBasicMaterial({ transparent: true, opacity: 0.8 }),
+      red: new THREE.LineDashedMaterial({ dashSize: 2.6, gapSize: 1.6 }), redFill: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.12, side: THREE.DoubleSide, depthWrite: false }),
+      median: new THREE.LineDashedMaterial({ dashSize: 1.8, gapSize: 1.8 }), ghost: new THREE.LineBasicMaterial({ transparent: true, opacity: 0.55 }),
+      redRibbon: new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }), medianFill: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.16, side: THREE.DoubleSide, depthWrite: false })
+    };
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(2000, 2000), G.mat.ground); ground.rotation.x = -Math.PI / 2; ground.position.y = -0.05; ground.receiveShadow = true; G.scene.add(ground);
+    G.ctx = new THREE.Group(); G.site = new THREE.Group(); G.mass = new THREE.Group(); G.scene.add(G.ctx, G.site, G.mass);
+    bindOrbit(el);
+    new ResizeObserver(() => { const w = el.clientWidth, h = el.clientHeight; if (!w || !h) return; G.renderer.setSize(w, h); G.camera.aspect = w / h; G.camera.updateProjectionMatrix(); render3D(); }).observe(el);
+    G.ok = true; theme3D();
+  } catch (e) { console.warn('3D unavailable', e); el.innerHTML = '<div class="scene-msg">3D needs WebGL. Every number on the right still works.</div>'; G.ok = false; }
+}
+function theme3D() {
+  if (!G.ok) return;
+  const bg = new THREE.Color(cssVar('--scene-bg')); G.scene.background = bg; G.scene.fog = new THREE.Fog(bg, 700, 1600);
+  G.mat.ground.color.set(cssVar('--ground')); G.mat.ctx.color.set(cssVar('--ctx')); G.mat.ctxEst.color.set(cssVar('--ctx-est'));
+  G.mat.road.color.set(cssVar('--road')); G.mat.roadMinor.color.set(cssVar('--road-minor')); G.mat.mass.color.set(cssVar('--mass')); G.mat.massLine.color.set(cssVar('--mass-line'));
+  G.mat.red.color.set(cssVar('--redline')); G.mat.redFill.color.set(cssVar('--redline')); G.mat.redRibbon.color.set(cssVar('--redline')); G.mat.median.color.set(cssVar('--median')); G.mat.medianFill.color.set(cssVar('--median')); G.mat.ghost.color.set(cssVar('--ghost'));
+  render3D();
+}
+function buildSite() {
+  if (!G.ok) return; clearGroup(G.site);
+  const ring = SITE_EN.concat([SITE_EN[0]]);
+  // red line as flat dashed ribbons (WebGL lines are 1 px, too faint)
+  const tri = [], W = 0.55, dash = 3.2, gap = 2.0;
+  for (let i = 0; i < SITE_EN.length; i++) {
+    const a = SITE_EN[i], b = SITE_EN[(i + 1) % SITE_EN.length], L = Math.hypot(b[0] - a[0], b[1] - a[1]); if (L < 0.01) continue;
+    const ux = (b[0] - a[0]) / L, uy = (b[1] - a[1]) / L, nx = -uy * W, ny = ux * W;
+    for (let s = 0; s < L; s += dash + gap) {
+      const e = Math.min(L, s + dash), p = [a[0] + ux * s, a[1] + uy * s], q = [a[0] + ux * e, a[1] + uy * e];
+      const c = [[p[0] - nx, p[1] - ny], [q[0] - nx, q[1] - ny], [q[0] + nx, q[1] + ny], [p[0] + nx, p[1] + ny]];
+      for (const k of [0, 1, 2, 0, 2, 3]) tri.push(c[k][0], 0.35, -c[k][1]);
+    }
+  }
+  const rg = new THREE.BufferGeometry(); rg.setAttribute('position', new THREE.Float32BufferAttribute(tri, 3));
+  G.site.add(new THREE.Mesh(rg, G.mat.redRibbon));
+  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(ring.map(p => V3(p[0], 0.4, p[1]))), G.mat.red); line.computeLineDistances(); G.site.add(line);
+  const fill = new THREE.Mesh(new THREE.ShapeGeometry(shapeFrom(SITE_EN)), G.mat.redFill); fill.rotation.x = -Math.PI / 2; fill.position.y = 0.08; G.site.add(fill);
+  // neighbour median: dashed outline + faint plane at the median height
+  G.medianGroup = new THREE.Group();
+  const ml = new THREE.Line(new THREE.BufferGeometry().setFromPoints(ring.map(p => V3(p[0], 0, p[1]))), G.mat.median); ml.computeLineDistances(); G.medianGroup.add(ml);
+  const mp = new THREE.Mesh(new THREE.ShapeGeometry(shapeFrom(SITE_EN.map(p => [SITE_C[0] + (p[0] - SITE_C[0]) * 1.12, SITE_C[1] + (p[1] - SITE_C[1]) * 1.12]))), G.mat.medianFill); mp.rotation.x = -Math.PI / 2; G.medianGroup.add(mp);
+  G.site.add(G.medianGroup);
+  G.target = new THREE.Vector3(SITE_C[0], 14, -SITE_C[1]);
+}
+function buildContext(data) {
+  if (!G.ok) return; clearGroup(G.ctx);
+  for (const e of data.elements || []) {
+    const g = e.geometry, t = e.tags || {};
+    if (!g || g.length < 2) continue;
+    const pts = g.map(q => P(q.lon, q.lat));
+    if (t.building && g.length >= 4) {
+      const ring = pts.slice(); const f = ring[0], l = ring[ring.length - 1]; if (f[0] === l[0] && f[1] === l[1]) ring.pop();
+      if (ring.length < 3) continue;
+      const hi = heightOf(t), c = ringCentroid(ring);
+      if (inRing(c[0], c[1], SITE_EN)) { const geo = extrude(ring, hi.h); const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), G.mat.ghost); geo.dispose(); G.ctx.add(edges); continue; }
+      const mesh = new THREE.Mesh(extrude(ring, hi.h), hi.src === 'assumed' ? G.mat.ctxEst : G.mat.ctx); mesh.castShadow = true; mesh.receiveShadow = true; G.ctx.add(mesh);
+    } else if (t.highway) {
+      const major = ['primary', 'secondary', 'tertiary', 'trunk'].includes(t.highway);
+      G.ctx.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts.map(p => V3(p[0], major ? 0.2 : 0.12, p[1]))), major ? G.mat.road : G.mat.roadMinor));
+    }
+  }
+  render3D();
+}
+function updateMassing() {
+  if (!G.ok || !OUT) return; clearGroup(G.mass);
+  const o = OUT, f2f = o.floor_to_floor_m;
+  if (G.medianGroup) { G.medianGroup.position.y = medianM(); }
+  if (o.podium_storeys > 0 && o.podium_coverage > 0) {
+    const s = Math.sqrt(o.podium_coverage), poly = SITE_EN.map(p => [SITE_C[0] + (p[0] - SITE_C[0]) * s, SITE_C[1] + (p[1] - SITE_C[1]) * s]);
+    const h = o.podium_storeys * f2f, m = new THREE.Mesh(extrude(poly, h), G.mat.mass); m.castShadow = true; m.receiveShadow = true; G.mass.add(m);
+    const ys = []; for (let k = 1; k <= o.podium_storeys; k++) ys.push(k * f2f - (k === o.podium_storeys ? 0 : 0.02));
+    G.mass.add(new THREE.LineSegments(loopSegments(poly, ys), G.mat.massLine));
+  }
+  if (o.tower_storeys > 0 && o.tower_coverage > 0) {
+    const side = Math.sqrt(o.tower_coverage * o.site_area_m2), hs = side / 2, ca = Math.cos(SITE_ANGLE), sa = Math.sin(SITE_ANGLE);
+    const sq = [[-hs, -hs], [hs, -hs], [hs, hs], [-hs, hs]].map(([x, y]) => [SITE_C[0] + x * ca - y * sa, SITE_C[1] + x * sa + y * ca]);
+    const base = o.podium_storeys * f2f, h = o.tower_storeys * f2f, m = new THREE.Mesh(extrude(sq, h, base), G.mat.mass); m.castShadow = true; m.receiveShadow = true; G.mass.add(m);
+    const ys = []; for (let k = 1; k <= o.tower_storeys; k++) ys.push(base + k * f2f); ys.push(base + 0.02);
+    G.mass.add(new THREE.LineSegments(loopSegments(sq, ys), G.mat.massLine));
+    const posts = []; for (const p of sq) posts.push(p[0], base, -p[1], p[0], base + h, -p[1]);
+    const pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.Float32BufferAttribute(posts, 3)); G.mass.add(new THREE.LineSegments(pg, G.mat.massLine));
+  }
+  render3D();
+}
+function render3D() {
+  if (!G.ok || !G.target) return;
+  const t = G.target, c = Math.cos(G.pitch);
+  G.camera.position.set(t.x + Math.sin(G.yaw) * c * G.D, t.y + Math.sin(G.pitch) * G.D, t.z + Math.cos(G.yaw) * c * G.D);
+  G.camera.lookAt(t); G.renderer.render(G.scene, G.camera);
+}
+function schedule3D() { if (G.pending) return; G.pending = true; requestAnimationFrame(() => { G.pending = false; updateMassing(); }); }
+function bindOrbit(el) {
+  const ptrs = new Map(); let pinch = 0;
+  el.addEventListener('pointerdown', e => { ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY }); try { el.setPointerCapture(e.pointerId); } catch (_) {} if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a.x - b.x, a.y - b.y); } });
+  el.addEventListener('pointermove', e => {
+    if (!ptrs.has(e.pointerId)) return; const prev = ptrs.get(e.pointerId); const cur = { x: e.clientX, y: e.clientY }; ptrs.set(e.pointerId, cur);
+    if (ptrs.size === 1) { G.yaw -= (cur.x - prev.x) * 0.008; G.pitch = clamp(G.pitch + (cur.y - prev.y) * 0.006, 0.08, 1.5); }
+    else if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; const d = Math.hypot(a.x - b.x, a.y - b.y); if (pinch > 0) G.D = clamp(G.D * pinch / d, 60, 1100); pinch = d; }
+    render3D();
+  });
+  const up = e => { ptrs.delete(e.pointerId); pinch = 0; };
+  el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+  el.addEventListener('wheel', e => { e.preventDefault(); G.D = clamp(G.D * (1 + e.deltaY * 0.0012), 60, 1100); render3D(); }, { passive: false });
+  $('#zIn').onclick = () => { G.D = clamp(G.D * 0.8, 60, 1100); render3D(); };
+  $('#zOut').onclick = () => { G.D = clamp(G.D * 1.25, 60, 1100); render3D(); };
+  $('#zReset').onclick = () => { Object.assign(G, { D: 330, pitch: 0.62, yaw: 0.85 }); render3D(); };
+}
+
+/* ================= boot ================= */
+async function loadJSON(u) { const r = await fetch(u, { cache: 'no-cache' }); if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); }
+function boot() {
+  let t = 'auto'; try { t = localStorage.getItem('p106-theme') || 'auto'; } catch (e) { /* storage unavailable */ }
+  setupSiteGeometry();
+  S.vision = Object.assign({}, S.params);            // realistic working state: vision already saved as Concept 0
+  initScene(); setTheme(t); buildSite();
+  compute(); renderStage(); renderVoices(); updateMassing();
+  loadJSON('data/site.json').then(site => {
+    if (site && Array.isArray(site.polygon) && site.polygon.length > 3) {
+      S.site = Object.assign({}, SITE_FALLBACK, site); setupSiteGeometry(); S.vision.site_area_m2 = S.params.site_area_m2;
+      $('#siteLine').textContent = `${S.site.name} · ${S.site.borough} · ${S.site.hectares} ha`;
+      buildSite(); refresh(); renderStage();
+    }
+    return loadJSON('data/context.json');
+  }).then(ctx => {
+    S.context = ctx;
+    const st = neighbourStats(ctx.elements, S.site.polygon, S.site.lat, S.site.lng);
+    if (st.median_m) S.median = Object.assign(st, { loaded: true });
+    buildContext(ctx); refresh();
+  }).catch(err => { console.warn('Data not loaded, using inline site and an assumed 9 m median:', err.message); refresh(); });
+}
+boot();
+</script>
+</body>
+</html>

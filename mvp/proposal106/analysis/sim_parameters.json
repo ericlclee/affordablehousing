@@ -1,0 +1,1523 @@
+{
+ "reclass_top": [
+  {
+   "area_name": "Wandsworth",
+   "app_type_raw": "Full",
+   "app_type": "Conditions",
+   "n": 1176,
+   "with_dwellings": 324
+  },
+  {
+   "area_name": "Hillingdon",
+   "app_type_raw": "Full",
+   "app_type": "Conditions",
+   "n": 725,
+   "with_dwellings": 115
+  },
+  {
+   "area_name": "Hillingdon",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 668,
+   "with_dwellings": 67
+  },
+  {
+   "area_name": "Westminster",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 339,
+   "with_dwellings": 14
+  },
+  {
+   "area_name": "Wandsworth",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 233,
+   "with_dwellings": 120
+  },
+  {
+   "area_name": "Kingston",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 186,
+   "with_dwellings": 10
+  },
+  {
+   "area_name": "Havering",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 139,
+   "with_dwellings": 13
+  },
+  {
+   "area_name": "Bexley",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 126,
+   "with_dwellings": 7
+  },
+  {
+   "area_name": "Harrow",
+   "app_type_raw": "Outline",
+   "app_type": "Conditions",
+   "n": 113,
+   "with_dwellings": 36
+  },
+  {
+   "area_name": "Hounslow",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 108,
+   "with_dwellings": 13
+  },
+  {
+   "area_name": "Kensington",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 106,
+   "with_dwellings": 3
+  },
+  {
+   "area_name": "Sutton",
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 97,
+   "with_dwellings": 7
+  },
+  {
+   "area_name": "Harrow",
+   "app_type_raw": "Outline",
+   "app_type": "Amendment",
+   "n": 19,
+   "with_dwellings": 16
+  },
+  {
+   "area_name": "Camden",
+   "app_type_raw": "Outline",
+   "app_type": "Conditions",
+   "n": 18,
+   "with_dwellings": 6
+  },
+  {
+   "area_name": "Richmond",
+   "app_type_raw": "Outline",
+   "app_type": "Amendment",
+   "n": 15,
+   "with_dwellings": 3
+  }
+ ],
+ "reclass_totals": [
+  {
+   "app_type_raw": "Full",
+   "app_type": "Amendment",
+   "n": 2019,
+   "n_10plus_dw": 255
+  },
+  {
+   "app_type_raw": "Full",
+   "app_type": "Conditions",
+   "n": 1906,
+   "n_10plus_dw": 441
+  },
+  {
+   "app_type_raw": "Full",
+   "app_type": "Full",
+   "n": 94587,
+   "n_10plus_dw": 422
+  },
+  {
+   "app_type_raw": "Outline",
+   "app_type": "Amendment",
+   "n": 112,
+   "n_10plus_dw": 47
+  },
+  {
+   "app_type_raw": "Outline",
+   "app_type": "Conditions",
+   "n": 204,
+   "n_10plus_dw": 61
+  },
+  {
+   "app_type_raw": "Outline",
+   "app_type": "Outline",
+   "n": 48160,
+   "n_10plus_dw": 337
+  }
+ ],
+ "status_counts": [
+  {
+   "status": "Permitted",
+   "n": 97827
+  },
+  {
+   "status": "Conditions",
+   "n": 34057
+  },
+  {
+   "status": "Rejected",
+   "n": 31504
+  },
+  {
+   "status": "Undecided",
+   "n": 9832
+  },
+  {
+   "status": "Withdrawn",
+   "n": 7198
+  },
+  {
+   "status": "",
+   "n": 1433
+  },
+  {
+   "status": "Unresolved",
+   "n": 63
+  },
+  {
+   "status": "Referred",
+   "n": 15
+  }
+ ],
+ "outline_trap": [
+  {
+   "app_type": "Outline",
+   "n": 48160,
+   "mentions_outline_permission": 322.0,
+   "mentions_lawful_or_prior_approval": 30456.0
+  },
+  {
+   "app_type": "Full",
+   "n": 94587,
+   "mentions_outline_permission": 42.0,
+   "mentions_lawful_or_prior_approval": 2496.0
+  }
+ ],
+ "a_by_app_size": [
+  {
+   "app_type": "Full",
+   "size": "(blank)",
+   "n": 5082,
+   "decided": 4224,
+   "refusal_rate": 0.289,
+   "withdrawal_rate": 0.075,
+   "med_days": 83.0,
+   "p25_days": 56.0,
+   "p75_days": 95.0,
+   "p90_days": 112.0,
+   "share_after_target_date": 0.5
+  },
+  {
+   "app_type": "Full",
+   "size": "Large",
+   "n": 794,
+   "decided": 431,
+   "refusal_rate": 0.206,
+   "withdrawal_rate": 0.098,
+   "med_days": 301.0,
+   "p25_days": 184.0,
+   "p75_days": 455.0,
+   "p90_days": 616.0,
+   "share_after_target_date": 0.817
+  },
+  {
+   "app_type": "Full",
+   "size": "Medium",
+   "n": 9250,
+   "decided": 8550,
+   "refusal_rate": 0.136,
+   "withdrawal_rate": 0.039,
+   "med_days": 92.0,
+   "p25_days": 70.0,
+   "p75_days": 136.0,
+   "p90_days": 222.0,
+   "share_after_target_date": 0.33
+  },
+  {
+   "app_type": "Full",
+   "size": "Small",
+   "n": 79461,
+   "decided": 71211,
+   "refusal_rate": 0.224,
+   "withdrawal_rate": 0.041,
+   "med_days": 60.0,
+   "p25_days": 55.0,
+   "p75_days": 83.0,
+   "p90_days": 129.0,
+   "share_after_target_date": 0.384
+  },
+  {
+   "app_type": "Outline",
+   "size": "(blank)",
+   "n": 3202,
+   "decided": 2889,
+   "refusal_rate": 0.194,
+   "withdrawal_rate": 0.03,
+   "med_days": 46.0,
+   "p25_days": 24.0,
+   "p75_days": 54.0,
+   "p90_days": 138.0,
+   "share_after_target_date": 1.0
+  },
+  {
+   "app_type": "Outline",
+   "size": "Large",
+   "n": 229,
+   "decided": 168,
+   "refusal_rate": 0.25,
+   "withdrawal_rate": 0.051,
+   "med_days": 98.0,
+   "p25_days": 53.0,
+   "p75_days": 200.0,
+   "p90_days": 288.0,
+   "share_after_target_date": 0.637
+  },
+  {
+   "app_type": "Outline",
+   "size": "Medium",
+   "n": 907,
+   "decided": 806,
+   "refusal_rate": 0.177,
+   "withdrawal_rate": 0.079,
+   "med_days": 72.0,
+   "p25_days": 59.0,
+   "p75_days": 98.0,
+   "p90_days": 157.0,
+   "share_after_target_date": 0.275
+  },
+  {
+   "app_type": "Outline",
+   "size": "Small",
+   "n": 43822,
+   "decided": 41131,
+   "refusal_rate": 0.192,
+   "withdrawal_rate": 0.027,
+   "med_days": 46.0,
+   "p25_days": 34.0,
+   "p75_days": 56.0,
+   "p90_days": 67.0,
+   "share_after_target_date": 0.208
+  }
+ ],
+ "a_by_dwelling_band": [
+  {
+   "app_type": "Full",
+   "dw_band": "2: 10-49",
+   "n": 274,
+   "decided": 127,
+   "refusal_rate": 0.354,
+   "withdrawal_rate": 0.142,
+   "med_days": 252.0,
+   "p25_days": 153.0,
+   "p75_days": 402.0,
+   "p90_days": 560.0,
+   "share_after_target_date": 0.72
+  },
+  {
+   "app_type": "Full",
+   "dw_band": "3: 50-149",
+   "n": 85,
+   "decided": 40,
+   "refusal_rate": 0.1,
+   "withdrawal_rate": 0.13,
+   "med_days": 374.0,
+   "p25_days": 221.0,
+   "p75_days": 468.0,
+   "p90_days": 654.0,
+   "share_after_target_date": 0.7
+  },
+  {
+   "app_type": "Full",
+   "dw_band": "4: 150+",
+   "n": 63,
+   "decided": 25,
+   "refusal_rate": 0.08,
+   "withdrawal_rate": 0.107,
+   "med_days": 322.0,
+   "p25_days": 197.0,
+   "p75_days": 506.0,
+   "p90_days": 778.0,
+   "share_after_target_date": 1.0
+  },
+  {
+   "app_type": "Outline",
+   "dw_band": "2: 10-49",
+   "n": 190,
+   "decided": 153,
+   "refusal_rate": 0.444,
+   "withdrawal_rate": 0.089,
+   "med_days": 59.0,
+   "p25_days": 55.0,
+   "p75_days": 104.0,
+   "p90_days": 193.0,
+   "share_after_target_date": 0.345
+  },
+  {
+   "app_type": "Outline",
+   "dw_band": "3: 50-149",
+   "n": 52,
+   "decided": 45,
+   "refusal_rate": 0.222,
+   "withdrawal_rate": 0.063,
+   "med_days": 65.0,
+   "p25_days": 55.0,
+   "p75_days": 169.0,
+   "p90_days": 250.0,
+   "share_after_target_date": 0.625
+  },
+  {
+   "app_type": "Outline",
+   "dw_band": "4: 150+",
+   "n": 95,
+   "decided": 66,
+   "refusal_rate": 0.152,
+   "withdrawal_rate": 0.07,
+   "med_days": 56.0,
+   "p25_days": 34.0,
+   "p75_days": 111.0,
+   "p90_days": 234.0,
+   "share_after_target_date": 0.638
+  }
+ ],
+ "a_true_outline": [
+  {
+   "size": "(blank)",
+   "n": 11,
+   "decided": 7,
+   "refusal_rate": 0.714,
+   "withdrawal_rate": 0.3,
+   "med_days": null,
+   "p25_days": null,
+   "p75_days": null,
+   "p90_days": null,
+   "share_after_target_date": null
+  },
+  {
+   "size": "Large",
+   "n": 88,
+   "decided": 58,
+   "refusal_rate": 0.293,
+   "withdrawal_rate": 0.017,
+   "med_days": 194.0,
+   "p25_days": 106.0,
+   "p75_days": 280.0,
+   "p90_days": 582.0,
+   "share_after_target_date": 0.63
+  },
+  {
+   "size": "Medium",
+   "n": 55,
+   "decided": 37,
+   "refusal_rate": 0.486,
+   "withdrawal_rate": 0.178,
+   "med_days": 180.0,
+   "p25_days": 113.0,
+   "p75_days": 288.0,
+   "p90_days": 397.0,
+   "share_after_target_date": 0.514
+  },
+  {
+   "size": "Small",
+   "n": 210,
+   "decided": 164,
+   "refusal_rate": 0.555,
+   "withdrawal_rate": 0.099,
+   "med_days": 95.0,
+   "p25_days": 61.0,
+   "p75_days": 192.0,
+   "p90_days": 303.0,
+   "share_after_target_date": 0.628
+  }
+ ],
+ "b_counts": [
+  {
+   "decision_mentions": 914,
+   "description_mentions": 1139,
+   "either": 2032
+  }
+ ],
+ "b_decision_text": [
+  {
+   "size": "(blank)",
+   "s106_decision": false,
+   "n_approved": 2968,
+   "med_days": 83.0,
+   "p75_days": 100.0,
+   "p90_days": 112.0,
+   "share_after_target": 0.5
+  },
+  {
+   "size": "(blank)",
+   "s106_decision": true,
+   "n_approved": 35,
+   "med_days": null,
+   "p75_days": null,
+   "p90_days": null,
+   "share_after_target": null
+  },
+  {
+   "size": "Large",
+   "s106_decision": false,
+   "n_approved": 228,
+   "med_days": 293.0,
+   "p75_days": 450.0,
+   "p90_days": 594.0,
+   "share_after_target": 0.784
+  },
+  {
+   "size": "Large",
+   "s106_decision": true,
+   "n_approved": 114,
+   "med_days": 397.0,
+   "p75_days": 526.0,
+   "p90_days": 755.0,
+   "share_after_target": 1.0
+  },
+  {
+   "size": "Medium",
+   "s106_decision": false,
+   "n_approved": 7280,
+   "med_days": 91.0,
+   "p75_days": 133.0,
+   "p90_days": 210.0,
+   "share_after_target": 0.317
+  },
+  {
+   "size": "Medium",
+   "s106_decision": true,
+   "n_approved": 106,
+   "med_days": 359.0,
+   "p75_days": 507.0,
+   "p90_days": 638.0,
+   "share_after_target": 0.967
+  },
+  {
+   "size": "Small",
+   "s106_decision": false,
+   "n_approved": 54909,
+   "med_days": 59.0,
+   "p75_days": 81.0,
+   "p90_days": 125.0,
+   "share_after_target": 0.385
+  },
+  {
+   "size": "Small",
+   "s106_decision": true,
+   "n_approved": 375,
+   "med_days": 243.0,
+   "p75_days": 365.0,
+   "p90_days": 483.0,
+   "share_after_target": 0.989
+  }
+ ],
+ "b_major_housing": [
+  {
+   "s106_any": true,
+   "n": 62,
+   "decided": 58,
+   "refusal_rate": 0.0,
+   "med_days_approved": 329.0,
+   "p90_days_approved": 776.0
+  },
+  {
+   "s106_any": false,
+   "n": 360,
+   "decided": 134,
+   "refusal_rate": 0.381,
+   "med_days_approved": 303.0,
+   "p90_days_approved": 563.0
+  }
+ ],
+ "b_by_borough": [
+  {
+   "area_name": "Camden",
+   "s106_decisions": 262,
+   "full_large": 23
+  },
+  {
+   "area_name": "Ealing",
+   "s106_decisions": 189,
+   "full_large": 27
+  },
+  {
+   "area_name": "Merton",
+   "s106_decisions": 116,
+   "full_large": 29
+  },
+  {
+   "area_name": "Barnet",
+   "s106_decisions": 53,
+   "full_large": 57
+  },
+  {
+   "area_name": "Hounslow",
+   "s106_decisions": 52,
+   "full_large": 53
+  },
+  {
+   "area_name": "Waltham Forest",
+   "s106_decisions": 50,
+   "full_large": 14
+  },
+  {
+   "area_name": "Islington",
+   "s106_decisions": 43,
+   "full_large": 17
+  },
+  {
+   "area_name": "Bromley",
+   "s106_decisions": 39,
+   "full_large": 29
+  },
+  {
+   "area_name": "Kensington",
+   "s106_decisions": 38,
+   "full_large": 27
+  },
+  {
+   "area_name": "Wandsworth",
+   "s106_decisions": 34,
+   "full_large": 34
+  },
+  {
+   "area_name": "Barking and Dagenham",
+   "s106_decisions": 22,
+   "full_large": 5
+  },
+  {
+   "area_name": "Enfield",
+   "s106_decisions": 10,
+   "full_large": 5
+  },
+  {
+   "area_name": "Harrow",
+   "s106_decisions": 4,
+   "full_large": 6
+  },
+  {
+   "area_name": "Bexley",
+   "s106_decisions": 2,
+   "full_large": 24
+  }
+ ],
+ "c_route_counts": [
+  {
+   "route": "delegated",
+   "n": 133776
+  },
+  {
+   "route": "unknown",
+   "n": 44289
+  },
+  {
+   "route": "other",
+   "n": 1428
+  },
+  {
+   "route": "committee",
+   "n": 1243
+  },
+  {
+   "route": "withdrawn-label",
+   "n": 1193
+  }
+ ],
+ "c_route_by_size": [
+  {
+   "size": "(blank)",
+   "route": "committee",
+   "n": 1,
+   "decided": 0,
+   "refusal_rate": null,
+   "withdrawal_rate": null,
+   "med_days": null,
+   "p25_days": null,
+   "p75_days": null,
+   "p90_days": null,
+   "share_after_target_date": null
+  },
+  {
+   "size": "(blank)",
+   "route": "delegated",
+   "n": 4,
+   "decided": 3,
+   "refusal_rate": 0.0,
+   "withdrawal_rate": 0.25,
+   "med_days": 56.0,
+   "p25_days": 28.0,
+   "p75_days": 56.0,
+   "p90_days": 56.0,
+   "share_after_target_date": null
+  },
+  {
+   "size": "Large",
+   "route": "committee",
+   "n": 228,
+   "decided": 174,
+   "refusal_rate": 0.109,
+   "withdrawal_rate": 0.022,
+   "med_days": 357.0,
+   "p25_days": 246.0,
+   "p75_days": 525.0,
+   "p90_days": 749.0,
+   "share_after_target_date": 0.886
+  },
+  {
+   "size": "Large",
+   "route": "delegated",
+   "n": 238,
+   "decided": 157,
+   "refusal_rate": 0.357,
+   "withdrawal_rate": 0.142,
+   "med_days": 241.0,
+   "p25_days": 154.0,
+   "p75_days": 368.0,
+   "p90_days": 489.0,
+   "share_after_target_date": 0.866
+  },
+  {
+   "size": "Medium",
+   "route": "committee",
+   "n": 135,
+   "decided": 125,
+   "refusal_rate": 0.112,
+   "withdrawal_rate": 0.0,
+   "med_days": 247.0,
+   "p25_days": 180.0,
+   "p75_days": 335.0,
+   "p90_days": 488.0,
+   "share_after_target_date": 0.649
+  },
+  {
+   "size": "Medium",
+   "route": "delegated",
+   "n": 2847,
+   "decided": 2713,
+   "refusal_rate": 0.149,
+   "withdrawal_rate": 0.028,
+   "med_days": 103.0,
+   "p25_days": 77.0,
+   "p75_days": 150.0,
+   "p90_days": 245.0,
+   "share_after_target_date": 0.636
+  },
+  {
+   "size": "Small",
+   "route": "committee",
+   "n": 590,
+   "decided": 570,
+   "refusal_rate": 0.189,
+   "withdrawal_rate": 0.014,
+   "med_days": 179.0,
+   "p25_days": 126.0,
+   "p75_days": 259.0,
+   "p90_days": 370.0,
+   "share_after_target_date": 0.939
+  },
+  {
+   "size": "Small",
+   "route": "delegated",
+   "n": 63499,
+   "decided": 59847,
+   "refusal_rate": 0.224,
+   "withdrawal_rate": 0.025,
+   "med_days": 62.0,
+   "p25_days": 55.0,
+   "p75_days": 85.0,
+   "p90_days": 130.0,
+   "share_after_target_date": 0.43
+  }
+ ],
+ "c_route_major_housing": [
+  {
+   "route": "committee",
+   "n": 79,
+   "decided": 58,
+   "refusal_rate": 0.069,
+   "withdrawal_rate": 0.033,
+   "med_days": 393.0,
+   "p25_days": 263.0,
+   "p75_days": 576.0,
+   "p90_days": 864.0,
+   "share_after_target_date": 0.913
+  },
+  {
+   "route": "delegated",
+   "n": 131,
+   "decided": 87,
+   "refusal_rate": 0.425,
+   "withdrawal_rate": 0.179,
+   "med_days": 234.0,
+   "p25_days": 150.0,
+   "p75_days": 355.0,
+   "p90_days": 488.0,
+   "share_after_target_date": 0.819
+  },
+  {
+   "route": "other",
+   "n": 13,
+   "decided": 5,
+   "refusal_rate": 0.2,
+   "withdrawal_rate": 0.167,
+   "med_days": 510.0,
+   "p25_days": 195.0,
+   "p75_days": 534.0,
+   "p90_days": 629.0,
+   "share_after_target_date": 1.0
+  },
+  {
+   "route": "unknown",
+   "n": 193,
+   "decided": 42,
+   "refusal_rate": 0.214,
+   "withdrawal_rate": 0.045,
+   "med_days": 253.0,
+   "p25_days": 140.0,
+   "p75_days": 376.0,
+   "p90_days": 511.0,
+   "share_after_target_date": 0.2
+  }
+ ],
+ "d_comment_boroughs": [
+  {
+   "area_name": "Barnet"
+  },
+  {
+   "area_name": "Bexley"
+  },
+  {
+   "area_name": "Brent"
+  },
+  {
+   "area_name": "City"
+  },
+  {
+   "area_name": "Croydon"
+  },
+  {
+   "area_name": "Ealing"
+  },
+  {
+   "area_name": "Enfield"
+  },
+  {
+   "area_name": "Lambeth"
+  },
+  {
+   "area_name": "Lewisham"
+  },
+  {
+   "area_name": "Newham"
+  },
+  {
+   "area_name": "Southwark"
+  },
+  {
+   "area_name": "Sutton"
+  },
+  {
+   "area_name": "Tower Hamlets"
+  },
+  {
+   "area_name": "Westminster"
+  }
+ ],
+ "d_distribution": [
+  {
+   "size": "(blank)",
+   "n": 12,
+   "share_zero": 0.833,
+   "p50": 0.0,
+   "p75": 0.0,
+   "p90": 0.9,
+   "p99": 1.0,
+   "max": 1.0,
+   "mean": 0.17
+  },
+  {
+   "size": "Large",
+   "n": 371,
+   "share_zero": 0.073,
+   "p50": 14.0,
+   "p75": 55.0,
+   "p90": 144.0,
+   "p99": 1074.2,
+   "max": 2716.0,
+   "mean": 75.19
+  },
+  {
+   "size": "Medium",
+   "n": 581,
+   "share_zero": 0.312,
+   "p50": 2.0,
+   "p75": 6.0,
+   "p90": 14.0,
+   "p99": 57.8,
+   "max": 163.0,
+   "mean": 5.92
+  },
+  {
+   "size": "Small",
+   "n": 36530,
+   "share_zero": 0.646,
+   "p50": 0.0,
+   "p75": 1.0,
+   "p90": 3.0,
+   "p99": 26.71,
+   "max": 3168.0,
+   "mean": 1.87
+  }
+ ],
+ "d_refusal_by_band": [
+  {
+   "size": "Large",
+   "comment_band": "0",
+   "decided": 9,
+   "refusal_rate": 0.333,
+   "med_days": 282.0,
+   "withdrawal_rate": 0.1
+  },
+  {
+   "size": "Large",
+   "comment_band": "1-2",
+   "decided": 19,
+   "refusal_rate": 0.368,
+   "med_days": 198.0,
+   "withdrawal_rate": 0.0
+  },
+  {
+   "size": "Large",
+   "comment_band": "3-9",
+   "decided": 33,
+   "refusal_rate": 0.121,
+   "med_days": 289.0,
+   "withdrawal_rate": 0.132
+  },
+  {
+   "size": "Large",
+   "comment_band": "10-24",
+   "decided": 41,
+   "refusal_rate": 0.195,
+   "med_days": 322.0,
+   "withdrawal_rate": 0.068
+  },
+  {
+   "size": "Large",
+   "comment_band": "25-99",
+   "decided": 45,
+   "refusal_rate": 0.222,
+   "med_days": 266.0,
+   "withdrawal_rate": 0.063
+  },
+  {
+   "size": "Large",
+   "comment_band": "100+",
+   "decided": 26,
+   "refusal_rate": 0.308,
+   "med_days": 353.0,
+   "withdrawal_rate": 0.133
+  },
+  {
+   "size": "Medium",
+   "comment_band": "0",
+   "decided": 152,
+   "refusal_rate": 0.072,
+   "med_days": 87.0,
+   "withdrawal_rate": 0.044
+  },
+  {
+   "size": "Medium",
+   "comment_band": "1-2",
+   "decided": 122,
+   "refusal_rate": 0.123,
+   "med_days": 97.0,
+   "withdrawal_rate": 0.039
+  },
+  {
+   "size": "Medium",
+   "comment_band": "3-9",
+   "decided": 119,
+   "refusal_rate": 0.109,
+   "med_days": 161.0,
+   "withdrawal_rate": 0.098
+  },
+  {
+   "size": "Medium",
+   "comment_band": "10-24",
+   "decided": 35,
+   "refusal_rate": 0.2,
+   "med_days": 205.0,
+   "withdrawal_rate": 0.125
+  },
+  {
+   "size": "Medium",
+   "comment_band": "25-99",
+   "decided": 14,
+   "refusal_rate": 0.5,
+   "med_days": 142.0,
+   "withdrawal_rate": 0.0
+  },
+  {
+   "size": "Medium",
+   "comment_band": "100+",
+   "decided": 3,
+   "refusal_rate": 0.333,
+   "med_days": 246.0,
+   "withdrawal_rate": 0.0
+  },
+  {
+   "size": "Small",
+   "comment_band": "0",
+   "decided": 20162,
+   "refusal_rate": 0.18,
+   "med_days": 59.0,
+   "withdrawal_rate": 0.029
+  },
+  {
+   "size": "Small",
+   "comment_band": "1-2",
+   "decided": 7546,
+   "refusal_rate": 0.253,
+   "med_days": 65.0,
+   "withdrawal_rate": 0.042
+  },
+  {
+   "size": "Small",
+   "comment_band": "3-9",
+   "decided": 2760,
+   "refusal_rate": 0.408,
+   "med_days": 80.0,
+   "withdrawal_rate": 0.061
+  },
+  {
+   "size": "Small",
+   "comment_band": "10-24",
+   "decided": 533,
+   "refusal_rate": 0.604,
+   "med_days": 116.0,
+   "withdrawal_rate": 0.083
+  },
+  {
+   "size": "Small",
+   "comment_band": "25-99",
+   "decided": 273,
+   "refusal_rate": 0.678,
+   "med_days": 120.0,
+   "withdrawal_rate": 0.114
+  },
+  {
+   "size": "Small",
+   "comment_band": "100+",
+   "decided": 58,
+   "refusal_rate": 0.672,
+   "med_days": 113.0,
+   "withdrawal_rate": 0.079
+  }
+ ],
+ "d_major_housing": [
+  {
+   "comment_band": "0",
+   "decided": 2,
+   "refusal_rate": 0.5,
+   "med_days": 109.0
+  },
+  {
+   "comment_band": "1-2",
+   "decided": 10,
+   "refusal_rate": 0.4,
+   "med_days": 181.0
+  },
+  {
+   "comment_band": "3-9",
+   "decided": 22,
+   "refusal_rate": 0.182,
+   "med_days": 303.0
+  },
+  {
+   "comment_band": "10-24",
+   "decided": 17,
+   "refusal_rate": 0.353,
+   "med_days": 322.0
+  },
+  {
+   "comment_band": "25-99",
+   "decided": 20,
+   "refusal_rate": 0.3,
+   "med_days": 243.0
+  },
+  {
+   "comment_band": "100+",
+   "decided": 9,
+   "refusal_rate": 0.111,
+   "med_days": 402.0
+  }
+ ],
+ "e_by_size": [
+  {
+   "app_type": "Full",
+   "size": "(blank)",
+   "closed": 4566.0,
+   "withdrawn": 342.0,
+   "withdrawal_rate": 0.075
+  },
+  {
+   "app_type": "Full",
+   "size": "Large",
+   "closed": 478.0,
+   "withdrawn": 47.0,
+   "withdrawal_rate": 0.098
+  },
+  {
+   "app_type": "Full",
+   "size": "Medium",
+   "closed": 8898.0,
+   "withdrawn": 348.0,
+   "withdrawal_rate": 0.039
+  },
+  {
+   "app_type": "Full",
+   "size": "Small",
+   "closed": 74218.0,
+   "withdrawn": 3007.0,
+   "withdrawal_rate": 0.041
+  },
+  {
+   "app_type": "Outline",
+   "size": "(blank)",
+   "closed": 2979.0,
+   "withdrawn": 90.0,
+   "withdrawal_rate": 0.03
+  },
+  {
+   "app_type": "Outline",
+   "size": "Large",
+   "closed": 177.0,
+   "withdrawn": 9.0,
+   "withdrawal_rate": 0.051
+  },
+  {
+   "app_type": "Outline",
+   "size": "Medium",
+   "closed": 875.0,
+   "withdrawn": 69.0,
+   "withdrawal_rate": 0.079
+  },
+  {
+   "app_type": "Outline",
+   "size": "Small",
+   "closed": 42281.0,
+   "withdrawn": 1150.0,
+   "withdrawal_rate": 0.027
+  }
+ ],
+ "e_by_dwelling_band": [
+  {
+   "dw_band": "2: 10-49",
+   "closed": 148.0,
+   "withdrawn": 21.0,
+   "withdrawal_rate": 0.142
+  },
+  {
+   "dw_band": "3: 50-149",
+   "closed": 46.0,
+   "withdrawn": 6.0,
+   "withdrawal_rate": 0.13
+  },
+  {
+   "dw_band": "4: 150+",
+   "closed": 28.0,
+   "withdrawn": 3.0,
+   "withdrawal_rate": 0.107
+  }
+ ],
+ "f_coverage": [
+  {
+   "app_type": "Amendment",
+   "n": 13264,
+   "with_parent_ref": 9611,
+   "share_with_ref": 0.725,
+   "parent_in_dataset": 2120
+  },
+  {
+   "app_type": "Conditions",
+   "n": 23231,
+   "with_parent_ref": 22666,
+   "share_with_ref": 0.976,
+   "parent_in_dataset": 5380
+  }
+ ],
+ "f_per_scheme": [
+  {
+   "schemes": 14153,
+   "mean_cond_apps": 2.56,
+   "median_cond_apps": 1.0,
+   "p90_cond_apps": 5.0,
+   "max_cond_apps": 145,
+   "mean_amend_apps": 1.35,
+   "max_amend_apps": 33
+  }
+ ],
+ "f_by_parent_size": [
+  {
+   "p_size": "(blank)",
+   "p_dw_band": "other/unknown",
+   "schemes": 42,
+   "mean_cond": 0.62,
+   "p90_cond": 1.0,
+   "mean_amend": 0.4,
+   "max_cond": 1
+  },
+  {
+   "p_size": "Large",
+   "p_dw_band": "other/unknown",
+   "schemes": 78,
+   "mean_cond": 5.18,
+   "p90_cond": 15.9,
+   "mean_amend": 1.14,
+   "max_cond": 33
+  },
+  {
+   "p_size": "Large",
+   "p_dw_band": "parent 10+ dwellings",
+   "schemes": 62,
+   "mean_cond": 5.24,
+   "p90_cond": 14.9,
+   "mean_amend": 1.1,
+   "max_cond": 54
+  },
+  {
+   "p_size": "Medium",
+   "p_dw_band": "other/unknown",
+   "schemes": 596,
+   "mean_cond": 1.37,
+   "p90_cond": 3.0,
+   "mean_amend": 0.59,
+   "max_cond": 19
+  },
+  {
+   "p_size": "Medium",
+   "p_dw_band": "parent 10+ dwellings",
+   "schemes": 17,
+   "mean_cond": 2.24,
+   "p90_cond": 3.0,
+   "mean_amend": 0.47,
+   "max_cond": 21
+  },
+  {
+   "p_size": "Small",
+   "p_dw_band": "other/unknown",
+   "schemes": 3354,
+   "mean_cond": 1.12,
+   "p90_cond": 2.0,
+   "mean_amend": 0.47,
+   "max_cond": 18
+  }
+ ],
+ "f_stage_stats": [
+  {
+   "app_type": "Amendment",
+   "n": 13264,
+   "decided": 11360,
+   "refusal_rate": 0.169,
+   "withdrawal_rate": 0.073,
+   "med_days": 48.0,
+   "p25_days": 28.0,
+   "p75_days": 68.0,
+   "p90_days": 121.0,
+   "share_after_target_date": 0.379
+  },
+  {
+   "app_type": "Conditions",
+   "n": 23231,
+   "decided": 20487,
+   "refusal_rate": 0.111,
+   "withdrawal_rate": 0.05,
+   "med_days": 59.0,
+   "p25_days": 50.0,
+   "p75_days": 100.0,
+   "p90_days": 184.0,
+   "share_after_target_date": 0.517
+  }
+ ],
+ "g_boroughs": [
+  {
+   "area_name": "Croydon",
+   "n": 28,
+   "decided": 17,
+   "refusal_rate": 0.471,
+   "withdrawal_rate": 0.15,
+   "med_days": 289.0,
+   "p90_days": 506.0,
+   "committee_share": 0.143,
+   "s106_share": 0.0,
+   "med_dwellings": 21.0
+  },
+  {
+   "area_name": "Hounslow",
+   "n": 23,
+   "decided": 14,
+   "refusal_rate": 0.357,
+   "withdrawal_rate": 0.125,
+   "med_days": 357.0,
+   "p90_days": 807.0,
+   "committee_share": 0.13,
+   "s106_share": 0.304,
+   "med_dwellings": 40.0
+  },
+  {
+   "area_name": "Merton",
+   "n": 19,
+   "decided": 11,
+   "refusal_rate": 0.273,
+   "withdrawal_rate": 0.0,
+   "med_days": 342.0,
+   "p90_days": 649.0,
+   "committee_share": 0.105,
+   "s106_share": 0.474,
+   "med_dwellings": 17.0
+  },
+  {
+   "area_name": "Hillingdon",
+   "n": 20,
+   "decided": 17,
+   "refusal_rate": 0.176,
+   "withdrawal_rate": 0.056,
+   "med_days": 191.0,
+   "p90_days": 519.0,
+   "committee_share": 0.0,
+   "s106_share": 0.1,
+   "med_dwellings": 50.0
+  },
+  {
+   "area_name": "Wandsworth",
+   "n": 21,
+   "decided": 13,
+   "refusal_rate": 0.154,
+   "withdrawal_rate": 0.188,
+   "med_days": 185.0,
+   "p90_days": 428.0,
+   "committee_share": 0.429,
+   "s106_share": 0.286,
+   "med_dwellings": 44.0
+  },
+  {
+   "area_name": "Ealing",
+   "n": 22,
+   "decided": 14,
+   "refusal_rate": 0.143,
+   "withdrawal_rate": 0.125,
+   "med_days": 346.0,
+   "p90_days": 570.0,
+   "committee_share": 0.364,
+   "s106_share": 0.5,
+   "med_dwellings": 47.0
+  },
+  {
+   "area_name": "Barnet",
+   "n": 29,
+   "decided": 14,
+   "refusal_rate": 0.071,
+   "withdrawal_rate": 0.125,
+   "med_days": 285.0,
+   "p90_days": 703.0,
+   "committee_share": 0.276,
+   "s106_share": 0.345,
+   "med_dwellings": 92.0
+  }
+ ],
+ "g_summary": [
+  {
+   "boroughs": 7,
+   "min_refusal": 0.071,
+   "median_refusal": 0.176,
+   "max_refusal": 0.471,
+   "min_med_days": 184.5,
+   "median_med_days": 289.0,
+   "max_med_days": 357.0
+  }
+ ],
+ "g_pooled": [
+  {
+   "n": 422,
+   "decided": 192,
+   "refusal_rate": 0.266,
+   "withdrawal_rate": 0.135,
+   "med_days": 289.0,
+   "p25_days": 173.0,
+   "p75_days": 440.0,
+   "p90_days": 610.0,
+   "share_after_target_date": 0.743
+  }
+ ],
+ "h_status_mix": [
+  {
+   "grp": "Full 10+ dwellings",
+   "status": "Undecided",
+   "n": 162
+  },
+  {
+   "grp": "Full 10+ dwellings",
+   "status": "Permitted",
+   "n": 91
+  },
+  {
+   "grp": "Full 10+ dwellings",
+   "status": "Rejected",
+   "n": 51
+  },
+  {
+   "grp": "Full 10+ dwellings",
+   "status": "Conditions",
+   "n": 50
+  },
+  {
+   "grp": "Full 10+ dwellings",
+   "status": "",
+   "n": 36
+  },
+  {
+   "grp": "Full 10+ dwellings",
+   "status": "Withdrawn",
+   "n": 30
+  },
+  {
+   "grp": "Full 10+ dwellings",
+   "status": "Unresolved",
+   "n": 2
+  },
+  {
+   "grp": "Full Large (any)",
+   "status": "Permitted",
+   "n": 145
+  },
+  {
+   "grp": "Full Large (any)",
+   "status": "Undecided",
+   "n": 142
+  },
+  {
+   "grp": "Full Large (any)",
+   "status": "Conditions",
+   "n": 69
+  },
+  {
+   "grp": "Full Large (any)",
+   "status": "Rejected",
+   "n": 41
+  },
+  {
+   "grp": "Full Large (any)",
+   "status": "Withdrawn",
+   "n": 20
+  },
+  {
+   "grp": "Full Large (any)",
+   "status": "",
+   "n": 10
+  }
+ ],
+ "h_cohort_2022_23": [
+  {
+   "size": "(blank)",
+   "n": 849,
+   "decided": 708,
+   "refusal_rate": 0.346,
+   "withdrawal_rate": 0.136,
+   "med_days": 0.0,
+   "p25_days": 0.0,
+   "p75_days": 0.0,
+   "p90_days": 0.0,
+   "share_after_target_date": null,
+   "share_still_undecided": 0.001
+  },
+  {
+   "size": "Large",
+   "n": 474,
+   "decided": 301,
+   "refusal_rate": 0.229,
+   "withdrawal_rate": 0.112,
+   "med_days": 329.0,
+   "p25_days": 196.0,
+   "p75_days": 503.0,
+   "p90_days": 704.0,
+   "share_after_target_date": 0.803,
+   "share_still_undecided": 0.259
+  },
+  {
+   "size": "Medium",
+   "n": 5260,
+   "decided": 4893,
+   "refusal_rate": 0.142,
+   "withdrawal_rate": 0.046,
+   "med_days": 95.0,
+   "p25_days": 71.0,
+   "p75_days": 143.0,
+   "p90_days": 245.0,
+   "share_after_target_date": 0.327,
+   "share_still_undecided": 0.022
+  },
+  {
+   "size": "Small",
+   "n": 44525,
+   "decided": 41453,
+   "refusal_rate": 0.236,
+   "withdrawal_rate": 0.045,
+   "med_days": 60.0,
+   "p25_days": 55.0,
+   "p75_days": 84.0,
+   "p90_days": 136.0,
+   "share_after_target_date": 0.393,
+   "share_still_undecided": 0.024
+  }
+ ],
+ "h_cohort_major_housing": [
+  {
+   "n": 242,
+   "decided": 135,
+   "refusal_rate": 0.304,
+   "withdrawal_rate": 0.156,
+   "med_days": 320.0,
+   "p25_days": 178.0,
+   "p75_days": 504.0,
+   "p90_days": 690.0,
+   "share_after_target_date": 0.747,
+   "share_still_undecided": 0.293
+  }
+ ],
+ "f_top_parents": [
+  {
+   "area_name": "Southwark",
+   "parent": "23/AP/2124",
+   "n_cond": 145,
+   "parent_size": null,
+   "parent_dwellings": null
+  },
+  {
+   "area_name": "Southwark",
+   "parent": "12/AP/1092",
+   "n_cond": 70,
+   "parent_size": null,
+   "parent_dwellings": null
+  },
+  {
+   "area_name": "Ealing",
+   "parent": "182579OUT",
+   "n_cond": 68,
+   "parent_size": null,
+   "parent_dwellings": null
+  },
+  {
+   "area_name": "Lambeth",
+   "parent": "17/03733/FUL",
+   "n_cond": 65,
+   "parent_size": null,
+   "parent_dwellings": null
+  },
+  {
+   "area_name": "Southwark",
+   "parent": "22/AP/0554",
+   "n_cond": 54,
+   "parent_size": "Large",
+   "parent_dwellings": 340.0
+  }
+ ]
+}
