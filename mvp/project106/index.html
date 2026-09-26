@@ -989,7 +989,8 @@ const CF = () => Math.max(0, Math.min(3, Math.round(+S.params.commercial_floors 
 function commOf(o) {
   const n = CF(); if (!n || !o) return null;
   const gia = o.site_area_m2 * Math.max(o.podium_coverage || 0, o.tower_coverage || 0) * n, nia = gia * COMM.nia_ratio;
-  const receipts = nia * COMM.value_psm, cost = gia * ((o.appraisal && o.appraisal.build_rate) || 0);
+  const ai = A(), receipts = nia * COMM.value_psm;
+  const cost = gia * ((o.appraisal && o.appraisal.build_rate) || 0) * 1.10 * 1.10 + gia * (ai.mcil_psm || 0) + receipts * 0.175;   // build + contingency, fees, Mayoral CIL and the same 17.5% return
   return { floors: n, gia, nia, receipts, cost, net: receipts - cost, height_m: n * o.floor_to_floor_m };
 }
 /* Houses: 1-9 houses of about 100 m² GIA (3 bed, 86 m² NIA each), 2-3 storeys, no affordable ask under 10 homes. Footprint is sized so the engine counts exactly n homes. */
@@ -1006,7 +1007,13 @@ function setBtype(t) {
   else if (S.blockParams) { const keep = { site_area_m2: S.params.site_area_m2, land_type: S.params.land_type }; S.params = Object.assign({}, S.blockParams, keep); }
   S.btype = t;
 }
-function compute() { if (S.btype === 'houses') applyHouses(); OUT = engine(S.params, A()); OUT.comm = commOf(OUT); return OUT; }
+function compute() {
+  if (S.btype === 'houses') applyHouses(); OUT = engine(S.params, A()); OUT.comm = commOf(OUT);
+  if (OUT.comm && OUT.routes && OUT.routes.mayor && OUT.max_height_m + OUT.comm.height_m > 30 && OUT.routes.mayor.status !== 'referable') {   // commercial floors count for the 30 m test
+    OUT.routes.mayor = { status: 'referable', reasons: [`over 30 m including ${OUT.comm.floors} commercial floor${OUT.comm.floors > 1 ? 's' : ''}`] };
+  }
+  return OUT;
+}
 function offer() {
   const k = JSON.stringify([S.params, A()]);
   if (k !== S.offerKey) { S.offerVal = bestOffer(S.params, A()); S.offerKey = k; }
@@ -1029,7 +1036,9 @@ function observed(h) {
 /* ================= approval probability: the team's model (model/score.js + model/approval_model.json) ================= */
 /* Loaded with import() at startup; if it fails, the approval UI hides. p_approved is always shown with the borough baseline (model/README.md). */
 const AP = { ok: false, failed: false, model: null, score: null, memo: new Map() };
-const AP_CAVEAT = 'From 2022–25 London decisions; only modestly better than the borough baseline (AUC 0.65 vs 0.62).';
+const AP_CAVEAT = 'From 2022–25 London decisions; only modestly better than the baseline (AUC 0.65 vs 0.62). PTAL and deprivation assumed London-typical. Where a borough has no data for this scheme size, the London rate is used.';
+const s106Txt = p => p == null ? '' : p < 0.01 ? '<1% (model, indicative)' : `${Math.round(p * 100)}% (model, indicative)`;
+const BL = a => (a && a.base_lbl) || 'borough baseline';
 const LPA_FIX = { 'kingston upon thames': 'Kingston', 'richmond upon thames': 'Richmond' };
 /* council name -> the model's borough naming: '&' for 'and', Kingston, Richmond. City of London is one of the model's small LPAs. */
 function lpaOf(name) {
@@ -1071,6 +1080,10 @@ function approvalFor(o, flags) {
   let r = AP.memo.get(k);
   if (!r) {
     try { r = AP.score(AP.model, inp); } catch (e) { console.warn('approval score failed', e); return null; }
+    const hn = +inp.homes_net || 0, band = hn <= 9 ? '1-9' : hn <= 49 ? '10-49' : hn <= 149 ? '50-149' : '150+';
+    const cell = AP.model && AP.model.baseline && AP.model.baseline.by_borough_size ? AP.model.baseline.by_borough_size[`${inp.lpa}|${band}`] : null;
+    const dph = inp.site_area_m2 > 0 ? hn / (inp.site_area_m2 / 1e4) : 0;
+    r = Object.assign({}, r, { base_lbl: cell ? 'borough baseline' : 'London baseline', out_of_range: dph > 1000 || hn > 700 });
     if (AP.memo.size > 4000) AP.memo.clear();
     AP.memo.set(k, r);
   }
@@ -1247,7 +1260,7 @@ function ctx() {
   const o = OUT || compute(), f = o.appraisal, r = o.routes, c = councilPack(), flags = classify();
   const routeT = r.route_min_pct, ct = cnum(c, 'affordable_target_pct'), sm = cnum(c, 'affordable_site_min_pct');
   // Planning asks the council's site minimum where the pack states one, else its plan target, never less than the route minimum
-  const ask = sm != null && sm > routeT ? sm : ct != null && ct > routeT ? ct : routeT;
+  const ask = OUT && OUT.homes < 10 ? 0 : sm != null && sm > routeT ? sm : ct != null && ct > routeT ? ct : routeT;
   return {
     o, f, r, c, flags, routeT, ct, sm, ask, askLbl: ask === routeT ? null : ask === sm ? 'site minimum' : 'plan target', off: offer(), a: withDefaults(A()),
     consv: flags.find(x => x.key === 'ca'), stop: flags.filter(x => x.tier === 'STOP'), ser: flags.filter(x => x.tier === 'SERIOUS'),
@@ -1261,7 +1274,8 @@ function ctx() {
 function routeName(x) { return x.o.social_rent_share >= RULES.temporary.min_social_rent_share && x.routeT === RULES.temporary.threshold[x.r.land_type] ? 'temporary route' : 'Fast Track'; }
 function verdictOf(x) {
   const level = x.stop.length ? 'red' : x.ser.length ? 'concerns' : 'ok';
-  const title = level === 'red' ? 'Red flags' : level === 'concerns' ? 'Concerns' : 'Supportable in principle';
+  const pend = x.cstatus && x.cstatus !== 'ok' && x.cstatus !== 'cached';
+  const title = level === 'red' ? 'Red flags' : level === 'concerns' ? 'Concerns' : pend ? 'Screening incomplete' : 'Supportable in principle';
   const R = [];
   if (x.cstatus === 'error') R.push('Constraint lookup offline: screening incomplete');
   if (x.stop.length) R.push('Red flag: policy presumption against housing here');
@@ -1303,8 +1317,8 @@ function take35(x) {
 const PL = {
   route: x => { const rn = routeName(x); return `${x.r.badge}. ${f0(x.o.affordable_hr_pct)}% by habitable room, ${fp(x.o.social_rent_share)} Social Rent. Minimum for the ${rn} here: ${x.routeT}%${rn === 'temporary route' ? ` (Fast Track ${x.r.fast_track.threshold}%)` : ''}.`; },
   need: x => `${x.ask}% affordable by habitable room${x.askLbl ? `, ${poss(x.cname)} ${x.askLbl}` : ''}, 60% of it Social Rent. And no red flags.`,
-  flags: x => flagsLine(x) + (x.ap ? ` Approval model: ${fp(x.ap.p_approved)} vs a ${fp(x.ap.baseline_rate)} borough baseline.` : ''),
-  approval: x => x.ap ? `${fp(x.ap.p_approved)} approval probability against a ${fp(x.ap.baseline_rate)} borough baseline. Drivers: ${drvTxt(x.ap, 3)}. Past decisions, not design quality.`
+  flags: x => flagsLine(x) + (x.ap ? ` Approval model: ${fp(x.ap.p_approved)} vs a ${fp(x.ap.baseline_rate)} ${BL(x.ap)}.` : ''),
+  approval: x => x.ap ? `${fp(x.ap.p_approved)} approval probability against a ${fp(x.ap.baseline_rate)} ${BL(x.ap)}. Drivers: ${drvTxt(x.ap, 3)}. Past decisions, not design quality.`
     : S.outside ? 'The approval model covers London boroughs only.' : 'The approval model is not loaded. Ask me about the route instead.',
   cil: x => `Mayoral CIL ${fm(x.f.mcil)}, fixed. Borough CIL ${bcilTxt(x)}. Neither is negotiable.`,
   time: x => `Observed, ${x.obs.where}, ${x.obs.label}: median ${f0(x.obs.days)} days.${x.stop.length ? ' Red-flag sites fall outside this sample.' : ''} S106 wording: ${OBS.s106_medium.with} vs ${OBS.s106_medium.without} days.`,
@@ -1317,7 +1331,7 @@ const PL = {
   residents: () => S.residents ? 'Residents are at the table. They count in the Balanced point.' : "Residents aren't at the table. Invite them and they count in the Balanced point.",
   mayor: x => `Mayor: ${x.r.mayor.status}, ${x.r.mayor.reasons[0]}.`,
   policy: policyLine,
-  homes: x => `${x.o.homes} homes, ${scaleOf(x.o.homes)} scale${!S.site.custom && S.site.dwellings_min ? `. The register says ${S.site.dwellings_min}–${S.site.dwellings_max}` : ''}.`,
+  homes: x => `${x.o.homes} homes${!S.site.custom && S.site.dwellings_min ? `. The register says ${S.site.dwellings_min}–${S.site.dwellings_max}` : ''}.`,
   hello: x => `Planning, ${x.cname}. Ask me about the route, constraints, timing or approval.`,
   other: () => 'I can speak to the route, constraints, approval, CIL, timing, height and tenure.'
 };
@@ -1417,7 +1431,7 @@ async function askLive(agent, q) {
       const d = await timedJSON('/api/agent', 15000, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ agent, messages, state, system }) });
       const t = typeof d === 'string' ? d : d && (d.text || d.reply || d.content || d.message);
       if (typeof t === 'string' && t.trim()) { S.api = true; return t.trim(); }
-    } catch (e) { S.api = false; }
+    } catch (e) { if (/HTTP 40[45]/.test(String(e && e.message))) S.api = false; }
   }
   return null;
 }
@@ -1499,7 +1513,7 @@ function propose(agent, title, sub, changes) {
     if (gen !== S.gen) return 'cancel';
     const ag = AG[agent], row = document.createElement('div'), cont = lastSpeaker() === agent;
     const b = apNow(), a2 = changes ? apAt(changes) : b;
-    const apHtml = b && a2 ? `<span class="ap ap-ui">Approval probability ${fp(b.p_approved)} → <b>${fp(a2.p_approved)}</b> · borough baseline ${fp(a2.baseline_rate)}</span>` : '';
+    const apHtml = b && a2 ? `<span class="ap ap-ui">Approval probability ${fp(b.p_approved)} → <b>${fp(a2.p_approved)}</b> · ${BL(a2)} ${fp(a2.baseline_rate)}</span>` : '';
     row.className = `msg m-${agent}${cont ? ' cont' : ''}`;
     row.dataset.agent = agent;
     row.style.setProperty('--c', ag.color);
@@ -1544,7 +1558,7 @@ function askTable(raw) {
     post('you', q);
     if (target === 'residents' && !S.residents) setResidents(true, true);
     const agents = target ? [target] : ['planning', 'developer'].concat(S.residents ? ['residents'] : []);
-    agents.forEach(ag => say(ag, async () => (await askLive(ag, clean)) || scripted(ag, intent)));
+    agents.forEach(ag => say(ag, async () => intent !== 'other' ? scripted(ag, intent) : ((await askLive(ag, clean)) || scripted(ag, intent))));   // numbers come from the engine; the AI answers open questions
     if (!target && REACT[intent]) say('planning', async () => { const x = ctx(); return REACT[intent](x); });
     if (!LANE_SIDE && target !== 'residents') typedProposal(intent, clean);
   } finally { LANE_SIDE = false; }
@@ -1633,12 +1647,12 @@ async function runStage1() {
   if (S.constraints.status === 'loading' && S.cPromise) await Promise.race([S.cPromise, sleepReal(9000)]);
   compute();
   const x = ctx(), v = verdictOf(x), ap = x.ap;
-  const apHtml = ap ? `<p class="apv">Approval probability <b>${fp(ap.p_approved)}</b> · borough baseline ${fp(ap.baseline_rate)}<i class="tag">model</i></p>` : '';
+  const apHtml = ap ? `<p class="apv">Approval probability <b>${fp(ap.p_approved)}</b> · ${BL(ap)} ${fp(ap.baseline_rate)}<i class="tag">model</i></p>` : '';
   await say('planning', `<div class="verdict v-${v.level}">${esc(v.title)}</div><ul class="reasons">${v.reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul>${apHtml}`,
-    { raw: true, plain: `${v.title}: ${v.reasons.join('; ')}${ap ? `. Approval probability ${fp(ap.p_approved)} vs a ${fp(ap.baseline_rate)} borough baseline` : ''}`, delay: 1100 });
+    { raw: true, plain: `${v.title}: ${v.reasons.join('; ')}${ap ? `. Approval probability ${fp(ap.p_approved)} vs a ${fp(ap.baseline_rate)} ${BL(ap)}` : ''}`, delay: 1100 });
   showStamp(v); S.s1done = true; renderResults();
   if (ap) await say('planning', `${ap.p_approved >= ap.baseline_rate ? 'Above' : 'Below'} the borough baseline. What moves it: ${drvTxt(ap, 3)}. The model can't see design quality.`);
-  if (x.o.homes < 10) await say('planning', `Under 10 homes: no affordable housing threshold applies. S106 ${x.ap && x.ap.p_s106 != null ? (x.ap.p_s106 < 0.01 ? 'unlikely (<1%, model)' : 'likely ' + fp(x.ap.p_s106) + ' (model)') : 'unlikely for a small scheme'}; CIL still applies.`);
+  if (x.o.homes < 10) await say('planning', `Under 10 homes: no affordable housing threshold applies. S106 probability ${x.ap && x.ap.p_s106 != null ? s106Txt(x.ap.p_s106) : 'low for a small scheme'}; CIL still applies.`);
   else await say('planning', `Route: ${x.r.badge}. ${f0(x.o.affordable_hr_pct)}% by habitable room, ${fp(x.o.social_rent_share)} Social Rent.`);
   if (x.r.mayor.status !== 'below thresholds') await say('planning', `Mayor: ${x.r.mayor.status}, ${x.r.mayor.reasons[0]}.`);
   await say('developer', v.level === 'red' ? "Red flags mean I'm buying a refusal. I won't fund that." : v.level === 'concerns' ? "Concerns I can price: consultants and time. Don't cut my homes to fix them." : 'Good. Then it comes down to the numbers.');
@@ -1796,7 +1810,7 @@ function balancedSearch() {
   let balanced = null, feasible = 0, scored = 0;
   const solo = new Set(), single = [];
   const apOf = v => { if (!useAp) return null; if (v.ap === undefined) { const m = massing(v.params, aw); v.ap = approvalFor(Object.assign({}, m, tenure(m, v.params)), flags); scored++; } return v.ap ? v.ap.p_approved : null; };
-  const apOk = v => { if (!useAp) return true; const pa = apOf(v); return pa != null && pa > d.app; };
+  const apOk = v => { if (!useAp) return true; const pa = apOf(v); return pa != null && pa > d.app && !(v.ap && v.ap.out_of_range); };   // outside the model's data: never picked
   for (const v of sw.variants) {
     const miss = base.filter(k => !(v.U[k] > d[k]));
     if (miss.length === 1) { single.push([v, miss[0]]); continue; }
@@ -1860,7 +1874,7 @@ function renderBar() {
   if (hs) {
     const nh = $('#nHouses'); if (document.activeElement !== nh) nh.value = S.houses; $('#nHousesOut').textContent = S.houses;
     let ap = null; try { ap = approvalFor(o); } catch (e) { ap = null; }
-    $('#houseNote').textContent = `Under 10 homes: no affordable ask${ap && ap.p_s106 != null ? ` · S106 ${ap.p_s106 < 0.01 ? 'unlikely (<1%, model)' : `likely ${(ap.p_s106 * 100).toFixed(0)}% (model)`}` : ''} · land priced for ${Math.max(1, Math.min(9, Math.round(+S.houses || 5)))} plots of ${HOUSE_PLOT_M2} m² (assumption)`;
+    $('#houseNote').textContent = `Under 10 homes: no affordable ask${ap && ap.p_s106 != null ? ` · S106 probability ${s106Txt(ap.p_s106)}` : ''} · land priced for ${Math.max(1, Math.min(9, Math.round(+S.houses || 5)))} plots of ${HOUSE_PLOT_M2} m² (assumption)`;
   }
   const st = $('#storeys'); if (document.activeElement !== st) st.value = p.podium_storeys + cf;
   $('#storeysOut').textContent = o.storeys + cf;
@@ -1949,7 +1963,7 @@ function renderResults() {
   if (ap) {
     countTo(mv, ap.p_approved * 100, v => Math.round(v) + '%');
     mv.classList.toggle('neg', ap.p_approved < ap.baseline_rate);
-    $('#mApS').textContent = `borough baseline ${fp(ap.baseline_rate)}`;
+    $('#mApS').textContent = `${BL(ap)} ${fp(ap.baseline_rate)}`;
     $('#mApBox').title = `Model probability of approval. ${AP_CAVEAT}${ap.warnings.length ? ' ' + ap.warnings.join(' ') : ''}`;
   } else {
     mv.textContent = '–'; mv._v = null; mv.classList.remove('neg');
@@ -1972,10 +1986,10 @@ function renderWhy() {
   else {
     const d = drv(ap, 3);
     html = `<div class="aprow"><span class="lbl">Approval probability</span><i class="tag">model</i></div>
-      <div class="aprow"><span class="apbig ${ap.p_approved < ap.baseline_rate ? 'neg' : ''}">${fp(ap.p_approved)}</span><span class="apbase">borough baseline ${fp(ap.baseline_rate)}</span></div>
+      <div class="aprow"><span class="apbig ${ap.p_approved < ap.baseline_rate ? 'neg' : ''}">${fp(ap.p_approved)}</span><span class="apbase">${BL(ap)} ${fp(ap.baseline_rate)}</span></div>
       <div class="lbl">Why</div>
       <ul>${d.map(q => `<li><span title="${esc(q.label)}">${esc(q.label)}</span><b class="${q.effect_pp >= 0 ? 'up' : 'dn'}">${ppTxt(q.effect_pp)}</b></li>`).join('')}</ul>
-      ${OUT.homes >= 10 ? `<div class="s106" title="${esc(ap.s106_note)}"><b>S106 expected</b> · 10+ homes</div>` : ap.p_s106 != null ? `<div class="s106" title="${esc(ap.s106_note)}">S106 ${fp(ap.p_s106)} likely · indicative</div>` : ''}
+      ${OUT.homes >= 10 ? `<div class="s106" title="${esc(ap.s106_note)}"><b>S106 expected</b> · 10+ homes</div>` : ap.p_s106 != null ? `<div class="s106" title="${esc(ap.s106_note)}">S106 probability ${s106Txt(ap.p_s106)}</div>` : ''}
       <div class="cav">${esc(AP_CAVEAT)}</div>
       ${ap.warnings.length ? `<div class="cav" title="${esc(ap.warnings.join(' '))}">⚠ ${esc(ap.warnings.join(' '))}</div>` : ''}`;
   }
@@ -2006,10 +2020,10 @@ function outcomeHTML() {
   const big = x.stop.concat(x.ser), fl = big.map(q => ({ label: q.label, how: handleOf(q.label), c: TIER[q.tier].c }));
   if (x.tall && !big.some(q => q.key === 'ca')) fl.push({ label: `Tall building, ${o.max_height_m.toFixed(0)} m`, how: 'townscape and tall-building case', c: TIER.CHECK.c });
   const d0 = drv(ap, 1)[0], diff = ap ? Math.round((ap.p_approved - ap.baseline_rate) * 100) : 0;
-  const s106 = a.s106_per_home != null ? fm(f.s106) : major ? 'expected · £ not entered' : ap && ap.p_s106 != null ? `${fp(ap.p_s106)} likely · £ not entered` : '£ not entered';
+  const s106 = a.s106_per_home != null ? fm(f.s106) : major ? 'expected · £ not entered' : ap && ap.p_s106 != null ? `probability ${s106Txt(ap.p_s106)} · £ not entered` : '£ not entered';
   const pitchP = [
     `${f0(o.affordable_homes)} affordable homes, ${f0(o.social_rent_homes)} at Social Rent: ${f0(o.affordable_hr_pct)}% by habitable room ${vt ? 'with early and late viability reviews, so it rises if values do' : `clears the ${x.routeT}% ${routeName(x)} minimum${reviews ? `, with viability reviews for the gap to the ${x.ask}% ask` : ' with no viability assessment'}`}.`,
-    ap ? `Approval probability ${fp(ap.p_approved)} against a ${fp(ap.baseline_rate)} borough baseline${diff >= 1 ? `, ${diff} points above it` : diff <= -1 ? `, ${-diff} points below it` : ''}${d0 ? `; biggest factor: ${d0.label} (${ppTxt(d0.effect_pp)})` : ''}.` : null,
+    ap ? `Approval probability ${fp(ap.p_approved)} against a ${fp(ap.baseline_rate)} ${BL(ap)}${diff >= 1 ? `, ${diff} points above it` : diff <= -1 ? `, ${-diff} points below it` : ''}${d0 ? `; biggest factor: ${d0.label} (${ppTxt(d0.effect_pp)})` : ''}.` : null,
     `${fm(cil)} of CIL for local infrastructure${major ? ', plus a Section 106 agreement' : ''}${fl.length ? `; ${fl.length === 1 ? 'the flag is' : 'flags are'} met with a ${fl[0].how.split(/[;,]/)[0]}` : '; no red flags at this point'}.`
   ].filter(Boolean);
   const head = o.breakeven_psm != null && f.sale_psm > 0 ? (f.sale_psm - o.breakeven_psm) / f.sale_psm : null;
@@ -2051,7 +2065,7 @@ function outcomeHTML() {
       <div class="oc-big"><div><b>${f0(o.affordable_homes)}</b><small>affordable homes</small></div><div><b>${f0(o.social_rent_homes)}</b><small>Social Rent homes</small></div></div>
       <dl class="oc-rows">
         <dt>Route</dt><dd>${x.o.homes < 10 ? 'no affordable threshold under 10 homes' : vt ? `below the ${x.routeT}% minimum: reviews` : `${esc(r.badge)} met`}</dd>
-        <dt>Planning's ask</dt><dd>${x.ask}% · ${o.affordable_hr_pct >= x.ask ? 'met' : `${f0(x.ask - o.affordable_hr_pct)} points short`}</dd>
+        <dt>Planning's ask</dt><dd>${o.homes < 10 ? 'none under 10 homes' : `${x.ask}% · ${o.affordable_hr_pct >= x.ask ? 'met' : `${f0(x.ask - o.affordable_hr_pct)} points short`}`}</dd>
         <dt>Contributions</dt><dd>${fm(cil)} CIL${major ? ' + S106' : ''}</dd>
       </dl>
       <div><span class="lbl">Red flags · how they are handled</span><ul class="oc-list">${flagList}</ul></div>
@@ -2143,7 +2157,7 @@ function renderHoT() {
     cell('Mayoral CIL', fm(f.mcil), 'fixed, 2026 rate'),
     cell('Borough CIL', x.a.bcil_psm == null ? '<span class="nr">n/a</span>' : (bc && bc.range ? '≈ ' : '') + fm(f.bcil), x.a.bcil_psm == null ? 'not researched' : bc && bc.range ? 'zone midpoint, unindexed' : ''),
     cell('S106 £', x.a.s106_per_home == null ? '£0' : fm(f.s106), x.a.s106_per_home == null ? (o.homes >= 10 ? 'S106 expected · £ not entered' : 'not entered') : ''),
-    cell('Approval', ap ? fp(ap.p_approved) : '–', ap ? `borough baseline ${fp(ap.baseline_rate)}` : 'model not loaded')
+    cell('Approval', ap ? fp(ap.p_approved) : '–', ap ? `${BL(ap)} ${fp(ap.baseline_rate)}` : 'model not loaded')
   ].join('');
 }
 function refresh(opt) {
@@ -2644,7 +2658,7 @@ function bindUI() {
 
 /* ================= boot ================= */
 async function getJSON(u, onHeaders) { const r = await fetch(u, { cache: 'no-cache' }); if (!r.ok) throw new Error(u + ' ' + r.status); if (onHeaders) onHeaders(r.headers); return r.json(); }
-async function dataListing() { try { const r = await fetch('data/', { cache: 'no-cache' }); if (!r.ok) return null; const t = await r.text(); return /<a\s/i.test(t) ? t : null; } catch (e) { return null; } }
+async function dataListing() { if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return null; try { const r = await fetch('data/', { cache: 'no-cache' }); if (!r.ok) return null; const t = await r.text(); return /<a\s/i.test(t) ? t : null; } catch (e) { return null; } }
 async function boot() {
   bindUI();
   setupSite(); detectCouncil(); applyPreset('mid');
