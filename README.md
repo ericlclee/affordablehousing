@@ -1,5 +1,7 @@
 # House London: approval and S106 prediction
 
+The independent [CivisOpt feasibility extension](mvp/research/CIVISOPT_IMPLEMENTATION.md) compares affordable-room allocations and transparent financial assumptions. Serve `mvp/dist` and open `civisopt.html`; the existing model pipeline below is unchanged.
+
 Predicts, for a proposed London housing scheme, **P(approved)** and **P(S106 | approved)** from proposal parameters (storeys, homes, floor area, tenure, amenities such as gym or pool) plus site context (conservation area, flood zone, PTAL, Opportunity Area, deprivation).
 
 ## Setup

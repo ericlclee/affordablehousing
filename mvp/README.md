@@ -14,6 +14,14 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 
 Open **http://127.0.0.1:4173/**. Serve over HTTP rather than opening index.html directly.
 
+## CivisOpt: evidence-grounded feasibility
+
+Open **http://127.0.0.1:4173/civisopt.html** for the new site study. It compares three integer affordable-room allocations against a fixed envelope and editable financial assumptions, with sourced policy checks, break-even values, input snapshots and a printable brief. A public Croydon register record anchors the illustration; its indicative boundary and unresolved site conditions remain visible.
+
+Run `npm test` from this directory with Node.js 22+ for the finance, allocation, policy and adapter checks. No dependency installation is required. See [implementation scope](research/CIVISOPT_IMPLEMENTATION.md), [source audit](research/CIVISOPT_SOURCES.md), and [model handoff](research/MODEL_INTEGRATION.md).
+
+The original interface below remains a separate illustrative planning conversation. Its actor scores do not enter the CivisOpt calculations.
+
 ## What you can explore
 
 - Choose London coordinates on a map; identify the council using all 33 GLA borough areas.
