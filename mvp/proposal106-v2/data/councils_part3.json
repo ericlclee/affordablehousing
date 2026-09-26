@@ -1,0 +1,211 @@
+[
+  {
+    "name": "Lewisham",
+    "local_plan": {
+      "name": "Lewisham Local Plan",
+      "year_adopted": 2025,
+      "url": "https://lewisham.gov.uk/-/media/services/planning/planning-policy/local-plan/lpnov25/adopted-lewisham-local-plan_2025_oct_tagged_final.pdf"
+    },
+    "affordable_target_pct": 50,
+    "affordable_target_note": "Strategic target 50% of all new homes genuinely affordable; Fast Track Route at minimum 35%; tenure 70% social rent/London Affordable Rent, 30% London Living Rent/shared ownership.",
+    "borough_cil_resi_per_m2": "70-100",
+    "borough_cil_note": "2015 charging schedule (in effect 1 Apr 2015), unindexed: Zone 1 £100 (SE3, SE8, SE10, SE16), Zone 2 £70 (all other postcodes, most of the borough). A new draft charging schedule was consulted on in 2025 but is not yet adopted.",
+    "tall_building_definition": "10 storeys or 32.8m or more, measured from ground to top including rooftop equipment. Tall Building Suitability Zones are mapped on the Policies Map, each with a maximum height (e.g. Deptford up to 48 storeys, Catford up to 20).",
+    "priorities": "Genuinely affordable homes, 70% social rent, zoned tall buildings",
+    "sources": [
+      "https://lewisham.gov.uk/myservices/planning/policy/adopted-local-plan/adoption-of-the-local-plan",
+      "https://lewisham.gov.uk/-/media/services/planning/planning-policy/local-plan/lpnov25/adopted-lewisham-local-plan_2025_oct_tagged_final.pdf",
+      "https://lewisham.gov.uk/myservices/planning/policy/cil",
+      "https://lewisham.gov.uk/-/media/files/imported/ciladoptedchargingschedule.ashx"
+    ]
+  },
+  {
+    "name": "Merton",
+    "local_plan": {
+      "name": "Merton Local Plan 2024-2037/38",
+      "year_adopted": 2024,
+      "url": "https://www.merton.gov.uk/system/files/merton_local_plan_-_adopted_20_november_2024_compressed.pdf"
+    },
+    "affordable_target_pct": 50,
+    "affordable_target_note": "Strategic target 50% of new homes 2021/22-2037/38 (Policy H11.1). Sites of 10+ homes: at least 35% and up to 50%, or 50% on public or industrial land. Tenure 70% low-cost rent, 30% intermediate (min 25% First Homes). 2-9 homes pay a contribution equal to 20%.",
+    "borough_cil_resi_per_m2": "115-220",
+    "borough_cil_note": "2014 charging schedule (in effect 1 Apr 2014), unindexed: £220 Colliers Wood, Raynes Park and Wimbledon; £115 Mitcham, Morden and West Barnes. Indexed 2025 rates £359.92 and £188.14.",
+    "tall_building_definition": "21m or more from ground to the top of the uppermost storey (Policy D12.6). Allowed only in Wimbledon Town Centre and the Morden Regeneration Zone (both have Strategic Heights Diagrams), the Eastfields and High Path estates, and named site allocations.",
+    "priorities": "50% affordable, low-cost rent, tall buildings only in Wimbledon/Morden",
+    "sources": [
+      "https://www.merton.gov.uk/system/files/merton_local_plan_-_adopted_20_november_2024_compressed.pdf",
+      "https://www.merton.gov.uk/system/files/Annual%20CIL%20Rate%20Summary%202025%20(1).pdf"
+    ]
+  },
+  {
+    "name": "Newham",
+    "local_plan": {
+      "name": "Newham Local Plan 2018",
+      "year_adopted": 2018,
+      "url": "https://www.newham.gov.uk/downloads/file/1111/newham-local-plan-2018-pdf-"
+    },
+    "affordable_target_pct": 50,
+    "affordable_target_note": "Strategic target 50% over the plan period. Sites of 10+ units: 35-50% of units, 60% social / 40% intermediate. In the Canning Town & Custom House regeneration area: 35%, split evenly. The replacement Local Plan received its Inspector's report in Aug 2026 and awaits adoption.",
+    "borough_cil_resi_per_m2": "40-80",
+    "borough_cil_note": "Charging schedule in effect 2014, unindexed: Zone 1 £80 (E15 outside the LLDC area, E16, part of E3), Zone 2 £40 (E6, E7, E12, E13, part of IG11). Indexed 2026 rates £133.89 and £66.95. The former LLDC area has its own CIL schedule.",
+    "tall_building_definition": "6 or more storeys, or more than 17.05m (Policy SP4). Tallest-building areas are mapped at Stratford and Canning Town (Figures 3.1-3.2), with heights set in the Strategic Site allocations.",
+    "priorities": "35-50% affordable, 60% social rent, 39% family (3-bed) homes",
+    "sources": [
+      "https://www.newham.gov.uk/planning-development-conservation/planning-policy-local-plan/2",
+      "https://www.newham.gov.uk/downloads/file/1111/newham-local-plan-2018-pdf-",
+      "https://www.newham.gov.uk/planning-development-conservation/newham-local-plan-refresh",
+      "https://www.newham.gov.uk/downloads/file/10501/newham-annual-cil-rate-summary-2026"
+    ]
+  },
+  {
+    "name": "Redbridge",
+    "local_plan": {
+      "name": "Redbridge Local Plan 2015-2030",
+      "year_adopted": 2018,
+      "url": "https://www.redbridge.gov.uk/media/oj3hxvhl/10-redbridgelocal-plan_070318_web-1_tp.pdf"
+    },
+    "affordable_target_pct": 35,
+    "affordable_target_note": "Minimum strategic target 35% (Policy LP3) on sites of 10+ homes, delivering 393 affordable homes a year. Tenure 60% social/affordable rent, 40% intermediate. Viability review applies if a scheme falls below 35%.",
+    "borough_cil_resi_per_m2": 70,
+    "borough_cil_note": "Flat rate £70/m2 across one borough-wide zone for all uses, in effect since 2012, unindexed. Indexed 2025 rate £122.74.",
+    "tall_building_definition": "No metre or storey threshold in Policy LP27. Tall Building Zones are mapped on the Policies Map: Ilford town centre, the Crossrail Corridor (East Ilford, Seven Kings, Goodmayes) and Gants Hill.",
+    "priorities": "35% affordable, social/affordable rent, growth in Ilford and Crossrail corridor",
+    "sources": [
+      "https://www.redbridge.gov.uk/planning-and-building/planning-policies/local-plan/",
+      "https://www.redbridge.gov.uk/media/oj3hxvhl/10-redbridgelocal-plan_070318_web-1_tp.pdf",
+      "https://www.redbridge.gov.uk/planning-and-building/planning-policy/community-infrastructure-levy/annual-cil-rate-summary/"
+    ]
+  },
+  {
+    "name": "Richmond upon Thames",
+    "local_plan": {
+      "name": "Richmond Local Plan 2024-2039",
+      "year_adopted": 2025,
+      "url": "https://www2.richmond.gov.uk/docs/localplan/local_plan_interim_track_changes_for_adoption_october_2025.pdf"
+    },
+    "affordable_target_pct": 50,
+    "affordable_target_note": "Minimum 50% affordable on sites, 70% rented / 30% intermediate by habitable room. At least 50% on industrial land (LSIS) and public land. Schemes on the Viability Tested Route below 50% must provide viability evidence.",
+    "borough_cil_resi_per_m2": "190-250",
+    "borough_cil_note": "2014 charging schedule (in effect 1 Nov 2014), unindexed: higher band £250, lower band £190. Indexed 2025 rates £409.00 and £310.84.",
+    "tall_building_definition": "7 or more storeys, or 21m or more (whichever is lower). Mid-rise is 5 or more storeys, or 15m or more. Tall and Mid-Rise Building Zones are mapped on the Policies Map and in Appendix 3 (Policy 45).",
+    "priorities": "50% affordable, 70% rented, heritage-sensitive height zones",
+    "sources": [
+      "https://www.richmond.gov.uk/adopted_local_plan",
+      "https://www2.richmond.gov.uk/docs/localplan/local_plan_interim_track_changes_for_adoption_october_2025.pdf",
+      "https://www.richmond.gov.uk/media/deth1tcm/cil_annual_rate_summary_2025.pdf"
+    ]
+  },
+  {
+    "name": "Southwark",
+    "local_plan": {
+      "name": "Southwark Plan 2022",
+      "year_adopted": 2022,
+      "url": "https://services.southwark.gov.uk/assets/attach/233496/Southwark-Plan-strategic-policies-section.pdf"
+    },
+    "affordable_target_pct": 50,
+    "affordable_target_note": "SP1 target: 50% of all new homes to be social rented or intermediate. Site minimum is 35% (at least 25% social rented and 10% intermediate), measured by habitable room, subject to viability.",
+    "borough_cil_resi_per_m2": "54-435",
+    "borough_cil_note": "Charging schedule in effect 1 Dec 2017, unindexed: Zone 1 £435, Zone 2 £218, Zone 3 £54. 2026 indexation is 400/291.",
+    "tall_building_definition": "Above 30m, or above 25m in the Thames Special Policy Area, or significantly higher than surroundings. Expected tall-building locations are shown on the Policies Map and Figure 4 (Policy P17).",
+    "priorities": "Social rent and intermediate homes, 11,000 new council homes",
+    "sources": [
+      "https://services.southwark.gov.uk/assets/attach/233496/Southwark-Plan-strategic-policies-section.pdf",
+      "https://services.southwark.gov.uk/assets/attach/233497/Southwark-Plan-development-management-policies.pdf",
+      "https://www.southwark.gov.uk/sites/default/files/2025-11/Southwark_Annual_CIL_Rate_Summary_2026.pdf"
+    ]
+  },
+  {
+    "name": "Sutton",
+    "local_plan": {
+      "name": "Sutton Local Plan 2016-2031",
+      "year_adopted": 2018,
+      "url": "https://www.sutton.gov.uk/sites/default/files/2026-04/sutton-local-plan-2016-to-2031.pdf"
+    },
+    "affordable_target_pct": 35,
+    "affordable_target_note": "Minimum 35% of dwellings affordable on sites of 11+ units or over 1,000m2 (Policy 8). Tenure 75% social/affordable rent, 25% intermediate. A new Local Plan is expected around late 2026.",
+    "borough_cil_resi_per_m2": 100,
+    "borough_cil_note": "Flat residential rate of £100/m2, in effect 1 Apr 2014, unindexed.",
+    "tall_building_definition": "Mid-rise 4-6 storeys (12-18m), tall 7-10 storeys (21-30m), very tall 11+ storeys. Areas of Taller Building Potential are mapped in Appendix 7 and on the Policies Map, mainly in Sutton Town Centre.",
+    "priorities": "35% affordable, 75% social/affordable rent, taller buildings in town centre",
+    "sources": [
+      "https://www.sutton.gov.uk/w/the-local-plan",
+      "https://www.sutton.gov.uk/sites/default/files/2026-04/sutton-local-plan-2016-to-2031.pdf",
+      "https://moderngov.sutton.gov.uk/documents/s30952/Sutton%20CIL%20Charging%20Schedule.pdf"
+    ]
+  },
+  {
+    "name": "Tower Hamlets",
+    "local_plan": {
+      "name": "Tower Hamlets Local Plan 2031: Managing Growth and Sharing Benefits",
+      "year_adopted": 2020,
+      "url": "https://www.towerhamlets.gov.uk/Documents/Planning-and-building-control/Strategic-Planning/Local-Plan/TH_Local_Plan_2031_accessibility_checked.pdf"
+    },
+    "affordable_target_pct": 50,
+    "affordable_target_note": "Overall target 50% of new homes affordable (Policy S.H1), with a site minimum of 35% subject to viability. Tenure 70% rented / 30% intermediate. A replacement Local Plan was submitted in Nov 2025 and is not yet adopted.",
+    "borough_cil_resi_per_m2": "50-280",
+    "borough_cil_note": "Charging schedule in effect 17 Jan 2020, unindexed: Zone 1 £280, Zone 2 £150, Zone 3 £50.",
+    "tall_building_definition": "More than 30m, or more than twice the height of surrounding buildings (whichever is less). Tall Building Zones are mapped on the Policies Map and Figure 7 (Policy D.DH6).",
+    "priorities": "50% affordable, 70% rented, family homes, tall building zones",
+    "sources": [
+      "https://www.towerhamlets.gov.uk/lgnl/planning_and_building_control/planning_policy_guidance/Local_plan/local_plan.aspx",
+      "https://www.towerhamlets.gov.uk/Documents/Planning-and-building-control/Strategic-Planning/Local-Plan/PoliciesPart1.pdf",
+      "https://www.towerhamlets.gov.uk/Documents/Planning-and-building-control/Development-control/CIL-Charging-Schedule-2020.pdf"
+    ]
+  },
+  {
+    "name": "Waltham Forest",
+    "local_plan": {
+      "name": "Waltham Forest Local Plan Part 1: Shaping the Borough 2020-2035",
+      "year_adopted": 2024,
+      "url": "https://www.walthamforest.gov.uk/sites/default/files/2024-02/LBWF_LocalPlan_LP1_Feb2024_compressed.pdf"
+    },
+    "affordable_target_pct": 50,
+    "affordable_target_note": "Strategic target 50% of all new homes genuinely affordable. Fast Track minimum 35%, or 50% on public sector or industrial land. Tenure 70% low-cost rent, 30% intermediate (Policy 14), measured in habitable rooms and homes.",
+    "borough_cil_resi_per_m2": "65-70",
+    "borough_cil_note": "Charging schedule in effect 15 May 2014, unindexed: £65 and £70 for Zone A (north of the North Circular) and Zone B (south of it). Indexed 2026 rates £108.79 and £117.15.",
+    "tall_building_definition": "10 or more storeys, or 30m or more from ground level (Policy 54). Supported only on identified Transition or Transformation sites (Figure 14.1), generally 10-17 storeys.",
+    "priorities": "50% genuinely affordable, low-cost rent, character-led intensification",
+    "sources": [
+      "https://www.walthamforest.gov.uk/sites/default/files/2024-02/LBWF_LocalPlan_LP1_Feb2024_compressed.pdf",
+      "https://www.walthamforest.gov.uk/sites/default/files/2025-12/Annual%20CIL%20Rate%20Summary%202026.pdf"
+    ]
+  },
+  {
+    "name": "Wandsworth",
+    "local_plan": {
+      "name": "Wandsworth Local Plan 2023-2038 (with Partial Review adopted March 2026)",
+      "year_adopted": 2023,
+      "url": "https://www.wandsworth.gov.uk/media/large/adopted_local_plan.pdf"
+    },
+    "affordable_target_pct": 50,
+    "affordable_target_note": "Strategic target 50% of all new homes affordable, by habitable room (LP23 as replaced by the Partial Review, 4 Mar 2026), prioritising social rent. Fast Track tenure: at least 70% social rent, at most 30% intermediate.",
+    "borough_cil_resi_per_m2": 250,
+    "borough_cil_note": "Charging schedule in effect 1 Nov 2012, unindexed: £250 in the rest of the borough (most of it), Nine Elms Area A £575, Nine Elms Area B £265, Roehampton £0. Indexed 2026 rate for the main zone £448.43.",
+    "tall_building_definition": "7 or more storeys, or 21m or more (whichever is lower). Allowed only in tall building zones mapped in Appendix 2, which set maximum heights; mid-rise zones are also defined (Policy LP4).",
+    "priorities": "50% affordable by habitable room, social rent prioritised, zoned heights",
+    "sources": [
+      "https://www.wandsworth.gov.uk/planning-and-building-control/planning-policy/local-plan/the-adopted-local-plan/",
+      "https://www.wandsworth.gov.uk/media/large/adopted_local_plan.pdf",
+      "https://www.wandsworth.gov.uk/media/jfxbe2u4/wandsworth_local_plan_partial_review.pdf",
+      "https://www.wandsworth.gov.uk/media/tiwhwxxh/annual_cil_rate_summary_2026.pdf"
+    ]
+  },
+  {
+    "name": "Westminster",
+    "local_plan": {
+      "name": "Westminster City Plan 2019-2040 (Partial Review adopted January 2026)",
+      "year_adopted": 2026,
+      "url": "https://www.westminster.gov.uk/sites/default/files/media/documents/city-plan-2019-2040-january-2026.pdf"
+    },
+    "affordable_target_pct": 35,
+    "affordable_target_note": "Minimum 35% on private land. 50% on public land (or 50% across a Mayor portfolio agreement with at least 35% per site). Contributes to the London Plan 50% target. Tenure 70% social, 30% intermediate. The plan was originally adopted in April 2021.",
+    "borough_cil_resi_per_m2": "200-550",
+    "borough_cil_note": "Charging schedule in effect 1 May 2016, unindexed: Prime £550, Core £400, Fringe £200.",
+    "tall_building_definition": "Twice the prevailing context height or higher, or causing a significant change to the skyline; no metre threshold (Policy 46). Tall buildings may be acceptable in the Paddington and Victoria Opportunity Areas; elsewhere they are generally not acceptable.",
+    "priorities": "35% affordable, 70% social rent, retrofit-first growth",
+    "sources": [
+      "https://www.westminster.gov.uk/sites/default/files/media/documents/city-plan-2019-2040-january-2026.pdf",
+      "https://www.westminster.gov.uk/media/document/westminster-cil-charging-schedule-2016"
+    ]
+  }
+]

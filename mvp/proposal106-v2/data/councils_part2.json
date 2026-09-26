@@ -1,0 +1,248 @@
+[
+ {
+  "name": "Hackney",
+  "local_plan": {
+   "name": "Hackney Local Plan 2033 (LP33)",
+   "year": 2020,
+   "url": "https://www.hackney.gov.uk/planning-and-building/planning-policies-and-local-plan/local-plan/local-plan-2033-lp33"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "LP13: 50% genuinely affordable sought on-site, subject to viability; schemes at or above 50% avoid detailed viability review. C3 tenure 60% social rent/London Affordable Rent, 40% intermediate (London Living Rent/shared ownership). Adopted 22 Jul 2020.",
+  "borough_cil_resi_per_m2": "£0–£190",
+  "borough_cil_resi_min": 0,
+  "borough_cil_resi_max": 190,
+  "borough_cil_note": "Zoned: Zone A £190, Zone B £25, Zone C £55, Zone D £0 (2015 base rates, indexed annually under CIL Regs). Adopted 25 Feb 2015, charged from 1 Apr 2015. Share of borough per zone not confirmed.",
+  "tall_building_definition": "Taller building = 50% taller than prevailing height, or significantly changes the skyline, or 30m+. Growth areas in place policies PP2–PP10 flagged as potentially suitable; 30m+ 'very tall' buildings extremely unlikely elsewhere. Site heights via AAPs/masterplans, no borough zone map.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "Genuinely affordable homes, social rent, employment-led growth, affordable workspace",
+  "sources": [
+   "https://www.hackney.gov.uk/planning-and-building/planning-policies-and-local-plan/local-plan/local-plan-2033-lp33",
+   "https://drive.google.com/file/d/1HRu0A_fdoWUi3OBfzUT03TT4S9gYwHDq/view",
+   "https://www.hackney.gov.uk/planning-and-building/make-planning-application/submit-planning-application/hcil-development",
+   "https://drive.google.com/file/d/1i7Wd-fPzkrGrRiYwA1bSOlJL-T911lGF/view"
+  ]
+ },
+ {
+  "name": "Hammersmith and Fulham",
+  "local_plan": {
+   "name": "Hammersmith & Fulham Local Plan 2018",
+   "year": 2018,
+   "url": "https://www.lbhf.gov.uk/sites/default/files/section_attachments/local_plan_2018_web_version.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Borough-wide target: at least 50% of all dwellings affordable; 60% social/affordable rent (especially for families), 40% intermediate. Adopted 28 Feb 2018.",
+  "borough_cil_resi_per_m2": "£100–£400",
+  "borough_cil_resi_min": 100,
+  "borough_cil_resi_max": 400,
+  "borough_cil_note": "Zoned: North £100, Central A (Hammersmith Town Centre) and Central B £200, South £400; nil at White City East and Earls Court & West Kensington. Approved 20 May 2015, effective 1 Sep 2015; base rates indexed.",
+  "tall_building_definition": "DC3: buildings significantly higher than the general prevailing height of the surrounding townscape (no metre threshold). Areas where tall buildings may be appropriate: White City, Earls Court & West Kensington, South Fulham Riverside, Hammersmith Town Centre (indicative map).",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "50% affordable, family social rent, regeneration areas, heritage-sensitive townscape",
+  "sources": [
+   "https://www.lbhf.gov.uk/planning/planning-policy/local-plan",
+   "https://www.lbhf.gov.uk/sites/default/files/section_attachments/local_plan_2018_web_version.pdf",
+   "https://www.lbhf.gov.uk/planning/planning-policy/community-infrastructure-levy-cil",
+   "https://www.lbhf.gov.uk/sites/default/files/2023-12/Community%20Infrastructure%20Levy%20Charging%20Schedule%20and%20Map.pdf"
+  ]
+ },
+ {
+  "name": "Haringey",
+  "local_plan": {
+   "name": "Haringey Local Plan: Strategic Policies 2013–2026 (with 2017 alterations) and Development Management DPD 2017",
+   "year": 2017,
+   "url": "https://haringey.gov.uk/sites/default/files/2024-01/final_haringey_local_plan_2017_online.pdf"
+  },
+  "affordable_target_pct": 40,
+  "affordable_target_note": "SP2: borough-wide 40% affordable on sites of 10+ units, by habitable rooms, subject to viability; tenure 60% affordable rent (including social rent), 40% intermediate.",
+  "borough_cil_resi_per_m2": "£50–£368.12",
+  "borough_cil_resi_min": 50,
+  "borough_cil_resi_max": 368.12,
+  "borough_cil_note": "Revised schedule: Western £368.12, Central £229.21, Eastern £50. Approved 14 Mar 2022, effective 1 Sep 2022; indexed annually.",
+  "tall_building_definition": "Tall = 10 storeys and over; 'taller' = 2–3 storeys above prevailing height. DM6 Figure 2.2 maps areas suitable for tall buildings; tall buildings outside them are resisted.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "40% affordable by habitable room, 60% social/affordable rent, plan-led heights",
+  "sources": [
+   "https://haringey.gov.uk/sites/default/files/2024-01/final_haringey_local_plan_2017_online.pdf",
+   "https://haringey.gov.uk/sites/default/files/final_haringey_dmp_dtp_online.pdf",
+   "https://www.haringey.gov.uk/sites/default/files/haringey_revised_cil_charging_schedule.pdf"
+  ]
+ },
+ {
+  "name": "Harrow",
+  "local_plan": {
+   "name": "Harrow Local Plan 2021–2041",
+   "year": 2026,
+   "url": "https://www.harrow.gov.uk/newlocalplan"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Borough-wide 50% target by habitable rooms or floorspace; fast-track threshold 35% (50% on public, SIL/LSIS and industrial land); 70:30 low-cost rent to intermediate, prioritising social rent. Separate target: 35% of new homes 3+ bed. Adopted 24 Mar 2026.",
+  "borough_cil_resi_per_m2": "£110",
+  "borough_cil_resi_min": 110,
+  "borough_cil_resi_max": 110,
+  "borough_cil_note": "Flat borough-wide residential (C3) rate £110/m2, adopted 16 Sep 2013; indexed each year (see Annual CIL Rate Summary).",
+  "tall_building_definition": "GR4: 7+ storeys or 21m+ from ground (excluding plant). Directed to designated tall building zones in the Harrow & Wealdstone Opportunity Area, shown on a Designated Tall Building Zones map.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Family homes, social rent, Metroland suburban character, Opportunity Area-led growth",
+  "sources": [
+   "https://www.harrow.gov.uk/newlocalplan",
+   "https://www.harrow.gov.uk/downloads/file/33672/local-plan-2021-2041",
+   "https://www.harrow.gov.uk/planning-developments/community-infrastructure-levy"
+  ]
+ },
+ {
+  "name": "Havering",
+  "local_plan": {
+   "name": "Havering Local Plan 2016–2031",
+   "year": 2021,
+   "url": "https://www.havering.gov.uk/downloads/file/5300/havering_local_plan_2016_-_2031.pdf"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Policy 4: at least 35% affordable on 10+ dwellings or >1,000 sqm, by habitable rooms (gross); 50% on public land without a portfolio agreement and on industrial land with net capacity loss. Tenure 70% affordable/social rent, 30% intermediate.",
+  "borough_cil_resi_per_m2": "£55–£125",
+  "borough_cil_resi_min": 55,
+  "borough_cil_resi_max": 125,
+  "borough_cil_note": "Zone A (North) £125, Zone B (South) £55 for residential and private care/retirement housing. Adopted Jul 2019, effective 1 Sep 2019; indexed.",
+  "tall_building_definition": "No numeric definition: 'significantly greater height than its context'. May be acceptable near Romford station, not in the Conservation Area. Local height definition and locations deferred to the Romford Masterplan SPD.",
+  "tall_building_zones_mapped": "no",
+  "priorities": "35% affordable, 70:30 rent/intermediate, Romford-focused growth, local character",
+  "sources": [
+   "https://www.havering.gov.uk/downloads/file/5300/havering_local_plan_2016_-_2031.pdf",
+   "https://www.havering.gov.uk/planning-3/planning-application-process-appeals/3",
+   "https://www.havering.gov.uk/downloads/file/3304/havering_community_infrastructure_levy_charging_schedule"
+  ]
+ },
+ {
+  "name": "Hillingdon",
+  "local_plan": {
+   "name": "Hillingdon Local Plan Part 1 Strategic Policies (2012) and Part 2 Development Management Policies (2020)",
+   "year": 2020,
+   "url": "https://www.hillingdon.gov.uk/media/3084/Hillingdon-Local-Plan-Part-2-Development-Management-Policies/pdf/pdLPP2_Development_Management_Policies_-_ADOPTED_VERSION_JAN_2020_1.pdf?m=1598370641570"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "Part 1 Policy H2 target: 35% of all new units. DMH 7: minimum 35% on 10+ unit sites, subject to viability; 70% social/affordable rent, 30% intermediate.",
+  "borough_cil_resi_per_m2": "£95",
+  "borough_cil_resi_min": 95,
+  "borough_cil_resi_max": 95,
+  "borough_cil_note": "Flat residential (C3) rate £95/m2, adopted 10 Jul 2014, effective 1 Aug 2014; indexed 2026 rate £160.43/m2.",
+  "tall_building_definition": "DMHB 10 'High buildings': no numeric definition. Must be in Uxbridge or Hayes town centres (or an area the Borough identifies); generally inappropriate elsewhere given low-rise suburban character.",
+  "tall_building_zones_mapped": "no",
+  "priorities": "35% affordable, 70% social/affordable rent, suburban character, Uxbridge/Hayes intensification",
+  "sources": [
+   "https://www.hillingdon.gov.uk/media/3084/Hillingdon-Local-Plan-Part-2-Development-Management-Policies/pdf/pdLPP2_Development_Management_Policies_-_ADOPTED_VERSION_JAN_2020_1.pdf?m=1598370641570",
+   "https://www.hillingdon.gov.uk/community-infrastructure-levy",
+   "https://pre.hillingdon.gov.uk/downloads/file/2181/annual-cil-rate-summary-2026",
+   "https://pre.hillingdon.gov.uk/downloads/file/2180/cil-charging-schedule-on-10-july-2014"
+  ]
+ },
+ {
+  "name": "Hounslow",
+  "local_plan": {
+   "name": "Hounslow Local Plan 2015–2030",
+   "year": 2015,
+   "url": "https://www.hounslow.gov.uk/local-plan/local-plan-1"
+  },
+  "affordable_target_pct": 40,
+  "affordable_target_note": "SC2: strategic borough-wide target of 40% of all new housing, negotiated on 10+ home sites with review mechanisms; 60% affordable/social rent, 40% intermediate. Adopted 15 Sep 2015; Local Plan Review 2020–2041 still at examination (2026).",
+  "borough_cil_resi_per_m2": "£70–£200",
+  "borough_cil_resi_min": 70,
+  "borough_cil_resi_max": 200,
+  "borough_cil_note": "Zone 1 (East) £200, Zone 2 (Central) £110, Zone 3 (West) £70. Approved 14 Jul 2015, effective 24 Jul 2015; indexed.",
+  "tall_building_definition": "CC3: over 20m, and/or significantly taller than surrounding townscape, and/or recognisably changes the skyline. Supported in Hounslow town centre; limited numbers in Feltham and Brentford town centres.",
+  "tall_building_zones_mapped": "indicative",
+  "priorities": "40% affordable, 60% social/affordable rent, town-centre-focused tall buildings",
+  "sources": [
+   "https://www.hounslow.gov.uk/local-plan/local-plan-1",
+   "https://www.hounslow.gov.uk/downloads/file/13227/hounslow-local-plan-part-1-direct",
+   "https://www.hounslow.gov.uk/local-plan/local-plan-review",
+   "https://www.hounslow.gov.uk/downloads/file/13237/hounslow-community-infrastructure-levy-adopted-charging-schedule-july-2015"
+  ]
+ },
+ {
+  "name": "Islington",
+  "local_plan": {
+   "name": "Islington Local Plan: Strategic and Development Management Policies",
+   "year": 2023,
+   "url": "https://www.islington.gov.uk/planning/planning-policy/islington-local-plan"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Strategic target: 50% of all new housing genuinely affordable (H3). On-site tenure 70% social rent, 30% intermediate (mostly London Living Rent). Sites under 10 units pay £50,000 per unit off-site. Adopted 28 Sep 2023.",
+  "borough_cil_resi_per_m2": "£250–£300",
+  "borough_cil_resi_min": 250,
+  "borough_cil_resi_max": 300,
+  "borough_cil_note": "Area A £300, Area B £250 (residential C3/C4). Approved 26 Jun 2014, effective 1 Sep 2014; indexed.",
+  "tall_building_definition": "DH3: over 30m is tall. Acceptable in principle only on allocated or Spatial Strategy sites identified as suitable (e.g. King's Cross, Nag's Head, Finsbury Park, Archway), with site maximum heights (Table 8.1).",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "Genuinely affordable homes, 70% social rent, small-site contributions, site-specific heights",
+  "sources": [
+   "https://www.islington.gov.uk/-/media/sharepoint-lists/public-records/planningandbuildingcontrol/publicity/publicconsultation/20232024/islington-council-local-plan-strategic-and-development-management-policies.pdf",
+   "https://www.islington.gov.uk/~/media/sharepoint-lists/public-records/planningandbuildingcontrol/information/factsheets/20202021/20210114communityinfrastructurelevychargingschedule.pdf",
+   "https://www.islington.gov.uk/planning/planning-policy/community-infrastructure-levy/cil-information"
+  ]
+ },
+ {
+  "name": "Kensington and Chelsea",
+  "local_plan": {
+   "name": "RBKC Local Plan (New Local Plan Review)",
+   "year": 2024,
+   "url": "https://www.rbkc.gov.uk/sites/default/files/media/documents/AA_24-09-03%20Local%20Plan%202024_Final%20Clean%20Version%20_02.pdf"
+  },
+  "affordable_target_pct": 35,
+  "affordable_target_note": "At least 35% affordable on private land, 50% on public land (council adoption notice, 24 Jul 2024). Tenure split not confirmed; the plan PDF blocked automated access.",
+  "borough_cil_resi_per_m2": "£110–£750",
+  "borough_cil_resi_min": 110,
+  "borough_cil_resi_max": 750,
+  "borough_cil_note": "Zones A–F: base £750 (A) to £110 (F); Zone G (Earl's Court) and Zone H (Kensal) nil. Effective 6 Apr 2015; indexed. 2026 indexed: A £1,158.30, B £911.20, C £664.09, D £416.99, E £293.44, F £169.88.",
+  "tall_building_definition": "Two thresholds, 21m and 30m, by neighbourhood context (first local definition). Areas identified as suitable to support the Kensal Canalside and Earl's Court opportunity areas.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "35%/50% affordable, stepped delivery, Kensal Canalside and Earl's Court growth",
+  "sources": [
+   "https://www.rbkc.gov.uk/node/45121",
+   "https://www.rbkc.gov.uk/planning-and-building-control/planning-policy/community-infrastructure-levy-cil"
+  ]
+ },
+ {
+  "name": "Kingston upon Thames",
+  "local_plan": {
+   "name": "Kingston Core Strategy (LDF)",
+   "year": 2012,
+   "url": "https://www.kingston.gov.uk/sites/default/files/downloads/Core_Strategy.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "DM15: 50% of units affordable on sites of 10+ units; sliding scale for 5–10 units; 70:30 social/affordable rent to intermediate; aim of 2,000+ affordable homes 2012/13–2026/27. Adopted Apr 2012; new Local Plan due for submission by Dec 2026.",
+  "borough_cil_resi_per_m2": "£50–£210",
+  "borough_cil_resi_min": 50,
+  "borough_cil_resi_max": 210,
+  "borough_cil_note": "Residential Zone 1 £210, Zone 2 £130, Zone 3 £85, Zone 4 £50. Adopted Nov 2015; indexed against BCIS.",
+  "tall_building_definition": "No numeric definition in the Core Strategy. Tall buildings may be appropriate in town centres, judged against EH/CABE 2007 tall buildings guidance and the London Plan, with SPD guidance.",
+  "tall_building_zones_mapped": "no",
+  "priorities": "50% affordable, 70% rented tenure, protect suburban character and heritage",
+  "sources": [
+   "https://www.kingston.gov.uk/planning-and-building-control/planning-policy/adopted-development-plan",
+   "https://www.kingston.gov.uk/sites/default/files/downloads/Core_Strategy.pdf",
+   "https://www.kingston.gov.uk/planning-and-building-control/planning-policy/local-plan",
+   "https://www.kingston.gov.uk/planning-and-building-control/planning-policy/infrastructure-planning-and-delivery/about-community-infrastructure-levy-cil/charges-schedules"
+  ]
+ },
+ {
+  "name": "Lambeth",
+  "local_plan": {
+   "name": "Lambeth Local Plan 2021 (2020–2035)",
+   "year": 2021,
+   "url": "https://www.lambeth.gov.uk/sites/default/files/2021-09/Lambeth%20Local%20Plan%202021.pdf"
+  },
+  "affordable_target_pct": 50,
+  "affordable_target_note": "Contributes to the London Plan 50% strategic target through the threshold/fast-track approach (H2). Tenure 70% low-cost rent (Social Rent/London Affordable Rent), 30% intermediate (London Living Rent/shared ownership). Adopted 22 Sep 2021.",
+  "borough_cil_resi_per_m2": "£200–£500",
+  "borough_cil_resi_min": 200,
+  "borough_cil_resi_max": 500,
+  "borough_cil_note": "Zone A (Waterloo, Vauxhall) £500, Zone B (Kennington, Oval, Clapham) £350, Zone C (Tulse Hill, Brixton, Herne Hill) £250, Zone D (Streatham, West Norwood) £200. Approved 22 Sep 2021, effective 1 Jan 2022; indexed.",
+  "tall_building_definition": "Q26: north of the South Circular, tall is over 45m (mid-rise 15–45m); south of it, over 25m (mid-rise 9–25m). Supported only in locations identified in Annex 10.",
+  "tall_building_zones_mapped": "yes",
+  "priorities": "70% social/low-cost rent, fast-track affordable, WHS views, Opportunity Area growth",
+  "sources": [
+   "https://www.lambeth.gov.uk/sites/default/files/2021-09/Lambeth%20Local%20Plan%202021.pdf",
+   "https://love.lambeth.gov.uk/lambeth-unveils-new-local-plan/",
+   "https://www.lambeth.gov.uk/sites/default/files/2021-09/lambeth-cil-charging-schedule-2022_0.pdf"
+  ]
+ }
+]

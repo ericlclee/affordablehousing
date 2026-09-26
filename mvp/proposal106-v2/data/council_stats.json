@@ -1,0 +1,2093 @@
+{
+ "Barking and Dagenham": {
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 9,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 8210000,
+  "land_value_detail": {
+   "medium_density_median": 8210000,
+   "low_density_median": 5690000,
+   "high_density_median": 11370000,
+   "density_dph": {
+    "low": 90,
+    "medium": 130,
+    "high": 180
+   }
+  },
+  "avg_house_price": 375604,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Barnet": {
+  "observed": {
+   "10-49": {
+    "n": 7,
+    "n_all_statuses": 11,
+    "n_withdrawn": 1,
+    "refusal_pct": 14.3,
+    "withdrawn_pct": 12.5,
+    "median_days": 310.0,
+    "n_with_days": 7,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 5,
+    "n_all_statuses": 10,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 221.0,
+    "n_with_days": 5,
+    "low_n": true
+   },
+   "150+": {
+    "n": 2,
+    "n_all_statuses": 12,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 33.3,
+    "median_days": 448.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 14,
+    "n_all_statuses": 33,
+    "n_withdrawn": 2,
+    "refusal_pct": 7.1,
+    "withdrawn_pct": 12.5,
+    "median_days": 285.0,
+    "n_with_days": 14,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 14730000,
+  "land_value_detail": {
+   "medium_density_median": 14730000,
+   "low_density_median": 9010000,
+   "high_density_median": 19640000,
+   "density_dph": {
+    "low": 55,
+    "medium": 90,
+    "high": 120
+   }
+  },
+  "avg_house_price": 600560,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Bexley": {
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 238.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 445.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 8,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 322.0,
+    "n_with_days": 3,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 8630000,
+  "land_value_detail": {
+   "medium_density_median": 8630000,
+   "low_density_median": 5760000,
+   "high_density_median": 10790000,
+   "density_dph": {
+    "low": 40,
+    "medium": 60,
+    "high": 75
+   }
+  },
+  "avg_house_price": 413343,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Brent": {
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 202.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 2,
+    "n_all_statuses": 6,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 202.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 43640000,
+  "land_value_detail": {
+   "medium_density_median": 43640000,
+   "low_density_median": 26860000,
+   "high_density_median": 63780000,
+   "density_dph": {
+    "low": 160,
+    "medium": 260,
+    "high": 380
+   }
+  },
+  "avg_house_price": 546135,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Bromley": {
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 329.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 218.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 3,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 238.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 5,
+    "n_all_statuses": 7,
+    "n_withdrawn": 0,
+    "refusal_pct": 20.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 238.0,
+    "n_with_days": 5,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 11700000,
+  "land_value_detail": {
+   "medium_density_median": 11700000,
+   "low_density_median": 9360000,
+   "high_density_median": 16380000,
+   "density_dph": {
+    "low": 40,
+    "medium": 50,
+    "high": 70
+   }
+  },
+  "avg_house_price": 511670,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Camden": {
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 525.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 525.0,
+    "n_with_days": 3,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 45600000,
+  "land_value_detail": {
+   "medium_density_median": 45600000,
+   "low_density_median": 24560000,
+   "high_density_median": 66650000,
+   "density_dph": {
+    "low": 70,
+    "medium": 130,
+    "high": 190
+   }
+  },
+  "avg_house_price": 815159,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "City of London": {
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 144140000,
+  "land_value_detail": {
+   "medium_density_median": 144140000,
+   "low_density_median": 144140000,
+   "high_density_median": 144140000,
+   "density_dph": {
+    "low": 240,
+    "medium": 240,
+    "high": 240
+   }
+  },
+  "avg_house_price": 710652,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Croydon": {
+  "observed": {
+   "10-49": {
+    "n": 21,
+    "n_all_statuses": 28,
+    "n_withdrawn": 2,
+    "refusal_pct": 61.9,
+    "withdrawn_pct": 8.7,
+    "median_days": 242.0,
+    "n_with_days": 21,
+    "low_n": false
+   },
+   "50-149": {
+    "n": 3,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 293.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "150+": {
+    "n": 3,
+    "n_all_statuses": 5,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 25.0,
+    "median_days": 263.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 27,
+    "n_all_statuses": 38,
+    "n_withdrawn": 3,
+    "refusal_pct": 51.9,
+    "withdrawn_pct": 10.0,
+    "median_days": 243.0,
+    "n_with_days": 27,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 14280000,
+  "land_value_detail": {
+   "medium_density_median": 14280000,
+   "low_density_median": 9690000,
+   "high_density_median": 18350000,
+   "density_dph": {
+    "low": 95,
+    "medium": 140,
+    "high": 180
+   }
+  },
+  "avg_house_price": 390041,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Ealing": {
+  "observed": {
+   "10-49": {
+    "n": 6,
+    "n_all_statuses": 11,
+    "n_withdrawn": 2,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 25.0,
+    "median_days": 132.0,
+    "n_with_days": 6,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 4,
+    "n_all_statuses": 7,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 376.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "150+": {
+    "n": 3,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 393.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 13,
+    "n_all_statuses": 21,
+    "n_withdrawn": 2,
+    "refusal_pct": 15.4,
+    "withdrawn_pct": 13.3,
+    "median_days": 347.0,
+    "n_with_days": 13,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 28200000,
+  "land_value_detail": {
+   "medium_density_median": 28200000,
+   "low_density_median": 19390000,
+   "high_density_median": 42290000,
+   "density_dph": {
+    "low": 110,
+    "medium": 160,
+    "high": 240
+   }
+  },
+  "avg_house_price": 585216,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Enfield": {
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 1065.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 1065.0,
+    "n_with_days": 1,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 21400000,
+  "land_value_detail": {
+   "medium_density_median": 21400000,
+   "low_density_median": 13180000,
+   "high_density_median": 12320000,
+   "density_dph": {
+    "low": 40,
+    "medium": 65,
+    "high": 90
+   }
+  },
+  "avg_house_price": 470988,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Greenwich": {
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 8,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 114.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 13.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 4,
+    "n_all_statuses": 9,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 33.3,
+    "median_days": 102.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 7,
+    "n_all_statuses": 18,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 22.2,
+    "median_days": 100.0,
+    "n_with_days": 7,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 44380000,
+  "land_value_detail": {
+   "medium_density_median": 44380000,
+   "low_density_median": 24050000,
+   "high_density_median": 73970000,
+   "density_dph": {
+    "low": 130,
+    "medium": 240,
+    "high": 400
+   }
+  },
+  "avg_house_price": 462589,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Hackney": {
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 12,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 4,
+    "n_all_statuses": 17,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 64410000,
+  "land_value_detail": {
+   "medium_density_median": 64410000,
+   "low_density_median": 32210000,
+   "high_density_median": 76120000,
+   "density_dph": {
+    "low": 110,
+    "medium": 220,
+    "high": 260
+   }
+  },
+  "avg_house_price": 605729,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Hammersmith and Fulham": {
+  "observed": {
+   "10-49": {
+    "n": 7,
+    "n_all_statuses": 18,
+    "n_withdrawn": 1,
+    "refusal_pct": 57.1,
+    "withdrawn_pct": 12.5,
+    "median_days": 194.0,
+    "n_with_days": 7,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 7,
+    "n_all_statuses": 7,
+    "n_withdrawn": 0,
+    "refusal_pct": 42.9,
+    "withdrawn_pct": 0.0,
+    "median_days": 97.0,
+    "n_with_days": 7,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 14,
+    "n_all_statuses": 27,
+    "n_withdrawn": 1,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 6.7,
+    "median_days": 150.0,
+    "n_with_days": 14,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 193900000,
+  "land_value_detail": {
+   "medium_density_median": 193900000,
+   "low_density_median": 126040000,
+   "high_density_median": 193900000,
+   "density_dph": {
+    "low": 260,
+    "medium": 400,
+    "high": 400
+   }
+  },
+  "avg_house_price": 738048,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Haringey": {
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 2,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 399.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 2,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 399.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 24370000,
+  "land_value_detail": {
+   "medium_density_median": 24370000,
+   "low_density_median": 15670000,
+   "high_density_median": 34810000,
+   "density_dph": {
+    "low": 90,
+    "medium": 140,
+    "high": 200
+   }
+  },
+  "avg_house_price": 638690,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Harrow": {
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 4,
+    "n_withdrawn": 2,
+    "refusal_pct": null,
+    "withdrawn_pct": 100.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 1,
+    "n_all_statuses": 6,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 66.7,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 14890000,
+  "land_value_detail": {
+   "medium_density_median": 14890000,
+   "low_density_median": 11920000,
+   "high_density_median": 20850000,
+   "density_dph": {
+    "low": 80,
+    "medium": 100,
+    "high": 140
+   }
+  },
+  "avg_house_price": 526493,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Havering": {
+  "observed": {
+   "10-49": {
+    "n": 4,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 75.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 168.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 4,
+    "n_all_statuses": 8,
+    "n_withdrawn": 0,
+    "refusal_pct": 75.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 168.0,
+    "n_with_days": 4,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 13260000,
+  "land_value_detail": {
+   "medium_density_median": 13260000,
+   "low_density_median": 9180000,
+   "high_density_median": 11180000,
+   "density_dph": {
+    "low": 45,
+    "medium": 65,
+    "high": 110
+   }
+  },
+  "avg_house_price": 448648,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Hillingdon": {
+  "observed": {
+   "10-49": {
+    "n": 4,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 400.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 4,
+    "n_all_statuses": 6,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 20.0,
+    "median_days": 336.0,
+    "n_with_days": 4,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 8,
+    "n_all_statuses": 11,
+    "n_withdrawn": 1,
+    "refusal_pct": 25.0,
+    "withdrawn_pct": 11.1,
+    "median_days": 336.0,
+    "n_with_days": 8,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 12810000,
+  "land_value_detail": {
+   "medium_density_median": 12810000,
+   "low_density_median": 11070000,
+   "high_density_median": 20960000,
+   "density_dph": {
+    "low": 95,
+    "medium": 110,
+    "high": 180
+   }
+  },
+  "avg_house_price": 470875,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Hounslow": {
+  "observed": {
+   "10-49": {
+    "n": 10,
+    "n_all_statuses": 12,
+    "n_withdrawn": 0,
+    "refusal_pct": 40.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 318.0,
+    "n_with_days": 10,
+    "low_n": false
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 7,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 66.7,
+    "median_days": 610.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 3,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 510.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 14,
+    "n_all_statuses": 22,
+    "n_withdrawn": 2,
+    "refusal_pct": 35.7,
+    "withdrawn_pct": 12.5,
+    "median_days": 357.0,
+    "n_with_days": 14,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 23030000,
+  "land_value_detail": {
+   "medium_density_median": 23030000,
+   "low_density_median": 14810000,
+   "high_density_median": 31250000,
+   "density_dph": {
+    "low": 90,
+    "medium": 140,
+    "high": 190
+   }
+  },
+  "avg_house_price": 525435,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Islington": {
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 184.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 1105.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 325.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 7,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 25.0,
+    "median_days": 325.0,
+    "n_with_days": 3,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 50180000,
+  "land_value_detail": {
+   "medium_density_median": 50180000,
+   "low_density_median": 33460000,
+   "high_density_median": 100350000,
+   "density_dph": {
+    "low": 100,
+    "medium": 150,
+    "high": 300
+   }
+  },
+  "avg_house_price": 674592,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Kensington and Chelsea": {
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 149.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 149.0,
+    "n_with_days": 1,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 92150000,
+  "land_value_detail": {
+   "medium_density_median": 92150000,
+   "low_density_median": 62540000,
+   "high_density_median": 98740000,
+   "density_dph": {
+    "low": 95,
+    "medium": 140,
+    "high": 150
+   }
+  },
+  "avg_house_price": 1232640,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Kingston upon Thames": {
+  "observed": {
+   "10-49": {
+    "n": 6,
+    "n_all_statuses": 13,
+    "n_withdrawn": 3,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 33.3,
+    "median_days": 415.0,
+    "n_with_days": 6,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 1,
+    "refusal_pct": null,
+    "withdrawn_pct": 100.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 100.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 182.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 7,
+    "n_all_statuses": 17,
+    "n_withdrawn": 4,
+    "refusal_pct": 42.9,
+    "withdrawn_pct": 36.4,
+    "median_days": 305.0,
+    "n_with_days": 7,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 11130000,
+  "land_value_detail": {
+   "medium_density_median": 11130000,
+   "low_density_median": 8350000,
+   "high_density_median": 14840000,
+   "density_dph": {
+    "low": 45,
+    "medium": 60,
+    "high": 80
+   }
+  },
+  "avg_house_price": 591555,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Lambeth": {
+  "observed": {
+   "10-49": {
+    "n": 8,
+    "n_all_statuses": 18,
+    "n_withdrawn": 1,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 11.1,
+    "median_days": 428.0,
+    "n_with_days": 8,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 8,
+    "n_all_statuses": 19,
+    "n_withdrawn": 1,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 11.1,
+    "median_days": 428.0,
+    "n_with_days": 8,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 61310000,
+  "land_value_detail": {
+   "medium_density_median": 61310000,
+   "low_density_median": 45980000,
+   "high_density_median": 85830000,
+   "density_dph": {
+    "low": 150,
+    "medium": 200,
+    "high": 280
+   }
+  },
+  "avg_house_price": 536623,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Lewisham": {
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 11,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 106.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 2,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 152.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 5,
+    "n_all_statuses": 13,
+    "n_withdrawn": 0,
+    "refusal_pct": 40.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 106.0,
+    "n_with_days": 5,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 30360000,
+  "land_value_detail": {
+   "medium_density_median": 30360000,
+   "low_density_median": 16870000,
+   "high_density_median": 43840000,
+   "density_dph": {
+    "low": 100,
+    "medium": 180,
+    "high": 260
+   }
+  },
+  "avg_house_price": 488658,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Merton": {
+  "observed": {
+   "10-49": {
+    "n": 10,
+    "n_all_statuses": 14,
+    "n_withdrawn": 0,
+    "refusal_pct": 30.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 371.0,
+    "n_with_days": 10,
+    "low_n": false
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 10,
+    "n_all_statuses": 15,
+    "n_withdrawn": 0,
+    "refusal_pct": 30.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 371.0,
+    "n_with_days": 10,
+    "low_n": false
+   }
+  },
+  "land_value_per_ha_2023": 23140000,
+  "land_value_detail": {
+   "medium_density_median": 23140000,
+   "low_density_median": 17360000,
+   "high_density_median": 30850000,
+   "density_dph": {
+    "low": 90,
+    "medium": 120,
+    "high": 160
+   }
+  },
+  "avg_house_price": 615890,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Newham": {
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 6,
+    "n_withdrawn": 2,
+    "refusal_pct": null,
+    "withdrawn_pct": 100.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 2,
+    "n_all_statuses": 5,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 175.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 2,
+    "n_all_statuses": 14,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 175.0,
+    "n_with_days": 1,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 64160000,
+  "land_value_detail": {
+   "medium_density_median": 64160000,
+   "low_density_median": 50650000,
+   "high_density_median": 67540000,
+   "density_dph": {
+    "low": 300,
+    "medium": 380,
+    "high": 400
+   }
+  },
+  "avg_house_price": 390349,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Redbridge": {
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 6,
+    "n_withdrawn": 2,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 40.0,
+    "median_days": 351.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 405.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 4,
+    "n_all_statuses": 9,
+    "n_withdrawn": 2,
+    "refusal_pct": 25.0,
+    "withdrawn_pct": 33.3,
+    "median_days": 378.0,
+    "n_with_days": 4,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 10330000,
+  "land_value_detail": {
+   "medium_density_median": 10330000,
+   "low_density_median": 14820000,
+   "high_density_median": 20650000,
+   "density_dph": {
+    "low": 80,
+    "medium": 100,
+    "high": 200
+   }
+  },
+  "avg_house_price": 481297,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Richmond upon Thames": {
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 5,
+    "n_withdrawn": 1,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 25.0,
+    "median_days": 332.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 3,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 618.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 322.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 5,
+    "n_all_statuses": 9,
+    "n_withdrawn": 2,
+    "refusal_pct": 20.0,
+    "withdrawn_pct": 28.6,
+    "median_days": 332.0,
+    "n_with_days": 5,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 14180000,
+  "land_value_detail": {
+   "medium_density_median": 14180000,
+   "low_density_median": 9030000,
+   "high_density_median": 18040000,
+   "density_dph": {
+    "low": 35,
+    "medium": 55,
+    "high": 70
+   }
+  },
+  "avg_house_price": 803249,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Southwark": {
+  "observed": {
+   "10-49": {
+    "n": 0,
+    "n_all_statuses": 8,
+    "n_withdrawn": 2,
+    "refusal_pct": null,
+    "withdrawn_pct": 100.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 2,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 222.0,
+    "n_with_days": 2,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 2,
+    "n_all_statuses": 15,
+    "n_withdrawn": 2,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 222.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 53850000,
+  "land_value_detail": {
+   "medium_density_median": 53850000,
+   "low_density_median": 36720000,
+   "high_density_median": 63640000,
+   "density_dph": {
+    "low": 150,
+    "medium": 220,
+    "high": 260
+   }
+  },
+  "avg_house_price": 572478,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Sutton": {
+  "observed": {
+   "10-49": {
+    "n": 6,
+    "n_all_statuses": 10,
+    "n_withdrawn": 1,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 14.3,
+    "median_days": 246.0,
+    "n_with_days": 6,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 100.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 235.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 7,
+    "n_all_statuses": 14,
+    "n_withdrawn": 1,
+    "refusal_pct": 42.9,
+    "withdrawn_pct": 12.5,
+    "median_days": 235.0,
+    "n_with_days": 7,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 12180000,
+  "land_value_detail": {
+   "medium_density_median": 12180000,
+   "low_density_median": 18600000,
+   "high_density_median": 17050000,
+   "density_dph": {
+    "low": 80,
+    "medium": 100,
+    "high": 140
+   }
+  },
+  "avg_house_price": 452654,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 3,
+  "mcil_rate_2026": 30.3,
+  "mcil_rate_adopted_2019": 25
+ },
+ "Tower Hamlets": {
+  "observed": {
+   "10-49": {
+    "n": 3,
+    "n_all_statuses": 6,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 252.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 3,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 374.0,
+    "n_with_days": 3,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 480.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 7,
+    "n_all_statuses": 12,
+    "n_withdrawn": 0,
+    "refusal_pct": 14.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 374.0,
+    "n_with_days": 7,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 98760000,
+  "land_value_detail": {
+   "medium_density_median": 98760000,
+   "low_density_median": 83950000,
+   "high_density_median": 98760000,
+   "density_dph": {
+    "low": 340,
+    "medium": 400,
+    "high": 400
+   }
+  },
+  "avg_house_price": 447796,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Waltham Forest": {
+  "observed": {
+   "10-49": {
+    "n": 2,
+    "n_all_statuses": 12,
+    "n_withdrawn": 0,
+    "refusal_pct": 50.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 223.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 3,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 189.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 17,
+    "n_withdrawn": 0,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 0.0,
+    "median_days": 206.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 23300000,
+  "land_value_detail": {
+   "medium_density_median": 23300000,
+   "low_density_median": 17090000,
+   "high_density_median": 29510000,
+   "density_dph": {
+    "low": 110,
+    "medium": 150,
+    "high": 190
+   }
+  },
+  "avg_house_price": 529102,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 2,
+  "mcil_rate_2026": 72.73,
+  "mcil_rate_adopted_2019": 60
+ },
+ "Wandsworth": {
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 248.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 1,
+    "n_all_statuses": 1,
+    "n_withdrawn": 0,
+    "refusal_pct": 100.0,
+    "withdrawn_pct": 0.0,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 1,
+    "n_all_statuses": 2,
+    "n_withdrawn": 1,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 50.0,
+    "median_days": 173.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 3,
+    "n_all_statuses": 5,
+    "n_withdrawn": 2,
+    "refusal_pct": 33.3,
+    "withdrawn_pct": 40.0,
+    "median_days": 210.0,
+    "n_with_days": 2,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 77870000,
+  "land_value_detail": {
+   "medium_density_median": 77870000,
+   "low_density_median": 48670000,
+   "high_density_median": 110310000,
+   "density_dph": {
+    "low": 150,
+    "medium": 240,
+    "high": 340
+   }
+  },
+  "avg_house_price": 686076,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "Westminster": {
+  "observed": {
+   "10-49": {
+    "n": 1,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 138.0,
+    "n_with_days": 1,
+    "low_n": true
+   },
+   "50-149": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "150+": {
+    "n": 0,
+    "n_all_statuses": 0,
+    "n_withdrawn": 0,
+    "refusal_pct": null,
+    "withdrawn_pct": null,
+    "median_days": null,
+    "n_with_days": 0,
+    "low_n": true
+   },
+   "10+ (all)": {
+    "n": 1,
+    "n_all_statuses": 4,
+    "n_withdrawn": 0,
+    "refusal_pct": 0.0,
+    "withdrawn_pct": 0.0,
+    "median_days": 138.0,
+    "n_with_days": 1,
+    "low_n": true
+   }
+  },
+  "land_value_per_ha_2023": 87990000,
+  "land_value_detail": {
+   "medium_density_median": 87990000,
+   "low_density_median": 53430000,
+   "high_density_median": 119410000,
+   "density_dph": {
+    "low": 85,
+    "medium": 140,
+    "high": 190
+   }
+  },
+  "avg_house_price": 876788,
+  "london_avg_house_price": 550037,
+  "house_price_month": "2026-07",
+  "mcil_band": 1,
+  "mcil_rate_2026": 96.97,
+  "mcil_rate_adopted_2019": 80
+ },
+ "_london": {
+  "observed": {
+   "150+": {
+    "n": 28,
+    "n_all_statuses": 76,
+    "n_withdrawn": 7,
+    "refusal_pct": 10.7,
+    "withdrawn_pct": 20.0,
+    "median_days": 238.0,
+    "n_with_days": 26,
+    "low_n": false
+   },
+   "50-149": {
+    "n": 44,
+    "n_all_statuses": 86,
+    "n_withdrawn": 5,
+    "refusal_pct": 18.2,
+    "withdrawn_pct": 10.2,
+    "median_days": 334.0,
+    "n_with_days": 40,
+    "low_n": false
+   },
+   "10-49": {
+    "n": 121,
+    "n_all_statuses": 254,
+    "n_withdrawn": 20,
+    "refusal_pct": 38.0,
+    "withdrawn_pct": 14.2,
+    "median_days": 249.0,
+    "n_with_days": 116,
+    "low_n": false
+   },
+   "10+ (all)": {
+    "n": 193,
+    "n_all_statuses": 416,
+    "n_withdrawn": 32,
+    "refusal_pct": 29.5,
+    "withdrawn_pct": 14.2,
+    "median_days": 262.0,
+    "n_with_days": 182,
+    "low_n": false
+   }
+  },
+  "avg_house_price": 550037,
+  "house_price_month": "2026-07"
+ },
+ "_sources": {
+  "observed": {
+   "file": "data/foundations.parquet (Foundations / PlanIt London planning applications, start dates 2022-2025)",
+   "method": "Cleaning as analysis/sim_parameters.py: Full/Outline rows whose description matches AMEND_RE -> 'Amendment', DISCH_RE -> 'Conditions' (removed). Kept app_type Full or Outline with n_dwellings >= 10, full applications only: NOT_FULL_RE removes reserved matters, EIA screening/scoping opinions, prior approval / Class MA, neighbouring-authority consultations and lawful-development certificates, and rows with a statutory period under 13 weeks (n_statutory_days < 89). Dates checked: days_to_decision equals decided_date - start_date on every row. n = decided (status Permitted/Conditions/Rejected); refusal_pct = Rejected / decided; withdrawn_pct = Withdrawn / (decided + Withdrawn); median_days = median days_to_decision (>= 0) over decided rows. Undecided rows excluded, so medians for recent large schemes are biased low. area_name mapping: City->City of London, Kensington->Kensington and Chelsea, Kingston->Kingston upon Thames, Richmond->Richmond upon Thames; 'Old Oak Park Royal' (OPDC) and 'London Legacy' (LLDC) skipped. '10+ (all)' is the pooled 10+ dwellings figure; '_london' pools the 33 boroughs.",
+   "small_n_warning": "Many borough x band cells have n < 10 (the 150+ band especially); the app headlines a borough median only when n >= 10 and it is at least 91 days.",
+   "height_data": "No storeys/height field exists. Only 281 of 750 kept rows (37%) mention storeys/floors in free-text description."
+  },
+  "land_value_per_ha_2023": {
+   "url": "https://assets.publishing.service.gov.uk/media/69b2d95f912f3f96bf687b1c/Land_value_estimates_for_policy_appraisal_2023.xlsx",
+   "publisher": "MHCLG, Land value estimates for policy appraisal 2023 (published March 2026, valuation date 1 Oct 2023)",
+   "sheet": "Residential",
+   "column": "Medium site density, across the house price distribution: (£/ha) -> '50 (Median)'",
+   "detail_columns": "land_value_detail: low/medium/high site density '50 (Median)' columns and the sheet's 'Site Density (dwellings/ha)' Low/Medium/High",
+   "units": "GBP per hectare, residential land with planning permission",
+   "accessed": "2026-09-26"
+  },
+  "avg_house_price": {
+   "url": "https://publicdata.landregistry.gov.uk/market-trend-data/house-price-index-data/UK-HPI-full-file-2026-07.csv",
+   "publisher": "HM Land Registry / ONS UK House Price Index, full file",
+   "column": "AveragePrice (all property types, not seasonally adjusted)",
+   "month": "2026-07",
+   "note": "UK-HPI-full-file-2026-08.csv returned 404 on the access date, so 2026-07 is the latest. 'City of Westminster' mapped to Westminster; London = region E12000007.",
+   "accessed": "2026-09-26"
+  },
+  "mcil": {
+   "url": "https://www.london.gov.uk/media/111917/download",
+   "document": "Mayoral Community Infrastructure Levy (MCIL): Annual CIL Rate Summary 2026, Table 1 (MCIL2 charging rates for all development)",
+   "rates": "mcil_rate_2026 = MCIL2 rate indexed for permissions granted in calendar year 2026 (GBP per sq m; Ip 400 / Ic 330). Band 1 GBP 96.97, Band 2 GBP 72.73, Band 3 GBP 30.30 (adopted 2019: 80/60/25).",
+   "note": "All 33 boroughs are listed by name in Table 1, so no band is null. Excludes Central London/Isle of Dogs office, retail and hotel rates (Table 2).",
+   "accessed": "2026-09-26"
+  }
+ }
+}
