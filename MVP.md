@@ -15,3 +15,7 @@ The original pipeline and its instructions remain in [README.md](README.md). The
 The claimed 75% versus 56% roof-extension approval rates could not be reproduced from a documented classification method and are excluded from the factual headline. See the [evidence audit](mvp/research/ROOF_RATE_FINDINGS.md).
 
 Public map geometry and its attribution are included in `mvp/dist/context/`; raw modelling datasets remain untracked.
+
+## CivisOpt feasibility extension
+
+Open **http://127.0.0.1:4173/civisopt.html** for the evidence-grounded site study, integer room allocations, editable low/base/high assumptions, route checks, financial sensitivities, and printable brief. This is separate from the original planning room’s illustrative actor scores. See [scope and limitations](mvp/research/CIVISOPT_IMPLEMENTATION.md). Run `npm test --prefix mvp` for the deterministic checks.

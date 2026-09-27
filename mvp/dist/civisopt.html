@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f8f4">
+  <title>CivisOpt · Site feasibility</title>
+  <link rel="stylesheet" href="vendor/leaflet.css">
+  <link rel="stylesheet" href="civisopt/ui.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="civisopt.html" aria-label="CivisOpt site feasibility home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M5 29V17L18 6l13 11v12H5Z"/><path d="M12 29V18h12v11M5 17h26"/></svg></span><span>Civis<span class="brand-accent">Opt</span></span></a>
+      <nav aria-label="Main navigation"><a href="#site">Site</a><a href="#design">Design</a><a href="#compare">Compare</a><a href="#evidence">Evidence</a></nav>
+      <a class="legacy-link" href="index.html">View illustrative map &amp; 3D <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="lead" aria-labelledby="page-title">
+      <div><h1 id="page-title">What could this site support?</h1><p class="lead-copy">Test a residential concept against the site area, room schedule, policy routes and the values it would need to break even. Every result remains tied to the assumptions below.</p></div>
+      <div class="lead-actions"><span class="status-pill">Indicative concept · September 2026</span><button id="download-brief" class="button light" type="button">Download brief</button><button id="print-brief" class="button dark" type="button">Print evidence brief</button></div>
+    </section>
+
+    <div id="screen-error" class="alert" role="alert" hidden></div>
+
+    <section id="site" class="site-overview" aria-labelledby="site-heading">
+      <div class="section-head"><div><h2 id="site-heading">The site under review</h2><p>One pinned site and a dated source record keep comparisons reproducible.</p></div><span id="site-verification" class="tiny-tag">Loading source</span></div>
+      <div class="site-grid">
+        <div class="map-panel map-fallback"><div id="site-map" aria-label="Map showing the pinned site boundary"></div><svg id="site-outline" class="site-outline" viewBox="0 0 340 220" role="img" aria-label="Site boundary diagram generated from the pinned source geometry"><rect width="340" height="220" fill="#e9eee8"/><path id="outline-path" d="" fill="#d7e5d7" stroke="#245642" stroke-width="4" stroke-linejoin="round"/><text x="18" y="205">Pinned boundary · offline outline</text></svg><div class="map-caption">Pinned site boundary <span>Map © OpenStreetMap contributors</span></div></div>
+        <div class="site-facts"><h3 id="site-name">Loading site…</h3><p id="site-location">London</p><dl><div><dt>Site area</dt><dd id="site-area">Unknown</dd></div><div><dt>Source record</dt><dd id="site-source">Unknown</dd></div><div><dt>Record date</dt><dd id="site-date">Unknown</dd></div></dl><a id="site-source-link" href="#evidence" target="_blank" rel="noopener noreferrer">Open source record <span aria-hidden="true">↗</span></a><p id="site-unknowns" class="site-warning">Constraint observations require review.</p></div>
+      </div>
+    </section>
+
+    <div class="work-grid">
+      <section id="design" class="editor" aria-labelledby="design-heading"><div class="section-head"><div><h2 id="design-heading">Shape the concept</h2><p>Mass and room counts are explicit inputs, not inferred from the map.</p></div></div>
+        <form id="study-form" novalidate>
+          <fieldset><legend>Building envelope</legend><div class="input-grid"><label>Storeys<input name="storeys" type="number" min="1" max="30" step="1" required></label><label>Site coverage <span>%</span><input name="coverageRatio" type="number" min="1" max="100" step="1" required></label><label>Floor height <span>m</span><input name="floorHeightM" type="number" min="2" max="8" step="0.1" required></label><label>GIA efficiency <span>%</span><input name="giaEfficiency" type="number" min="1" max="100" step="1" required></label><label>Saleable efficiency <span>% of GIA</span><input name="saleableEfficiency" type="number" min="1" max="100" step="1" required></label></div><p class="field-help">Area check: site × coverage × storeys × efficiency. Local design capacity remains unverified.</p></fieldset>
+          <fieldset><legend>Integer room schedule</legend><div class="table-scroll"><table class="mix-table"><thead><tr><th>Home type</th><th>Homes</th><th>Saleable area / home</th><th>Habitable rooms / home</th></tr></thead><tbody id="mix-rows"></tbody></table></div><p id="capacity-line" class="field-help" aria-live="polite"></p></fieldset>
+          <fieldset><legend>Policy questions</legend><div class="input-grid"><label>Land type<select name="landType"><option value="unknown">Unknown</option><option value="private">Private</option><option value="public">Public</option><option value="industrial_reprovided">Industrial, re-provided</option><option value="industrial_loss">Industrial, lost</option></select></label><label>Application validation date<input name="applicationDate" type="date"></label><label>Scheme type<select name="schemeType"><option value="sale">Homes for sale</option><option value="build_to_rent">Build to rent</option></select></label><label>Social rent share <span>% of affordable habitable rooms</span><input name="socialRentSharePct" type="number" min="0" max="100" step="1"></label><label>Minimum affordable rooms <span>% preference</span><input name="preferenceMinAffordablePct" type="number" min="0" max="100" step="1"></label></div><p class="field-help">Leave the validation date blank if unknown; any entered date is a proposed concept assumption. Other material route conditions remain unconfirmed. A professional must check borough policy, site constraints and tenure evidence.</p></fieldset>
+        </form>
+      </section>
+
+      <section class="assumptions" aria-labelledby="assumptions-heading"><div class="section-head"><div><h2 id="assumptions-heading">Commercial assumptions</h2><p>Illustrative starting ranges. Replace each with project evidence before relying on the result.</p></div><span class="tiny-tag copper">Editable ranges</span></div><div class="assumption-toolbar"><p id="assumption-status">Amounts in £ unless shown as %.</p><button id="reset-assumptions" class="text-button" type="button">Reset illustrative values</button></div><div class="table-scroll"><table class="assumption-table"><thead><tr><th>Input &amp; source</th><th>Low</th><th>Base</th><th>High</th></tr></thead><tbody id="assumption-rows"></tbody></table></div><p class="field-help">Low and high are input ranges, not confidence intervals. Unknown values stay blank and block the affected calculation.</p></section>
+    </div>
+
+    <section id="compare" class="compare" aria-labelledby="compare-heading"><div class="section-head"><div><h2 id="compare-heading">Three pinned comparisons</h2><p>Same site and room schedule; affordable rooms are allocated in whole homes.</p></div><span id="study-state" class="tiny-tag">Calculating</span></div><div id="validation-errors" class="alert" role="alert" hidden></div><div id="scenario-cards" class="scenario-cards" aria-live="polite"></div><div id="comparison-note" class="comparison-note"></div>
+      <div class="analysis-grid"><div class="analysis-panel"><h3>Break-even market sale value</h3><p>Base cost case. The line marks your entered base market value per m²; each bar shows the value that would cover stated costs and target return.</p><div id="break-even-chart" class="break-even-chart" role="img" aria-label="Break-even value comparison"></div><p id="break-even-note" class="field-help"></p></div><div class="analysis-panel"><h3>What moves the result</h3><p>Largest reported sensitivities for the selected concept. These are conditional changes within your entered ranges.</p><div id="sensitivity-view" class="sensitivity-view"></div></div></div><div id="selected-detail" class="selected-detail"></div>
+    </section>
+
+    <section id="evidence" class="evidence" aria-labelledby="evidence-heading"><div class="section-head"><div><h2 id="evidence-heading">Evidence and open questions</h2><p>Route checks are screening prompts. They do not establish consent or an approval probability.</p></div></div><div class="evidence-grid"><div><h3>Policy route checks</h3><div id="policy-checks"></div><h3>Provisional application readiness</h3><div id="readiness-checks"></div></div><div><h3>Source trail</h3><div id="source-records"></div><h3>Still to verify</h3><ul id="open-questions" class="question-list"></ul></div></div><details class="formulae"><summary>How the figures are calculated</summary><div id="formulae-content"></div></details><div class="snapshot-tools"><div><h3>Keep this version</h3><p>Download the inputs, site snapshot and calculated result as JSON. Load the file to reproduce this study here.</p></div><div class="snapshot-actions"><button id="download-json" class="button dark" type="button">Save study JSON</button><label class="button light upload-label" for="load-json">Load study JSON</label><input id="load-json" type="file" accept=".json,application/json"><span id="snapshot-status" role="status"></span></div></div></section>
+
+    <section id="print-sheet" class="print-sheet" aria-labelledby="print-heading"><h2 id="print-heading">CivisOpt · evidence brief</h2><p id="print-meta"></p><div id="print-summary"></div><p class="print-disclaimer">Indicative concept only. Site constraints, policy interpretation and commercial inputs require professional verification. No approval probability is provided.</p></section>
+  </main>
+  <footer><span>CivisOpt · House London #2</span><span>Evidence-led site feasibility · 26 September 2026</span></footer>
+  <script src="vendor/leaflet.js"></script>
+  <script type="module" src="civisopt/ui.js"></script>
+</body>
+</html>
