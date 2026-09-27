@@ -14,3 +14,5 @@ Run locally from the repository root:
 ```sh
 python3 -m http.server 4174 --bind 127.0.0.1 --directory mvp/proposal106-v3
 ```
+
+> **Superseded by [`mvp/project106`](../project106/)**, the final submission (live at https://project106.vercel.app).
