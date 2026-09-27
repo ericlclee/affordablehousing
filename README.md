@@ -42,7 +42,7 @@ python scripts/feature_importance.py
 
 `train_models.py` (~3 min) trains the approval and S106 models with a time split (train 2022–24, test 2025) and writes `reports/model_metrics.md`, `models/model.json` (logistic regression), `models/xgb_approval.json`, the browser bundle in `models/web/`, and `models/approval_with_text.joblib` (offline model that also reads the description; score with `train_models.score_with_text`). `feature_importance.py` writes `reports/feature_importance.md`.
 
-**Current results (2025 test set, 2,328 proposals):** XGBoost ROC-AUC 0.652, Brier 0.232, against 0.615 / 0.240 for a borough × size-band baseline. A modest gain: borough and scheme size explain most of what public data can predict about approval. Adding the application description (offline model only, since the simulator has no description) raises this to ROC-AUC 0.673, Brier 0.227.
+**Current results (2025 test set, 2,328 proposals):** XGBoost ROC-AUC 0.655, Brier 0.231, against 0.615 / 0.240 for a borough × size-band baseline. A modest gain: borough and scheme size explain most of what public data can predict about approval. Adding the application description (offline model only, since the simulator has no description) raises this to ROC-AUC 0.674, Brier 0.227.
 
 ## Use the model in the website
 

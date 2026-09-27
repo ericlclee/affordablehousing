@@ -177,6 +177,8 @@ def flatten_pld(rec: dict) -> dict:
     row["student_units"] = sum(t == "Student Accommodation" for t in utypes)
     row["coliving_units"] = sum(t == "Co Living Unit" for t in utypes)
     row["hmo_units"] = sum(t == "HMO" for t in utypes)
+    row["house_units"] = sum(t in HOUSE_UNIT_TYPES for t in utypes)
+    row["flat_units"] = sum(t in FLAT_UNIT_TYPES for t in utypes)
 
     # Tenure: affordable share by units and by habitable rooms
     ten = [TENURE.get((u.get("tenure") or "").strip().lower(), "unknown") for u in gain]
@@ -270,6 +272,28 @@ def dev_type(text: str) -> str:
     if re.search(r"extension|additional (?:storey|floor)|upward|mansard|roof", text):
         return "extension"
     return "other"
+
+
+HOUSE_UNIT_TYPES = {"House or Bungalow", "Terraced Home", "Semi Detached Home", "Detached Home"}
+FLAT_UNIT_TYPES = {"Flat Apartment Maisonette", "Studio Bedsit", "Cluster Flat"}
+BUILD_FORMS = ["single_house", "multiple_houses", "single_flat", "flats_2_9", "apartment_block", "mixed", "hmo",
+               "student_coliving"]
+HOUSE_WORDS = r"\b(?:house|houses|dwellinghouses?|bungalows?|terrace[sd]?|semi[- ]detached|detached|mews houses?|townhouses?)\b"
+FLAT_WORDS = r"\b(?:flats?|apartments?|maisonettes?|studios?)\b"
+
+
+def build_form_from(kind: str, homes: float, scheme: str) -> str:
+    """Build form from housing kind (houses / flats / mixed), number of homes and scheme type.
+    Mirrored in models/web/score.js (deriveBuildForm)."""
+    if scheme == "hmo":
+        return "hmo"
+    if scheme in ("student", "coliving"):
+        return "student_coliving"
+    if kind == "houses":
+        return "single_house" if homes <= 1 else "multiple_houses"
+    if kind == "mixed":
+        return "mixed"
+    return "single_flat" if homes <= 1 else "flats_2_9" if homes < 10 else "apartment_block"
 
 
 def text_features(desc: pd.Series) -> pd.DataFrame:
@@ -465,6 +489,17 @@ def main() -> None:
         ["student", "coliving", "hmo"], "standard")
     df["has_gym"] = df["has_gym"] | df["has_sport_use_class"].fillna(False).astype(bool)
 
+    # Build form: houses / flats / mixed from PLD unit types; where PLD has none, from the description
+    # (houses vs flats wording, default flats). Never left unknown, so it can't act as a missing flag.
+    h, fl = df["house_units"].fillna(0), df["flat_units"].fillna(0)
+    pld_kind = np.select([(h > 0) & (fl == 0), (fl > 0) & (h == 0), (h > 0) & (fl > 0)], ["houses", "flats", "mixed"], "")
+    d = df["description"].fillna("").str.lower()
+    hw, fw = d.str.contains(HOUSE_WORDS, regex=True), d.str.contains(FLAT_WORDS, regex=True)
+    text_kind = np.select([hw & ~fw, hw & fw], ["houses", "mixed"], "flats")
+    kind = np.where(pld_kind != "", pld_kind, text_kind)
+    df["build_form"] = [build_form_from(k, n, st) for k, n, st in zip(kind, df["homes_net"], df["scheme_type"])]
+    df["build_form_source"] = np.where(pld_kind != "", "pld", "text")
+
     # Location: Foundations lat/lng, else PLD centroid
     in_london = lambda la, lo: la.between(51.2, 51.8) & lo.between(-0.6, 0.4)
     fp_ok = in_london(df["lat"], df["lng"])
@@ -522,7 +557,7 @@ def main() -> None:
         "low_cost_rent_share_of_affordable", "social_rent_pct_units", "tenure_known_share",
         "storeys", "height_m", "height_m_est", "n_buildings", "site_area_m2", "resi_gia_m2", "avg_home_size_m2",
         "density_homes_per_ha", "density_habrooms_per_ha", "nonresi_gia_gained_m2",
-        "car_spaces", "cycle_spaces", "dev_type", "scheme_type",
+        "car_spaces", "cycle_spaces", "dev_type", "scheme_type", "build_form", "build_form_source",
         "has_gym", "has_pool", "has_basement", "has_roof_terrace", "has_concierge", "has_communal_amenity",
         "has_commercial", "has_demolition", "has_affordable_mention", "premium_amenity",
         "gym_removed", "pool_removed", "has_backland", "has_pub_loss", "has_studio",

@@ -22,7 +22,7 @@ const sigmoid = (z) => 1 / (1 + Math.exp(-z));
 
 // Plain-English names for the driver list
 const LABELS = {
-  borough: "Borough", avg_home_size_m2: "Average home size", scheme: "Scheme type (HMO / student / co-living)",
+  build_form: "Build form (houses / flats / block)", borough: "Borough", avg_home_size_m2: "Average home size", scheme: "Scheme type (HMO / student / co-living)",
   unit_mix: "Unit mix", log_site_area: "Site area", space_std_share_below: "Homes below minimum space standards",
   log_homes_net: "Number of homes", log_ptal: "Public transport access (PTAL)", log_density: "Density",
   log_homes_lost: "Existing homes lost", affordable_pct_major: "Affordable housing %",
@@ -39,7 +39,19 @@ const LABELS = {
 };
 const groupOf = (f) =>
   f.startsWith("lpa_") ? "borough" : f.startsWith("mix_") ? "unit_mix" : f.startsWith("dev_") ? "development_type"
-    : f.startsWith("flood_zone") ? "flood_zone" : f.startsWith("scheme_") ? "scheme" : f;
+    : f.startsWith("flood_zone") ? "flood_zone" : f.startsWith("scheme_") ? "scheme" : f.startsWith("bf_") ? "build_form" : f;
+
+/**
+ * Build form from housing_type ("houses" | "flats" | "mixed"; default "flats"), homes and scheme type.
+ * Mirrors build_features.build_form_from. Pass params.build_form to set it directly.
+ */
+export function deriveBuildForm(housingType = "flats", homes = 1, scheme = "standard") {
+  if (scheme === "hmo") return "hmo";
+  if (scheme === "student" || scheme === "coliving") return "student_coliving";
+  if (housingType === "houses") return homes <= 1 ? "single_house" : "multiple_houses";
+  if (housingType === "mixed") return "mixed";
+  return homes <= 1 ? "single_flat" : homes < 10 ? "flats_2_9" : "apartment_block";
+}
 
 /** Derive the training-time raw fields (flags, density, height) from user inputs. */
 function derive(p) {
@@ -50,7 +62,7 @@ function derive(p) {
   if (Number.isNaN(height) && !Number.isNaN(storeys)) height = storeys * 3.2;
   let density = num(p.density_homes_per_ha);
   if (Number.isNaN(density) && homes > 0 && site > 0) density = homes / (site / 10000);
-  if (density > 1000) density = NaN; // treated as bad data in training
+  // (implausible densities are stopped by checkSupport before scoring)
   const premium = p.premium_amenity ?? (flag(p.has_gym) || flag(p.has_pool) || flag(p.has_concierge));
   return {
     ...p, homes, site, storeys, height, density, premium_amenity: premium,
@@ -85,6 +97,9 @@ function features(model, p, pre = model.preprocess) {
   for (const t of ["change_of_use", "conversion", "extension"]) x[`dev_${t}`] = dev === t ? 1 : 0;
   x.scheme_hmo = d.scheme_type === "hmo" ? 1 : 0;
   x.scheme_student_coliving = d.scheme_type === "student" || d.scheme_type === "coliving" ? 1 : 0;
+  const form = d.build_form || deriveBuildForm(d.housing_type, d.homes, d.scheme_type);
+  for (const f of ["single_house", "multiple_houses", "single_flat", "apartment_block", "mixed", "hmo", "student_coliving"])
+    x[`bf_${f}`] = form === f ? 1 : 0;
 
   // Fill gaps exactly as in training (training-year medians)
   for (const [k, v] of Object.entries(pre.medians)) x[k] = fill(x[k], v);
@@ -155,12 +170,62 @@ function s106(model, p) {
 }
 
 /**
+ * Stopping conditions (mirrors train_models.support_reasons). Returns { stop: [...], out_of_range: [...] }.
+ * stop: policy presumes against housing in principle; submitted schemes on such sites are
+ * self-selected, so their historical approval rate says nothing about a new scheme there.
+ * out_of_range: the scheme is outside what the model was trained on, so it would be extrapolating.
+ */
+export function checkSupport(model, p) {
+  const { limits: L, stop_flags } = model.support;
+  const stop = Object.entries(stop_flags).filter(([k]) => flag(p[k])).map(([, name]) => `STOP: ${name}`);
+  const out = [];
+  const homes = num(p.homes_net), site = num(p.site_area_m2), storeys = num(p.storeys);
+  const dens = homes / (site / 10000);
+  if (!(homes >= 1)) out.push("needs at least one new home");
+  if (homes > L.homes_net_max) out.push("more homes than 99.9% of schemes seen");
+  if (fill(num(p.homes_lost), 0) > L.homes_lost_max) out.push("more existing homes lost than 99.9% of schemes seen");
+  if (dens > L.density_max) out.push("denser than 99.9% of schemes seen");
+  if (site < L.site_area_min) out.push("smaller site than 99.5% of schemes seen");
+  if (site > L.site_area_max) out.push("larger site than 99.9% of schemes seen");
+  if (num(p.avg_home_size_m2) < L.avg_home_size_min) out.push("average home size below any London space standard");
+  if (fill(num(p.nonresi_gia_gained_m2), 0) > L.nonresi_max) out.push("more non-residential floorspace than 99.9% of schemes seen");
+  if (num(p.ptal_ai) > L.ptal_max) out.push("PTAL above any site seen");
+  if (!Number.isNaN(site)) {
+    const e = L.storeys_by_site_area.edges.map((v) => (v === null ? Infinity : v));
+    let i = 0;
+    while (i < e.length - 2 && !(site <= e[i + 1])) i++;
+    if (storeys > L.storeys_by_site_area.max_storeys[i]) out.push("taller for its site size than 99% of schemes seen");
+  }
+  const pre = model.preprocess;
+  const grp = pre.small_lpas.includes(p.lpa) ? "Other small" : p.lpa;
+  if (!pre.lpa_levels.includes(grp)) out.push("borough not in the training data");
+  return { stop, out_of_range: out };
+}
+
+/**
  * Score a proposal.
- * Returns { p_approved, p_approved_raw, baseline_rate, p_s106, p_approved_with_s106, drivers, warnings }.
+ * Returns { status, p_approved, p_approved_raw, baseline_rate, p_s106, p_approved_with_s106, drivers,
+ *           reasons, warnings }.
+ * status: "ok" | "policy_stop" | "out_of_range". Unless "ok", p_approved / p_s106 are null and
+ * reasons says why; show the policy flag or "outside what the model has seen" instead of a number.
  * drivers: grouped features ranked by their effect on this prediction, in approximate percentage points.
  */
 export function score(model, params) {
-  const { x, known_borough } = features(model, params);
+  const support = checkSupport(model, params);
+  if (support.stop.length || support.out_of_range.length) {
+    return {
+      status: support.stop.length ? "policy_stop" : "out_of_range",
+      p_approved: null, p_approved_raw: null, p_s106: null, p_approved_with_s106: null,
+      baseline_rate: baselineRate(model, params.lpa, num(params.homes_net)),
+      drivers: [],
+      reasons: [...support.stop, ...support.out_of_range],
+      message: support.stop.length
+        ? "Policy presumes against housing here in principle. Past approvals on such sites are of self-selected, policy-compliant schemes, so no probability is given: check the policy first."
+        : "Outside the range of schemes the model was trained on, so no probability is given.",
+      warnings: [],
+    };
+  }
+  const { x } = features(model, params);
   const vec = model.approval.features.map((f) => x[f]);
   const { margin, contrib } = boost(model, vec);
   const raw = sigmoid(margin);
@@ -181,13 +246,14 @@ export function score(model, params) {
     .sort((a, b) => Math.abs(b.effect_pp) - Math.abs(a.effect_pp));
 
   const warnings = [];
-  if (!known_borough) warnings.push(`Borough "${params.lpa}" not in training data; using the reference borough.`);
   if (num(params.homes_net) >= 10) warnings.push("Few major schemes in the data (682): wider uncertainty for 10+ homes.");
   // S106: for 10+ homes an agreement is near-certain in practice (the affordable-housing threshold),
   // and the decision-text label under-records it (32% positive), so no model estimate is given.
   const major = num(params.homes_net) >= 10;
   const ps106 = major ? null : s106(model, params);
   return {
+    status: "ok",
+    reasons: [],
     p_approved: p,
     p_approved_raw: raw,
     baseline_rate: baselineRate(model, params.lpa, num(params.homes_net)),
