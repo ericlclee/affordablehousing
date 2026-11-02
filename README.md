@@ -1,4 +1,29 @@
-# House London: approval and S106 prediction
+<div align="center">
+
+# House London
+
+**Explore how housing proposals and their surroundings relate to planning outcomes.**
+
+Python · geospatial joins · XGBoost · browser inference
+
+</div>
+
+> **Evidence, not a planning decision.** Estimates reflect historical applications and available datasets; they do not guarantee an outcome.
+
+## ▍From applications to estimates
+
+```mermaid
+flowchart LR
+    A[Foundations applications] --> D[Join and build features]
+    B[Planning London Datahub] --> D
+    C[Spatial context layers] --> D
+    D --> E[Time-split model training]
+    E --> F[Approval and S106 estimates]
+    E --> G[Browser model bundle]
+    G --> H[Probability, baseline and drivers]
+```
+
+## ▍The project
 
 Predicts, for a proposed London housing scheme, **P(approved)** and **P(S106 | approved)** from proposal parameters (storeys, homes, floor area, tenure, amenities such as gym or pool) plus site context (conservation area, flood zone, PTAL, Opportunity Area, deprivation).
 
