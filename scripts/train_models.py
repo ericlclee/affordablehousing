@@ -44,6 +44,8 @@ from sklearn.model_selection import GroupKFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
+BUILD_FORMS = ["single_house", "multiple_houses", "single_flat", "flats_2_9", "apartment_block", "mixed", "hmo",
+               "student_coliving"]  # as build_features.BUILD_FORMS
 FEATURES_FILE = Path("data/processed/features.parquet")
 REPORTS, MODELS = Path("reports"), Path("models")
 TEST_YEAR = 2025
@@ -109,6 +111,9 @@ class Preprocessor:
             b[f"dev_{d}"] = (dev == d).astype(float)
         b["scheme_hmo"] = (df["scheme_type"] == "hmo").astype(float)
         b["scheme_student_coliving"] = df["scheme_type"].isin(["student", "coliving"]).astype(float)
+        for form in BUILD_FORMS:  # flats_2_9 (the most common) is the reference
+            if form != "flats_2_9":
+                b[f"bf_{form}"] = (df["build_form"] == form).astype(float)
         b["lpa_grp"] = df["lpa"].where(~df["lpa"].isin(SMALL_LPAS), "Other small")
         return b
 
@@ -324,7 +329,16 @@ def run_task(name, df, label, positive, feature_filter=None, text=False):
         "lpa_levels": pre.lpas, "lpa_reference": pre.lpas[0], "small_lpas_grouped": sorted(SMALL_LPAS),
         "threshold_best_f1": thresholds["Logistic regression"],
     }
+    lim = support_limits(train)
+    reasons = support_reasons(test, lim, pre.lpas)
+    guarded = reasons.map(len).to_numpy() > 0
+    xp = preds["XGBoost (calibrated)"]
+    guard = {"n_test": int(len(test)), "n_guarded": int(guarded.sum()),
+             "reasons": pd.Series([r for rs in reasons for r in set(rs)]).value_counts().to_dict(),
+             "in_range": metrics(yte[~guarded], xp[~guarded], 0.5, positive) if (~guarded).sum() else None,
+             "guarded": metrics(yte[guarded], xp[guarded], 0.5, positive) if guarded.sum() > 1 and len(set(yte[guarded])) > 1 else None}
     return {"split": split, "results": results, "xgb_params": xgb_params, "leakage_probe_auc": float(probe_auc),
+            "support_limits": lim, "guard": guard,
             "top_coefficients": coefs.drop([c for c in coefs.index if c.startswith("lpa_")])
                                       .sort_values(key=abs, ascending=False).head(12).round(3).to_dict(),
             "export": export, "xgb_model": xgbm, "iso": iso, "pre": pre, "xgb_cols": list(Xtr_x.columns),
@@ -333,12 +347,78 @@ def run_task(name, df, label, positive, feature_filter=None, text=False):
 
 
 # Raw inputs score.js accepts (same names as features.parquet); everything else is derived
-WEB_INPUTS = ["lpa", "homes_net", "homes_lost", "is_outline", "dev_type", "scheme_type", "storeys", "height_m_est",
+# ---------------------------------------------------------------- stopping conditions
+# Policy STOP: sites where policy presumes against housing in principle. Submitted schemes on these
+# sites are self-selected (only modest, compliant ones get submitted: Green Belt approval is 48%, the
+# same as average), so the model cannot estimate their odds and returns no probability.
+STOP_FLAGS = {
+    "in_green_belt": "Green Belt",
+    "in_sil": "Strategic Industrial Location",
+    "in_mol": "Metropolitan Open Land",
+    "in_functional_floodplain": "Functional floodplain (flood zone 3b)",
+    "scheduled_monument": "Scheduled monument",
+    "sssi": "Site of Special Scientific Interest",
+    "ancient_woodland": "Ancient woodland",
+}
+
+
+def support_limits(train: pd.DataFrame) -> dict:
+    """Range of schemes the model has seen (training years). Outside it, no probability is given."""
+    site = train["site_area_m2"]
+    dens = train["density_homes_per_ha"]  # as the model saw it (values above 1,000/ha were treated as bad data)
+    edges = site.quantile(np.linspace(0, 1, 11)).to_numpy().copy()
+    edges[0], edges[-1] = 0.0, np.inf
+    bins = pd.cut(site, edges, include_lowest=True)
+    storeys_p99 = train.groupby(bins, observed=False)["storeys"].quantile(0.99).to_numpy()
+    q = lambda c, v: float(train[c].quantile(v))
+    return {
+        "homes_net_max": q("homes_net", 0.999),
+        "homes_lost_max": q("homes_lost", 0.999),
+        "density_max": float(dens.quantile(0.999)),
+        "site_area_min": q("site_area_m2", 0.005),
+        "site_area_max": q("site_area_m2", 0.999),
+        "avg_home_size_min": 30.0,  # below any London space standard; such values were treated as bad data
+        "nonresi_max": q("nonresi_gia_gained_m2", 0.999),
+        "ptal_max": float(train["ptal_ai"].max()),
+        "storeys_by_site_area": {"edges": [None if not np.isfinite(e) else float(e) for e in edges],
+                                 "max_storeys": [float(v) for v in storeys_p99]},
+    }
+
+
+def support_reasons(df: pd.DataFrame, lim: dict, lpas: list) -> pd.Series:
+    """Why each row is outside the model's range or on a policy STOP site (empty list = OK)."""
+    out = [[] for _ in range(len(df))]
+    def add(mask, msg):
+        for i in np.flatnonzero(np.asarray(mask, dtype=bool)):
+            out[i].append(msg)
+    for col, name in STOP_FLAGS.items():
+        if col in df:
+            add(df[col].fillna(False).astype(bool), f"STOP: {name}")
+    homes, site = df["homes_net"], df["site_area_m2"]
+    dens = homes / (site / 10_000)
+    add(homes > lim["homes_net_max"], "more homes than 99.9% of schemes seen")
+    add(df["homes_lost"].fillna(0) > lim["homes_lost_max"], "more existing homes lost than 99.9% of schemes seen")
+    add(dens > lim["density_max"], "denser than 99.9% of schemes seen")
+    add(site < lim["site_area_min"], "smaller site than 99.5% of schemes seen")
+    add(site > lim["site_area_max"], "larger site than 99.9% of schemes seen")
+    add(df["avg_home_size_m2"] < lim["avg_home_size_min"], "average home size below any London space standard")
+    add(df["nonresi_gia_gained_m2"].fillna(0) > lim["nonresi_max"], "more non-residential floorspace than 99.9% of schemes seen")
+    add(df["ptal_ai"] > lim["ptal_max"], "PTAL above any site seen")
+    e = [np.inf if v is None else v for v in lim["storeys_by_site_area"]["edges"]]
+    b = np.clip(np.searchsorted(e, site.fillna(-1).to_numpy(), side="left") - 1, 0, len(e) - 2)
+    cap = np.array(lim["storeys_by_site_area"]["max_storeys"])[b]
+    add(site.notna().to_numpy() & (df["storeys"].to_numpy() > cap), "taller for its site size than 99% of schemes seen")
+    grp = df["lpa"].where(~df["lpa"].isin(SMALL_LPAS), "Other small")
+    add(~grp.isin(lpas), "borough not in the training data")
+    return pd.Series(out, index=df.index)
+
+
+WEB_INPUTS = ["lpa", "homes_net", "homes_lost", "is_outline", "dev_type", "scheme_type", "build_form", "storeys", "height_m_est",
               "site_area_m2", "density_homes_per_ha", "avg_home_size_m2", "space_std_share_below", "mix_studio", "mix_1b",
               "mix_2b", "affordable_pct_units", "social_rent_pct_units", "nonresi_gia_gained_m2", "has_demolition",
               "has_basement", "has_roof_terrace", "has_commercial", "has_communal_amenity", "premium_amenity",
               "in_conservation_area", "in_article4_area", "in_green_belt", "in_opportunity_area", "in_town_centre",
-              "listed_building_within_25m", "brownfield_site_within_50m", "flood_zone", "ptal_ai", "imd_decile",
+              "listed_building_within_25m", "brownfield_site_within_50m", "flood_zone", "ptal_ai", "imd_decile", "in_sil",
               "has_backland", "has_pub_loss", "has_studio"]
 
 
@@ -389,6 +469,7 @@ def export_web(task: dict, s106_task: dict) -> None:
             "features": task["xgb_cols"], "base_margin": float(np.log(base_p / (1 - base_p))), "trees": trees,
             "calibration": {"type": "platt", "a": iso.a, "b": iso.b},
         },
+        "support": {"limits": task["support_limits"], "stop_flags": STOP_FLAGS},
         "baseline": {"overall": g, "shrinkage": 20.0,
                      "by_borough_size": {f"{a}|{b}": [float(r["sum"]), int(r["count"])] for (a, b), r in stats.iterrows()}},
         "s106_given_approved": {**{k: s106_export[k] for k in ("features", "intercept", "coef_standardised",
@@ -401,6 +482,9 @@ def export_web(task: dict, s106_task: dict) -> None:
     # Parity samples so score.js can be checked against Python
     test = task["test"].reset_index(drop=True)
     idx = np.random.default_rng(SEED).choice(len(test), size=min(300, len(test)), replace=False)
+    # also include stopped rows, so the parity check covers the stopping conditions
+    stopped = np.flatnonzero(support_reasons(test, task["support_limits"], pre.lpas).map(len).to_numpy() > 0)
+    idx = np.unique(np.concatenate([idx, stopped[:60]]))
     rows = test.loc[idx, WEB_INPUTS].astype(object).where(test.loc[idx, WEB_INPUTS].notna(), None)
     # Expected S106 probabilities from the exported coefficients and the S106 task's own fill values
     Xs = s106_task["pre"].transform(test.loc[idx])[s106_export["features"]]
@@ -408,9 +492,11 @@ def export_web(task: dict, s106_task: dict) -> None:
         s106_export["coef_standardised"][f] * (Xs[f] - s106_export["scaler_mean"][f]) / s106_export["scaler_scale"][f]
         for f in s106_export["features"])
     p_s106 = 1 / (1 + np.exp(-z.to_numpy()))
+    guarded = support_reasons(test.loc[idx].reset_index(drop=True), task["support_limits"], pre.lpas).map(len).to_numpy() > 0
     samples = [{"input": {k: (bool(v) if isinstance(v, (bool, np.bool_)) else v) for k, v in r.items()},
-                "expected_p_approved": float(task["xgb_test_pred"][i]), "expected_p_s106": float(ps)}
-               for i, ps, (_, r) in zip(idx, p_s106, rows.iterrows())]
+                "expected_p_approved": float(task["xgb_test_pred"][i]), "expected_p_s106": float(ps),
+                "expected_guarded": bool(g)}
+               for i, ps, g, (_, r) in zip(idx, p_s106, guarded, rows.iterrows())]
     (web / "parity_samples.json").write_text(json.dumps(samples, default=float))
     print(f"Wrote {web / 'approval_model.json'} ({(web / 'approval_model.json').stat().st_size / 1e3:.0f} kB)")
 
@@ -491,6 +577,17 @@ def main() -> None:
                    "- Refusal-leaning terms: " + ", ".join(f"`{w}`" for w in t["text_terms"]["refusal"]),
                    "- Approval-leaning terms: " + ", ".join(f"`{w}`" for w in t["text_terms"]["approval"]), ""]
 
+    ga = tasks["A. P(approved), withdrawn = not approved"]["guard"]
+    md += ["## Stopping conditions (approval model, 2025 test set)", "",
+           f"{ga['n_guarded']} of {ga['n_test']:,} test applications ({ga['n_guarded'] / ga['n_test']:.1%}) get no probability: "
+           "they are on a policy STOP site or outside the range of schemes the model was trained on. Reasons (a row can have several):", "",
+           "| Reason | Test applications |", "|---|---|"]
+    md += [f"| {k} | {v} |" for k, v in ga["reasons"].items()]
+    for k, label in (("in_range", "Within range"), ("guarded", "Guarded (for reference: what the model would have said)")):
+        if ga[k]:
+            m = ga[k]
+            md.append(f"\n{label}: n = {m['n']}, ROC-AUC {fmt(m['roc_auc'])}, Brier {fmt(m['brier'])}, approval rate {m['positive_rate']:.1%}.")
+    md.append("")
     v1 = REPORTS / "model_metrics_v1.json"
     if v1.exists():
         old = json.loads(v1.read_text())

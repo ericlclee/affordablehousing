@@ -20,13 +20,14 @@ import train_models as tm
 TENURE = ("affordable_pct_major", "social_rent_pct_major")  # only defined for 10+ home schemes
 GROUP_NAMES = {"borough": "Borough", "unit mix": "Unit mix (studio / 1b / 2b share)",
                "development type": "Development type", "flood zone": "Flood zone",
-               "scheme type": "Scheme type (HMO / student / co-living)"}
+               "scheme type": "Scheme type (HMO / student / co-living)",
+               "build form": "Build form (houses / flats / block…)"}
 
 
 def group_of(c):
     return ("borough" if c.startswith("lpa_") else "unit mix" if c.startswith("mix_") else
             "development type" if c.startswith("dev_") else "flood zone" if c.startswith("flood_zone") else
-            "scheme type" if c.startswith("scheme_") else c)
+            "scheme type" if c.startswith("scheme_") else "build form" if c.startswith("bf_") else c)
 
 
 def main():

@@ -28,6 +28,8 @@ const result = score(model, {
   social_rent_pct_units: 20,
   dev_type: "new_build",       // new_build | change_of_use | conversion | extension
   scheme_type: "standard",     // standard | hmo | student | coliving
+  housing_type: "flats",       // houses | flats | mixed -> build form with homes (or pass build_form directly:
+                               // single_house | multiple_houses | single_flat | flats_2_9 | apartment_block | mixed | hmo | student_coliving)
   in_conservation_area: false,
   ptal_ai: 25,
   imd_decile: 3,
@@ -40,11 +42,22 @@ Serve over HTTP (e.g. copy this folder to `mvp/dist/model/`); `fetch` does not w
 
 **Inputs:** any field in `model.inputs` (same names as `data/processed/features.parquet`, documented in `docs/DATA_DICTIONARY.md`). Everything is optional except `lpa` and `homes_net`; missing values are filled exactly as in training (training-year medians). Site facts (conservation area, flood zone, PTAL, deprivation…) should come from the location, not the user. Derived automatically: `is_major`, `statutory_major`, Mayor referral flags, density (from homes and site area), height (storeys × 3.2 m if not given), and `premium_amenity` (from `has_gym` / `has_pool` / `has_concierge`).
 
+**Stopping conditions.** `score()` first calls `checkSupport()`. If either list below applies, it returns `status: "policy_stop"` or `"out_of_range"` with `p_approved: null`, `p_s106: null` and `reasons`. Show the policy flag or "outside what the model has seen" instead of a number; `baseline_rate` is still returned.
+
+| Status | Condition | Why |
+|---|---|---|
+| `policy_stop` | `in_green_belt`, `in_sil`, or (if the page supplies them) `in_mol`, `in_functional_floodplain`, `scheduled_monument`, `sssi`, `ancient_woodland` | Policy presumes against housing in principle. Submitted schemes there are self-selected (Green Belt approval is 48%, the same as average), so past approval rates don't apply to a new scheme |
+| `out_of_range` | more homes than 99.9% of training schemes (> 916); density > 99.9% (> 871 homes/ha); site < 99.5% (< 56 m²) or > 99.9% (> 8.3 ha); storeys above the 99th percentile for the site's size band (e.g. > 8 storeys on 490–1,150 m², > 33 on the largest sites); > 70 existing homes lost; > 24,300 m² non-residential; average home < 30 m²; PTAL above any site seen; borough not in training data; fewer than 1 home | The model would be extrapolating. On the 69 test applications (3%) these conditions stop, it scores ROC-AUC 0.510, i.e. no skill, against 0.659 on the rest |
+
+Limits are computed from the training years in `scripts/train_models.py` (`support_limits`, `STOP_FLAGS`) and stored in `approval_model.json` under `support`.
+
 **Output:**
 
 | Field | Meaning |
 |---|---|
-| `p_approved` | Calibrated probability of approval (withdrawn counts as not approved) |
+| `status` | `ok`, `policy_stop` or `out_of_range` (see above) |
+| `reasons`, `message` | Why no probability was given |
+| `p_approved` | Calibrated probability of approval (withdrawn counts as not approved); `null` unless `status` is `ok` |
 | `baseline_rate` | Historical approval rate for this borough and size band. **Show it next to `p_approved`**: the model beats it only modestly (test ROC-AUC 0.652 vs 0.615) |
 | `drivers` | Grouped features ranked by their effect on *this* prediction, in approximate percentage points (exact path attribution through the trees) |
 | `p_s106` | Probability of an S106 agreement given approval, for 1–9 home schemes only. `null` for 10+ homes, where an S106 is expected |
