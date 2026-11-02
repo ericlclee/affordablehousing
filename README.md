@@ -1,6 +1,8 @@
 <div align="center">
 
-# House London
+# House London · Project106
+
+**🥈 2nd place · London House Data Hackathon**
 
 **Explore how housing proposals and their surroundings relate to planning outcomes.**
 
@@ -22,6 +24,15 @@ flowchart LR
     E --> G[Browser model bundle]
     G --> H[Probability, baseline and drivers]
 ```
+
+## ▍Project gallery
+
+<table><tr>
+<td width="50%"><img src="https://raw.githubusercontent.com/bede-lau/bede-lau.github.io/main/assets/img/project106/project106_1.png" alt="Project106 portfolio view, first screen" /></td>
+<td width="50%"><img src="https://raw.githubusercontent.com/bede-lau/bede-lau.github.io/main/assets/img/project106/project106_2.png" alt="Project106 portfolio view, second screen" /></td>
+</tr></table>
+
+<sub>Images from the [project portfolio](https://bede-lau.github.io/); they may depict an earlier build.</sub>
 
 ## ▍The project
 
