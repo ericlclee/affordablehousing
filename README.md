@@ -1,4 +1,40 @@
-# House London: approval and S106 prediction
+<div align="center">
+
+# House London · Project106
+
+**🥈 2nd place · London House Data Hackathon**
+
+**Explore how housing proposals and their surroundings relate to planning outcomes.**
+
+Python · geospatial joins · XGBoost · browser inference
+
+</div>
+
+> **Evidence, not a planning decision.** Estimates reflect historical applications and available datasets; they do not guarantee an outcome.
+
+## ▍From applications to estimates
+
+```mermaid
+flowchart LR
+    A[Foundations applications] --> D[Join and build features]
+    B[Planning London Datahub] --> D
+    C[Spatial context layers] --> D
+    D --> E[Time-split model training]
+    E --> F[Approval and S106 estimates]
+    E --> G[Browser model bundle]
+    G --> H[Probability, baseline and drivers]
+```
+
+## ▍Project gallery
+
+<table><tr>
+<td width="50%"><img src="https://raw.githubusercontent.com/bede-lau/bede-lau.github.io/main/assets/img/project106/project106_1.png" alt="Project106 portfolio view, first screen" /></td>
+<td width="50%"><img src="https://raw.githubusercontent.com/bede-lau/bede-lau.github.io/main/assets/img/project106/project106_2.png" alt="Project106 portfolio view, second screen" /></td>
+</tr></table>
+
+<sub>Images from the [project portfolio](https://bede-lau.github.io/); they may depict an earlier build.</sub>
+
+## ▍The project
 
 Predicts, for a proposed London housing scheme, **P(approved)** and **P(S106 | approved)** from proposal parameters (storeys, homes, floor area, tenure, amenities such as gym or pool) plus site context (conservation area, flood zone, PTAL, Opportunity Area, deprivation).
 
